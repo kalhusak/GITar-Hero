@@ -16,7 +16,7 @@ class AppContainer extends Component {
     return (
       <Provider store={this.props.store}>
         <div style={{ height: '100%' }}>
-          <Canvas/>
+          <Canvas id="renderCanvas"/>
           <Console/>
         </div>
       </Provider>

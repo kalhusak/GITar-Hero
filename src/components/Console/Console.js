@@ -3,7 +3,7 @@ import './Console.scss'
 
 class Canvas extends Component {
   render() {
-    return (<textarea rows="4" cols="50" className='console' value='git reset--soft HEAD~3'/>)
+    return (<textarea rows="4" cols="50" className='console' defaultValue='git reset--soft HEAD~3'/>)
   }
 };
 
