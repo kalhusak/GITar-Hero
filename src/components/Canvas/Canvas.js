@@ -1,8 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux'
 import { Engine3D } from '../../engine3D'
 import './Canvas.scss'
 
 class Canvas extends Component {
+
+  constructor(props){
+    super(props);
+  }
 
   shouldComponentUpdate() {
     return false
@@ -15,6 +20,7 @@ class Canvas extends Component {
     canvas.style.height = '100%';
 
     this.engine = new Engine3D(canvas);
+    this.props.store.subscribe(this.engine.onStateChange);
   }
 
   render() {
@@ -26,4 +32,7 @@ Canvas.propTypes = {
   id: React.PropTypes.string
 };
 
-export default Canvas;
+const mapStateToProps = (state) => ({
+})
+
+export default connect(mapStateToProps)(Canvas)
