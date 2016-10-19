@@ -2,14 +2,14 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
 import rootReducer from '../reducers'
+import commandResolverMiddleware from '../middlewares/CommandResolverMiddleware'
 import { updateLocation } from './location'
 
 export default () => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
-
+  const middleware = [thunk, commandResolverMiddleware]
   // ======================================================
   // Store Enhancers
   // ======================================================
