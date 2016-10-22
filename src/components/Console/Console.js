@@ -24,15 +24,20 @@ class Console extends Component {
   }
 
   render() {
+    console.log("RENDER CONSOLE");
     return (
-      <textarea id = "console" rows = "4" cols = "50" className = 'console'
-          onKeyDown = { this.onKeyPress } />
+      <div>
+          <textarea id = "console" rows = "4" cols = "50" className = 'console'
+            onKeyDown = { this.onKeyPress } />
+      </div>
     )
   }
 };
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    console: state.console
+  }
 }
 
 export default connect(mapStateToProps)(Console)
