@@ -6,7 +6,7 @@ export default ({ getState }) => (next) => (action) => {
     next(action);
     var tasks = getState().tasks;
     var currentTask = tasks.list[0];
-    var step = currentTask.steps.find((element) => element.executed === false);
+    var step = currentTask.steps.find(({ executed }) => !executed);
     console.log('STEP', step);
     action = commandResolver(action.payload.command, step.allowedCommands);
   }

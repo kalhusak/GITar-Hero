@@ -10,9 +10,9 @@ class Scene extends BABYLON.Scene {
     camera.setTarget(BABYLON.Vector3.Zero());
     camera.attachControl(engine.getRenderingCanvas(), false);
     const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this);
-    const sphere = BABYLON.Mesh.CreateSphere('sphere1', 16, 2, this);
-    sphere.position.y = 1;
-    const ground = BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, this);
+    const commit = BABYLON.Mesh.CreateSphere('commit', 16, 3, this);
+    const line = BABYLON.Mesh.CreateCylinder('line', 16, 1, 1, 40, 40, this);
+    line.rotation.x = Math.PI / 2;
   }
 }
 
