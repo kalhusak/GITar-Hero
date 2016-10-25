@@ -1,3 +1,3 @@
-import Console from './Console'
+import Console from './Console';
 
-export default Console
+export default Console;

@@ -1,4 +1,4 @@
-import createAction from './CreateAction'
+import createAction from './CreateAction';
 
 export {
   createAction

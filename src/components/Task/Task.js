@@ -1,6 +1,6 @@
-import React, { Component,  PropTypes } from 'react';
-import { connect } from 'react-redux'
-import './Task.scss'
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import './Task.scss';
 
 class Task extends Component {
 
@@ -8,29 +8,23 @@ class Task extends Component {
     task: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
+  render () {
+    const steps = this.props.task.steps.map((step, index) =>
+      <li key={index} className={step.executed ? 'executedTask' : 'notExecutedTask'}>{step.description}</li>);
 
-  render() {
-    console.log("render");
-    console.log(this.props.task.steps[1]);
-    const steps = this.props.task.steps.map((step, index) => <li key={index} className={step.executed ? 'executedTask' : 'notExecutedTask'}>{step.description}</li>);
     return (
-      <div className = 'task'>
+      <div className='task'>
         <h4>{this.props.task.title}</h4>
         <ul>
           {steps}
         </ul>
       </div>
-    )
+    );
   }
 };
 
 const mapStateToProps = (state) => {
-  return {
+  return {};
+};
 
-  }
-}
-
-export default connect(mapStateToProps)(Task)
+export default connect(mapStateToProps)(Task);

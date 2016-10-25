@@ -1,19 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
-import { Engine3D } from '../../engine3D'
-import './Canvas.scss'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Engine3D } from '../../engine3D';
+import './Canvas.scss';
 
 class Canvas extends Component {
 
-  constructor(props){
-    super(props);
+  shouldComponentUpdate () {
+    return false;
   }
 
-  shouldComponentUpdate() {
-    return false
-  }
-
-  componentDidMount() {
+  componentDidMount () {
     var canvas = document.getElementById(this.props.id);
     // width and height from css are loaded after creating engine and then is small resolution
     canvas.style.width = '100%';
@@ -23,8 +19,8 @@ class Canvas extends Component {
     this.props.store.subscribe(this.engine.onStateChange);
   }
 
-  render() {
-    return (<canvas id = { this.props.id } className = 'renderCanvas' />);
+  render () {
+    return (<canvas id={this.props.id} className='renderCanvas' />);
   }
 };
 
@@ -32,7 +28,6 @@ Canvas.propTypes = {
   id: React.PropTypes.string
 };
 
-const mapStateToProps = (state) => ({
-})
+const mapStateToProps = (state) => {};
 
-export default connect(mapStateToProps)(Canvas)
+export default connect(mapStateToProps)(Canvas);

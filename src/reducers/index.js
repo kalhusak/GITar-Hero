@@ -1,1 +1,1 @@
-export default from './RootReducer'
+export default from './RootReducer';

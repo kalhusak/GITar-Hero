@@ -3,22 +3,22 @@ import config from './config';
 import Scene from './Scene';
 
 class Engine3D extends BABYLON.Engine {
-  constructor(canvas) {
+  constructor (canvas) {
     super(canvas, config.ANTIALIASING);
     this.scene = new Scene(this);
     this.onStateChange = this.onStateChange.bind(this);
     this.renderLoop();
   }
 
-  renderLoop(){
+  renderLoop () {
     let scene = this.scene;
-    this.runRenderLoop(function() {
+    this.runRenderLoop(function () {
       scene.render();
     });
   }
 
-  onStateChange(){
-    console.log("Engine3D::onStageChange");
+  onStateChange () {
+    console.log('Engine3D::onStageChange');
   }
 }
 
