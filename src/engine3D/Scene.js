@@ -8,11 +8,15 @@ class Scene extends BABYLON.Scene {
     // TODO move camera to separate class
     const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), this);
     camera.setTarget(BABYLON.Vector3.Zero());
-    camera.attachControl(engine.getRenderingCanvas(), false);
     const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this);
     const commit = BABYLON.Mesh.CreateSphere('commit', 16, 3, this);
     const line = BABYLON.Mesh.CreateCylinder('line', 16, 1, 1, 40, 40, this);
     line.rotation.x = Math.PI / 2;
+    const loop = () => {
+      requestAnimationFrame(loop);
+      commit.position.z -= 0.1;
+    };
+    loop();
   }
 }
 
