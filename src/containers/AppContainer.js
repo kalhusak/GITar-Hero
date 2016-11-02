@@ -9,7 +9,6 @@ class AppContainer extends Component {
   }
 
   render () {
-    console.log(TaskList);
     return (
       <Provider store={this.props.store}>
         <div style={{ height: '100%' }}>

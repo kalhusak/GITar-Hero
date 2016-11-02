@@ -1,14 +1,16 @@
 import commandResolver from '../resolvers/CommandResolver';
 import * as consoleActions from '../actions/ConsoleActions';
+import TaskUtils from '../utils/TaskUtils';
 
 export default ({ getState }) => (next) => (action) => {
   if (action.type === consoleActions.NEW_COMMAND) {
     next(action);
-    var tasks = getState().tasks;
-    var currentTask = tasks.list[0];
-    var step = currentTask.steps.find(({ executed }) => !executed);
-    console.log('STEP', step);
-    action = commandResolver(action.payload.command, step.allowedCommands);
+    action = getNextActionFromCommandResolver(action, getState());
   }
   return next(action);
 };
+
+function getNextActionFromCommandResolver (oldAction, state) {
+  var currentStep = TaskUtils.getCurrentStep(state.tasks.steps);
+  return commandResolver(oldAction.payload.command, currentStep.allowedCommands);
+}

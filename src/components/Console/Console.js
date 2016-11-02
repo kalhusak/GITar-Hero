@@ -22,7 +22,6 @@ class Console extends Component {
   }
 
   render () {
-    console.log('RENDER CONSOLE');
     return (
       <div>
         <textarea id='console' rows='4' cols='50' className='console'
