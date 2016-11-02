@@ -61,12 +61,6 @@ export default function tasksReducers (state = defaultState, action) {
   switch (action.type) {
     case actions.NEW_VALID_COMMAND:
       var newState = _.cloneDeep(state);
-      newState.list[3] = {
-        id: '2',
-        title: 'Create branch and download from remote',
-        steps: ['3', '4']
-      };
-      console.log(newState.list);
       return onNewValidCommand(newState);
     default:
       return state;
