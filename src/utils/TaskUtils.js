@@ -27,6 +27,13 @@ export function deleteCurrentTaskAndStepsIfCompleted (tasks) {
     if (currentStep.executed) {
       deleteCurrentTask(tasks);
       initCurrentOfTasksAndSteps(tasks);
+      // TODO pimosa remove it. its only for test
+      tasks.i++;
+      tasks.list[tasks.i] = {
+        id: tasks.i,
+        title: 'Create branch and download from remote',
+        steps: ['3', '4']
+      };
     }
   }
 }

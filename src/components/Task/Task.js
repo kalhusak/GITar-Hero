@@ -11,17 +11,21 @@ class Task extends Component {
   };
 
   render () {
+    console.log(this.props.steps);
     const steps = _.values(this.props.steps).map((step, index) =>
-      <li key={index} className={step.executed ? 'executedTask' : 'notExecutedTask'}>{step.description}</li>
+      <li key={index}>
+        <input className='toggle' type='checkbox' checked={step.executed} />
+        <label className={step.executed ? 'executedTask' : 'notExecutedTask'}>{step.description}</label>
+      </li>
     );
 
     return (
-        <div className='task'>
-          <h4>{this.props.task.title}</h4>
-          <ul>
-            {steps}
-          </ul>
-        </div>
+      <div className='task'>
+        <label className='title'>{this.props.task.title}</label>
+        <ul className='steps-list'>
+          {steps}
+        </ul>
+      </div>
     );
   }
 };

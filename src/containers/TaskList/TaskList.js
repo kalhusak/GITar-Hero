@@ -4,22 +4,54 @@ import './TaskList.scss';
 import Task from '../../components/Task';
 import TaskUtils from '../../utils/TaskUtils';
 import _ from 'lodash';
+import { TransitionMotion, spring } from 'react-motion';
+
 class TaskList extends Component {
 
+  getDefaultStyles () {
+    return this.props.tasks.map((task) => ({ ...task, style: { height: 0, opacity: 0 } }));
+  }
+
+  getStyles () {
+    return this.props.tasks.map((task) => ({ ...task, style: { height: spring(120), opacity: spring(1) } }));
+  }
+
+  mapStylesToTask (styles) {
+    return styles.map(({ key, data, style }, index) =>
+      <li key={key} style={style}>
+        <Task task={data.task} steps={data.steps} />
+      </li>);
+  }
+
+  willEnter () {
+    return {
+      height: 0,
+      opacity: 0
+    };
+  }
+
+  willLeave () {
+    return {
+      height: spring(0),
+      opacity: spring(0)
+    };
+  }
+
   render () {
-    var reversedTaskList = _.slice(Object.values(this.props.tasks));
-    reversedTaskList = _.reverse(reversedTaskList);
-
-    const tasks = reversedTaskList.map((task, index) => {
-      var steps = TaskUtils.getStepsByTask(task, this.props.steps);
-      return (<li key={index}><Task task={task} steps={steps} /></li>);
-    });
-
     return (
       <div className='taskList'>
-        <ul>
-          {tasks}
-        </ul>
+        <TransitionMotion
+          defaultStyles={this.getDefaultStyles()}
+          styles={this.getStyles()}
+          willLeave={this.willLeave}
+          willEnter={this.willEnter}
+          >
+          { styles =>
+            <ul className='tasks-list'>
+              {this.mapStylesToTask(styles)}
+            </ul>
+           }
+        </TransitionMotion>
       </div>
     );
   }
@@ -27,8 +59,8 @@ class TaskList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks.list,
-    steps: state.tasks.steps.list
+    tasks: _.reverse(_.slice(Object.values(state.tasks.list))).map((task) =>
+      ({ key: task.id, data: { task, steps: TaskUtils.getStepsByTask(task, state.tasks.steps.list) } }))
   };
 };
 

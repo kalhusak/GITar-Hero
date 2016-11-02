@@ -1,7 +1,7 @@
 .taskList {
-  background-color: red;
+  background-color: none;
   width: 300px;
-  right: 50px;
+  right: 10px;
   top: 0;
   overflow: visible;
   position: absolute;
@@ -10,6 +10,12 @@
 
 .taskList li {
   padding: 2px;
+}
+
+.tasks-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .taskListAnimation-appear {
