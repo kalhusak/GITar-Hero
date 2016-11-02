@@ -25,7 +25,7 @@ const defaultState = {
         executed: false,
         allowedCommands: [
           'git add -u',
-          'git add -A'
+          'git add'
         ]
       },
       '2': {
@@ -47,14 +47,16 @@ const defaultState = {
       },
       '4': {
         id: '4',
-        description: 'download changes from origin master',
+        description: 'download changes from origin',
         executed: false,
         allowedCommands: [
           'git pull'
         ]
       }
     }
-  }
+  },
+  // TODO pimosa remove it. its only for test
+  i: 3
 };
 
 export default function tasksReducers (state = defaultState, action) {
