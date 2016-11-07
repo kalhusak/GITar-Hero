@@ -1,9 +1,7 @@
 import { createAction } from '../utils';
 
-export const NEW_COMMAND = 'NEW_COMMAND';
+export const ENTER_COMMAND = 'ENTER_COMMAND';
 
-export function newCommand (command) {
-  return createAction(NEW_COMMAND, {
-    command
-  });
-}
+export function enterCommand (command) {
+  return createAction(ENTER_COMMAND, { command });
+};

@@ -1,11 +1,54 @@
-.console {
-  overflow: visible;
+$console-background: #000;
+$console-color: #eee;
+
+.floatingCommand-leave {
+  transition: all 0.3s ease-out;
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+}
+
+.floatingCommand-leave.floatingCommand-leave-active {
+  transform: translateY(-300px) scale(0.5);
+  opacity: 0;
+}
+
+.console__wrapper {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100px;
+  background: $console-background;
+  padding: 10px;
+}
+
+.console__input {
+  opacity: 0;
+  width: 100%;
+  height: 100px;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: black;
-  border: 0px;
-  border-color: black;
-  color: white;
+}
+
+.console__cursor {
+  //animation: blink 1s infinite steps(1, start);
+  background-color: $console-color;
+  color: $console-background;
+}
+
+.console__text {
+  color: $console-color;
+  font-size: 68px;
+  font-family: monospace;
+  white-space: pre;
+}
+
+@keyframes blink {
+  0%, 100% {
+      background-color: $console-background;
+      color: $console-color;
+  }
+  50% {
+      background-color: $console-color;
+      color: $console-background;
+  }
 }
