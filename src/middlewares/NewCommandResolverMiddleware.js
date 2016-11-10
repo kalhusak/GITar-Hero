@@ -7,7 +7,7 @@ export default ({ getState }) => (next) => (action) => {
     next(action);
     action = getNextActionFromCommandResolver(action, getState());
   }
-  return next(action);
+  next(action);
 };
 
 function getNextActionFromCommandResolver (oldAction, state) {

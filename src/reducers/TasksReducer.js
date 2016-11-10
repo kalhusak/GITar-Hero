@@ -1,6 +1,7 @@
-import * as actions from '../actions/CommandActions';
-import _ from 'lodash';
+import * as commandActions from '../actions/CommandActions';
+import * as taskActions from '../actions/TaskActions';
 import TaskUtils from '../utils/TaskUtils';
+import _ from 'lodash';
 
 const defaultState = {
   current: '1',
@@ -61,16 +62,25 @@ const defaultState = {
 
 export default function tasksReducers (state = defaultState, action) {
   switch (action.type) {
-    case actions.NEW_VALID_COMMAND:
+    case commandActions.NEW_VALID_COMMAND:
       var newState = _.cloneDeep(state);
       return onNewValidCommand(newState);
+    case taskActions.LAST_STEP_EXECUTED:
+      var newState = _.cloneDeep(state);
+      return onLastStepExecuted(newState);
     default:
       return state;
   }
 }
 
 function onNewValidCommand (state) {
-  TaskUtils.setCurrentStepExecuted(state);
-  TaskUtils.deleteCurrentTaskAndStepsIfCompleted(state);
+  TaskUtils.setCurrentStepExecuted(state.steps);
+  TaskUtils.setCurrentStepOnNext(state);
+  return state;
+}
+
+function onLastStepExecuted (state) {
+  TaskUtils.deleteCurrentTask(state);
+  TaskUtils.setCurrentTaskOnNext(state);
   return state;
 }

@@ -11,7 +11,6 @@ class Task extends Component {
   };
 
   render () {
-    console.log(this.props.steps);
     const steps = _.values(this.props.steps).map((step, index) =>
       <li key={index}>
         <input className='toggle' type='checkbox' checked={step.executed} />

@@ -28,6 +28,4 @@ Canvas.propTypes = {
   id: React.PropTypes.string
 };
 
-const mapStateToProps = (state) => {};
-
-export default connect(mapStateToProps)(Canvas);
+export default Canvas;

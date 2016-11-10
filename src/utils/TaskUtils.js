@@ -2,44 +2,48 @@ import _ from 'lodash';
 
 // TODO add steps remove ?? steps can be the same in different tasks ?
 
-export function getCurrentTask (tasks) {
-  return tasks.list[tasks.current];
+export function getCurrentTask (tasksState) {
+  return tasksState.list[tasksState.current];
 }
 
 export function getCurrentStep (steps) {
   return steps.list[steps.current];
 }
 
-export function setCurrentStepExecuted (tasks) {
-  var taskSteps = getCurrentTask(tasks).steps;
-  var currentStep = getCurrentStep(tasks.steps);
+export function setCurrentStepExecuted (steps) {
+  var currentStep = getCurrentStep(steps);
   currentStep.executed = true;
+}
 
-  if (currentStep.id !== _.last(taskSteps)) {
-    tasks.steps.current = taskSteps[taskSteps.indexOf(tasks.steps.current) + 1];
+export function setCurrentStepOnNext (tasksState) {
+  var currentTask = getCurrentTask(tasksState);
+  var currentStepId = tasksState.steps.current;
+  var stepsIdsOfCurrentTask = currentTask.steps;
+  var indexOfCurrentTaskStep = stepsIdsOfCurrentTask.indexOf(currentStepId);
+  if (indexOfCurrentTaskStep === stepsIdsOfCurrentTask.length - 1) {
+    tasksState.steps.current = null;
+  } else {
+    tasksState.steps.current = stepsIdsOfCurrentTask[indexOfCurrentTaskStep + 1];
   }
 }
 
-export function deleteCurrentTaskAndStepsIfCompleted (tasks) {
-  var taskSteps = getCurrentTask(tasks).steps;
-  if (_.last(taskSteps) === tasks.steps.current) {
-    var currentStep = getCurrentStep(tasks.steps);
-    if (currentStep.executed) {
-      deleteCurrentTask(tasks);
-      initCurrentOfTasksAndSteps(tasks);
-      // TODO pimosa remove it. its only for test
-      tasks.i++;
-      tasks.list[tasks.i] = {
-        id: tasks.i,
-        title: 'Create branch and download from remote',
-        steps: ['3', '4']
-      };
-    }
+//TODO delete also steps cause 1 to many relation applied
+export function deleteCurrentTask (tasksState) {
+  _.unset(tasksState.list, tasksState.current);
+}
+
+export function setCurrentTaskOnNext (tasksState) {
+  var tasksArray = Object.values(tasksState.list);
+  if (tasksArray.length === 0) {
+    tasksState.current = null;
+  } else {
+    tasksState.current = tasksArray[0].id;
+    tasksState.steps.current = tasksArray[0].steps[0];
   }
 }
 
-function deleteCurrentTask (tasks) {
-  _.unset(tasks.list, tasks.current);
+export function addNewTaskToState (tasksState) {
+  //TODO implement
 }
 
 function initCurrentOfTasksAndSteps (tasks) {
@@ -63,6 +67,9 @@ export default {
   getCurrentTask,
   getCurrentStep,
   setCurrentStepExecuted,
-  deleteCurrentTaskAndStepsIfCompleted,
+  setCurrentStepOnNext,
+  deleteCurrentTask,
+  setCurrentTaskOnNext,
+  addNewTaskToState,
   getStepsByTask
 };
