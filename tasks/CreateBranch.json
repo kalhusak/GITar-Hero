@@ -1,0 +1,20 @@
+{
+  "title": "Create branch and download from remote",
+  "steps": [
+    {
+      "description": "create branch",
+      "executed": false,
+      "allowedCommands": [
+        "git branch",
+        "git checkout -b"
+      ]
+    },
+    {
+      "description": "download changes from origin master",
+      "executed": false,
+      "allowedCommands": [
+        "git pull"
+      ]
+    }
+  ]
+}

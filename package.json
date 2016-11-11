@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-starter-kit",
-  "version": "3.0.0-alpha.2",
-  "description": "Get started with React, Redux, and React-Router!",
+  "name": "GITarHero",
+  "version": "1.0.0",
+  "description": "Educational web game learning the basics of Git",
   "main": "index.js",
   "engines": {
     "node": ">=4.5.0",
@@ -20,7 +20,8 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "graphCreator": "node ./graphCreator/app.js"
+    "graphCreator": "node ./graphCreator/app.js",
+    "createTasksGraph": "gulp createTasksGraph"
   },
   "betterScripts": {
     "compile": {
@@ -72,9 +73,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+https://github.com/kalhusak/GITar-Hero.git"
   },
-  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
     "babel-loader": "^6.2.5",
@@ -91,11 +91,13 @@
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
+    "gulp": "^3.9.1",
     "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.6.5",
     "ip": "^1.1.2",
     "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
+    "jsonlint": "^1.6.2",
     "node-sass": "^3.7.0",
     "normalize.css": "^4.1.1",
     "postcss-loader": "^0.13.0",

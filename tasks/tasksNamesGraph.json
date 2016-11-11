@@ -1,0 +1,25 @@
+{
+  "root": 2,
+  "byId": {
+    "2": {
+      "file": "CreateRepository",
+      "children": [3]
+    },
+    "3": {
+      "file": "ConfigureGit",
+      "children": [4, 5]
+    },
+    "4": {
+      "file": "CreateBranch",
+      "children": [6]
+    },
+    "5": {
+      "file": "MakeFirstCommit",
+      "children": [6]
+    },
+    "6": {
+      "file": "CreateRepository",
+      "children": [3]
+    }
+  }
+}
