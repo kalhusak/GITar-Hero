@@ -1,3 +1,6 @@
+import taskSequence from './TaskSequence';
+import taskProvider from '../providers/taskProvider';
+import config from '../config';
 import _ from 'lodash';
 
 // TODO add steps remove ?? steps can be the same in different tasks ?
@@ -27,7 +30,7 @@ export function setCurrentStepOnNext (tasksState) {
   }
 }
 
-//TODO delete also steps cause 1 to many relation applied
+// TODO delete also steps cause 1 to many relation applied
 export function deleteCurrentTask (tasksState) {
   _.unset(tasksState.list, tasksState.current);
 }
@@ -43,7 +46,7 @@ export function setCurrentTaskOnNext (tasksState) {
 }
 
 export function addNewTaskToState (tasksState) {
-  //TODO implement
+  // TODO implement
 }
 
 function initCurrentOfTasksAndSteps (tasks) {
@@ -63,6 +66,33 @@ export function getStepsByTask (task, stepsList) {
   return result;
 }
 
+export function getTasksSize (tasksState) {
+  return Object.keys(tasksState.list).length;
+}
+
+export function fillTaskList (tasksState) {
+  let howManyAdd = config.task_list_size - getTasksSize(tasksState);
+
+  for (let i = 0; i < howManyAdd; i++) {
+    if (taskProvider.hasNext()) {
+      let newTask = taskProvider.next();
+      let stepsIds = [];
+
+      newTask.steps.forEach((step) => {
+        let newStepId = taskSequence.nextStep();
+        step['id'] = newStepId;
+        tasksState.steps.list[newStepId] = step;
+        stepsIds.push(newStepId);
+      });
+
+      let newTaskId = taskSequence.nextTask();
+      newTask['id'] = newTaskId;
+      newTask['steps'] = stepsIds;
+      tasksState.list[newTaskId] = newTask;
+    }
+  }
+}
+
 export default {
   getCurrentTask,
   getCurrentStep,
@@ -71,5 +101,7 @@ export default {
   deleteCurrentTask,
   setCurrentTaskOnNext,
   addNewTaskToState,
-  getStepsByTask
+  getStepsByTask,
+  getTasksSize,
+  fillTaskList
 };

@@ -5,16 +5,14 @@
       "description": "set up name",
       "executed": false,
       "allowedCommands": [
-        "git config --global user.name Someone",
-        "git config user.name Someone"
+        "git config"
       ]
     },
     {
       "description": "set up email",
       "executed": false,
       "allowedCommands": [
-        "git config --global user.email test@mail.com",
-        "git config user.email test@mail.com"
+        "git config"
       ]
     }
   ]

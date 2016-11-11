@@ -4,14 +4,20 @@ import { browserHistory } from 'react-router';
 import rootReducer from '../reducers';
 import newCommandResolverMiddleware from '../middlewares/NewCommandResolverMiddleware';
 import validCommandMiddleware from '../middlewares/ValidCommandMiddleware';
-import lastStepMiddleware from '../middlewares/lastStepMiddleware';
+import lastStepMiddleware from '../middlewares/LastStepMiddleware';
+import tooFewTasksMiddleware from '../middlewares/TooFewTasksMiddleware';
 import { updateLocation } from './location';
 
 export default () => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, newCommandResolverMiddleware, validCommandMiddleware, lastStepMiddleware];
+  const middleware = [thunk,
+    newCommandResolverMiddleware,
+    validCommandMiddleware,
+    lastStepMiddleware,
+    tooFewTasksMiddleware];
+
   // ======================================================
   // Store Enhancers
   // ======================================================

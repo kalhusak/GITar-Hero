@@ -4,57 +4,11 @@ import TaskUtils from '../utils/TaskUtils';
 import _ from 'lodash';
 
 const defaultState = {
-  current: '1',
-  list: {
-    '1': {
-      id: '1',
-      title: 'Commit modified files',
-      steps: ['1', '2']
-    },
-    '2': {
-      id: '2',
-      title: 'Create branch and download from remote',
-      steps: ['3', '4']
-    }
-  },
+  current: '0',
+  list: {},
   steps: {
-    current: '1',
-    list: {
-      '1': {
-        id: '1',
-        description: 'stage files',
-        executed: false,
-        allowedCommands: [
-          'git add -u',
-          'git add'
-        ]
-      },
-      '2': {
-        id: '2',
-        description: 'make a commit',
-        executed: false,
-        allowedCommands: [
-          'git commit'
-        ]
-      },
-      '3': {
-        id: '3',
-        description: 'create branch',
-        executed: false,
-        allowedCommands: [
-          'git branch',
-          'git checkout -b'
-        ]
-      },
-      '4': {
-        id: '4',
-        description: 'download changes from origin',
-        executed: false,
-        allowedCommands: [
-          'git pull'
-        ]
-      }
-    }
+    current: '0',
+    list: {}
   },
   // TODO pimosa remove it. its only for test
   i: 3
@@ -68,6 +22,9 @@ export default function tasksReducers (state = defaultState, action) {
     case taskActions.LAST_STEP_EXECUTED:
       var newState = _.cloneDeep(state);
       return onLastStepExecuted(newState);
+    case taskActions.TOO_FEW_TASKS:
+      var newState = _.cloneDeep(state);
+      return onTooFewTasks(newState);
     default:
       return state;
   }
@@ -82,5 +39,10 @@ function onNewValidCommand (state) {
 function onLastStepExecuted (state) {
   TaskUtils.deleteCurrentTask(state);
   TaskUtils.setCurrentTaskOnNext(state);
+  return state;
+}
+
+function onTooFewTasks (state) {
+  TaskUtils.fillTaskList(state);
   return state;
 }

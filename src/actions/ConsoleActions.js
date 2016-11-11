@@ -1,4 +1,4 @@
-import { createAction } from '../tools';
+import { createAction } from '../utils';
 
 export const NEW_COMMAND = 'NEW_COMMAND';
 
