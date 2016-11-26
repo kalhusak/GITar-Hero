@@ -11,7 +11,7 @@ export function onValidCommand (state) {
 export function onInvalidCommand (state) {
   onCommand(state, (tags, tag) => {
     incrementTagProbes(tags, tag);
-    calculateTagKnowledgeRation(tags, tag);
+    calculateTagKnowledgeRatio(tags, tag);
   });
 }
 
@@ -34,8 +34,8 @@ function incrementTagValid (tags, tag) {
   tags[tag].valid = (tags[tag].valid || 0) + 1;
 }
 
-function calculateTagKnowledgeRation (tags, tag) {
-  tags[tag].ratio = tags[tag].valid / tags[tag].probes;
+function calculateTagKnowledgeRatio (tags, tag) {
+  tags[tag].ratio = (tags[tag].valid || 0) / tags[tag].probes;
 }
 
 export default {
