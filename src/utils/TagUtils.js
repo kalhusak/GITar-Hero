@@ -4,7 +4,7 @@ export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {
     incrementTagProbes(tags, tag);
     incrementTagValid(tags, tag);
-    calculateTagKnowledgeRation(tags, tag);
+    calculateTagKnowledgeRatio(tags, tag);
   });
 }
 
