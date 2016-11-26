@@ -3,42 +3,28 @@ import * as taskActions from '../actions/TaskActions';
 import TaskUtils from '../utils/TaskUtils';
 import _ from 'lodash';
 
-const defaultState = {
-  current: '0',
-  list: {},
-  steps: {
-    current: '0',
-    list: {}
-  },
-  // TODO pimosa remove it. its only for test
-  i: 3
-};
-
-export default function tasksReducers (state = defaultState, action) {
+export default function tasksReducers (state = {}, action) {
   switch (action.type) {
     case commandActions.NEW_VALID_COMMAND:
-      var newState = _.cloneDeep(state);
-      return onNewValidCommand(newState);
+      return onNewValidCommand(_.cloneDeep(state));
     case taskActions.LAST_STEP_EXECUTED:
-      var newState = _.cloneDeep(state);
-      return onLastStepExecuted(newState);
+      return onLastStepExecuted(_.cloneDeep(state));
     case taskActions.TOO_FEW_TASKS:
-      var newState = _.cloneDeep(state);
-      return onTooFewTasks(newState);
+      return onTooFewTasks(_.cloneDeep(state));
     default:
       return state;
   }
 }
 
 function onNewValidCommand (state) {
-  TaskUtils.setCurrentStepExecuted(state.steps);
-  TaskUtils.setCurrentStepOnNext(state);
+  var task = TaskUtils.getCurrentTask(state);
+  task.currentStepIndex++;
   return state;
 }
 
 function onLastStepExecuted (state) {
   TaskUtils.deleteCurrentTask(state);
-  TaskUtils.setCurrentTaskOnNext(state);
+  state.current++;
   return state;
 }
 

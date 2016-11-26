@@ -9,17 +9,17 @@ import { TransitionMotion, spring } from 'react-motion';
 class TaskList extends Component {
 
   getDefaultStyles () {
-    return this.props.tasks.map((task) => ({ ...task, style: { height: 0, opacity: 0 } }));
+    return this.props.tasks.map((task) => ({ ...task, style: { opacity: 0 } }));
   }
 
   getStyles () {
-    return this.props.tasks.map((task) => ({ ...task, style: { height: spring(120), opacity: spring(1) } }));
+    return this.props.tasks.map((task) => ({ ...task, style: { opacity: spring(1) } }));
   }
 
   mapStylesToTask (styles) {
     return styles.map(({ key, data, style }, index) =>
       <li key={key} style={style}>
-        <Task task={data.task} steps={data.steps} />
+        <Task task={data.task} />
       </li>);
   }
 
@@ -59,8 +59,8 @@ class TaskList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: _.reverse(_.slice(Object.values(state.tasks.list))).map((task) =>
-      ({ key: task.id, data: { task, steps: TaskUtils.getStepsByTask(task, state.tasks.steps.list) } }))
+    tasks: _.reverse(_.slice(Object.values(state.tasks.byId))).map((task) =>
+      ({ key: task.id, data: { task } }))
   };
 };
 

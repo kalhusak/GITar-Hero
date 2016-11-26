@@ -1,0 +1,5 @@
+{
+  "title": "Create branch and checkout",
+  "description": "At first create new branch and then move to it",
+  "steps": [7, 6]
+}

@@ -1,12 +1,5 @@
 {
   "title": "Create initial repository",
-  "steps": [
-    {
-      "description": "init repository",
-      "executed": false,
-      "allowedCommands": [
-        "git init"
-      ]
-    }
-  ]
+  "description": "Create initial repository",
+  "steps": [1]
 }

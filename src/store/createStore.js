@@ -5,7 +5,6 @@ import rootReducer from '../reducers';
 import newCommandResolverMiddleware from '../middlewares/NewCommandResolverMiddleware';
 import validCommandMiddleware from '../middlewares/ValidCommandMiddleware';
 import lastStepMiddleware from '../middlewares/LastStepMiddleware';
-import tooFewTasksMiddleware from '../middlewares/TooFewTasksMiddleware';
 import { updateLocation } from './location';
 
 export default () => {
@@ -15,8 +14,7 @@ export default () => {
   const middleware = [thunk,
     newCommandResolverMiddleware,
     validCommandMiddleware,
-    lastStepMiddleware,
-    tooFewTasksMiddleware];
+    lastStepMiddleware];
 
   // ======================================================
   // Store Enhancers

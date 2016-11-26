@@ -1,20 +1,5 @@
 {
-  "title": "Commit modified files",
-  "steps": [
-    {
-      "description": "stage files",
-      "executed": false,
-      "allowedCommands": [
-        "git add -u",
-        "git add -A"
-      ]
-    },
-    {
-      "description": "make a commit",
-      "executed": false,
-      "allowedCommands": [
-        "git commit"
-      ]
-    }
-  ]
+  "title": "Make first commit",
+  "description": "Add your all files and commit it",
+  "steps": [4, 5]
 }

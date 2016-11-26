@@ -1,0 +1,44 @@
+{
+  "byId": {
+    "1": {
+      "description": "Initialize repository",
+      "command": "git init",
+      "tags": ["init"]
+    },
+    "2": {
+      "description": "Clone repository from https://github.com/kalhusak/GITar-Hero.git",
+      "command": "git clone https://github.com/kalhusak/GITar-Hero.git",
+      "tags": ["clone"]
+    },
+    "3": {
+      "description": "Add CarList.java file to staging",
+      "command": "git add CarList.java",
+      "tags": ["add"]
+    },
+    "4": {
+      "description": "Add all files to staging",
+      "command": "git add -A",
+      "tags": ["add"]
+    },
+    "5": {
+      "description": "Create commit with message 'My first commit'",
+      "command": "git commit -m",
+      "tags": ["commit"]
+    },
+    "6": {
+      "description": "Change branch to 'feature/new-task'",
+      "command": "git checkout feature/new-task",
+      "tags": ["checkout"]
+    },
+    "7": {
+      "description": "Create new branch 'feature/new-task'",
+      "command": "git branch feature/new-task",
+      "tags": ["branch"]
+    },
+    "8": {
+      "description": "Checkout to new branch 'feature/qtask'",
+      "command": "git checkout -b feature/qtask",
+      "tags": ["checkout", "branch"]
+    }
+  }
+}

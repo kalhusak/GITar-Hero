@@ -6,20 +6,16 @@
       "children": [3]
     },
     "3": {
-      "file": "ConfigureGit",
+      "file": "MakeFirstCommit",
       "children": [4, 5]
     },
     "4": {
-      "file": "CreateBranch",
-      "children": [6]
+      "file": "CreateBranchAndCheckout",
+      "children": [2]
     },
     "5": {
-      "file": "MakeFirstCommit",
-      "children": [6]
-    },
-    "6": {
-      "file": "CreateRepository",
-      "children": [3]
+      "file": "CreateBranchAndCheckoutInOneStep",
+      "children": [2]
     }
   }
 }
