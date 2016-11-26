@@ -35,7 +35,7 @@ function incrementTagValid (tags, tag) {
 }
 
 function calculateTagKnowledgeRation (tags, tag) {
-  tags[tag].ratio = tags[tag].valid / tags[tag].probes;
+  tags[tag].ratio = (tags[tag].valid || 0) / tags[tag].probes;
 }
 
 export default {
