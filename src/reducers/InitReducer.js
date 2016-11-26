@@ -7,7 +7,8 @@ const defaultState = {
   },
   tasks: {
     current: 0,
-    byId: {}
+    byId: {},
+    tags: {}
   }
 };
 

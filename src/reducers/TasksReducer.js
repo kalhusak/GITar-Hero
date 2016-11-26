@@ -1,6 +1,7 @@
 import * as commandActions from '../actions/CommandActions';
 import * as taskActions from '../actions/TaskActions';
 import TaskUtils from '../utils/TaskUtils';
+import TagUtils from '../utils/TagUtils';
 import _ from 'lodash';
 
 export default function tasksReducers (state = {}, action) {
@@ -11,6 +12,8 @@ export default function tasksReducers (state = {}, action) {
       return onLastStepExecuted(_.cloneDeep(state));
     case taskActions.TOO_FEW_TASKS:
       return onTooFewTasks(_.cloneDeep(state));
+    case commandActions.NEW_INVALID_COMMAND:
+      return onNewInvalidCommand(_.cloneDeep(state));
     default:
       return state;
   }
@@ -18,6 +21,7 @@ export default function tasksReducers (state = {}, action) {
 
 function onNewValidCommand (state) {
   var task = TaskUtils.getCurrentTask(state);
+  TagUtils.onValidCommand(state);
   task.currentStepIndex++;
   return state;
 }
@@ -30,5 +34,10 @@ function onLastStepExecuted (state) {
 
 function onTooFewTasks (state) {
   TaskUtils.fillTaskList(state);
+  return state;
+}
+
+function onNewInvalidCommand (state) {
+  TagUtils.onInvalidCommand(state);
   return state;
 }
