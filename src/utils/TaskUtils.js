@@ -22,7 +22,7 @@ export function fillTaskList (tasksState) {
 
   for (let i = 0; i < howManyAdd; i++) {
     if (taskProvider.hasNext()) {
-      let newTask = taskProvider.next();
+      let newTask = taskProvider.next(tasksState.tags);
       newTask.steps = stepProvider.getSteps(newTask.steps);
       newTask.currentStepIndex = 0;
       newTask.id = taskSequence.nextTask();

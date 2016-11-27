@@ -1,4 +1,5 @@
 import TaskUtils from './TaskUtils';
+import StatisticsUtils from './StatisticsUtils';
 
 export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {
@@ -35,7 +36,7 @@ function incrementTagValid (tags, tag) {
 }
 
 function calculateTagKnowledgeRatio (tags, tag) {
-  tags[tag].ratio = (tags[tag].valid || 0) / tags[tag].probes;
+  tags[tag].ratio = StatisticsUtils.calculateTagRatio(tags[tag].probes, tags[tag].valid);
 }
 
 export default {
