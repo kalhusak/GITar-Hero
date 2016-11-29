@@ -53,9 +53,12 @@ $console-font-size: 36px;
   border: none;
   margin: 0px;
   animation: blink 1s infinite steps(1, start);
-  animation-delay: 1s;
   background-color: $console-color;
   color: $console-background;
+}
+
+.console__cursor--moving {
+  animation: none;
 }
 
 .console__text, .console__prompt-character {

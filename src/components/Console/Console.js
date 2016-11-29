@@ -17,7 +17,8 @@ class Console extends Component {
       selectionStart: 0,
       commandId: 0,
       currentValue: '',
-      focus: false
+      focus: false,
+      movingCursor: false
     };
   }
 
@@ -36,8 +37,10 @@ class Console extends Component {
   onChange ({ target: { value, selectionStart } }) {
     this.setState({
       selectionStart,
-      currentValue: value
+      currentValue: value,
+      movingCursor: true
     });
+    this.setMovingCursorTimeout();
   }
 
   onKeyDown ({ keyCode, target: { value, selectionStart } }) {
@@ -45,10 +48,21 @@ class Console extends Component {
     const NEXT_CODE = 39;
 
     if (keyCode === PREV_CODE) {
-      this.setState({ selectionStart: Math.max(selectionStart - 1, 0) });
+      this.setState({ selectionStart: Math.max(selectionStart - 1, 0), movingCursor: true });
     } else if (keyCode === NEXT_CODE) {
-      this.setState({ selectionStart:  Math.min(selectionStart + 1, value.length) });
+      this.setState({ selectionStart:  Math.min(selectionStart + 1, value.length), movingCursor: true });
+    } else {
+      return;
     }
+
+    this.setMovingCursorTimeout();
+  }
+
+  setMovingCursorTimeout () {
+    clearTimeout(this.cursorStopTimeout);
+    this.cursorStopTimeout = setTimeout(() => {
+      this.setState({ movingCursor: false });
+    }, 1000);
   }
 
   enterCommand (command) {
@@ -81,6 +95,10 @@ class Console extends Component {
 
     if (this.state.focus) {
       cursorClasses.push('console__cursor--active');
+    }
+
+    if (this.state.movingCursor) {
+      cursorClasses.push('console__cursor--moving');
     }
 
     return (<span className='console__text' key={commandId}>
