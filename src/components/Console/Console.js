@@ -8,15 +8,29 @@ class Console extends Component {
 
   constructor (props) {
     super(props);
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onKeyUp = ::this.onKeyUp;
+    this.onKeyDown = ::this.onKeyDown;
+    this.onChange = ::this.onChange;
+    this.onFocus = ::this.onFocus;
+    this.onBlur = ::this.onBlur;
     this.state = {
       selectionStart: 0,
-      selectionEnd: 0,
-      numEntered: 0,
-      currentValue: ''
+      commandId: 0,
+      currentValue: '',
+      focus: false
     };
+  }
+
+  onFocus ({ target }) {
+    const { selectionStart } = this.state;
+    this.setState({ focus: true });
+    setTimeout(() => {
+      target.setSelectionRange(selectionStart, selectionStart);
+    });
+  }
+
+  onBlur () {
+    this.setState({ focus: false });
   }
 
   onChange ({ target: { value, selectionStart } }) {
@@ -37,36 +51,59 @@ class Console extends Component {
     }
   }
 
+  enterCommand (command) {
+    const { dispatch } = this.props;
+
+    dispatch(enterCommand(command));
+  }
+
   onKeyUp ({ keyCode, target }) {
     const ENTER_CODE = 13;
 
     if (keyCode === ENTER_CODE) {
-      const { numEntered } = this.state;
-      const { dispatch } = this.props;
-      dispatch(enterCommand(target.value));
+      const { commandId } = this.state;
+
+      this.enterCommand(target.value);
+
       target.value = '';
       this.setState({
-        numEntered: numEntered + 1,
-        currentValue: ''
+        commandId: commandId + 1,
+        currentValue: '',
+        selectionStart: 0
       });
     }
   }
 
   renderFloatingCommand () {
-    const { numEntered, currentValue, selectionStart } = this.state;
+    const { commandId, currentValue, selectionStart } = this.state;
     const text = currentValue + ' ';
-    return (<span className='console__text' key={numEntered}>
+    const cursorClasses = ['console__cursor'];
+
+    if (this.state.focus) {
+      cursorClasses.push('console__cursor--active');
+    }
+
+    return (<span className='console__text' key={commandId}>
       {text.slice(0, selectionStart)}
-      <span className='console__cursor'>{ text.slice(selectionStart, selectionStart + 1) }</span>
+      <span className={cursorClasses.join(' ')}>{ text.slice(selectionStart, selectionStart + 1) }</span>
       {text.slice(selectionStart + 1)}
     </span>);
   }
 
   render () {
+    const consoleClasses = ['console__wrapper'];
+
+    if (this.state.focus) {
+      consoleClasses.push('console__wrapper--focused');
+    }
+
     return (
-      <div className='console__wrapper'>
-        <input className='console__input' onChange={this.onChange} onKeyUp={this.onKeyUp} onKeyDown={this.onKeyDown} />
+      <div className={consoleClasses.join(' ')}>
+        <input autoFocus className='console__input' onChange={this.onChange} onKeyUp={this.onKeyUp}
+          onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} />
+        <span className='console__prompt-character'>GITar-Hero~$ </span>
         <ReactCSSTransitionGroup
+          className='console__text-container'
           transitionName='floatingCommand'
           transitionEnterTimeout={300}
           transitionLeaveTimeout={0}>
