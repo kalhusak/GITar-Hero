@@ -1,5 +1,7 @@
 {
   "title": "Create branch and checkout in one step",
   "description": "Checkout to new branch using only one command",
+  "minTime": 10,
+  "defaultTime": 30,
   "steps": [8]
 }

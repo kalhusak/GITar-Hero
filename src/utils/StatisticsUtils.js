@@ -14,7 +14,13 @@ function countTaskTagWeight (ratio) {
   return Math.pow(1 / (ratio || 1), 2);
 }
 
+function calculateTaskTime (minTaskTime, defaultTaskTime, tasksCount) {
+  let time = defaultTaskTime - tasksCount * 5;
+  return time > minTaskTime ? time : minTaskTime;
+}
+
 export default {
   calculateWeight,
-  calculateTagRatio
+  calculateTagRatio,
+  calculateTaskTime
 };
