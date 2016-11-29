@@ -1,8 +1,59 @@
 import React, { Component } from 'react';
+import { identity } from 'lodash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { enterCommand } from '../../actions/ConsoleActions';
 import './Console.scss';
+
+const autocompletePatterns = [
+  'git init',
+  'git add',
+  'git commit',
+  'git branch',
+  'git checkout :branch:'
+];
+
+const autocompleteBranches = [
+  'develop',
+  'master',
+  'feature/task1',
+  'feature/task2'
+];
+
+// TODO Move to utils directory
+// Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
+const searchForTheOnlyOne = (collection = [], predicate = identity) => {
+  let match;
+
+  collection.every(item => {
+    if (predicate(item)) {
+      if (match) {
+        match = null;
+        return false;
+      }
+      match = item;
+    }
+    return true;
+  });
+
+  return match;
+};
+
+const generateTreeBuilder = (pattern, collection) => {
+  const cutTailRegExp = new RegExp(`\\s?${pattern}.*`);
+  const replaceRecursively = searchValue => {
+    if (searchValue.includes(pattern)) {
+      return {
+        pattern: searchValue.replace(cutTailRegExp, ''),
+        children: collection.map(item => replaceRecursively(searchValue.replace(pattern, item), collection))
+      };
+    }
+    return { pattern: searchValue };
+  };
+  return replaceRecursively;
+};
+
+const assignBranchNames = generateTreeBuilder(':branch:', autocompleteBranches);
 
 class Console extends Component {
 
@@ -34,7 +85,9 @@ class Console extends Component {
     this.setState({ focus: false });
   }
 
-  onChange ({ target: { value, selectionStart } }) {
+  onChange () {
+    const { consoleInput: { selectionStart, value } } = this.refs;
+
     this.setState({
       selectionStart,
       currentValue: value,
@@ -43,16 +96,69 @@ class Console extends Component {
     this.setMovingCursorTimeout();
   }
 
-  onKeyDown ({ keyCode, target: { value, selectionStart } }) {
+  generateAutocompletionTree () {
+    return {
+      pattern: '',
+      children: [
+        {
+          pattern: 'git',
+          children: autocompletePatterns.map(pattern => assignBranchNames(pattern, autocompleteBranches))
+        }
+      ]
+    };
+  }
+
+  searchForHint (searchValue, { children }) {
+    if (children) {
+      let match = searchForTheOnlyOne(children, node => searchValue.startsWith(node.pattern));
+      if (match) {
+        return this.searchForHint(searchValue, match);
+      }
+
+      match = searchForTheOnlyOne(children, node => node.pattern.startsWith(searchValue));
+      if (match) {
+        return match.pattern;
+      }
+    }
+  }
+
+  tryToComplete () {
+    const { currentValue } = this.state;
+    const { consoleInput } = this.refs;
+    const hint = this.searchForHint(currentValue, this.generateAutocompletionTree());
+
+    if (hint) {
+      consoleInput.value = hint + ' ';
+      this.onChange();
+    }
+  }
+
+  onKeyDown (event) {
+    const { consoleInput } = this.refs;
+
     const PREV_CODE = 37;
     const NEXT_CODE = 39;
+    const TAB_CODE = 9;
 
-    if (keyCode === PREV_CODE) {
-      this.setState({ selectionStart: Math.max(selectionStart - 1, 0), movingCursor: true });
-    } else if (keyCode === NEXT_CODE) {
-      this.setState({ selectionStart:  Math.min(selectionStart + 1, value.length), movingCursor: true });
-    } else {
-      return;
+    switch (event.keyCode) {
+      case PREV_CODE:
+        this.setState({
+          selectionStart: Math.max(consoleInput.selectionStart - 1, 0),
+          movingCursor: true
+        });
+        break;
+      case NEXT_CODE:
+        this.setState({
+          selectionStart:  Math.min(consoleInput.selectionStart + 1, consoleInput.value.length),
+          movingCursor: true
+        });
+        break;
+      case TAB_CODE:
+        event.preventDefault();
+        this.tryToComplete();
+        break;
+      default:
+        return;
     }
 
     this.setMovingCursorTimeout();
@@ -67,7 +173,6 @@ class Console extends Component {
 
   enterCommand (command) {
     const { dispatch } = this.props;
-
     dispatch(enterCommand(command));
   }
 
@@ -117,7 +222,7 @@ class Console extends Component {
 
     return (
       <div className={consoleClasses.join(' ')}>
-        <input autoFocus className='console__input' onChange={this.onChange} onKeyUp={this.onKeyUp}
+        <input autoFocus ref='consoleInput' className='console__input' onChange={this.onChange} onKeyUp={this.onKeyUp}
           onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} />
         <span className='console__prompt-character'>GITar-Hero~$ </span>
         <ReactCSSTransitionGroup
