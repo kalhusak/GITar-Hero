@@ -10,15 +10,24 @@ const autocompletePatterns = [
   'git add',
   'git commit',
   'git branch',
-  'git checkout :branch:'
+  'git checkout :branch:',
+  'git rebase :branch: :branch:'
 ];
 
-const autocompleteBranches = [
-  'develop',
-  'master',
-  'feature/task1',
-  'feature/task2'
-];
+const autocompleteBranches = {
+  pattern: '',
+  children: [
+    {pattern: 'develop'},
+    {pattern: 'master'},
+    {
+      pattern: 'feature/',
+      children: [
+        {pattern: 'feature/task1'},
+        {pattern: 'feature/chuj2'}
+      ]
+    }
+  ]
+};
 
 // TODO Move to utils directory
 // Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
@@ -39,14 +48,22 @@ const searchForTheOnlyOne = (collection = [], predicate = identity) => {
   return match;
 };
 
+const a = (replaceFn, node, execForLast) => {
+  if (node.children) {
+    return {
+      pattern: replaceFn(node.pattern),
+      children: node.children.map(node => a(replaceFn, node, execForLast))
+    };
+  }
+  return execForLast(node.pattern);
+};
+
 const generateTreeBuilder = (pattern, collection) => {
-  const cutTailRegExp = new RegExp(`\\s?${pattern}.*`);
+  const cutTailRegExp = new RegExp(pattern + '.*');
   const replaceRecursively = searchValue => {
     if (searchValue.includes(pattern)) {
-      return {
-        pattern: searchValue.replace(cutTailRegExp, ''),
-        children: collection.map(item => replaceRecursively(searchValue.replace(pattern, item), collection))
-      };
+      return a(value => searchValue.replace(cutTailRegExp, value), collection,
+        item => replaceRecursively(searchValue.replace(pattern, item)));
     }
     return { pattern: searchValue };
   };
@@ -128,7 +145,7 @@ class Console extends Component {
     const hint = this.searchForHint(currentValue, this.generateAutocompletionTree());
 
     if (hint) {
-      consoleInput.value = hint + ' ';
+      consoleInput.value = hint;
       this.onChange();
     }
   }
