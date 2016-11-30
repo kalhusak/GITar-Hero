@@ -7,7 +7,9 @@ import { generateAutocompletionTree } from './utils/Autocompletion.js';
 import './Console.scss';
 
 const allowedCommands = ['init', 'add', 'commit', 'branch', 'checkout :branch:', 'rebase :branch: :branch:'];
-const autocompleteTree = generateAutocompletionTree(allowedCommands);
+const branches = ['master', 'develop', 'release/0.1.0', 'hotfix/aaa', 'blabla', 'release',
+  'fix/xxx', 'feature/task1', 'feature/task2', 'feature/mlask', 'feat', 'helpers', 'fix/8'];
+const autocompleteTree = generateAutocompletionTree(allowedCommands, branches);
 
 // TODO Move to utils directory
 // Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
@@ -71,7 +73,8 @@ class Console extends Component {
 
   searchForHint (searchValue, { children }) {
     if (children) {
-      let match = searchForTheOnlyOne(children, node => searchValue.startsWith(node.pattern));
+      let match = searchForTheOnlyOne(children, node =>
+        searchValue.startsWith(node.pattern) && node.pattern.length < searchValue.length);
       if (match) {
         return this.searchForHint(searchValue, match);
       }
