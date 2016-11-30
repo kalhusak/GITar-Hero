@@ -1,11 +1,87 @@
-.console {
-  overflow: visible;
+$console-background: #000;
+$console-color: #eee;
+$console-height: 100px;
+$console-font-size: 36px;
+
+.floatingCommand-leave {
+  transition: all 0.5s cubic-bezier(0,.78,.78,.94);
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+
+  .console__cursor {
+    animation: none;
+    background-color: transparent;
+    color: $console-color;
+  }
+}
+
+.floatingCommand-leave.floatingCommand-leave-active {
+  transform: translateY(-$console-height) scale(0.8);
+  opacity: 0;
+}
+
+.console__wrapper {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: $console-height;
+  background: rgba($console-background, 0.9);
+  padding-left: 10px;
+}
+
+.console__input {
+  opacity: 0;
+  width: 100%;
+  height: $console-height;
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: black;
-  border: 0px;
-  border-color: black;
-  color: white;
+}
+
+.console__text-container {
+  pointer-events: none;
+  position: relative;
+}
+
+.console__cursor {
+  margin: -1px;
+  background-color: transparent;
+  border: 1px solid $console-color;
+  color: $console-color;
+}
+
+.console__cursor--active {
+  border: none;
+  margin: 0px;
+  animation: blink 1s infinite steps(1, start);
+  background-color: $console-color;
+  color: $console-background;
+}
+
+.console__cursor--moving {
+  animation: none;
+}
+
+.console__text, .console__prompt-character {
+  display: inline-block;
+  color: $console-color;
+  font-size: $console-font-size;
+  font-family: monospace;
+  line-height: $console-height;
+  white-space: pre;
+}
+
+.console__text {
+  position: absolute;
+  left: 0px;
+}
+
+@keyframes blink {
+  0%, 100% {
+      background-color: transparent;
+      color: $console-color;
+  }
+  50% {
+      background-color: $console-color;
+      color: $console-background;
+  }
 }
