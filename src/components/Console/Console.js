@@ -3,31 +3,11 @@ import { identity } from 'lodash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { enterCommand } from '../../actions/ConsoleActions';
+import { generateAutocompletionTree } from './utils/Autocompletion.js';
 import './Console.scss';
 
-const autocompletePatterns = [
-  'git init',
-  'git add',
-  'git commit',
-  'git branch',
-  'git checkout :branch:',
-  'git rebase :branch: :branch:'
-];
-
-const autocompleteBranches = {
-  pattern: '',
-  children: [
-    {pattern: 'develop'},
-    {pattern: 'master'},
-    {
-      pattern: 'feature/',
-      children: [
-        {pattern: 'feature/task1'},
-        {pattern: 'feature/chuj2'}
-      ]
-    }
-  ]
-};
+const allowedCommands = ['init', 'add', 'commit', 'branch', 'checkout :branch:', 'rebase :branch: :branch:'];
+const autocompleteTree = generateAutocompletionTree(allowedCommands);
 
 // TODO Move to utils directory
 // Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
@@ -47,30 +27,6 @@ const searchForTheOnlyOne = (collection = [], predicate = identity) => {
 
   return match;
 };
-
-const a = (replaceFn, node, execForLast) => {
-  if (node.children) {
-    return {
-      pattern: replaceFn(node.pattern),
-      children: node.children.map(node => a(replaceFn, node, execForLast))
-    };
-  }
-  return execForLast(node.pattern);
-};
-
-const generateTreeBuilder = (pattern, collection) => {
-  const cutTailRegExp = new RegExp(pattern + '.*');
-  const replaceRecursively = searchValue => {
-    if (searchValue.includes(pattern)) {
-      return a(value => searchValue.replace(cutTailRegExp, value), collection,
-        item => replaceRecursively(searchValue.replace(pattern, item)));
-    }
-    return { pattern: searchValue };
-  };
-  return replaceRecursively;
-};
-
-const assignBranchNames = generateTreeBuilder(':branch:', autocompleteBranches);
 
 class Console extends Component {
 
@@ -113,18 +69,6 @@ class Console extends Component {
     this.setMovingCursorTimeout();
   }
 
-  generateAutocompletionTree () {
-    return {
-      pattern: '',
-      children: [
-        {
-          pattern: 'git',
-          children: autocompletePatterns.map(pattern => assignBranchNames(pattern, autocompleteBranches))
-        }
-      ]
-    };
-  }
-
   searchForHint (searchValue, { children }) {
     if (children) {
       let match = searchForTheOnlyOne(children, node => searchValue.startsWith(node.pattern));
@@ -142,7 +86,7 @@ class Console extends Component {
   tryToComplete () {
     const { currentValue } = this.state;
     const { consoleInput } = this.refs;
-    const hint = this.searchForHint(currentValue, this.generateAutocompletionTree());
+    const hint = this.searchForHint(currentValue, autocompleteTree);
 
     if (hint) {
       consoleInput.value = hint;
