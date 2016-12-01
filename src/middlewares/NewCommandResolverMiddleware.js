@@ -4,7 +4,7 @@ import * as consoleActions from '../actions/ConsoleActions';
 import TaskUtils from '../utils/TaskUtils';
 
 export default ({ getState }) => (next) => (action) => {
-  if (action.type === consoleActions.NEW_COMMAND) {
+  if (action.type === consoleActions.ENTER_COMMAND) {
     next(action);
     action = getNextAction(action, getState());
   }
