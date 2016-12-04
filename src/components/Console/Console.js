@@ -137,7 +137,7 @@ class Console extends Component {
 
   enterCommand (command) {
     const { dispatch } = this.props;
-    dispatch(enterCommand(command));
+    dispatch(enterCommand(command.trim().replace(/\s\s+/g, ' ')));
   }
 
   onKeyUp ({ keyCode, target }) {

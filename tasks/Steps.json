@@ -2,25 +2,25 @@
   "byId": {
     "1": {
       "description": "Initialize repository",
-      "command": "git init",
+      "commands": ["git init"],
       "tags": ["init"],
       "type": "INIT"
     },
     "3": {
       "description": "Add CarList.java file to staging",
-      "command": "git add CarList.java",
+      "commands": ["git add CarList.java"],
       "tags": ["add"],
       "type": "ADD"
     },
     "4": {
       "description": "Add all files to staging",
-      "command": "git add -A",
+      "commands": ["git add -A", "git add ."],
       "tags": ["add"],
       "type": "ADD"
     },
     "5": {
       "description": "Create commit with message 'Init'",
-      "command": "git commit -m \"Init\"",
+      "commands": ["git commit -m \"Init\""],
       "tags": ["commit"],
       "type": "COMMIT",
       "data": {
@@ -29,7 +29,7 @@
     },
     "6": {
       "description": "Change branch to 'feature/new-task'",
-      "command": "git checkout feature/new-task",
+      "commands": ["git checkout feature/new-task"],
       "tags": ["checkout"],
       "type": "CHECKOUT",
       "data": {
@@ -38,7 +38,7 @@
     },
     "7": {
       "description": "Create new branch 'feature/new-task'",
-      "command": "git branch feature/new-task",
+      "commands": ["git branch feature/new-task"],
       "tags": ["branch"],
       "type": "BRANCH",
       "data": {
@@ -47,7 +47,7 @@
     },
     "8": {
       "description": "Checkout to new branch 'feature/task'",
-      "command": "git checkout -b feature/task",
+      "commands": ["git checkout -b feature/task"],
       "tags": ["checkout", "branch"],
       "type": "CHECKOUT",
       "data": {
@@ -56,7 +56,7 @@
     },
     "9": {
       "description": "Create commit with message 'Add new files'",
-      "command": "git commit -m \"Add new files\"",
+      "commands": ["git commit -m \"Add new files\""],
       "tags": ["commit"],
       "type": "COMMIT",
       "data": {
