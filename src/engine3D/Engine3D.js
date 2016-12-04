@@ -7,6 +7,10 @@ class Engine3D extends BABYLON.Engine {
     super(canvas, config.ANTIALIASING);
     this.scene = new Scene(this);
     this.onStateChange = this.onStateChange.bind(this);
+
+    var freeCamera = new BABYLON.FreeCamera('FreeCamer', new BABYLON.Vector3(0, 10, -40), this.scene);
+    freeCamera.attachControl(canvas, true);
+    this.scene.activeCamera = freeCamera;
     this.renderLoop();
   }
 

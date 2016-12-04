@@ -1,0 +1,1 @@
+import BABYLON from 'babylonjs';
