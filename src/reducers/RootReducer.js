@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 import consoleReducer from './ConsoleReducer';
 import tasksReducer from './TasksReducer';
 import initReducer from './InitReducer';
+import lastActionReducer from './LastActionReducer';
 
 const combine = combineReducers({
   console: consoleReducer,
-  tasks: tasksReducer
+  tasks: tasksReducer,
+  lastAction: lastActionReducer
 });
 
 export default (state, action) => {

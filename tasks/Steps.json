@@ -3,42 +3,65 @@
     "1": {
       "description": "Initialize repository",
       "command": "git init",
-      "tags": ["init"]
-    },
-    "2": {
-      "description": "Clone repository from https://github.com/kalhusak/GITar-Hero.git",
-      "command": "git clone https://github.com/kalhusak/GITar-Hero.git",
-      "tags": ["clone"]
+      "tags": ["init"],
+      "type": "INIT"
     },
     "3": {
       "description": "Add CarList.java file to staging",
       "command": "git add CarList.java",
-      "tags": ["add"]
+      "tags": ["add"],
+      "type": "ADD"
     },
     "4": {
       "description": "Add all files to staging",
       "command": "git add -A",
-      "tags": ["add"]
+      "tags": ["add"],
+      "type": "ADD"
     },
     "5": {
-      "description": "Create commit with message 'My first commit'",
-      "command": "git commit -m",
-      "tags": ["commit"]
+      "description": "Create commit with message 'Init'",
+      "command": "git commit -m \"Init\"",
+      "tags": ["commit"],
+      "type": "COMMIT",
+      "data": {
+        "message": "Init"
+      }
     },
     "6": {
       "description": "Change branch to 'feature/new-task'",
       "command": "git checkout feature/new-task",
-      "tags": ["checkout"]
+      "tags": ["checkout"],
+      "type": "CHECKOUT",
+      "data": {
+        "name": "feature/new-task"
+      }
     },
     "7": {
       "description": "Create new branch 'feature/new-task'",
       "command": "git branch feature/new-task",
-      "tags": ["branch"]
+      "tags": ["branch"],
+      "type": "BRANCH",
+      "data": {
+        "name": "feature/new-task"
+      }
     },
     "8": {
-      "description": "Checkout to new branch 'feature/qtask'",
-      "command": "git checkout -b feature/qtask",
-      "tags": ["checkout", "branch"]
+      "description": "Checkout to new branch 'feature/task'",
+      "command": "git checkout -b feature/task",
+      "tags": ["checkout", "branch"],
+      "type": "CHECKOUT",
+      "data": {
+        "name": "feature/task"
+      }
+    },
+    "9": {
+      "description": "Create commit with message 'Add new files'",
+      "command": "git commit -m \"Add new files\"",
+      "tags": ["commit"],
+      "type": "COMMIT",
+      "data": {
+        "message": "Add new files"
+      }
     }
   }
 }

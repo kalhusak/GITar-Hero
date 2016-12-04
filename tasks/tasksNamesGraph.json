@@ -7,15 +7,15 @@
     },
     "3": {
       "file": "MakeFirstCommit",
-      "children": [4, 5]
+      "children": [4]
     },
     "4": {
-      "file": "CreateBranchAndCheckout",
-      "children": [2]
+      "file": "MakeAnotherCommit",
+      "children": [5]
     },
     "5": {
       "file": "CreateBranchAndCheckoutInOneStep",
-      "children": [2]
+      "children": [4]
     }
   }
 }

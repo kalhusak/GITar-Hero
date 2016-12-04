@@ -2,7 +2,7 @@ import stepsList from '../../tasks/Steps.json';
 
 class StepProvider {
   constructor () {
-    this.fillCommands = this.getSteps.bind(this);
+    this.getSteps = ::this.getSteps;
   }
 
   getSteps (stepIds) {

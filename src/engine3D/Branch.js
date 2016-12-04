@@ -32,16 +32,13 @@ export default class Branch {
     this.scene = scene;
     this.path = this._createPath(parentCommit);
     this.mesh = this._createTube(this.name, this.path, null);
+    this.mesh.alwaysSelectAsActiveMesh = true;
     this.commits = [];
+    this.activeCommit = null;
     this.enlogatingDelta = 0;
 
     if (!parentCommit) {
       this._addParts(1);
-      //this.mesh.alwaysSelectAsActiveMesh = true;
-      BABYLON.Mesh.prototype.isInFrustum = function (e) {
-        //console.log(e);
-        return true;
-      };
     } else {
       this._animateCurve();
     }
