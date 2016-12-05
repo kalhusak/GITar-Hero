@@ -14,7 +14,9 @@ const defaultState = {
 
 export default function initReducer (state = defaultState, action) {
   switch (action.type) {
-    case '@@INIT':
+    case '@@INIT':          // for CHROME
+      return onTooFewTasks(_.cloneDeep(state));
+    case '@@redux/INIT':    // for FIREFOX
       return onTooFewTasks(_.cloneDeep(state));
     default:
       return state;
