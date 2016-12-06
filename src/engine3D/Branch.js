@@ -1,7 +1,7 @@
 import BABYLON from 'babylonjs';
 import _ from 'lodash';
 import PathUtils from './utils/PathUtils';
-
+import Abstract3DObject from './Abstract3DObject';
 const tubeConfig = {
   radius: 2,
   tessellation: 16,
@@ -19,20 +19,22 @@ const pathConfig = {
   branchDistance: 30
 };
 
-export default class Branch {
+export default class Branch extends Abstract3DObject {
   constructor (name, parentCommit, scene) {
+    super(name, scene);
+
     this.addCommit = ::this.addCommit;
     this._createTube = ::this._createTube;
     this._createPath = ::this._createPath;
     this._addParts = ::this._addParts;
     this._animateCurve = ::this._animateCurve;
 
-    this.name = name;
     this.parentCommit = parentCommit;
-    this.scene = scene;
     this.path = this._createPath(parentCommit);
     this.mesh = this._createTube(this.name, this.path, null);
     this.mesh.alwaysSelectAsActiveMesh = true;
+
+    this.cameraTarget.position = _.last(this.path);
     this.commits = [];
     this.activeCommit = null;
     this.enlogatingDelta = 0;
@@ -47,20 +49,23 @@ export default class Branch {
   addCommit (commit) {
     var point = _.last(this.path);
     commit.setPosition(_.cloneDeep(point));
+    commit.cameraTarget.position = _.cloneDeep(point);
     this.commits.push(commit);
     this._addParts(1);
   }
 
   _animateCurve () {
     var index = 1;
+    this.cameraTarget.position = _.cloneDeep(_.first(this.path));
+    this.cameraTarget.position.z += pathConfig.partLength;
     var curve = () => {
       var newPath = this.path.slice(0, index);
       var pathEnd = _.fill(Array(this.path.length - index), _.last(newPath));
       newPath = _.concat(newPath, pathEnd);
       this.mesh = this._createTube(null, newPath, this.mesh);
       index += pathConfig.curvingSpeed;
-
-      if (index - 1 === this.path.length) {
+      this.cameraTarget.position.x = _.cloneDeep(_.last(newPath)).x;
+      if (index - 1 >= this.path.length) {
         this.scene.unregisterBeforeRender(curve);
       }
     };
@@ -74,6 +79,7 @@ export default class Branch {
       lastPathPoint.z += pathConfig.enlogatingSpeed;
       this.enlogatingDelta += pathConfig.enlogatingSpeed;
       this.mesh = this._createTube(null, this.path, this.mesh);
+      this.cameraTarget.position = _.cloneDeep(lastPathPoint);
       if (this.enlogatingDelta >= partCount * pathConfig.partLength) {
         this.enlogatingDelta = 0;
         this.scene.unregisterBeforeRender(enlogating);

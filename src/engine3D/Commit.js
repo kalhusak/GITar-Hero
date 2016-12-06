@@ -1,4 +1,5 @@
 import BABYLON from 'babylonjs';
+import Abstract3DObject from './Abstract3DObject';
 
 let commitConfig = {
   segments: 16,
@@ -9,27 +10,16 @@ let commitConfig = {
   }
 };
 
-export default class Commit {
+export default class Commit extends Abstract3DObject {
 
   constructor (ref, message, scene) {
-    this.getPosition = ::this.getPosition;
-    this.setPosition = ::this.setPosition;
-
+    super(ref, scene);
     this._createSphere = ::this._createSphere;
     this._appearAnimate = ::this._appearAnimate;
     this.ref = ref;
     this.message = message;
-    this.scene = scene;
     this.mesh = this._createSphere();
     this._appearAnimate();
-  }
-
-  getPosition () {
-    return this.mesh.position;
-  }
-
-  setPosition (position) {
-    this.mesh.position = position;
   }
 
   _createSphere () {

@@ -1,10 +1,12 @@
 import Branch from './Branch';
 import Commit from './Commit';
+import _ from 'lodash';
 
 let branchSeq = 0;
 
 class Repo3D {
-  constructor (scene) {
+  constructor (camera, scene) {
+    this.camera = camera;
     this.scene = scene;
 
     this.onNewValidCommand = ::this.onNewValidCommand;
@@ -46,6 +48,7 @@ class Repo3D {
   onInit () {
     this.activeBranch = new Branch('master', null, this.scene);
     this.branches['master'] = this.activeBranch;
+    this.camera.target = this.activeBranch.cameraTarget;
   }
 
   onCommit (data) {
@@ -62,10 +65,18 @@ class Repo3D {
 
   // TODO implement and set active commit
   onCheckout (data) {
-    if (!this.branches[data.name]) {
-      this.onBranch(data);
+    // TODO change it
+    if (data.name === '1232') {
+      this.activeBranch = this.branches['master'];
+      this.activeCommit = _.last(this.activeBranch.commits);
+      this.camera.target = this.activeCommit.cameraTarget;
+    } else {
+      if (!this.branches[data.name]) {
+        this.onBranch(data);
+      }
+      this.activeBranch = this.branches[data.name];
+      this.camera.target = this.activeBranch.cameraTarget;
     }
-    this.activeBranch = this.branches[data.name];
   }
 
 }

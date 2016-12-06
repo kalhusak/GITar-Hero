@@ -14,13 +14,13 @@
     },
     "4": {
       "description": "Add all files to staging",
-      "commands": ["git add -A", "git add ."],
+      "commands": ["git add", "git add ."],
       "tags": ["add"],
       "type": "ADD"
     },
     "5": {
       "description": "Create commit with message 'Init'",
-      "commands": ["git commit -m \"Init\""],
+      "commands": ["git commit"],
       "tags": ["commit"],
       "type": "COMMIT",
       "data": {
@@ -47,7 +47,7 @@
     },
     "8": {
       "description": "Checkout to new branch 'feature/task'",
-      "commands": ["git checkout -b feature/task"],
+      "commands": ["git checkout"],
       "tags": ["checkout", "branch"],
       "type": "CHECKOUT",
       "data": {
@@ -56,11 +56,20 @@
     },
     "9": {
       "description": "Create commit with message 'Add new files'",
-      "commands": ["git commit -m \"Add new files\""],
+      "commands": ["git commit"],
       "tags": ["commit"],
       "type": "COMMIT",
       "data": {
         "message": "Add new files"
+      }
+    },
+    "10": {
+      "description": "Checkout to commit 123",
+      "commands": ["git checkout 123"],
+      "tags": ["commit"],
+      "type": "CHECKOUT",
+      "data": {
+        "name": "123"
       }
     }
   }
