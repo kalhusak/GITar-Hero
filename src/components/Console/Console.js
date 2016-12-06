@@ -56,7 +56,7 @@ class Console extends Component {
   }
 
   onBlur () {
-    this.setState({ focus: false });
+    this.setState({ focus: false, showHistory: false });
   }
 
   onChange () {
@@ -65,7 +65,8 @@ class Console extends Component {
     this.setState({
       selectionStart,
       currentValue: value,
-      movingCursor: true
+      movingCursor: true,
+      showHistory: false
     });
 
     this.setMovingCursorTimeout();
@@ -227,7 +228,7 @@ class Console extends Component {
       const commandStyle = {
         transform: `perspective(20px)
           translate3d(0px, ${-index * 50}px, ${-Math.pow(index / 4, 2)}px) rotateX(${index / 6}deg)`,
-        opacity: 1 - index * 0.05
+        opacity: 1 - index * 0.08
       };
 
       return (<span className={historyTextClasses.join(' ')} key={id} style={commandStyle}>
