@@ -34,26 +34,25 @@ class Console extends Component {
 
   constructor (props) {
     super(props);
-    this.onKeyUp = ::this.onKeyUp;
     this.onKeyDown = ::this.onKeyDown;
     this.onChange = ::this.onChange;
     this.onFocus = ::this.onFocus;
     this.onBlur = ::this.onBlur;
+    this.onMouseDown = ::this.onMouseDown;
     this.state = {
       selectionStart: 0,
       commandId: 0,
       currentValue: '',
+      previousValues: [],
+      history: -1,
       focus: false,
       movingCursor: false
     };
   }
 
-  onFocus ({ target }) {
+  onFocus () {
     const { selectionStart } = this.state;
-    this.setState({ focus: true });
-    setTimeout(() => {
-      target.setSelectionRange(selectionStart, selectionStart);
-    });
+    this.setState({ focus: true, selectionStart });
   }
 
   onBlur () {
@@ -68,6 +67,7 @@ class Console extends Component {
       currentValue: value,
       movingCursor: true
     });
+
     this.setMovingCursorTimeout();
   }
 
@@ -99,30 +99,68 @@ class Console extends Component {
 
   onKeyDown (event) {
     const { consoleInput } = this.refs;
-
-    const PREV_CODE = 37;
-    const NEXT_CODE = 39;
-    const TAB_CODE = 9;
+    const { history, previousValues, currentValue, commandId } = this.state;
+    const [ TAB_CODE, ENTER_CODE, LEFT_CODE, UP_CODE, RIGHT_CODE, DOWN_CODE ] = [ 9, 13, 37, 38, 39, 40 ];
 
     event.stopPropagation();
+    let index, value;
 
     switch (event.keyCode) {
-      case PREV_CODE:
+      case LEFT_CODE:
         this.setState({
           selectionStart: Math.max(consoleInput.selectionStart - 1, 0),
           movingCursor: true
         });
         break;
-      case NEXT_CODE:
+
+      case RIGHT_CODE:
         this.setState({
           selectionStart:  Math.min(consoleInput.selectionStart + 1, consoleInput.value.length),
           movingCursor: true
         });
         break;
+
+      case UP_CODE:
+        index = Math.min(history + 1, previousValues.length - 1);
+        this.setState({
+          history: index
+        });
+        consoleInput.value = previousValues[index].value;
+        this.onChange();
+        break;
+
+      case DOWN_CODE:
+        index = Math.max(history - 1, -1);
+        value = index >= 0 ? previousValues[index].value : '';
+        this.setState({
+          history: index,
+          currentValue: value,
+          selectionStart: value.length
+        });
+        break;
+
       case TAB_CODE:
         event.preventDefault();
         this.tryToComplete();
         break;
+
+      case ENTER_CODE:
+        this.enterCommand(consoleInput.value);
+        previousValues.unshift({
+          id: commandId,
+          value: currentValue
+        });
+
+        consoleInput.value = '';
+        this.setState({
+          commandId: commandId + 1,
+          history: -1,
+          currentValue: '',
+          previousValues,
+          selectionStart: 0
+        });
+        break;
+
       default:
         return;
     }
@@ -142,23 +180,6 @@ class Console extends Component {
     dispatch(enterCommand(command.trim().replace(/\s\s+/g, ' ')));
   }
 
-  onKeyUp ({ keyCode, target }) {
-    const ENTER_CODE = 13;
-
-    if (keyCode === ENTER_CODE) {
-      const { commandId } = this.state;
-
-      this.enterCommand(target.value);
-
-      target.value = '';
-      this.setState({
-        commandId: commandId + 1,
-        currentValue: '',
-        selectionStart: 0
-      });
-    }
-  }
-
   renderFloatingCommand () {
     const { commandId, currentValue, selectionStart } = this.state;
     const text = currentValue + ' ';
@@ -172,11 +193,40 @@ class Console extends Component {
       cursorClasses.push('console__cursor--moving');
     }
 
-    return (<span className='console__text' key={commandId}>
+    return this.renderHistory().concat(<span className='console__text' key={commandId}>
       {text.slice(0, selectionStart)}
       <span className={cursorClasses.join(' ')}>{ text.slice(selectionStart, selectionStart + 1) }</span>
       {text.slice(selectionStart + 1)}
     </span>);
+  }
+
+  renderHistory () {
+    const { previousValues, history } = this.state;
+    return previousValues.slice(history + 1, history + 15).map(({ value, id }, index) => {
+      index++;
+      const commandStyle = {
+        transform: `perspective(20px)
+          translate3d(0px, ${-index * 50}px, ${-Math.pow(index / 4, 2)}px) rotateX(${index / 6}deg)`,
+        opacity: 1 - index * 0.05
+      };
+
+      return (<span className='console__history-text' key={id} style={commandStyle}>
+        {value}
+      </span>);
+    });
+  }
+
+  componentDidUpdate () {
+    const { selectionStart } = this.state;
+    setTimeout(() => {
+      this.refs.consoleInput.setSelectionRange(selectionStart, selectionStart);
+    });
+  }
+
+  onMouseDown (event) {
+    if (this.state.focus) {
+      event.preventDefault();
+    }
   }
 
   render () {
@@ -188,16 +238,14 @@ class Console extends Component {
 
     return (
       <div className={consoleClasses.join(' ')}>
-        <input autoFocus ref='consoleInput' className='console__input' onChange={this.onChange} onKeyUp={this.onKeyUp}
-          onKeyDown={this.onKeyDown} onFocus={this.onFocus} onBlur={this.onBlur} />
+        <input autoFocus ref='consoleInput' className='console__input'
+          onChange={this.onChange} onKeyDown={this.onKeyDown}
+          onMouseDown={this.onMouseDown} onFocus={this.onFocus}
+          onBlur={this.onBlur} value={this.state.currentValue} />
         <span className='console__prompt-character'>GITar-Hero~$ </span>
-        <ReactCSSTransitionGroup
-          className='console__text-container'
-          transitionName='floatingCommand'
-          transitionEnterTimeout={300}
-          transitionLeaveTimeout={0}>
+        <span className='console__text-container'>
           { this.renderFloatingCommand() }
-        </ReactCSSTransitionGroup>
+        </span>
       </div>
     );
   }
