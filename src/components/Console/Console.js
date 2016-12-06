@@ -111,6 +111,7 @@ class Console extends Component {
           selectionStart: Math.max(consoleInput.selectionStart - 1, 0),
           movingCursor: true
         });
+        this.setMovingCursorTimeout();
         break;
 
       case RIGHT_CODE:
@@ -118,6 +119,7 @@ class Console extends Component {
           selectionStart:  Math.min(consoleInput.selectionStart + 1, consoleInput.value.length),
           movingCursor: true
         });
+        this.setMovingCursorTimeout();
         break;
 
       case UP_CODE:
@@ -127,8 +129,10 @@ class Console extends Component {
           history: index,
           currentValue: value,
           prevCurrentValue: history === -1 ? currentValue : prevCurrentValue,
-          selectionStart: value.length
+          selectionStart: value.length,
+          showHistory: true
         });
+        this.setShowHistoryTimeout();
         break;
 
       case DOWN_CODE:
@@ -137,44 +141,52 @@ class Console extends Component {
         this.setState({
           history: index,
           currentValue: value,
-          selectionStart: value.length
+          selectionStart: value.length,
+          showHistory: true
         });
+        this.setShowHistoryTimeout();
         break;
 
       case TAB_CODE:
         event.preventDefault();
         this.tryToComplete();
+        this.setMovingCursorTimeout();
         break;
 
       case ENTER_CODE:
-        this.enterCommand(consoleInput.value);
-        previousValues.unshift({
-          id: commandId,
-          value: currentValue
-        });
-
-        consoleInput.value = '';
-        this.setState({
-          commandId: commandId + 1,
-          history: -1,
-          currentValue: '',
-          previousValues,
-          selectionStart: 0
-        });
+        if (currentValue !== '') {
+          this.enterCommand(currentValue);
+          previousValues.unshift({
+            id: commandId,
+            value: currentValue
+          });
+          this.setState({
+            commandId: commandId + 1,
+            history: -1,
+            currentValue: '',
+            previousValues,
+            selectionStart: 0
+          });
+        }
         break;
 
       default:
         return;
     }
-
-    this.setMovingCursorTimeout();
   }
 
   setMovingCursorTimeout () {
     clearTimeout(this.cursorStopTimeout);
     this.cursorStopTimeout = setTimeout(() => {
       this.setState({ movingCursor: false });
-    }, 1000);
+    }, 500);
+  }
+
+  setShowHistoryTimeout () {
+    clearTimeout(this.hideHistoryTimeout);
+    this.hideHistoryTimeout = setTimeout(() => {
+      this.setState({ showHistory: false });
+    }, 2000);
   }
 
   enterCommand (command) {
@@ -203,7 +215,13 @@ class Console extends Component {
   }
 
   renderHistory () {
-    const { previousValues, history } = this.state;
+    const { previousValues, history, showHistory } = this.state;
+    const historyTextClasses = ['console__history-text'];
+
+    if (!showHistory) {
+      historyTextClasses.push('console__history-text--hidden');
+    }
+
     return previousValues.slice(history + 1, history + 15).map(({ value, id }, index) => {
       index++;
       const commandStyle = {
@@ -212,7 +230,7 @@ class Console extends Component {
         opacity: 1 - index * 0.05
       };
 
-      return (<span className='console__history-text' key={id} style={commandStyle}>
+      return (<span className={historyTextClasses.join(' ')} key={id} style={commandStyle}>
         {value}
       </span>);
     });

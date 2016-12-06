@@ -76,8 +76,13 @@ $console-font-size: 36px;
 }
 
 .console__history-text {
+  opacity: 1;
   transform-origin: left;
-  transition: transform 0.1s cubic-bezier(0,.78,.78,.94);
+  transition: transform 0.1s cubic-bezier(0,.78,.78,.94), opacity 0.5s linear;
+}
+
+.console__history-text--hidden {
+  opacity: 0 !important;
 }
 
 @keyframes blink {
