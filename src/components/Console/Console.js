@@ -104,6 +104,8 @@ class Console extends Component {
     const NEXT_CODE = 39;
     const TAB_CODE = 9;
 
+    event.stopPropagation();
+
     switch (event.keyCode) {
       case PREV_CODE:
         this.setState({
