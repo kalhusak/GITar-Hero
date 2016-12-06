@@ -61,7 +61,7 @@ $console-font-size: 36px;
   animation: none;
 }
 
-.console__text, .console__prompt-character {
+.console__text, .console__history-text, .console__prompt-character {
   display: inline-block;
   color: $console-color;
   font-size: $console-font-size;
@@ -70,9 +70,19 @@ $console-font-size: 36px;
   white-space: pre;
 }
 
-.console__text {
+.console__text, .console__history-text {
   position: absolute;
   left: 0px;
+}
+
+.console__history-text {
+  opacity: 1;
+  transform-origin: left;
+  transition: transform 0.1s cubic-bezier(0,.78,.78,.94), opacity 0.5s linear;
+}
+
+.console__history-text--hidden {
+  opacity: 0 !important;
 }
 
 @keyframes blink {
