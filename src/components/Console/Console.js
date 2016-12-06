@@ -99,7 +99,7 @@ class Console extends Component {
 
   onKeyDown (event) {
     const { consoleInput } = this.refs;
-    const { history, previousValues, currentValue, commandId } = this.state;
+    const { history, previousValues, currentValue, prevCurrentValue, commandId } = this.state;
     const [ TAB_CODE, ENTER_CODE, LEFT_CODE, UP_CODE, RIGHT_CODE, DOWN_CODE ] = [ 9, 13, 37, 38, 39, 40 ];
 
     event.stopPropagation();
@@ -122,16 +122,18 @@ class Console extends Component {
 
       case UP_CODE:
         index = Math.min(history + 1, previousValues.length - 1);
+        value = previousValues[index].value;
         this.setState({
-          history: index
+          history: index,
+          currentValue: value,
+          prevCurrentValue: history === -1 ? currentValue : prevCurrentValue,
+          selectionStart: value.length
         });
-        consoleInput.value = previousValues[index].value;
-        this.onChange();
         break;
 
       case DOWN_CODE:
         index = Math.max(history - 1, -1);
-        value = index >= 0 ? previousValues[index].value : '';
+        value = index >= 0 ? previousValues[index].value : prevCurrentValue;
         this.setState({
           history: index,
           currentValue: value,
