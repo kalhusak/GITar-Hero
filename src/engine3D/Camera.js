@@ -1,4 +1,5 @@
 import BABYLON from 'babylonjs';
+import FollowCamera from './FollowCamera';
 
 const config = {
   name: 'followCamera',
@@ -10,7 +11,7 @@ const config = {
   maxCameraSpeed: 5
 };
 
-class Camera extends BABYLON.FollowCamera {
+class Camera extends FollowCamera {
 
   constructor (canvas, scene) {
     super(config.name, config.initPosition, scene);

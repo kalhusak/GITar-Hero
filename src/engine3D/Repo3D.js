@@ -48,7 +48,7 @@ class Repo3D {
   onInit () {
     this.activeBranch = new Branch('master', null, this.scene);
     this.branches['master'] = this.activeBranch;
-    this.camera.target = this.activeBranch.cameraTarget;
+    this.camera.lockedTarget = this.activeBranch.cameraTarget;
   }
 
   onCommit (data) {
@@ -69,13 +69,13 @@ class Repo3D {
     if (data.name === '1232') {
       this.activeBranch = this.branches['master'];
       this.activeCommit = _.last(this.activeBranch.commits);
-      this.camera.target = this.activeCommit.cameraTarget;
+      this.camera.lockedTarget = this.activeCommit.cameraTarget;
     } else {
       if (!this.branches[data.name]) {
         this.onBranch(data);
       }
       this.activeBranch = this.branches[data.name];
-      this.camera.target = this.activeBranch.cameraTarget;
+      this.camera.lockedTarget = this.activeBranch.cameraTarget;
     }
   }
 
