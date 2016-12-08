@@ -12,13 +12,13 @@ const config = {
 
 class Camera extends BABYLON.FollowCamera {
 
-  constructor (HEAD, canvas, scene) {
+  constructor (followObject, canvas, scene) {
     super(config.name, config.initPosition, scene);
 
     this.scene = scene;
     this.scene.activeCamera = this;
 
-    this.lockedTarget = HEAD.cameraTarget.mesh;
+    this.lockedTarget = followObject.cameraTarget.mesh;
     this.radius = config.radius;
     this.rotationOffset = config.rotationOffset;
     this.heightOffset = config.heightOffset;

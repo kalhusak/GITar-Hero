@@ -1,5 +1,5 @@
-import Branch from './Branch';
-import Commit from './Commit';
+import Branch from './objects/Branch';
+import Commit from './objects/Commit';
 import Head from './Head';
 import _ from 'lodash';
 
@@ -56,9 +56,10 @@ class Repo3D {
       var commit = new Commit(commitSeq, data.message, this.scene);
       var activeBranch = this.HEAD.getObject();
       activeBranch.addCommit(commit);
+    } else {
+      // TODO what if is detached or pointing to commit?
+      console.log('WARNING - create commit (-m ' + data.message + ') on detached HEAD');
     }
-    // TODO what if is detached or pointing to commit?
-    console.log('WARNING - create commit (' + data.message + ') on detached HEAD');
   }
 
   onBranch (data) {

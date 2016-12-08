@@ -2,7 +2,7 @@ import BABYLON from 'babylonjs';
 import Abstract3DObject from './Abstract3DObject';
 
 const config = {
-  isVisible: true,
+  isVisible: false,
   initPosition: new BABYLON.Vector3(0, 0, 0)
 };
 

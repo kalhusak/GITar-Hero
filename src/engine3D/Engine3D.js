@@ -1,12 +1,15 @@
 import BABYLON from 'babylonjs';
-import config from './config';
 import Scene from './Scene';
 import Repo3D from './Repo3D';
 import Camera from './Camera';
 
+const config = {
+  antialiasing: true
+};
+
 class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
-    super(canvas, config.ANTIALIASING);
+    super(canvas, config.antialiasing);
     this.onNewValidCommand = ::this.onNewValidCommand;
 
     this.scene = new Scene(this);

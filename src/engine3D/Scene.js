@@ -1,18 +1,10 @@
 import BABYLON from 'babylonjs';
-import config from './config';
-import Branch from './Branch';
-import Commit from './Commit';
 
-let index = 0;
-
-class Scene extends BABYLON.Scene {
+export default class Scene extends BABYLON.Scene {
   constructor (engine) {
     super(engine);
 
-    // TODO move camera to separate class
-
+    // TODO make light management object
     const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(5, 1, 0), this);
   }
 }
-
-export default Scene;

@@ -1,8 +1,8 @@
 import MoveUtils from './utils/MoveUtils';
-import CameraTarget from './CameraTarget';
+import CameraTarget from './objects/CameraTarget';
 
 const config = {
-  cameraTargetSpeed: 0.5
+  cameraTargetSpeed: 1.5
 };
 
 export default class FollowObject {
