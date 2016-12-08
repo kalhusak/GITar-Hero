@@ -1,20 +1,19 @@
 import Branch from './Branch';
 import Commit from './Commit';
+import Head from './Head';
 import _ from 'lodash';
 
+// TODO remove
 let branchSeq = 0;
+let commitSeq = 0;
 
 class Repo3D {
-  constructor (camera, scene) {
-    this.camera = camera;
-    this.scene = scene;
-
+  constructor (scene) {
     this.onNewValidCommand = ::this.onNewValidCommand;
 
-    this.commitId = 0;
+    this.scene = scene;
+    this.HEAD = new Head(this.scene);
     this.branches = {};
-    this.activeBranch = null;
-    this.activeCommit = null;
   }
 
   renderLoop () {
@@ -30,6 +29,7 @@ class Repo3D {
         this.onInit();
         break;
       case 'COMMIT':
+        commitSeq++;
         this.onCommit(data);
         break;
       case 'BRANCH':
@@ -46,36 +46,48 @@ class Repo3D {
   }
 
   onInit () {
-    this.activeBranch = new Branch('master', null, this.scene);
-    this.branches['master'] = this.activeBranch;
-    this.camera.lockedTarget = this.activeBranch.cameraTarget;
+    var master = new Branch('master', null, this.scene);
+    this.branches['master'] = master;
+    this.HEAD.pointTo(master);
   }
 
   onCommit (data) {
-    var commit = new Commit(this.commitId, data.message, this.scene);
-    this.commitId++;
-    this.activeCommit = commit;
-    this.activeBranch.addCommit(commit);
+    if (this.HEAD.isPointingToBranch()) {
+      var commit = new Commit(commitSeq, data.message, this.scene);
+      var activeBranch = this.HEAD.getObject();
+      activeBranch.addCommit(commit);
+    }
+    // TODO what if is detached or pointing to commit?
+    console.log('WARNING - create commit (' + data.message + ') on detached HEAD');
   }
 
   onBranch (data) {
-    var branch = new Branch(data.name, this.activeCommit, this.scene);
-    this.branches[data.name] = branch;
+    if (this.HEAD.isDetached()) {
+      console.log('WARNING - create branch (' + data.name + ') on detached HEAD');
+      return;
+    }
+
+    var activeCommit = null;
+    if (this.HEAD.isPointingToCommit()) {
+      activeCommit = this.HEAD.getObject();
+    } else if (this.HEAD.isPointingToBranch()) {
+      var activeBranch = this.HEAD.getObject();
+      activeCommit = _.last(activeBranch.commits);
+    }
+    this.branches[data.name] = new Branch(data.name, activeCommit, this.scene);
   }
 
-  // TODO implement and set active commit
   onCheckout (data) {
-    // TODO change it
-    if (data.name === '1232') {
-      this.activeBranch = this.branches['master'];
-      this.activeCommit = _.last(this.activeBranch.commits);
-      this.camera.lockedTarget = this.activeCommit.cameraTarget;
-    } else {
+    if (data.type === 'branch') {
       if (!this.branches[data.name]) {
         this.onBranch(data);
       }
-      this.activeBranch = this.branches[data.name];
-      this.camera.lockedTarget = this.activeBranch.cameraTarget;
+      this.HEAD.pointTo(this.branches[data.name]);
+    } else if (data.type === 'commit') {
+      // TODO find commit by ref
+      var master = this.branches['master'];
+      var lastCommit = _.last(master.commits);
+      this.HEAD.pointTo(lastCommit);
     }
   }
 

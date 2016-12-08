@@ -1,20 +1,20 @@
-import BABYLON from 'babylonjs';
-
-class Abstract3DObject {
+export default class Abstract3DObject {
 
   constructor (name, scene) {
     this.getPosition = ::this.getPosition;
+    this.getPositionRef = ::this.getPositionRef;
     this.setPosition = ::this.setPosition;
+    this.getType = ::this.getType;
 
     this.name = name;
     this.scene = scene;
-    this.cameraTarget = BABYLON.Mesh.CreateSphere(name + 'CameraTarget', 1, 1, scene);
-    this.cameraTarget.isInFrustum = (planes) => {
-      return false;
-    };
   }
 
   getPosition () {
+    return this.getPositionRef().clone();
+  }
+
+  getPositionRef () {
     return this.mesh.position;
   }
 
@@ -22,6 +22,8 @@ class Abstract3DObject {
     this.mesh.position = position;
   }
 
+  getType () {
+    console.log('WARNING - undefined type of object: ' + this.name);
+    return 'UNDEFINED_TYPE';
+  }
 }
-
-export default Abstract3DObject;

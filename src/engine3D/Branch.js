@@ -2,6 +2,8 @@ import BABYLON from 'babylonjs';
 import _ from 'lodash';
 import PathUtils from './utils/PathUtils';
 import Abstract3DObject from './Abstract3DObject';
+import ObjectTypes from './ObjectTypes';
+
 const tubeConfig = {
   radius: 2,
   tessellation: 16,
@@ -33,15 +35,24 @@ export default class Branch extends Abstract3DObject {
     this.path = this._createPath(parentCommit);
     this.mesh = this._createTube(this.name, this.path, null);
     this.mesh.alwaysSelectAsActiveMesh = true;
+    // TODO remove mat
+    var mat = new BABYLON.StandardMaterial('branchMat', scene);
+    //mat.wireframe = true;
+    mat.diffuseColor = new BABYLON.Color3(1, 0.5, 0);
+    this.mesh.material = mat;
 
-    this.cameraTarget.position = _.last(this.path);
+    this.mesh.enableEdgesRendering();
+    this.mesh.edgesWidth = 10.0;
+    this.mesh.edgesColor = new BABYLON.Color4(0, 0, 0, 1);
+
     this.commits = [];
-    this.activeCommit = null;
     this.enlogatingDelta = 0;
 
     if (!parentCommit) {
+      this.type = ObjectTypes.MASTER;
       this._addParts(1);
     } else {
+      this.type = ObjectTypes.BRANCH;
       this._animateCurve();
     }
   }
@@ -49,22 +60,39 @@ export default class Branch extends Abstract3DObject {
   addCommit (commit) {
     var point = _.last(this.path);
     commit.setPosition(_.cloneDeep(point));
-    commit.cameraTarget.position = _.cloneDeep(point);
     this.commits.push(commit);
     this._addParts(1);
   }
 
+  getPosition () {
+    var position = this.mesh.position.clone();
+
+    if (this.getType() === ObjectTypes.MASTER) {
+      position.z = _.last(this.path).z;
+      return position;
+    } else if (this.getType() === ObjectTypes.BRANCH) {
+      position.x += pathConfig.branchDistance;
+      position.z = _.last(this.path).z;
+      return position;
+    } else {
+      console.log('WARNING - unknown type of object: ' + this.name);
+    }
+
+    return position;
+  }
+
+  getType () {
+    return this.type;
+  }
+
   _animateCurve () {
     var index = 1;
-    this.cameraTarget.position = _.cloneDeep(_.first(this.path));
-    this.cameraTarget.position.z += pathConfig.partLength;
     var curve = () => {
       var newPath = this.path.slice(0, index);
       var pathEnd = _.fill(Array(this.path.length - index), _.last(newPath));
       newPath = _.concat(newPath, pathEnd);
       this.mesh = this._createTube(null, newPath, this.mesh);
       index += pathConfig.curvingSpeed;
-      this.cameraTarget.position.x = _.cloneDeep(_.last(newPath)).x;
       if (index - 1 >= this.path.length) {
         this.scene.unregisterBeforeRender(curve);
       }
@@ -79,7 +107,6 @@ export default class Branch extends Abstract3DObject {
       lastPathPoint.z += pathConfig.enlogatingSpeed;
       this.enlogatingDelta += pathConfig.enlogatingSpeed;
       this.mesh = this._createTube(null, this.path, this.mesh);
-      this.cameraTarget.position = _.cloneDeep(lastPathPoint);
       if (this.enlogatingDelta >= partCount * pathConfig.partLength) {
         this.enlogatingDelta = 0;
         this.scene.unregisterBeforeRender(enlogating);

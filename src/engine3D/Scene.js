@@ -11,7 +11,7 @@ class Scene extends BABYLON.Scene {
 
     // TODO move camera to separate class
 
-    const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this);
+    const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(5, 1, 0), this);
   }
 }
 

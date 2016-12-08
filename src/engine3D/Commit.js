@@ -20,6 +20,10 @@ export default class Commit extends Abstract3DObject {
     this.message = message;
     this.mesh = this._createSphere();
     this._appearAnimate();
+    // TODO remove mat
+    var mat = new BABYLON.StandardMaterial("commitMat", scene);
+    mat.wireframe = true;
+    this.mesh.material = mat;
   }
 
   _createSphere () {

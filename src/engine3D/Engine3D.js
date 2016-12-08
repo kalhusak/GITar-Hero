@@ -7,11 +7,11 @@ import Camera from './Camera';
 class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
     super(canvas, config.ANTIALIASING);
-    this.scene = new Scene(this);
     this.onNewValidCommand = ::this.onNewValidCommand;
 
-    this.camera = new Camera(canvas, this.scene);
-    this.repo3D = new Repo3D(this.camera, this.scene);
+    this.scene = new Scene(this);
+    this.repo3D = new Repo3D(this.scene);
+    this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
     this.renderLoop();
   }
 
