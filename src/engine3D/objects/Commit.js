@@ -20,6 +20,10 @@ export default class Commit extends Abstract3DObject {
     this.message = message;
     this.mesh = this._createSphere();
     this._appearAnimate();
+    // TODO remove wireframe mat
+    // var mat = new BABYLON.StandardMaterial("commitMat", scene);
+    // mat.wireframe = true;
+    // this.mesh.material = mat;
   }
 
   _createSphere () {
@@ -27,6 +31,7 @@ export default class Commit extends Abstract3DObject {
   }
 
   _appearAnimate () {
+    // TODO make separate class for animation
     const { fps, duration } = commitConfig.animation;
     var scaleAnimation = new BABYLON.Animation('commitScaleAnimation', 'scaling', fps, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     var keys = [];

@@ -6,17 +6,19 @@ const config = {
   radius: 80,
   rotationOffset: 180,
   heightOffset: 30,
-  acceleration: 0.005,
+  acceleration: 0.01,
   maxCameraSpeed: 5
 };
 
 class Camera extends BABYLON.FollowCamera {
 
-  constructor (canvas, scene) {
+  constructor (followObject, canvas, scene) {
     super(config.name, config.initPosition, scene);
 
     this.scene = scene;
     this.scene.activeCamera = this;
+
+    this.lockedTarget = followObject.cameraTarget.mesh;
     this.radius = config.radius;
     this.rotationOffset = config.rotationOffset;
     this.heightOffset = config.heightOffset;
