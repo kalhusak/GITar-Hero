@@ -21,6 +21,7 @@ class Branch extends Abstract3DObject {
     this._createTube = ::this._createTube;
     this.addCommit = ::this.addCommit;
     this.merge = ::this.merge;
+    this.removeLastCommit = ::this.removeLastCommit;
 
     this.parentCommit = parentCommit;
     this.tube = this._createTube();
@@ -34,6 +35,13 @@ class Branch extends Abstract3DObject {
   addCommit (commit) {
     this.commits.push(commit);
     this.tube.addParts(1);
+  }
+
+  removeLastCommit () {
+    var lastCommit = this.commits.pop();
+    if (lastCommit) {
+      lastCommit.disappear();
+    }
   }
 
   getPositionRef () {

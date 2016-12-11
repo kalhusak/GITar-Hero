@@ -46,6 +46,10 @@ class Repo3D {
       case 'MERGE':
         this.onMerge(data);
         break;
+      case 'DELETE_COMMIT':
+        this.HEAD.getObject().tube.removeParts(1);
+        this.HEAD.getObject().removeLastCommit();
+        break;
     }
   }
 
