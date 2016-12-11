@@ -33,14 +33,16 @@ class Repo3D {
         this.onCommit(data);
         break;
       case 'BRANCH':
-        data.name = data.name + branchSeq;
-        branchSeq++;
         this.onBranch(data);
         break;
       case 'CHECKOUT':
-        data.name = data.name + branchSeq;
-        branchSeq++;
+        if (data.name === 'feature/new-task') {
+          data.name = 'master';
+        }
         this.onCheckout(data);
+        break;
+      case 'MERGE':
+        this.onMerge(data);
         break;
     }
   }
@@ -90,6 +92,15 @@ class Repo3D {
       var lastCommit = _.last(master.commits);
       this.HEAD.pointTo(lastCommit);
     }
+  }
+
+  onMerge (data) {
+    var sourceBranch = null;
+    if (!data.sourceBranch && this.HEAD.isPointingToBranch()) {
+      sourceBranch = this.HEAD.getObject();
+    }
+    var targetBranch = this.branches[data.targetBranch];
+    sourceBranch.merge(targetBranch);
   }
 
 }

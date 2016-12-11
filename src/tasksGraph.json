@@ -44,11 +44,11 @@
     "6": {
       "children": [7],
       "task": {
-        "title": "Create branch and checkout in one step",
-        "description": "Checkout to new branch using only one command",
-        "minTime": 10,
-        "defaultTime": 30,
-        "steps": [8]
+        "title": "Make first commit",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [5]
       }
     },
     "7": {
@@ -62,13 +62,33 @@
       }
     },
     "8": {
-      "children": [3],
+      "children": [9],
       "task": {
         "title": "Checkout to commit",
         "description": "At first create new branch and then move to it",
         "minTime": 20,
         "defaultTime": 50,
-        "steps": [10]
+        "steps": [6]
+      }
+    },
+    "9": {
+      "children": [10],
+      "task": {
+        "title": "Make first commit",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [5]
+      }
+    },
+    "10": {
+      "children": [3],
+      "task": {
+        "title": "Merge branches",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [11]
       }
     }
   }

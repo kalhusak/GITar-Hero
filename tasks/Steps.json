@@ -29,10 +29,11 @@
     },
     "6": {
       "description": "Change branch to 'feature/new-task'",
-      "commands": ["git checkout feature/new-task"],
+      "commands": ["git checkout"],
       "tags": ["checkout"],
       "type": "CHECKOUT",
       "data": {
+        "type": "branch",
         "name": "feature/new-task"
       }
     },
@@ -52,7 +53,7 @@
       "type": "CHECKOUT",
       "data": {
         "type": "branch",
-        "name": "feature/task"
+        "name": "develop"
       }
     },
     "9": {
@@ -72,6 +73,15 @@
       "data": {
         "type": "commit",
         "name": "123"
+      }
+    },
+    "11": {
+      "description": "Merge",
+      "commands": ["git merge"],
+      "tags": ["merge"],
+      "type": "MERGE",
+      "data": {
+        "targetBranch": "develop"
       }
     }
   }

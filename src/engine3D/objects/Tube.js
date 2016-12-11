@@ -37,9 +37,9 @@ export default class Tube extends Abstract3DObject {
     // this.mesh.material = mat;
   }
 
-  addParts (parts) {
+  addParts (parts, onEndEvent) {
     this.parts += parts;
-    this._animate(config.addOperation);
+    this._animate(config.addOperation, onEndEvent);
   }
 
   removeParts (parts) {
@@ -65,7 +65,7 @@ export default class Tube extends Abstract3DObject {
     return _.first(this.path);
   }
 
-  _animate (operation) {
+  _animate (operation, onEndEvent) {
     // TODO make separate class for animation
     var enlogating = () => {
       var first = this.getFirstPointPosition();
@@ -75,6 +75,9 @@ export default class Tube extends Abstract3DObject {
       if (operation === config.addOperation ? last.z >= lastTargetPositionZ : last.z <= lastTargetPositionZ) {
         last.z = lastTargetPositionZ;
         this.scene.unregisterBeforeRender(enlogating);
+        if (onEndEvent) {
+          onEndEvent();
+        }
       }
       this.mesh = this._createMesh(null, this.path, this.mesh);
     };
