@@ -46,9 +46,8 @@ class Repo3D {
       case 'MERGE':
         this.onMerge(data);
         break;
-      case 'DELETE_COMMIT':
-        this.HEAD.getObject().tube.removeParts(1);
-        this.HEAD.getObject().removeLastCommit();
+      case 'RESET':
+        this.onReset(data);
         break;
     }
   }
@@ -109,6 +108,14 @@ class Repo3D {
     }
     var targetBranch = this.branches[data.targetBranch];
     sourceBranch.merge(targetBranch);
+  }
+
+  onReset (data) {
+    if (data.type === 'commit') {
+
+    } else if (data.type === 'number'){
+
+    }
   }
 
 }
