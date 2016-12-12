@@ -1,5 +1,6 @@
 import BABYLON from 'babylonjs';
 import Abstract3DObject from './Abstract3DObject';
+import Text from './Text';
 
 let commitConfig = {
   segments: 16,
@@ -12,18 +13,22 @@ let commitConfig = {
 
 export default class Commit extends Abstract3DObject {
 
-  constructor (ref, message, scene) {
+  constructor (ref, message, position, scene) {
     super(ref, scene);
     this._createSphere = ::this._createSphere;
     this._appearAnimate = ::this._appearAnimate;
     this.ref = ref;
     this.message = message;
     this.mesh = this._createSphere();
+    this.mesh.position = position;
     this._appearAnimate();
     // TODO remove wireframe mat
     // var mat = new BABYLON.StandardMaterial("commitMat", scene);
     // mat.wireframe = true;
     // this.mesh.material = mat;
+    var textPosition = position.clone();
+    textPosition.y += 1;
+    this.text = new Text(message, textPosition, scene);
   }
 
   _createSphere () {

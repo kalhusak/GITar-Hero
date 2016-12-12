@@ -3,6 +3,8 @@ import Abstract3DObject from './Abstract3DObject';
 import BranchConnector from './BranchConnector';
 import ObjectTypes from './../ObjectTypes';
 import Tube from './Tube';
+import Commit from './Commit';
+import Text from './Text';
 
 const config = {
   partLength: 30,
@@ -26,10 +28,12 @@ class Branch extends Abstract3DObject {
     if (this.parentCommit) {
       this.startConnector = this._createStartConnector();
     }
+
+    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene);
   }
 
-  addCommit (commit) {
-    commit.setPosition(this.tube.getLastPointPosition());
+  addCommit (commitSeq, message) {
+    var commit = new Commit(commitSeq, message, this.tube.getLastPointPosition(), this.scene);
     this.commits.push(commit);
     this.tube.addParts(1);
   }

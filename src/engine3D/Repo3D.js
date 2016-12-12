@@ -53,9 +53,9 @@ class Repo3D {
 
   onCommit (data) {
     if (this.HEAD.isPointingToBranch()) {
-      var commit = new Commit(commitSeq, data.message, this.scene);
+      // var commit = new Commit(commitSeq, data.message, this.scene
       var activeBranch = this.HEAD.getObject();
-      activeBranch.addCommit(commit);
+      activeBranch.addCommit(commitSeq, data.message);
     } else {
       // TODO what if is detached or pointing to commit?
       console.log('WARNING - create commit (-m ' + data.message + ') on detached HEAD');
