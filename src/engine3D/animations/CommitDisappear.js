@@ -1,6 +1,7 @@
 import BABYLON from 'babylonjs';
 import BounceScaleUtil from '../utils/BounceScaleUtil';
 import AbstractCommitAnimation from './AbstractCommitAnimation';
+import SolidExplodeParticles from '../particles/SolidExplodeParticles';
 
 const config = {
   fps: 30,
@@ -22,6 +23,7 @@ class CommitDisappear extends AbstractCommitAnimation {
     var bounceScaleAnimation = BounceScaleUtil.bounceScaleAnimation(fps, duration, startScale, endScale);
     this.commit.mesh.animations.push(bounceScaleAnimation);
     this.scene.beginAnimation(this.commit.mesh, 0, duration * fps, true);
+    var particles = new SolidExplodeParticles(this.scene, this.commit.getPosition());
   }
 }
 
