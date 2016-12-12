@@ -1,10 +1,10 @@
 import Branch from './objects/Branch';
 import Commit from './objects/Commit';
 import Head from './Head';
+import CommitUtils from './utils/CommitUtils';
 import _ from 'lodash';
 
 // TODO remove
-let branchSeq = 0;
 let commitSeq = 0;
 
 class Repo3D {
@@ -29,13 +29,15 @@ class Repo3D {
         this.onInit();
         break;
       case 'COMMIT':
-        commitSeq++;
+        // TODO remove
+        data.name = '' + ++commitSeq;
         this.onCommit(data);
         break;
       case 'BRANCH':
         this.onBranch(data);
         break;
       case 'CHECKOUT':
+        // TODO remove
         if (data.name === 'feature/new-task') {
           data.name = 'master';
         }
@@ -55,8 +57,8 @@ class Repo3D {
 
   onCommit (data) {
     if (this.HEAD.isPointingToBranch()) {
-      var commit = new Commit(commitSeq, data.message, this.scene);
       var activeBranch = this.HEAD.getObject();
+      var commit = new Commit(data.name, data.message, activeBranch.getPosition(), this.scene);
       activeBranch.addCommit(commit);
     } else {
       // TODO what if is detached or pointing to commit?
@@ -87,10 +89,12 @@ class Repo3D {
       }
       this.HEAD.pointTo(this.branches[data.name]);
     } else if (data.type === 'commit') {
-      // TODO find commit by ref
-      var master = this.branches['master'];
-      var lastCommit = _.last(master.commits);
-      this.HEAD.pointTo(lastCommit);
+      var commit = CommitUtils.findByNameInBranches(data.name, this.branches);
+      if (commit) {
+        this.HEAD.pointTo(commit);
+      } else {
+        console.log('WARNING - can not find commit with name: ' + data.name);
+      }
     }
   }
 

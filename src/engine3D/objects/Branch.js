@@ -4,6 +4,7 @@ import BranchConnector from './BranchConnector';
 import ObjectTypes from './../ObjectTypes';
 import Tube from './Tube';
 import Commit from './Commit';
+import _ from 'lodash';
 
 const config = {
   partLength: 30,
@@ -31,7 +32,6 @@ class Branch extends Abstract3DObject {
   }
 
   addCommit (commit) {
-    commit.setPosition(this.tube.getLastPointPosition());
     this.commits.push(commit);
     this.tube.addParts(1);
   }
@@ -46,16 +46,18 @@ class Branch extends Abstract3DObject {
 
   merge (branch) {
     var mergeEvent = () => {
-      var commit = new Commit('mergeCommit', 'Merge develop to master', this.scene);
+      var name = 'mergeCommit_' + branch.name + '_' + this.name;
+      var message = 'Merge ' + branch.name + ' to ' + this.name;
+      var commit = new Commit(name, message, this.getPosition(), this.scene);
       this.addCommit(commit);
-      branch.addCommit(commit);
+      branch.commits.push(commit);
     };
 
     var adjustEvent = () => {
       if (deltaParts <= 0) {
-        this.tube.addParts(1, mergeEvent);
+        this.tube.addParts(1);
       }
-      branch.addEndConnector(endConnectorEndPosition);
+      branch.addEndConnector(endConnectorEndPosition, mergeEvent);
     };
 
     var deltaZ = this.tube.getLastPointPosition().z - branch.tube.getLastPointPosition().z;
@@ -69,14 +71,18 @@ class Branch extends Abstract3DObject {
     }
   }
 
-  addEndConnector (endPosition) {
+  addEndConnector (endPosition, endEvent) {
     if (!this.endConnector) {
       var name = this.name + '_endConnector';
       var startPosition = this.tube.getLastPointPosition();
-      this.endConnector = new BranchConnector(name, startPosition, endPosition, this.scene);
+      this.endConnector = new BranchConnector(name, startPosition, endPosition, this.scene, endEvent);
     } else {
       console.log('WARNING - traing to add second end connector');
     }
+  }
+
+  getCommit (name) {
+    return _.find(this.commits, { name });
   }
 
   _createTube () {
