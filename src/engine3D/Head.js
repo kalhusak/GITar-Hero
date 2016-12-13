@@ -1,5 +1,6 @@
-import ObjectTypes from './ObjectTypes';
 import FollowObject from './FollowObject';
+import Branch from './objects/Branch';
+import Commit from './objects/Commit';
 
 export default class Head extends FollowObject {
   constructor (scene) {
@@ -17,12 +18,11 @@ export default class Head extends FollowObject {
   }
 
   isPointingToCommit () {
-    return !this.isDetached() && this.object3D.getType() === ObjectTypes.COMMIT;
+    return !this.isDetached() && this.object3D instanceof Commit;
   }
 
   isPointingToBranch () {
-    return !this.isDetached() && this.object3D.getType() === ObjectTypes.MASTER ||
-           this.object3D.getType() === ObjectTypes.BRANCH;
+    return !this.isDetached() && this.object3D instanceof Branch;
   }
 
   isDetached () {
