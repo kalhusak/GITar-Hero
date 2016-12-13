@@ -102,10 +102,7 @@ class Repo3D {
   }
 
   onMerge (data) {
-    var sourceBranch = null;
-    if (!data.sourceBranch && this.HEAD.isPointingToBranch()) {
-      sourceBranch = this.HEAD.getObject();
-    }
+    var sourceBranch = data.sourceBranch ? this.branches[data.sourceBranch] : this.HEAD.getObject();
     var targetBranch = this.branches[data.targetBranch];
     sourceBranch.merge(targetBranch);
   }

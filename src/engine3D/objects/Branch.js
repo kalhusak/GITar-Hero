@@ -1,7 +1,6 @@
 import BABYLON from 'babylonjs';
 import Abstract3DObject from './Abstract3DObject';
 import BranchConnector from './BranchConnector';
-import ObjectTypes from './../ObjectTypes';
 import Tube from './Tube';
 import Commit from './Commit';
 import Text from './Text';
@@ -53,10 +52,6 @@ class Branch extends Abstract3DObject {
     return this.tube.getLastPointPositionRef();
   }
 
-  getType () {
-    return this.parentCommit ? ObjectTypes.BRANCH : ObjectTypes.MASTER;
-  }
-
   merge (branch) {
     var mergeEvent = () => {
       var name = 'mergeCommit_' + branch.name + '_' + this.name;
@@ -76,7 +71,7 @@ class Branch extends Abstract3DObject {
     var deltaZ = this.tube.getLastPointPosition().z - branch.tube.getLastPointPosition().z;
     var deltaParts = deltaZ / config.partLength;
     var endConnectorEndPosition = this.getPosition();
-    endConnectorEndPosition.z += Math.abs(deltaZ) + config.partLength;
+    endConnectorEndPosition.z += deltaParts > 0 ? 0 : Math.abs(deltaZ) + config.partLength;
     if (deltaParts > 0) {
       branch.tube.addParts(deltaParts - 1, adjustEvent);
     } else if (deltaParts <= 0) {

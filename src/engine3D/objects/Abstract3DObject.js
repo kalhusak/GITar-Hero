@@ -4,7 +4,6 @@ export default class Abstract3DObject {
     this.getPosition = ::this.getPosition;
     this.getPositionRef = ::this.getPositionRef;
     this.setPosition = ::this.setPosition;
-    this.getType = ::this.getType;
 
     this.name = name;
     this.scene = scene;
@@ -20,10 +19,5 @@ export default class Abstract3DObject {
 
   setPosition (position) {
     this.mesh.position = position;
-  }
-
-  getType () {
-    console.log('WARNING - undefined type of object: ' + this.name);
-    return 'UNDEFINED_TYPE';
   }
 }
