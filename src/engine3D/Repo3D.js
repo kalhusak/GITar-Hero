@@ -1,10 +1,10 @@
 import Branch from './objects/Branch';
 import Commit from './objects/Commit';
 import Head from './Head';
+import CommitUtils from './utils/CommitUtils';
 import _ from 'lodash';
 
 // TODO remove
-let branchSeq = 0;
 let commitSeq = 0;
 
 class Repo3D {
@@ -29,18 +29,25 @@ class Repo3D {
         this.onInit();
         break;
       case 'COMMIT':
-        commitSeq++;
+        // TODO remove
+        data.name = '' + ++commitSeq;
         this.onCommit(data);
         break;
       case 'BRANCH':
-        data.name = data.name + branchSeq;
-        branchSeq++;
         this.onBranch(data);
         break;
       case 'CHECKOUT':
-        data.name = data.name + branchSeq;
-        branchSeq++;
+        // TODO remove
+        if (data.name === 'feature/new-task') {
+          data.name = 'master';
+        }
         this.onCheckout(data);
+        break;
+      case 'MERGE':
+        this.onMerge(data);
+        break;
+      case 'RESET':
+        this.onReset(data);
         break;
     }
   }
@@ -53,8 +60,8 @@ class Repo3D {
 
   onCommit (data) {
     if (this.HEAD.isPointingToBranch()) {
-      var commit = new Commit(commitSeq, data.message, this.scene);
       var activeBranch = this.HEAD.getObject();
+      var commit = new Commit(data.name, data.message, activeBranch.getPosition(), this.scene);
       activeBranch.addCommit(commit);
     } else {
       // TODO what if is detached or pointing to commit?
@@ -85,10 +92,31 @@ class Repo3D {
       }
       this.HEAD.pointTo(this.branches[data.name]);
     } else if (data.type === 'commit') {
-      // TODO find commit by ref
-      var master = this.branches['master'];
-      var lastCommit = _.last(master.commits);
-      this.HEAD.pointTo(lastCommit);
+      var commit = CommitUtils.findByNameInBranches(data.name, this.branches);
+      if (commit) {
+        this.HEAD.pointTo(commit);
+      } else {
+        console.log('WARNING - can not find commit with name: ' + data.name);
+      }
+    }
+  }
+
+  onMerge (data) {
+    var sourceBranch = null;
+    if (!data.sourceBranch && this.HEAD.isPointingToBranch()) {
+      sourceBranch = this.HEAD.getObject();
+    }
+    var targetBranch = this.branches[data.targetBranch];
+    sourceBranch.merge(targetBranch);
+  }
+
+  onReset (data) {
+    if (data.type === 'commit') {
+      if (this.HEAD.getObject() instanceof Branch) {
+        this.HEAD.getObject().resetToCommit(data.name);
+      }
+    } else if (data.type === 'number') {
+      this.activeBranch.resetOf(data.count);
     }
   }
 

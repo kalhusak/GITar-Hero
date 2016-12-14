@@ -11,6 +11,7 @@ class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
     super(canvas, config.antialiasing);
     this.onNewValidCommand = ::this.onNewValidCommand;
+    this.renderLoop = ::this.renderLoop;
 
     this.scene = new Scene(this);
     this.repo3D = new Repo3D(this.scene);
@@ -21,7 +22,10 @@ class Engine3D extends BABYLON.Engine {
   renderLoop () {
     let scene = this.scene;
     this.runRenderLoop(function () {
+      var currentTime = new Date().getTime();
+      scene.elapsedTime = currentTime - scene.lastTime;
       scene.render();
+      scene.lastTime = currentTime;
     });
   }
 
