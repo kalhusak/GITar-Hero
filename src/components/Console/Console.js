@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { identity } from 'lodash';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { enterCommand } from '../../actions/ConsoleActions';
 import { generateAutocompletionTree } from './utils/Autocompletion.js';
