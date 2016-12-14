@@ -4,6 +4,7 @@ import BranchConnector from './BranchConnector';
 import ObjectTypes from './../ObjectTypes';
 import Tube from './Tube';
 import Commit from './Commit';
+import Text from './Text';
 import _ from 'lodash';
 
 const config = {
@@ -32,6 +33,8 @@ class Branch extends Abstract3DObject {
     if (this.parentCommit) {
       this.startConnector = this._createStartConnector();
     }
+
+    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene);
   }
 
   addCommit (commit) {
