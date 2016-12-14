@@ -83,6 +83,16 @@
       "data": {
         "targetBranch": "develop"
       }
+    },
+    "12": {
+      "description": "Reset",
+      "commands": ["git reset"],
+      "tags": ["reset"],
+      "type": "RESET",
+      "data": {
+        "type": "commit",
+        "name": "2"
+      }
     }
   }
 }

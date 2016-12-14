@@ -12,7 +12,7 @@
       }
     },
     "3": {
-      "children": [4],
+      "children": [3,7],
       "task": {
         "title": "Make first commit",
         "description": "Add your all files and commit it",
@@ -32,7 +32,7 @@
       }
     },
     "7": {
-      "children": [8],
+      "children": [11],
       "task": {
         "title": "Make first commit",
         "description": "Add your all files and commit it",
@@ -69,6 +69,16 @@
         "minTime": 20,
         "defaultTime": 60,
         "steps": [11]
+      }
+    },
+    "11": {
+      "children": [3],
+      "task": {
+        "title": "Reset to commit",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [12]
       }
     }
   }

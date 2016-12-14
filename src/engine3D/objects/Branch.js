@@ -22,6 +22,8 @@ class Branch extends Abstract3DObject {
     this.addCommit = ::this.addCommit;
     this.merge = ::this.merge;
     this.removeLastCommit = ::this.removeLastCommit;
+    this.resetToCommit = ::this.resetToCommit;
+    this._resetToCommitRecursive = ::this._resetToCommitRecursive;
 
     this.parentCommit = parentCommit;
     this.tube = this._createTube();
@@ -85,8 +87,32 @@ class Branch extends Abstract3DObject {
       var startPosition = this.tube.getLastPointPosition();
       this.endConnector = new BranchConnector(name, startPosition, endPosition, this.scene, endEvent);
     } else {
-      console.log('WARNING - traing to add second end connector');
+      console.log('WARNING - trying to add second end connector');
     }
+  }
+
+  resetToCommit (commitName) {
+    var commit = this.getCommit(commitName);
+    if (commit) {
+      var deltaZ = _.last(this.commits).getPosition().z - commit.getPosition().z;
+      var deltaParts = deltaZ / config.partLength;
+      this._resetToCommitRecursive(deltaParts);
+    } else {
+      console.log('WARNING - trying to reset to commit that not exists');
+    }
+  }
+
+  _resetToCommitRecursive (commitsCount) {
+    var rec = () => {
+      if (commitsCount === 0) {
+        return;
+      } else {
+        commitsCount--;
+        this.removeLastCommit();
+        this.tube.removeParts(1, rec);
+      }
+    };
+    rec();
   }
 
   getCommit (name) {

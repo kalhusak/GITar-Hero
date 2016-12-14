@@ -112,9 +112,11 @@ class Repo3D {
 
   onReset (data) {
     if (data.type === 'commit') {
-
-    } else if (data.type === 'number'){
-
+      if (this.HEAD.getObject() instanceof Branch) {
+        this.HEAD.getObject().resetToCommit(data.name);
+      }
+    } else if (data.type === 'number') {
+      this.activeBranch.resetOf(data.count);
     }
   }
 

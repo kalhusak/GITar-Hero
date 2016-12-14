@@ -42,11 +42,11 @@ export default class Tube extends Abstract3DObject {
     this._animate(config.addOperation, onEndEvent);
   }
 
-  removeParts (parts) {
+  removeParts (parts, onEndEvent) {
     var delta = this.parts - parts;
     parts = delta < 0 ? 0 : parts;
     this.parts -= parts;
-    this._animate(config.removeOperation);
+    this._animate(config.removeOperation, onEndEvent);
   }
 
   getLastPointPosition () {

@@ -1,7 +1,7 @@
 import BABYLON from 'babylonjs';
-import BounceScaleUtil from '../utils/BounceScaleUtil';
+import BounceScaleUtil from '../utils/BounceScaleUtil'; // TODO remove or change anim
 import AbstractCommitAnimation from './AbstractCommitAnimation';
-import SolidExplodeParticles from '../particles/SolidExplodeParticles';
+import SolidExplodeParticles from '../particles/SolidExplode';
 
 const config = {
   fps: 30,
@@ -17,13 +17,8 @@ class CommitDisappear extends AbstractCommitAnimation {
   }
 
   _animate () {
-    const { fps, duration } = config;
-    var startScale = new BABYLON.Vector3(1, 1, 1);
-    var endScale = new BABYLON.Vector3(0, 0, 0);
-    var bounceScaleAnimation = BounceScaleUtil.bounceScaleAnimation(fps, duration, startScale, endScale);
-    this.commit.mesh.animations.push(bounceScaleAnimation);
-    this.scene.beginAnimation(this.commit.mesh, 0, duration * fps, true);
     var particles = new SolidExplodeParticles(this.scene, this.commit.getPosition());
+    this.scene.removeMesh(this.commit.mesh);
   }
 }
 
