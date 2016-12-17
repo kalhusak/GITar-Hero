@@ -37,7 +37,7 @@ void main(void) {
 		edgeValue = getEdgeValue(textureSampler);
 
 	if(edgeValue < 0.4)
-		gl_FragColor = texture2D( textureSampler, vUV );
+		gl_FragColor = texture2D(textureSampler, vUV);
 	else
 		gl_FragColor = vec4(0, 0, 0, 1);
 }

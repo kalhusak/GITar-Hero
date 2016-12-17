@@ -26,6 +26,7 @@ export default class BranchConnector extends Abstract3DObject {
     this.path = this._createPath();
     this.mesh = this._createMesh(this.name, this.path, null);
     this.mesh.renderTextureMaterial = renderTextureMaterial;
+    this.mesh.renderEdges = true;
     this._animate(endEvent);
   }
 
