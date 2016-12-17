@@ -1,0 +1,13 @@
+.points-container {
+  font-family: joystix-monospace;
+  position: fixed;
+  top: 10px;
+  left: 25px;
+  color: #fff;
+  font-size: 60px;
+}
+
+@font-face {
+  font-family: joystix-monospace;
+  src: url('./fonts/joystix-monospace.ttf');
+}
