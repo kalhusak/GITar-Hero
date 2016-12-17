@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Points.scss';
 
+const transitionTime = 3000;
+
 export default class Points extends Component {
   constructor (props) {
     super(props);
@@ -19,7 +21,6 @@ export default class Points extends Component {
 
   animateCounter () {
     const { from, to, start, value } = this.state;
-    const { time: transitionTime } = this.props;
     const elapsedTime = Date.now() - start;
     const currentValue = from + Math.round(this.ease(elapsedTime / transitionTime) * (to - from));
 
@@ -38,18 +39,20 @@ export default class Points extends Component {
     const { value: from } = this.state;
     const { value: to } = newProps;
 
-    this.setState({
-      from,
-      to,
-      start: Date.now()
-    });
+    if (to !== this.props.value) {
+      this.setState({
+        from,
+        to,
+        start: Date.now()
+      });
 
-    requestAnimationFrame(this.animateCounter);
+      requestAnimationFrame(this.animateCounter);
+    }
   }
 
   render () {
     return <div className='points-container'>
-      {this.state.value}
+      <div className='points-container__points'>{this.state.value}</div>
     </div>;
   }
 }

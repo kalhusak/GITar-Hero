@@ -1,0 +1,20 @@
+.time-container {
+  height: 30px;
+  width: 200px;
+  border-radius: 4px;
+  background: white;
+  overflow: hidden;
+  position: fixed;
+  top: 100px;
+  left: 25px;
+}
+
+.time-container__bar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(1);
+}
