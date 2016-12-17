@@ -15,7 +15,7 @@ const config = {
 };
 
 export default class BranchConnector extends Abstract3DObject {
-  constructor (name, startPosition, endPosition, scene, endEvent) {
+  constructor (name, startPosition, endPosition, scene, endEvent, renderTextureMaterial) {
     super(name, scene);
     this._createPath = ::this._createPath;
     this._createMesh = ::this._createMesh;
@@ -25,12 +25,8 @@ export default class BranchConnector extends Abstract3DObject {
     this.endPosition = endPosition.clone();
     this.path = this._createPath();
     this.mesh = this._createMesh(this.name, this.path, null);
+    this.mesh.renderTextureMaterial = renderTextureMaterial;
     this._animate(endEvent);
-
-    // TODO remove wireframe mat
-    // var mat = new BABYLON.StandardMaterial('branchMat', scene);
-    // mat.wireframe = true;
-    // this.mesh.material = mat;
   }
 
   _animate (endEvent) {

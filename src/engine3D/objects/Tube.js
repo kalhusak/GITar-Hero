@@ -13,7 +13,7 @@ const config = {
 };
 
 export default class Tube extends Abstract3DObject {
-  constructor (name, position, partLength, scene, parts) {
+  constructor (name, position, partLength, scene, parts, renderTextureMaterial) {
     super(name, scene);
     this.getLastPointPosition = ::this.getLastPointPosition;
     this.getLastPointPositionRef = ::this.getLastPointPositionRef;
@@ -27,14 +27,11 @@ export default class Tube extends Abstract3DObject {
     this.path = [position.clone(), position.clone()];
     this.mesh = this._createMesh(this.name, this.path, null);
     this.mesh.alwaysSelectAsActiveMesh = true;
+    this.mesh.renderTextureMaterial = renderTextureMaterial;
 
     if (parts) {
       this.addParts(parts);
     }
-    // TODO remove wireframe mat
-    // var mat = new BABYLON.StandardMaterial('branchMat', scene);
-    // mat.wireframe = true;
-    // this.mesh.material = mat;
   }
 
   addParts (parts, onEndEvent) {

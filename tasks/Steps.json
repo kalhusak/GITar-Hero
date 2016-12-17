@@ -6,48 +6,68 @@
       "tags": ["init"],
       "type": "INIT"
     },
-    "3": {
-      "description": "Add CarList.java file to staging",
-      "commands": ["git add CarList.java"],
-      "tags": ["add"],
-      "type": "ADD"
-    },
-    "4": {
-      "description": "Add all files to staging",
-      "commands": ["git add", "git add ."],
-      "tags": ["add"],
-      "type": "ADD"
-    },
-    "5": {
-      "description": "Create commit with message 'Init'",
+    "2": {
+      "description": "Test commit",
       "commands": ["git commit"],
       "tags": ["commit"],
       "type": "COMMIT",
       "data": {
-        "message": "Init"
+        "name": "1",
+        "message": "Test message 1"
+      }
+    },
+    "3": {
+      "description": "Test commit",
+      "commands": ["git commit"],
+      "tags": ["commit"],
+      "type": "COMMIT",
+      "data": {
+        "name": "2",
+        "message": "Test message 2"
+      }
+    },
+    "4": {
+      "description": "Test commit",
+      "commands": ["git commit"],
+      "tags": ["commit"],
+      "type": "COMMIT",
+      "data": {
+        "name": "3",
+        "message": "Test message 3"
+      }
+    },
+    "5": {
+      "description": "Test commit",
+      "commands": ["git commit"],
+      "tags": ["commit"],
+      "type": "COMMIT",
+      "data": {
+        "name": "4",
+        "message": "Test message 4"
       }
     },
     "6": {
-      "description": "Change branch to 'feature/new-task'",
-      "commands": ["git checkout"],
-      "tags": ["checkout"],
-      "type": "CHECKOUT",
+      "description": "Test commit",
+      "commands": ["git commit"],
+      "tags": ["commit"],
+      "type": "COMMIT",
       "data": {
-        "type": "commit",
-        "name": "1"
+        "name": "5",
+        "message": "Test message 5"
       }
     },
     "7": {
-      "description": "Create new branch 'feature/new-task'",
-      "commands": ["git branch feature/new-task"],
-      "tags": ["branch"],
-      "type": "BRANCH",
+      "description": "Test commit",
+      "commands": ["git commit"],
+      "tags": ["commit"],
+      "type": "COMMIT",
       "data": {
-        "name": "feature/new-task"
+        "name": "6",
+        "message": "Test message 6"
       }
     },
     "8": {
-      "description": "Checkout to new branch 'feature/task'",
+      "description": "Create and checkout develop",
       "commands": ["git checkout"],
       "tags": ["checkout", "branch"],
       "type": "CHECKOUT",
@@ -57,26 +77,27 @@
       }
     },
     "9": {
-      "description": "Create commit with message 'Add new files'",
-      "commands": ["git commit"],
-      "tags": ["commit"],
-      "type": "COMMIT",
+      "description": "Checkout develop",
+      "commands": ["git checkout"],
+      "tags": ["checkout", "branch"],
+      "type": "CHECKOUT",
       "data": {
-        "message": "Add new files"
+        "type": "branch",
+        "name": "develop"
       }
     },
     "10": {
-      "description": "Checkout to commit 123",
-      "commands": ["git checkout 123"],
-      "tags": ["commit"],
+      "description": "Checkout master",
+      "commands": ["git checkout"],
+      "tags": ["checkout", "branch"],
       "type": "CHECKOUT",
       "data": {
-        "type": "commit",
-        "name": "123"
+        "type": "branch",
+        "name": "master"
       }
     },
     "11": {
-      "description": "Merge",
+      "description": "Merge develop",
       "commands": ["git merge"],
       "tags": ["merge"],
       "type": "MERGE",
@@ -85,6 +106,44 @@
       }
     },
     "12": {
+      "description": "Merge master",
+      "commands": ["git merge"],
+      "tags": ["merge"],
+      "type": "MERGE",
+      "data": {
+        "targetBranch": "master"
+      }
+    },
+    "13": {
+      "description": "Merge develop to master",
+      "commands": ["git merge"],
+      "tags": ["merge"],
+      "type": "MERGE",
+      "data": {
+        "sourceBranch": "master",
+        "targetBranch": "develop"
+      }
+    },
+    "14": {
+      "description": "Checkout to first commit",
+      "commands": ["git checkout"],
+      "tags": ["checkout", "branch"],
+      "type": "CHECKOUT",
+      "data": {
+        "type": "commit",
+        "name": "1"
+      }
+    },
+    "15": {
+      "description": "Merge active to master",
+      "commands": ["git merge"],
+      "tags": ["merge"],
+      "type": "MERGE",
+      "data": {
+        "targetBranch": "master"
+      }
+    },
+    "16": {
       "description": "Reset",
       "commands": ["git reset"],
       "tags": ["reset"],
@@ -93,6 +152,5 @@
         "type": "commit",
         "name": "2"
       }
-    }
   }
 }

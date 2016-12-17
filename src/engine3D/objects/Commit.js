@@ -3,6 +3,7 @@ import Abstract3DObject from './Abstract3DObject';
 import CommitAppear from '../animations/CommitAppear';
 import CommitDisappear from '../animations/CommitDisappear';
 import Text from './Text';
+import SimpleColorMaterial from '../materials/SimpleColorMaterial';
 
 let commitConfig = {
   segments: 16,
@@ -19,13 +20,11 @@ export default class Commit extends Abstract3DObject {
     this.ref = ref;
     this.message = message;
     this.mesh = this._createSphere();
+    this.mesh.renderTextureMaterial = new SimpleColorMaterial(scene,
+      new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
     this.setPosition(position);
 
     var commitAppearAnimation = new CommitAppear(this, scene);
-    // TODO remove wireframe mat
-    // var mat = new BABYLON.StandardMaterial("commitMat", scene);
-    // mat.wireframe = true;
-    // this.mesh.material = mat;
     var textPosition = position.clone();
     textPosition.y += 1;
     this.text = new Text(message, textPosition, scene);
