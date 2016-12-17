@@ -39,8 +39,8 @@ class Engine3D extends BABYLON.Engine {
   }
 
   _renderPipeline () {
-    this.renderTexture = new RenderTexture(this.scene);
-    this.sobelPostProcess = new SobelPostProcess(this, this.renderTexture);
+    //this.renderTexture = new RenderTexture(this.scene);
+    this.sobelPostProcess = new SobelPostProcess(this);
     if (config.antialiasing) {
       this.fxaaAntialiasing = new BABYLON.FxaaPostProcess('fxaa', 1.0, this.camera, null, this, true);
     }
