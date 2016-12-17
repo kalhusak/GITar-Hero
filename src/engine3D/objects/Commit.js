@@ -1,5 +1,6 @@
 import BABYLON from 'babylonjs';
 import Abstract3DObject from './Abstract3DObject';
+import SimpleColorMaterial from '../materials/SimpleColorMaterial';
 
 let commitConfig = {
   segments: 16,
@@ -19,12 +20,10 @@ export default class Commit extends Abstract3DObject {
     this.ref = ref;
     this.message = message;
     this.mesh = this._createSphere();
+    this.mesh.renderTextureMaterial = new SimpleColorMaterial(scene,
+      new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
     this.setPosition(position);
     this._appearAnimate();
-    // TODO remove wireframe mat
-    // var mat = new BABYLON.StandardMaterial("commitMat", scene);
-    // mat.wireframe = true;
-    // this.mesh.material = mat;
   }
 
   _createSphere () {

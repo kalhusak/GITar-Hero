@@ -4,6 +4,7 @@ import BranchConnector from './BranchConnector';
 import Tube from './Tube';
 import Commit from './Commit';
 import _ from 'lodash';
+import SimpleColorMaterial from '../materials/SimpleColorMaterial';
 
 const config = {
   partLength: 30,
@@ -20,6 +21,9 @@ class Branch extends Abstract3DObject {
     this._createTube = ::this._createTube;
     this.addCommit = ::this.addCommit;
     this.merge = ::this.merge;
+
+    this.renderTextureMaterial = new SimpleColorMaterial(scene,
+      new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
 
     this.parentCommit = parentCommit;
     this.tube = this._createTube();
@@ -70,7 +74,7 @@ class Branch extends Abstract3DObject {
     if (!this.endConnector) {
       var name = this.name + '_endConnector';
       var startPosition = this.tube.getLastPointPosition();
-      this.endConnector = new BranchConnector(name, startPosition, endPosition, this.scene, endEvent);
+      this.endConnector = new BranchConnector(name, startPosition, endPosition, this.scene, endEvent, this.renderTextureMaterial);
     } else {
       console.log('WARNING - traing to add second end connector');
     }
@@ -91,14 +95,14 @@ class Branch extends Abstract3DObject {
       position = config.initPosition.clone();
       parts = 1;
     }
-    return new Tube(this.name + '_tube', position, config.partLength, this.scene, parts);
+    return new Tube(this.name + '_tube', position, config.partLength, this.scene, parts, this.renderTextureMaterial);
   }
 
   _createStartConnector () {
     var name = this.name + '_startConnector';
     var startPosition = this.parentCommit.getPosition();
     var endPosition = this.tube.getFirstPointPosition();
-    return new BranchConnector(name, startPosition, endPosition, this.scene);
+    return new BranchConnector(name, startPosition, endPosition, this.scene, null, this.renderTextureMaterial);
   }
 }
 
