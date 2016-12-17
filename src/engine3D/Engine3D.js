@@ -3,7 +3,7 @@ import Scene from './Scene';
 import Repo3D from './Repo3D';
 import Camera from './Camera';
 import SobelPostProcess from './SobelPostProcess';
-import RenderTexture from './RenderTexture';
+import TextureForSobelFilter from './renderTextures/TextureForSobelFilter';
 
 const config = {
   antialiasing: true
@@ -39,8 +39,8 @@ class Engine3D extends BABYLON.Engine {
   }
 
   _renderPipeline () {
-    //this.renderTexture = new RenderTexture(this.scene);
-    this.sobelPostProcess = new SobelPostProcess(this);
+    this.textureForSobel = new TextureForSobelFilter(this.scene);
+    this.sobelPostProcess = new SobelPostProcess(this, this.textureForSobel);
     if (config.antialiasing) {
       this.fxaaAntialiasing = new BABYLON.FxaaPostProcess('fxaa', 1.0, this.camera, null, this, true);
     }

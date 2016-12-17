@@ -22,6 +22,7 @@ export default class Commit extends Abstract3DObject {
     this.mesh = this._createSphere();
     this.mesh.renderTextureMaterial = new SimpleColorMaterial(scene,
       new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
+    this.mesh.renderEdges = true;
     this.setPosition(position);
 
     var commitAppearAnimation = new CommitAppear(this, scene);

@@ -28,6 +28,7 @@ export default class Tube extends Abstract3DObject {
     this.mesh = this._createMesh(this.name, this.path, null);
     this.mesh.alwaysSelectAsActiveMesh = true;
     this.mesh.renderTextureMaterial = renderTextureMaterial;
+    this.mesh.renderEdges = true;
 
     if (parts) {
       this.addParts(parts);
