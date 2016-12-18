@@ -17,23 +17,23 @@ class AppContainer extends Component {
       points: 0,
       time: 0
     };
-    // setTimeout(() => {
-    //   this.setState({
-    //     points: 0,
-    //     time: 10000
-    //   });
-    // });
-    // setTimeout(() => {
-    //   this.setState({
-    //     points: 200,
-    //     time: 8000
-    //   });
-    // }, 6000);
-    // setTimeout(() => {
-    //   this.setState({
-    //     points: 400
-    //   });
-    // }, 10000);
+    setTimeout(() => {
+      this.setState({
+        points: 0,
+        time: 10000
+      });
+    });
+    setTimeout(() => {
+      this.setState({
+        points: 200,
+        time: 8000
+      });
+    }, 6000);
+    setTimeout(() => {
+      this.setState({
+        points: 400
+      });
+    }, 10000);
   }
 
   render () {
