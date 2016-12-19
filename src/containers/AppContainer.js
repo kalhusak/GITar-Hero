@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import Canvas from '../components/Canvas';
-import Console from '../components/Console';
+import BottomDrawer from '../components/BottomDrawer';
 import TaskList from './TaskList';
 import Points from '../components/Points';
 import Time from '../components/Time';
@@ -43,8 +43,8 @@ class AppContainer extends Component {
           <Canvas id='renderCanvas' store={this.props.store} />
           <Points value={this.state.points} />
           <Time time={this.state.time} />
-          <Console />
           <TaskList />
+          <BottomDrawer />
         </div>
       </Provider>
     );
