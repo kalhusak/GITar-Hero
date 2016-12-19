@@ -1,6 +1,7 @@
 import BABYLON from 'babylonjs';
 import _ from 'lodash';
 import Abstract3DObject from './Abstract3DObject';
+import { outline as outlineStyle } from '../style';
 
 const config = {
   radius: 2,
@@ -13,7 +14,7 @@ const config = {
 };
 
 export default class Tube extends Abstract3DObject {
-  constructor (name, position, partLength, scene, parts, renderTextureMaterial) {
+  constructor (name, position, partLength, parts, material, scene) {
     super(name, scene);
     this.getLastPointPosition = ::this.getLastPointPosition;
     this.getLastPointPositionRef = ::this.getLastPointPositionRef;
@@ -25,10 +26,13 @@ export default class Tube extends Abstract3DObject {
     this.partLength = partLength;
     this.parts = 0;
     this.path = [position.clone(), position.clone()];
+
     this.mesh = this._createMesh(this.name, this.path, null);
     this.mesh.alwaysSelectAsActiveMesh = true;
-    this.mesh.renderTextureMaterial = renderTextureMaterial;
-    this.mesh.renderEdges = true;
+    this.mesh.renderOutline = outlineStyle.enable;
+    this.mesh.outlineColor = outlineStyle.color;
+    this.mesh.outlineWidth = outlineStyle.width;
+    this.mesh.material = material;
 
     if (parts) {
       this.addParts(parts);
