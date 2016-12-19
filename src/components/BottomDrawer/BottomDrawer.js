@@ -10,6 +10,7 @@ class BottomDrawer extends Component {
   constructor (props) {
     super(props);
     this.closeDrawer = ::this.closeDrawer;
+    this.initialRender = true;
   }
 
   closeDrawer () {
@@ -39,9 +40,14 @@ class BottomDrawer extends Component {
       return this.props.isOpen ? `${className} ${className}--visible` : className;
     };
 
+    const preventInitialAnimation = this.initialRender ? { transition: 'none' } : null;
+    this.initialRender = false;
+
     return <div>
-      <div className={getClasses('bottom-drawer__overlay')} onClick={this.closeDrawer} />
-      <div className={getClasses('bottom-drawer__container')}>
+      <div className={getClasses('bottom-drawer__overlay')} onClick={this.closeDrawer}
+        style={preventInitialAnimation} />
+      <div className={getClasses('bottom-drawer__container')}
+        style={preventInitialAnimation}>
         <Console />
         <div className='bottom-drawer__help-container'>
           <nav className='help-container__nav'>
