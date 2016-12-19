@@ -53,3 +53,23 @@
 .help-container__nav-item--active {
   border-bottom: 2px solid white;
 }
+
+.help-container__current-tab {
+  font-size: 16px;
+  font-family: monospace;
+  color: white;
+  margin: 30px auto;
+  width: 800px;
+
+  p {
+    margin: 20px 0;
+  }
+
+  pre {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 3px;
+    margin: 5px 0;
+  }
+}
