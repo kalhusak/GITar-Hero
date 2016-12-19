@@ -2,8 +2,6 @@ import BABYLON from 'babylonjs';
 import Scene from './Scene';
 import Repo3D from './Repo3D';
 import Camera from './Camera';
-import SobelPostProcess from './SobelPostProcess';
-import TextureForSobelFilter from './renderTextures/TextureForSobelFilter';
 
 const config = {
   antialiasing: true
@@ -11,14 +9,12 @@ const config = {
 
 class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
-    super(canvas, false);
+    super(canvas, config.antialiasing);
     this.onNewValidCommand = ::this.onNewValidCommand;
     this.renderLoop = ::this.renderLoop;
-    this._renderPipeline = ::this._renderPipeline;
     this.scene = new Scene(this);
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
-    this._renderPipeline();
     this.renderLoop();
   }
 
@@ -36,14 +32,6 @@ class Engine3D extends BABYLON.Engine {
       scene.render();
       scene.lastTime = currentTime;
     });
-  }
-
-  _renderPipeline () {
-    this.textureForSobel = new TextureForSobelFilter(this.scene);
-    this.sobelPostProcess = new SobelPostProcess(this, this.textureForSobel);
-    if (config.antialiasing) {
-      this.fxaaAntialiasing = new BABYLON.FxaaPostProcess('fxaa', 1.0, this.camera, null, this, true);
-    }
   }
 
   onNewValidCommand (type, data) {

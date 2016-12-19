@@ -1,9 +1,9 @@
 import BABYLON from 'babylonjs';
-import Abstract3DObject from './Abstract3DObject';
-import CommitAppear from '../animations/CommitAppear';
 import CommitDisappear from '../animations/CommitDisappear';
+import CommitAppear from '../animations/CommitAppear';
+import Abstract3DObject from './Abstract3DObject';
 import Text from './Text';
-import SimpleColorMaterial from '../materials/SimpleColorMaterial';
+import { outline as outlineStyle } from '../style';
 
 let commitConfig = {
   segments: 16,
@@ -12,7 +12,7 @@ let commitConfig = {
 
 export default class Commit extends Abstract3DObject {
 
-  constructor (ref, message, position, scene) {
+  constructor (ref, message, position, material, scene) {
     super(ref, scene);
     this._createSphere = ::this._createSphere;
     this.disappear = ::this.disappear;
@@ -20,14 +20,15 @@ export default class Commit extends Abstract3DObject {
     this.ref = ref;
     this.message = message;
     this.mesh = this._createSphere();
-    this.mesh.renderTextureMaterial = new SimpleColorMaterial(scene,
-      new BABYLON.Color3(Math.random(), Math.random(), Math.random()));
-    this.mesh.renderEdges = true;
     this.setPosition(position);
 
-    var commitAppearAnimation = new CommitAppear(this, scene);
+    this.commitAppearAnimation = new CommitAppear(this, scene);
     var textPosition = position.clone();
     textPosition.y += 1;
+    this.mesh.renderOutline = outlineStyle.enable;
+    this.mesh.outlineColor = outlineStyle.color;
+    this.mesh.outlineWidth = outlineStyle.width;
+    this.mesh.material = material;
     this.text = new Text(message, textPosition, scene);
   }
 

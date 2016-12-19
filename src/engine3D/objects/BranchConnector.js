@@ -1,6 +1,7 @@
 import BABYLON from 'babylonjs';
 import _ from 'lodash';
 import Abstract3DObject from './Abstract3DObject';
+import { outline as outlineStyle } from '../style';
 
 const config = {
   radius: 2,
@@ -15,7 +16,7 @@ const config = {
 };
 
 export default class BranchConnector extends Abstract3DObject {
-  constructor (name, startPosition, endPosition, scene, endEvent, renderTextureMaterial) {
+  constructor (name, startPosition, endPosition, endEvent, material, scene) {
     super(name, scene);
     this._createPath = ::this._createPath;
     this._createMesh = ::this._createMesh;
@@ -25,8 +26,11 @@ export default class BranchConnector extends Abstract3DObject {
     this.endPosition = endPosition.clone();
     this.path = this._createPath();
     this.mesh = this._createMesh(this.name, this.path, null);
-    this.mesh.renderTextureMaterial = renderTextureMaterial;
-    this.mesh.renderEdges = true;
+    this.mesh.renderOutline = outlineStyle.enable;
+    this.mesh.outlineColor = outlineStyle.color;
+    this.mesh.outlineWidth = outlineStyle.width;
+    this.mesh.material = material;
+
     this._animate(endEvent);
   }
 
