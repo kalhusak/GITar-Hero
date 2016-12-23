@@ -15,6 +15,7 @@ class Camera extends BABYLON.FollowCamera {
 
   constructor (followObject, canvas, scene) {
     super(config.name, config.initPosition, scene);
+    this.getPosition = ::this.getPosition;
     this.onWheel = ::this.onWheel;
 
     this.scene = scene;
@@ -43,6 +44,10 @@ class Camera extends BABYLON.FollowCamera {
     this.heightOffset += config.heightOffsetSpeed * factor;
     this.maxCameraSpeed += 5 * factor;
     this.followObject.addOffsetInPlace(new BABYLON.Vector3(0, 0, -3 * factor));
+  }
+
+  getPosition () {
+    return this.position.clone();
   }
 }
 

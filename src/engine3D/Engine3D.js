@@ -4,6 +4,7 @@ import Repo3D from './Repo3D';
 import Camera from './Camera';
 import SobelPostProcess from './SobelPostProcess';
 import TextureForSobelFilter from './renderTextures/TextureForSobelFilter';
+import Ground from './objects/Ground';
 
 const config = {
   antialiasing: true
@@ -19,20 +20,17 @@ class Engine3D extends BABYLON.Engine {
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
     this._renderTextOutline();
+    this.ground = new Ground(this.camera, this.scene);
     this.renderLoop();
   }
 
   renderLoop () {
     let scene = this.scene;
     let engine = this;
-    var counter = 0;
     this.runRenderLoop(function () {
       var currentTime = new Date().getTime();
       scene.elapsedTime = currentTime - scene.lastTime;
-      if (((++counter) % 30) === 0) {
-        document.getElementById('fps').innerHTML = Math.round(engine.fps);
-        counter = 0;
-      }
+      document.getElementById('fps').innerHTML = engine.getFps().toFixed();
       scene.render();
       scene.lastTime = currentTime;
     });
