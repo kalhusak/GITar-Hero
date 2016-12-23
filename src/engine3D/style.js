@@ -12,5 +12,6 @@ export const branch = {
 };
 
 export default {
-  outline
+  outline,
+  branch
 };

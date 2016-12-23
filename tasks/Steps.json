@@ -152,6 +152,21 @@
         "type": "commit",
         "name": "2"
       }
+    },
+    "17": {
+      "description": "Push",
+      "commands": ["git push"],
+      "tags": ["push"],
+      "type": "PUSH"
+    },
+    "18": {
+      "description": "Pull",
+      "commands": ["git pull"],
+      "tags": ["pull"],
+      "type": "PULL",
+      "data": {
+        "newCommits": ["newCommit1"]
+      }
     }
   }
 }

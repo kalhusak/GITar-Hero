@@ -38,57 +38,47 @@
         "description": "Add your all files and commit it",
         "minTime": 20,
         "defaultTime": 60,
-        "steps": [4]
+        "steps": [3]
       }
     },
     "6": {
       "children": [7],
       "task": {
-        "title": "Checkout to first commit",
-        "description": "Checkout to new branch using only one command",
-        "minTime": 10,
-        "defaultTime": 30,
-        "steps": [14]
+        "title": "Make first commit",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [3]
       }
     },
     "7": {
       "children": [8],
       "task": {
-        "title": "Checkout to develop",
-        "description": "Checkout to new branch using only one command",
-        "minTime": 10,
-        "defaultTime": 30,
-        "steps": [8]
+        "title": "Checkout to commit",
+        "description": "",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [14]
       }
     },
     "8": {
       "children": [9],
       "task": {
-        "title": "Make first commit",
-        "description": "Add your all files and commit it",
+        "title": "Push to origin",
+        "description": "",
         "minTime": 20,
         "defaultTime": 60,
-        "steps": [5]
+        "steps": [17]
       }
     },
     "9": {
-      "children": [10],
+      "children": [8],
       "task": {
-        "title": "Merge branches",
-        "description": "Add your all files and commit it",
-        "minTime": 20,
-        "defaultTime": 60,
-        "steps": [15]
-      }
-    },
-    "10": {
-      "children": [6],
-      "task": {
-        "title": "Make first commit",
-        "description": "Add your all files and commit it",
-        "minTime": 20,
-        "defaultTime": 60,
-        "steps": [6]
+        "title": "Pull from origin",
+        "description": "",
+        "minTime": 10,
+        "defaultTime": 30,
+        "steps": [18]
       }
     }
   }

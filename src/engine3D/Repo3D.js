@@ -49,6 +49,12 @@ class Repo3D {
       case 'RESET':
         this.onReset(data);
         break;
+      case 'PUSH':
+        this.onPush(data);
+        break;
+      case 'PULL':
+        this.onPull(data);
+        break;
     }
   }
 
@@ -118,6 +124,35 @@ class Repo3D {
     }
   }
 
+  onPush (data) {
+    if (this.HEAD.isPointingToBranch()) {
+      this.HEAD.getObject().push();
+    } else if (this.HEAD.isPointingToCommit()) {
+      var activeBranch = CommitUtils.getBranchForCommit(this.HEAD.getObject(), this.branches);
+      if (!activeBranch) {
+        console.log('WARNING - can not find branch for commit: ' + this.HEAD.getObject().name);
+        return;
+      }
+      activeBranch.push();
+    } else {
+      console.log('WARNING - execute push on detached HEAD');
+    }
+  }
+
+  onPull (data) {
+    if (this.HEAD.isPointingToBranch()) {
+      this.HEAD.getObject().pull(data.newCommits);
+    } else if (this.HEAD.isPointingToCommit()) {
+      var activeBranch = CommitUtils.getBranchForCommit(this.HEAD.getObject(), this.branches);
+      if (!activeBranch) {
+        console.log('WARNING - can not find branch for commit: ' + this.HEAD.getObject().name);
+        return;
+      }
+      activeBranch.pull(data.newCommits);
+    } else {
+      console.log('WARNING - execute push on detached HEAD');
+    }
+  }
 }
 
 export default Repo3D;
