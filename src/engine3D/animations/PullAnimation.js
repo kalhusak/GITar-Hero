@@ -1,4 +1,5 @@
 import AbstractPushPullAnimation from './AbstractPushPullAnimation';
+import AddCommitsAnimation from './AddCommitsAnimation';
 
 const config = {
   duration: 0.6,
@@ -22,6 +23,9 @@ class PullAnimation extends AbstractPushPullAnimation {
       this.commits.forEach((commit) => {
         commit.dispose();
       });
+      if (this.newCommits) {
+        var addCommitsAnimation = new AddCommitsAnimation(this.newCommits, this.activeBranch, this.scene);
+      }
     }
     this.passedTime += this.scene.elapsedTime / 1000;
   }

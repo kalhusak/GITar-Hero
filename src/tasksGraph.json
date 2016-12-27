@@ -42,7 +42,7 @@
       }
     },
     "6": {
-      "children": [7],
+      "children": [8],
       "task": {
         "title": "Make first commit",
         "description": "Add your all files and commit it",
@@ -52,7 +52,7 @@
       }
     },
     "7": {
-      "children": [8],
+      "children": [10],
       "task": {
         "title": "Checkout to commit",
         "description": "",
@@ -62,7 +62,7 @@
       }
     },
     "8": {
-      "children": [9],
+      "children": [10],
       "task": {
         "title": "Push to origin",
         "description": "",
@@ -72,6 +72,16 @@
       }
     },
     "9": {
+      "children": [10],
+      "task": {
+        "title": "Make first commit",
+        "description": "Add your all files and commit it",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [3]
+      }
+    },
+    "10": {
       "children": [8],
       "task": {
         "title": "Pull from origin",
@@ -79,6 +89,16 @@
         "minTime": 10,
         "defaultTime": 30,
         "steps": [18]
+      }
+    },
+    "11": {
+      "children": [10],
+      "task": {
+        "title": "Make first commit",
+        "description": "",
+        "minTime": 20,
+        "defaultTime": 60,
+        "steps": [3]
       }
     }
   }

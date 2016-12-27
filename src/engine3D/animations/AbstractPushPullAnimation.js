@@ -6,12 +6,14 @@ const config = {
 };
 
 class AbstractPushPullAnimation {
-  constructor (branch, scene) {
+  constructor (branch, scene, newCommits) {
     this._animate = ::this._animate;
     this._cloneBranch = ::this._cloneBranch;
     this._cloneCommits = ::this._cloneCommits;
     this.scene = scene;
+    this.newCommits = newCommits;
     this.passedTime = 0.0;
+    this.activeBranch = branch;
     this.material = this._cloneMaterial(branch, this.scene);
     this.branch = this._cloneBranch(branch, this.material);
     this.commits = this._cloneCommits(branch, this.material);
@@ -20,8 +22,8 @@ class AbstractPushPullAnimation {
   }
 
   _cloneBranch (branch, material) {
-    var path = this._getPath(branch);
-    var mesh = BABYLON.Mesh.CreateTube(branch.name + '_push_pull', path, 2, 16, null,
+    this.branchPath = this._getPath(branch);
+    var mesh = BABYLON.Mesh.CreateTube(branch.name + '_push_pull', this.branchPath, 2, 16, null,
                                         BABYLON.Mesh.CAP_ALL, this.scene);
     mesh.material = material;
     mesh.alwaysSelectAsActiveMesh = true;
@@ -38,6 +40,16 @@ class AbstractPushPullAnimation {
       mesh.position.y = config.height;
       commits.push(mesh);
     });
+    if (this.newCommits) {
+      this.newCommits.forEach((newCommit, index) => {
+        var point = this.branchPath[this.branchPath.length - (index + 2)];
+        var mesh = BABYLON.Mesh.CreateSphere(newCommit.name + '_push_pull', 16, 10, this.scene);
+        mesh.position = new BABYLON.Vector3(point.x, point.y, point.z);
+        mesh.material = material;
+        mesh.position.y = config.height;
+        commits.push(mesh);
+      });
+    }
     return commits;
   }
 
@@ -59,6 +71,12 @@ class AbstractPushPullAnimation {
     }
     if (branch.endConnector) {
       path.push(...branch.endConnector.path);
+    }
+    if (this.newCommits && !branch.endConnector) {
+      this.newCommits.forEach((newCommit) => {
+        var last = path[path.length - 1];
+        path.push(new BABYLON.Vector3(last.x, last.y, last.z + 30));
+      });
     }
     return path;
   }

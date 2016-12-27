@@ -48,9 +48,9 @@ class Branch extends Abstract3DObject {
     this.text = new Text(name, this.tube.getLastPointPositionRef(), scene);
   }
 
-  addCommit (commit) {
+  addCommit (commit, onEndEvent) {
     this.commits.push(commit);
-    this.tube.addParts(1);
+    this.tube.addParts(1, onEndEvent);
   }
 
   removeLastCommit () {
@@ -117,14 +117,8 @@ class Branch extends Abstract3DObject {
     var pushAnimation = new PushAnimation(this, this.scene);
   }
 
-  pull (newCommitsName) {
-    var pullAnimation = new PullAnimation(this, this.scene);
-    if (newCommitsName) {
-      newCommitsName.forEach((commitName) => {
-        var commit = new Commit(commitName + '_ref', commitName, this.getPosition(), this.material, this.scene);
-        this.addCommit(commit);
-      });
-    }
+  pull (newCommits) {
+    var pullAnimation = new PullAnimation(this, this.scene, newCommits);
   }
 
   _resetToCommitRecursive (commitsCount) {

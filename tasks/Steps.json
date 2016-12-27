@@ -165,7 +165,23 @@
       "tags": ["pull"],
       "type": "PULL",
       "data": {
-        "newCommits": ["newCommit1"]
+        "newCommits": [
+        {
+          "name": "10",
+          "message": "New Pull Commit1"
+        },
+        {
+          "name": "11",
+          "message": "New Pull Commit2"
+        },
+        {
+          "name": "12",
+          "message": "New Pull Commit3"
+        },
+        {
+          "name": "13",
+          "message": "New Pull Commit4"
+        }]
       }
     }
   }
