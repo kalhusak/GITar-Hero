@@ -6,7 +6,9 @@ import ColorFactory from '../ColorFactory';
 import Commit from './Commit';
 import Tube from './Tube';
 import Text from './Text';
-import { branch as branchStyle } from '../style'
+import { branch as branchStyle } from '../style';
+import PushAnimation from '../animations/PushAnimation';
+import PullAnimation from '../animations/PullAnimation';
 
 const config = {
   partLength: 30,
@@ -26,7 +28,10 @@ class Branch extends Abstract3DObject {
     this.removeLastCommit = ::this.removeLastCommit;
     this.resetToCommit = ::this.resetToCommit;
     this._resetToCommitRecursive = ::this._resetToCommitRecursive;
+    this.push = ::this.push;
+    this.pull = ::this.pull;
 
+    this.scene = scene;
     this.parentCommit = parentCommit;
     this.material = new BABYLON.StandardMaterial(name + '_material', scene);
     this.material.diffuseColor = ColorFactory.next();
@@ -43,9 +48,9 @@ class Branch extends Abstract3DObject {
     this.text = new Text(name, this.tube.getLastPointPositionRef(), scene);
   }
 
-  addCommit (commit) {
+  addCommit (commit, onEndEvent) {
     this.commits.push(commit);
-    this.tube.addParts(1);
+    this.tube.addParts(1, onEndEvent);
   }
 
   removeLastCommit () {
@@ -106,6 +111,14 @@ class Branch extends Abstract3DObject {
     } else {
       console.log('WARNING - trying to reset to commit that not exists');
     }
+  }
+
+  push () {
+    var pushAnimation = new PushAnimation(this, this.scene);
+  }
+
+  pull (newCommits) {
+    var pullAnimation = new PullAnimation(this, this.scene, newCommits);
   }
 
   _resetToCommitRecursive (commitsCount) {
