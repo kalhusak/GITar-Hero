@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { identity } from 'lodash';
 import { connect } from 'react-redux';
 import { enterCommand } from '../../actions/ConsoleActions';
+import { nextHelpDrawerTab, prevHelpDrawerTab } from '../../actions/HelpDrawerActions';
 import { generateAutocompletionTree } from './utils/Autocompletion.js';
 import './Console.scss';
 
@@ -107,19 +108,27 @@ class Console extends Component {
 
     switch (event.keyCode) {
       case LEFT_CODE:
-        this.setState({
-          selectionStart: Math.max(consoleInput.selectionStart - 1, 0),
-          movingCursor: true
-        });
-        this.setMovingCursorTimeout();
+        if (consoleInput.selectionStart > 0) {
+          event.stopPropagation();
+          event.nativeEvent.stopImmediatePropagation();
+          this.setState({
+            selectionStart: consoleInput.selectionStart - 1,
+            movingCursor: true
+          });
+          this.setMovingCursorTimeout();
+        }
         break;
 
       case RIGHT_CODE:
-        this.setState({
-          selectionStart:  Math.min(consoleInput.selectionStart + 1, consoleInput.value.length),
-          movingCursor: true
-        });
-        this.setMovingCursorTimeout();
+        if (consoleInput.selectionStart < consoleInput.value.length) {
+          event.stopPropagation();
+          event.nativeEvent.stopImmediatePropagation();
+          this.setState({
+            selectionStart: consoleInput.selectionStart + 1,
+            movingCursor: true
+          });
+          this.setMovingCursorTimeout();
+        }
         break;
 
       case UP_CODE:

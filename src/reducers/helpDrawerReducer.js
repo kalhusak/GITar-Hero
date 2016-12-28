@@ -1,6 +1,7 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, findIndex } from 'lodash';
 import * as commandActions from '../actions/CommandActions';
 import * as helpDrawerActions from '../actions/HelpDrawerActions';
+import helpTabs from '../components/BottomDrawer/helpTabs';
 
 const initialState = {
   isOpen: false,
@@ -23,6 +24,22 @@ export default function helpDrawerReducer (state = initialState, { type, payload
     case commandActions.NEW_INVALID_COMMAND:
       if (payload.command === 'help') {
         newState.isOpen = !newState.isOpen;
+        return newState;
+      }
+      return state;
+
+    case helpDrawerActions.NEXT_HELP_DRAWER_TAB:
+      const nextTabIndex = findIndex(helpTabs, { name: state.selectedTab }) + 1;
+      if (state.isOpen && nextTabIndex < helpTabs.length) {
+        newState.selectedTab = helpTabs[nextTabIndex].name;
+        return newState;
+      }
+      return state;
+
+    case helpDrawerActions.PREV_HELP_DRAWER_TAB:
+      const prevTabIndex = findIndex(helpTabs, { name: state.selectedTab }) - 1;
+      if (state.isOpen && prevTabIndex >= 0) {
+        newState.selectedTab = helpTabs[prevTabIndex].name;
         return newState;
       }
       return state;
