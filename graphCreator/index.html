@@ -2,22 +2,62 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/graph-creator.css" />
+    <script src="jquery-3.1.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
   <body>
     <div id="graph">
-    <div id="toolbox">
-      <input type="file" id="hidden-file-upload">
-      <input type="image" id="upload-input" title="upload graph" src="images/upload-icon.png" alt="upload graph">
-      <input type="image" id="download-input" title="download graph" src="images/download-icon.png" alt="download graph">
-      <input type="image" id="delete-graph" title="delete graph" src="images/trash-icon.png" alt="delete graph">
+      <div id="toolbox">
+        <input type="file" id="hidden-file-upload">
+        <input type="image" id="upload-input" title="upload graph" src="images/upload-icon.png" alt="upload graph">
+        <input type="image" id="download-input" title="download graph" src="images/download-icon.png" alt="download graph">
+        <input type="image" id="delete-graph" title="delete graph" src="images/trash-icon.png" alt="delete graph">
+      </div>
     </div>
+    <div id="editor">
+      <div class="property">
+        <label class="label">Title:</label>
+        <input type="text" id="titleInput">
+      </div>
+      <div class="property">
+        <label class="label">Description:</label>
+        <textarea rows="4" id="descriptionInput"></textarea>
+      </div>
+      <div class="property">
+        <label class="label">Min time:</label>
+        <input type="text" id="minTimeInput">
+      </div>
+      <div class="property">
+        <label class="label">Default time:</label>
+        <input type="text" id="defaultTimeInput">
+      </div>
+      <h2 style="margin: 40px 0 0 0;">STEPS</h2>
+      <hr>
+      <div id="steps">
+        <div class="property" id="addNewStepProperty">
+          <select id="stepTypes">
+            <option value="COMMIT">Commit</option>
+            <option value="INIT">Init</option>
+            <option value="CHECKOUT">Checkout</option>
+            <option value="PUSH">Push</option>
+            <option value="PULL">Pull</option>
+            <option value="BRANCH">Branch</option>
+            <option value="MERGE">Merge</option>
+            <option value="RESET">Reset</option>
+          </select>
+          <button id='addStepButton' style="float: right;" onclick="onAddStepClick($('#stepTypes').val())">Add</button>
+        </div>
+      </div>
     </div>
 
     <script src="//d3js.org/d3.v3.js" charset="utf-8"></script>
     <script src="//cdn.jsdelivr.net/filesaver.js/0.1/FileSaver.min.js"></script>
     <script src="js/graphCreator.js"></script>
     <script src="js/taskGraph.js"></script>
+    <script src="js/steps.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/htmlElementsGenerator.js"></script>
     <script src="js/converter.js"></script>
   </body>
 

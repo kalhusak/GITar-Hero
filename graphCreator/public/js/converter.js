@@ -1,32 +1,14 @@
-function convertFromTaskGraphToOldFormat(tasks){
+function convertFromTaskGraphToOldFormat(taskGraph){
   var nodes = [];
   var edges = [];
-  var seq = 1;
-  var initX = window.innerWidth * 0.5;
-  var initY = window.innerHeight - 100;
 
-  var rootNode = tasks.byId[tasks.root];
-
-  var lev = 0;
-  var addedNodes = [];
-  var children = [tasks.root];
-  while(children.length > 0){
-    console.log("CHILDREN", children);
-    addNodes(nodes, tasks, children, lev);
-    addedNodes = addedNodes.concat(children);
-    var newChildren = [];
-    children.forEach(function(childId){
-      newChildren = newChildren.concat(tasks.byId[childId].children);
-    });
-    children = newChildren.filter(function(item, pos) {
-      return addedNodes.indexOf( item ) < 0 && newChildren.indexOf(item) == pos;
-    })
-    lev++;
-  }
-
-  var ids = Object.keys(tasks.byId);
+  var ids = Object.keys(taskGraph.byId);
   ids.forEach(function(id){
-    tasks.byId[id].children.forEach(function(child){
+    var taskNode = taskGraph.byId[id];
+    taskNode.task.id = id;
+    taskNode.task.steps = convertSteps(taskNode.task.steps);
+    nodes.push(taskNode.task);
+    taskNode.children.forEach(function(child){
       edges.push({
     		"source": id,
     		"target": child
@@ -40,16 +22,41 @@ function convertFromTaskGraphToOldFormat(tasks){
   }
 }
 
-function addNodes(nodeList, tasks, nodeIds, level){
-  var initX = window.innerWidth * 0.5 - (nodeIds.length%2 === 0 ? (75 + (Math.floor(nodeIds.length/2) - 1) * 150) : Math.floor(nodeIds.length/2) * 150 );
-  var initY = window.innerHeight - 100;
-
-  nodeIds.forEach(function(nodeId, i){
-    nodeList.push({
-      "id": nodeId,
-      "title": tasks.byId[nodeId].file,
-      "x": initX + (i * 150),
-      "y": initY - (level * 150)
+function convertSteps(steps) {
+  var newSteps = [];
+  if (steps) {
+    steps.forEach((step, index) => {
+      var newStep = {};
+      newStep.description = step.description;
+      newStep.commands = step.commands.join(';');
+      newStep.tags = step.tags.join(';');
+      newStep.type = step.type;
+      switch (step.type) {
+        case 'COMMIT':
+          newStep.name = step.data.name;
+          newStep.message = step.data.message;
+          break;
+        case 'CHECKOUT':
+          newStep.toCommitOrBranch = step.data.type;
+          newStep.name = step.data.name;
+          break;
+        case 'PULL':
+          // TODO
+          break;
+        case 'BRANCH':
+          newStep.name = step.data.name;
+          break;
+        case 'MERGE':
+          newStep.sourceBranch = step.data.sourceBranch;
+          newStep.targetBranch = step.data.targetBranch;
+          break;
+        case 'RESET':
+          newStep.commitOrNumber = step.data.type;
+          newStep.value = step.data.name;
+          break;
+      }
+      newSteps.push(newStep);
     });
-  });
+  }
+  return newSteps;
 }

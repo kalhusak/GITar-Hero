@@ -1,9 +1,18 @@
 function saveAsTaskGraph (nodes, edges, Blob, saveAs) {
   var newNodes = {};
+  var steps = {};
   nodes.forEach(function (node) {
     newNodes[node.id] = {
-      'file': node.title,
-      'children': getChildren(node.id, edges)
+      children: getChildren(node.id, edges),
+      task: {
+          title: node.title,
+          description: node.description,
+          minTime: node.minTime,
+          defaultTime: node.defaultTime,
+          steps: prepareSteps(node.steps),
+          x: node.x,
+          y: node.y
+      }
     };
   });
 
@@ -13,7 +22,56 @@ function saveAsTaskGraph (nodes, edges, Blob, saveAs) {
   })], {
     type: 'text/plain;charset=utf-8'
   });
-  saveAs(blob, 'tasksNamesGraph.json');
+  saveAs(blob, 'taskGraph.json');
+}
+
+function prepareSteps(steps) {
+  var newSteps = [];
+  if (steps) {
+    steps.forEach((step, index) => {
+      var newStep = {};
+      newStep.description = step.description;
+      newStep.commands = step.commands.split(";");
+      newStep.tags = step.tags.split(";");
+      newStep.type = step.type;
+      switch (step.type) {
+        case 'COMMIT':
+          newStep.data = {
+            name: step.name.toString(),
+            message: step.message
+          }
+          break;
+        case 'CHECKOUT':
+          newStep.data = {
+            type: step.toCommitOrBranch,
+            name: step.name
+          }
+          break;
+        case 'PULL':
+          // TODO
+          break;
+        case 'BRANCH':
+          newStep.data = {
+            name: step.name
+          }
+          break;
+        case 'MERGE':
+          newStep.data = {
+            sourceBranch: step.sourceBranch,
+            targetBranch: step.targetBranch
+          }
+          break;
+        case 'RESET':
+          newStep.data = {
+            type: step.commitOrNumber,
+            name: step.value
+          }
+          break;
+      }
+      newSteps.push(newStep);
+    });
+  }
+  return newSteps;
 }
 
 function getChildren (nodeId, edges) {

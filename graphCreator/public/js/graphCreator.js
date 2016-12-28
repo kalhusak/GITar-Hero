@@ -122,7 +122,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
         saveEdges.push({source: val.source.id, target: val.target.id});
       });
       var blob = new Blob([window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges})], {type: "text/plain;charset=utf-8"});
-      saveAs(blob, "graph.json");
+      //saveAs(blob, "graph.json");
       saveAsTaskGraph(thisGraph.nodes, saveEdges, Blob, saveAs);
     });
 
@@ -212,6 +212,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       thisGraph.nodes = [];
       thisGraph.edges = [];
       thisGraph.updateGraph();
+      init();
     }
   };
 
@@ -268,6 +269,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       thisGraph.removeSelectFromNode();
     }
     thisGraph.state.selectedNode = nodeData;
+    onSelectNode(nodeData);
   };
 
   GraphCreator.prototype.removeSelectFromNode = function(){
@@ -276,6 +278,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       return cd.id === thisGraph.state.selectedNode.id;
     }).classed(thisGraph.consts.selectedClass, false);
     thisGraph.state.selectedNode = null;
+    init();
   };
 
   GraphCreator.prototype.removeSelectFromEdge = function(){
@@ -465,7 +468,6 @@ document.onload = (function(d3, saveAs, Blob, undefined){
         selectedEdge = state.selectedEdge;
 
     switch(d3.event.keyCode) {
-    case consts.BACKSPACE_KEY:
     case consts.DELETE_KEY:
       d3.event.preventDefault();
       if (selectedNode){
