@@ -11,13 +11,13 @@ export default class Task extends Component {
   };
 
   renderSubtasks () {
-    const { task } = this.props;
+    const { task, active } = this.props;
 
     return task.steps.map((step, index) => {
       const done = index < task.currentStepIndex;
 
       return <div
-        className={'task__step' + (index === task.currentStepIndex ? ' task__step--current' : '')}
+        className={'task__step' + (active && index === task.currentStepIndex ? ' task__step--current' : '')}
         key={index}>
         <div className='task__step-check'>
           <Check checked={done} />
