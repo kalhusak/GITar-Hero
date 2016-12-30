@@ -11,34 +11,12 @@ class AppContainer extends Component {
     store: PropTypes.object.isRequired
   }
 
-  constructor (props) {
-    super(props);
-    this.state = {
-      points: 0
-    };
-    setTimeout(() => {
-      this.setState({
-        points: 0
-      });
-    });
-    setTimeout(() => {
-      this.setState({
-        points: 200
-      });
-    }, 6000);
-    setTimeout(() => {
-      this.setState({
-        points: 400
-      });
-    }, 10000);
-  }
-
   render () {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
           <Canvas id='renderCanvas' store={this.props.store} />
-          <Points value={this.state.points} />
+          <Points />
           <TaskList />
           <BottomDrawer />
         </div>

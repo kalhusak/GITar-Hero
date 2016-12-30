@@ -3,6 +3,7 @@ import * as taskActions from '../actions/TaskActions';
 import { selectHelpDrawerTab } from '../actions/HelpDrawerActions';
 import TaskUtils from '../utils/TaskUtils';
 import TagUtils from '../utils/TagUtils';
+import StatisticsUtils from '../utils/StatisticsUtils';
 
 export default ({ getState }) => (next) => (action) => {
   next(action);
@@ -20,5 +21,11 @@ export default ({ getState }) => (next) => (action) => {
 
 function getNextAction (state) {
   var currentStep = TaskUtils.getCurrentStep(state.tasks);
-  return !currentStep ? taskActions.lastStepExecuted() : null;
+  if (!currentStep) {
+    var currentTask = TaskUtils.getCurrentTask(state.tasks);
+    var taskTimeElapsed = (Date.now() - state.tasks.startTime) / 1000;
+    var reward = StatisticsUtils.calculateTaskReward(currentTask, taskTimeElapsed);
+    return taskActions.lastStepExecuted(reward);
+  }
+  return null;
 }

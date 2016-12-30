@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Points.scss';
 
 const transitionTime = 3000;
 
-export default class Points extends Component {
+class Points extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      value: props.value,
+      value: 0,
       from: 0,
       to: 0,
       start: 0
@@ -55,4 +56,12 @@ export default class Points extends Component {
       <div className='points-container__points'>{this.state.value}</div>
     </div>;
   }
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    value: state.points.value
+  };
+};
+
+export default connect(mapStateToProps)(Points);

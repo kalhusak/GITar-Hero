@@ -4,8 +4,8 @@ export const LAST_STEP_EXECUTED = 'LAST_STEP_EXECUTED';
 export const LAST_TASK_EXECUTED = 'LAST_TASK_EXECUTED';
 export const TOO_FEW_TASKS = 'TOO_FEW_TASKS';
 
-export function lastStepExecuted () {
-  return createAction(LAST_STEP_EXECUTED, {});
+export function lastStepExecuted (reward) {
+  return createAction(LAST_STEP_EXECUTED, { reward });
 }
 
 export function lastTaskExecuted () {
