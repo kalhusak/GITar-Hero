@@ -16,7 +16,9 @@ export default class Task extends Component {
     return task.steps.map((step, index) => {
       const done = index < task.currentStepIndex;
 
-      return <div className='task__step' key={index}>
+      return <div
+        className={'task__step' + (index === task.currentStepIndex ? ' task__step--current' : '')}
+        key={index}>
         <div className='task__step-check'>
           <Check checked={done} />
         </div>
