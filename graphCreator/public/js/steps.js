@@ -31,6 +31,15 @@ function addCheckoutStep (index, task) {
   createCheckoutStepElement(step, index, 'Checkout').insertBefore('#addNewStepProperty');
 }
 
+function addAddStep (index, task) {
+  var step = task.steps[index];
+  if (!step) {
+    step = createStep('add', 'ADD');
+    task.steps.push(step);
+  }
+  createStepElement(step, index, 'Add').insertBefore('#addNewStepProperty');
+}
+
 function addPushStep (index, task) {
   var step = task.steps[index];
   if (!step) {
@@ -44,9 +53,21 @@ function addPullStep (index, task) {
   var step = task.steps[index];
   if (!step) {
     step = createStep('pull', 'PULL');
+    step.commitName1 = getNextRef();
+    step.commitMessage1 = '';
+    step.commitName2 = getNextRef();
+    step.commitMessage2 = '';
+    step.commitName3 = getNextRef();
+    step.commitMessage3 = '';
     task.steps.push(step);
   }
-  createStepElement(step, index, 'Pull').insertBefore('#addNewStepProperty');
+  for (var i=1; i<=3; i++) {
+    if (!step['commitMessage' + i] && !step['commitName' + i]) {
+      step['commitName' + i] = getNextRef();
+      step['commitMessage' + i] = '';
+    }
+  }
+  createPullStepElement(step, index, 'Pull').insertBefore('#addNewStepProperty');
 }
 
 function addBranchStep (index, task) {
@@ -79,6 +100,17 @@ function addResetStep (index, task) {
     task.steps.push(step);
   }
   createResetStepElement(step, index, 'Reset').insertBefore('#addNewStepProperty');
+}
+
+function addTagStep (index, task) {
+  var step = task.steps[index];
+  if (!step) {
+    step = createStep('tag', 'TAG');
+    step.name = '';
+    step.message = '';
+    task.steps.push(step);
+  }
+  createTagStepElement(step, index, 'TAG').insertBefore('#addNewStepProperty');
 }
 
 function createStep (command, type) {

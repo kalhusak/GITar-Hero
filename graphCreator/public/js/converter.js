@@ -5,7 +5,7 @@ function convertFromTaskGraphToOldFormat(taskGraph){
   var ids = Object.keys(taskGraph.byId);
   ids.forEach(function(id){
     var taskNode = taskGraph.byId[id];
-    taskNode.task.id = id;
+    taskNode.task.id = parseInt(id);
     taskNode.task.steps = convertSteps(taskNode.task.steps);
     nodes.push(taskNode.task);
     taskNode.children.forEach(function(child){
@@ -35,13 +35,23 @@ function convertSteps(steps) {
         case 'COMMIT':
           newStep.name = step.data.name;
           newStep.message = step.data.message;
+          if (!isNaN(step.data.name) && step.data.name >= refSequence) {
+            refSequence = parseInt(step.data.name) + 1;
+          }
           break;
         case 'CHECKOUT':
           newStep.toCommitOrBranch = step.data.type;
           newStep.name = step.data.name;
           break;
         case 'PULL':
-          // TODO
+          for (var i=0; i<step.data.newCommits.length; i++) {
+            var commit = step.data.newCommits[i];
+            newStep['commitName' + (i+1)] = commit.name;
+            newStep['commitMessage' + (i+1)] = commit.message;
+            if (!isNaN(commit.name) && commit.name >= refSequence) {
+              refSequence = parseInt(commit.name) + 1;
+            }
+          }
           break;
         case 'BRANCH':
           newStep.name = step.data.name;
@@ -53,6 +63,10 @@ function convertSteps(steps) {
         case 'RESET':
           newStep.commitOrNumber = step.data.type;
           newStep.value = step.data.name;
+          break;
+        case 'TAG':
+          newStep.name = step.data.name;
+          newStep.message = step.data.message;
           break;
       }
       newSteps.push(newStep);

@@ -55,6 +55,9 @@ function addStep (index, type) {
     case 'CHECKOUT':
       addCheckoutStep(index, selectedNode);
       break;
+    case 'ADD':
+      addAddStep(index, selectedNode);
+      break;
     case 'PUSH':
       addPushStep(index, selectedNode);
       break;
@@ -69,6 +72,9 @@ function addStep (index, type) {
       break;
     case 'RESET':
       addResetStep(index, selectedNode);
+      break;
+    case 'TAG':
+      addTagStep(index, selectedNode);
       break;
     default:
       console.log('WARNING - Unknown step type!');;

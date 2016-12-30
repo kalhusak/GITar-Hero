@@ -32,6 +32,24 @@ function createResetStepElement (step, index, label) {
   return createStepElement(step, index, label, additionalProperties);
 }
 
+function createPullStepElement (step, index, label) {
+  var additionalProperties = [];
+  additionalProperties.push(createPropertyElement('commitName1Input' + index, '1. name', step, 'commitName1'));
+  additionalProperties.push(createPropertyElement('commitMessage1Input' + index, '1. message', step, 'commitMessage1'));
+  additionalProperties.push(createPropertyElement('commitName2Input' + index, '2. name', step, 'commitName2'));
+  additionalProperties.push(createPropertyElement('commitMessage2Input' + index, '2. message', step, 'commitMessage2'));
+  additionalProperties.push(createPropertyElement('commitName3Input' + index, '3. name', step, 'commitName3'));
+  additionalProperties.push(createPropertyElement('commitMessage3Input' + index, '3. message', step, 'commitMessage3'));
+  return createStepElement(step, index, label, additionalProperties);
+}
+
+function createTagStepElement (step, index, label) {
+  var additionalProperties = [];
+  additionalProperties.push(createPropertyElement('nameInput' + index, 'Name', step, 'name'));
+  additionalProperties.push(createPropertyElement('messageInput' + index, 'Message', step, 'message'));
+  return createStepElement(step, index, label, additionalProperties);
+}
+
 function createStepElement (step, index, label, additionalProperties) {
   var div = $('<div class="step" index="'+ index +'"></div>');
   createStepHeaderElement(div, label, index);

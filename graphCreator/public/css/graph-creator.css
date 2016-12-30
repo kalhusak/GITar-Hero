@@ -4,8 +4,8 @@ body{
     overflow:hidden;
 }
 
-p{ 
-     text-align: center; 
+p{
+     text-align: center;
      overflow: overlay;
      position: relative;
 }
@@ -95,4 +95,63 @@ path.link.hidden{
 
 path.link.selected {
     stroke: rgb(229, 172, 247);
+}
+
+#editor {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 40%;
+    height: 100%;
+    border-left-style: solid;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    background-color: rgb(55, 71, 79);
+    color: white;
+    overflow: scroll;
+}
+
+.property {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 2px;
+}
+
+.property input{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.property textarea{
+    width: 100%;
+    margin-left: 10px;
+}
+
+label {
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+input.add {
+    background-image: url("http://downloadicons.net/sites/default/files/plus-icon-27951.png"); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+.step-header {
+    padding: 20px 0 15px 0;
+}
+.step-header .label {
+    color: rgb(243, 79, 41);
+    width: 80%;
+    display: inline-block;
+    font-size: 20px;
 }

@@ -121,7 +121,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       thisGraph.edges.forEach(function(val, i){
         saveEdges.push({source: val.source.id, target: val.target.id});
       });
-      var blob = new Blob([window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges})], {type: "text/plain;charset=utf-8"});
+      //var blob = new Blob([window.JSON.stringify({"nodes": thisGraph.nodes, "edges": saveEdges})], {type: "text/plain;charset=utf-8"});
       //saveAs(blob, "graph.json");
       saveAsTaskGraph(thisGraph.nodes, saveEdges, Blob, saveAs);
     });
@@ -146,7 +146,8 @@ document.onload = (function(d3, saveAs, Blob, undefined){
             }
             thisGraph.deleteGraph(true);
             thisGraph.nodes = jsonObj.nodes;
-            thisGraph.setIdCt(jsonObj.nodes.length + 1);
+            var maxId = Math.max.apply(Math, jsonObj.nodes.map(function(node){return node.id;}))
+            thisGraph.setIdCt(maxId + 1);
             var newEdges = jsonObj.edges;
             newEdges.forEach(function(e, i){
               newEdges[i] = {source: thisGraph.nodes.filter(function(n){return n.id == e.source;})[0],
@@ -324,9 +325,9 @@ document.onload = (function(d3, saveAs, Blob, undefined){
 
   /* place editable text on node in place of svg text */
   GraphCreator.prototype.changeTextOfNode = function(d3node, d){
-    var thisGraph= this,
-        consts = thisGraph.consts,
-        htmlEl = d3node.node();
+    var thisGraph= this;
+    var consts = thisGraph.consts;
+    var htmlEl = d3node.node();
     d3node.selectAll("text").remove();
     var nodeBCR = htmlEl.getBoundingClientRect(),
         curScale = nodeBCR.width/consts.nodeRadius,
@@ -337,10 +338,10 @@ document.onload = (function(d3, saveAs, Blob, undefined){
           .data([d])
           .enter()
           .append("foreignObject")
-          .attr("x", nodeBCR.left + placePad )
-          .attr("y", nodeBCR.top + placePad)
-          .attr("height", 2*useHW)
-          .attr("width", useHW)
+          .attr("x", 1 )
+          .attr("y", 1)
+          .attr("height", 1)
+          .attr("width", 1)
           .append("xhtml:p")
           .attr("id", consts.activeEditId)
           .attr("contentEditable", "true")
@@ -436,17 +437,19 @@ document.onload = (function(d3, saveAs, Blob, undefined){
       state.justScaleTransGraph = false;
     } else if (state.graphMouseDown && d3.event.shiftKey){
       // clicked not dragged from svg
-      var xycoords = d3.mouse(thisGraph.svgG.node()),
+      var newD3node = thisGraph.svgG.node();
+      var xycoords = d3.mouse(newD3node),
           d = {id: thisGraph.idct++, title: consts.defaultTitle, x: xycoords[0], y: xycoords[1]};
       thisGraph.nodes.push(d);
       thisGraph.updateGraph();
+      thisGraph.replaceSelectNode(d3.select(newD3node.lastChild.lastChild),d);
       // make title of text immediently editable
-      var d3txt = thisGraph.changeTextOfNode(thisGraph.circles.filter(function(dval){
-        return dval.id === d.id;
-      }), d),
-          txtNode = d3txt.node();
-      thisGraph.selectElementContents(txtNode);
-      txtNode.focus();
+      // var d3txt = thisGraph.changeTextOfNode(thisGraph.circles.filter(function(dval){
+      //   return dval.id === d.id;
+      // }), d),
+      //     txtNode = d3txt.node();
+      // thisGraph.selectElementContents(txtNode);
+      // txtNode.focus();
     } else if (state.shiftNodeDrag){
       // dragged from node
       state.shiftNodeDrag = false;

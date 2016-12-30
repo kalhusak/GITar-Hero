@@ -48,7 +48,18 @@ function prepareSteps(steps) {
           }
           break;
         case 'PULL':
-          // TODO
+          var newCommits = [];
+          for (var i=1; i<=3; i++) {
+            if (step['commitMessage' + i]) {
+              newCommits.push({
+                name: step['commitName' + i],
+                message: step['commitMessage' + i]
+              });
+            }
+          }
+          newStep.data = {
+            newCommits
+          }
           break;
         case 'BRANCH':
           newStep.data = {
@@ -65,6 +76,12 @@ function prepareSteps(steps) {
           newStep.data = {
             type: step.commitOrNumber,
             name: step.value
+          }
+          break;
+        case 'TAG':
+          newStep.data = {
+            name: step.name.toString(),
+            message: step.message
           }
           break;
       }
