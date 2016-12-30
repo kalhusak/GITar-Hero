@@ -6,6 +6,10 @@ $timing-fn: cubic-bezier(0,.78,.78,.94);
   top: 20px;
 }
 
+.task-list .task:not(:first-child) {
+  opacity: 0.5;
+}
+
 .task-list__task-enter {
   opacity: 0;
   transform: translateX(400px);
