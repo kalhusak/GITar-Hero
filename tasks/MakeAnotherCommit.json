@@ -1,7 +1,0 @@
-{
-  "title": "Make another commit",
-  "description": "Add your all files and commit it",
-  "minTime": 20,
-  "defaultTime": 60,
-  "steps": [4, 9]
-}

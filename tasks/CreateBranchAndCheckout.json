@@ -1,7 +1,0 @@
-{
-  "title": "Create branch and checkout",
-  "description": "At first create new branch and then move to it",
-  "minTime": 20,
-  "defaultTime": 50,
-  "steps": [7, 6]
-}

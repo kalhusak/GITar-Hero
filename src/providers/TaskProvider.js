@@ -1,5 +1,4 @@
 import tasksGraph from '../tasksGraph.json';
-import stepProvider from './StepProvider';
 import statisticsUtils from '../utils/StatisticsUtils';
 import rwc from 'random-weighted-choice';
 import _ from 'lodash';
@@ -46,8 +45,7 @@ class TaskProvider {
   }
 
   getTaskTags (task) {
-    var steps = stepProvider.getSteps(task.steps);
-    return _.flattenDeep(_.map(steps, 'tags'));
+    return _.flattenDeep(_.map(task.steps, 'tags'));
   }
 
   getTasksCount () {

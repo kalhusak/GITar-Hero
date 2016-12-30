@@ -18,7 +18,7 @@ const config = {
 
 class Branch extends Abstract3DObject {
 
-  constructor (name, parentCommit, scene) {
+  constructor (name, startPosition, scene) {
     super(name, scene);
     this._createStartConnector = ::this._createStartConnector;
     this.getPositionRef = ::this.getPositionRef;
@@ -32,7 +32,7 @@ class Branch extends Abstract3DObject {
     this.pull = ::this.pull;
 
     this.scene = scene;
-    this.parentCommit = parentCommit;
+    this.startPosition = startPosition;
     this.material = new BABYLON.StandardMaterial(name + '_material', scene);
     this.material.diffuseColor = ColorFactory.next();
     this.material.specularColor = branchStyle.specularColor;
@@ -41,7 +41,7 @@ class Branch extends Abstract3DObject {
     this.tube = this._createTube();
     this.commits = [];
 
-    if (this.parentCommit) {
+    if (this.startPosition) {
       this.startConnector = this._createStartConnector();
     }
 
@@ -75,9 +75,9 @@ class Branch extends Abstract3DObject {
 
     var adjustEvent = () => {
       if (deltaParts <= 0) {
-        this.tube.addParts(1);
+        this.tube.addParts(1, mergeEvent);
       }
-      branch.addEndConnector(endConnectorEndPosition, mergeEvent);
+      branch.addEndConnector(endConnectorEndPosition);
     };
 
     var deltaZ = this.tube.getLastPointPosition().z - branch.tube.getLastPointPosition().z;
@@ -92,14 +92,10 @@ class Branch extends Abstract3DObject {
   }
 
   addEndConnector (endPosition, endEvent) {
-    if (!this.endConnector) {
-      var name = this.name + '_endConnector';
-      var startPosition = this.tube.getLastPointPosition();
-      this.endConnector = new BranchConnector(name, startPosition, endPosition,
-        endEvent, this.material, this.scene);
-    } else {
-      console.log('WARNING - trying to add second end connector');
-    }
+    var name = this.name + '_endConnector';
+    var startPosition = this.tube.getLastPointPosition();
+    this.endConnector = new BranchConnector(name, startPosition, endPosition,
+      endEvent, this.material, this.scene);
   }
 
   resetToCommit (commitName) {
@@ -107,7 +103,7 @@ class Branch extends Abstract3DObject {
     if (commit) {
       var deltaZ = _.last(this.commits).getPosition().z - commit.getPosition().z;
       var deltaParts = deltaZ / config.partLength;
-      this._resetToCommitRecursive(deltaParts);
+      this._resetToCommitRecursive(deltaParts + 1);
     } else {
       console.log('WARNING - trying to reset to commit that not exists');
     }
@@ -128,7 +124,7 @@ class Branch extends Abstract3DObject {
       } else {
         commitsCount--;
         this.removeLastCommit();
-        this.tube.removeParts(1, rec);
+        this.tube.shorten(_.last(this.commits), rec);
       }
     };
     rec();
@@ -141,9 +137,10 @@ class Branch extends Abstract3DObject {
   _createTube () {
     var position = null;
     var parts = 0;
-    if (this.parentCommit) {
-      position = this.parentCommit.getPosition();
+    if (this.startPosition) {
+      position = _.cloneDeep(this.startPosition);
       position.x += config.distanceBetweenBranches;
+      position.x *= this.name.includes('hotfix') ? -1 : 1;
       position.z += config.partLength;
     } else {  // master branch
       position = config.initPosition.clone();
@@ -154,7 +151,7 @@ class Branch extends Abstract3DObject {
 
   _createStartConnector () {
     var name = this.name + '_startConnector';
-    var startPosition = this.parentCommit.getPosition();
+    var startPosition = _.cloneDeep(this.startPosition);
     var endPosition = this.tube.getFirstPointPosition();
     return new BranchConnector(name, startPosition, endPosition, null, this.material, this.scene);
   }

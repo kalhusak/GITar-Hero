@@ -51,6 +51,18 @@ export default class Tube extends Abstract3DObject {
     this._animate(config.removeOperation, onEndEvent);
   }
 
+  shorten (lastCommit, onEndEvent) {
+    if (lastCommit) {
+      var deltaZ = this.getLastPointPosition().z - lastCommit.getPosition().z;
+      if (deltaZ > this.partLength) {
+        this.parts -= (deltaZ/this.partLength) - 1;
+      }
+    } else {
+      this.parts = 0;
+    }
+    this._animate(config.removeOperation, onEndEvent);
+  }
+
   getLastPointPosition () {
     return this.getLastPointPositionRef().clone();
   }
@@ -72,8 +84,10 @@ export default class Tube extends Abstract3DObject {
     var enlogating = () => {
       var first = this.getFirstPointPosition();
       var last = this.getLastPointPositionRef();
-      last.z += operation === config.addOperation ? config.enlogatingSpeed : -config.enlogatingSpeed;
       var lastTargetPositionZ = first.z + (this.parts * this.partLength);
+      var speedFactor = (lastTargetPositionZ - first.z) / this.partLength;
+      var speed = speedFactor > 10 ? 2 * config.enlogatingSpeed : config.enlogatingSpeed;
+      last.z += operation === config.addOperation ? speed : -speed;
       if (operation === config.addOperation ? last.z >= lastTargetPositionZ : last.z <= lastTargetPositionZ) {
         last.z = lastTargetPositionZ;
         this.scene.unregisterBeforeRender(enlogating);
