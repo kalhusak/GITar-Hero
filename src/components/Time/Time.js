@@ -44,7 +44,7 @@ export default class Time extends Component {
     });
   }
 
-  startIfActive (active) {
+  startIf (active) {
     if (active) {
       this.setState({
         timeValue: 1,
@@ -55,12 +55,12 @@ export default class Time extends Component {
     }
   }
 
-  componentWillReceiveProps ({ active }) {
-    this.startIfActive(active);
+  componentWillReceiveProps ({ active, value }) {
+    this.startIf(active && active !== this.props.active);
   }
 
   componentDidMount () {
-    this.startIfActive(this.props.active);
+    this.startIf(this.props.active);
   }
 
   componentWillUnmount () {
