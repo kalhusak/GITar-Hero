@@ -23,12 +23,20 @@ class Points extends Component {
   animateCounter () {
     const { from, to, start, value } = this.state;
     const elapsedTime = Date.now() - start;
-    const currentValue = from +
-      Math.round(this.ease(Math.min(elapsedTime, transitionTime) / transitionTime) * (to - from));
+    const elapsedFract = this.ease(Math.min(elapsedTime, transitionTime) / transitionTime);
+    const currentValue = from + Math.round(elapsedFract * (to - from));
+
+    let scale = 1;
+    if (elapsedFract < 0.1) {
+      scale = 1 + elapsedFract;
+    } else if (elapsedFract < 0.4) {
+      scale = 1.4 - elapsedFract;
+    }
 
     if (currentValue !== value) {
       this.setState({
-        value: currentValue
+        value: currentValue,
+        scale
       });
     }
 
@@ -53,8 +61,12 @@ class Points extends Component {
   }
 
   render () {
+    const pointsStyle = {
+      transform: `scale(${this.state.scale})`
+    };
+
     return <div className='points-container'>
-      <div className='points-container__points'>{this.state.value}</div>
+      <div className='points-container__points' style={pointsStyle}>{this.state.value}</div>
     </div>;
   }
 };
