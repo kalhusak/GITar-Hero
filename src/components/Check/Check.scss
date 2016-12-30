@@ -1,0 +1,21 @@
+.check {
+  width: 30px;
+  height: 30px;
+}
+
+.check__path {
+  stroke-width: 10px;
+  stroke-dasharray: 76 1000;
+  stroke-dashoffset: 100;
+  stroke: hsl(120, 50%, 50%);
+  transition: stroke-dashoffset 0.3s ease-out;
+  fill: none;
+}
+
+.check__path--checked {
+  stroke-dashoffset: 0;
+}
+
+.check__path--bg {
+  stroke: hsl(120, 0%, 50%);
+}
