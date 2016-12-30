@@ -8,7 +8,11 @@ const defaultState = {
   tasks: {
     current: 0,
     byId: {},
-    tags: {}
+    tags: {},
+    startTime: 0
+  },
+  points: {
+    value: 20
   }
 };
 
@@ -25,5 +29,6 @@ export default function initReducer (state = defaultState, action) {
 
 function onTooFewTasks (state) {
   TaskUtils.fillTaskList(state.tasks);
+  state.tasks.startTime = Date.now();
   return state;
 }

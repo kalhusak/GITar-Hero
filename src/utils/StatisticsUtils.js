@@ -19,8 +19,14 @@ function calculateTaskTime (minTaskTime, defaultTaskTime, tasksCount) {
   return time > minTaskTime ? time : minTaskTime;
 }
 
+function calculateTaskReward (task, elapsedTime) {
+  var timeLeft = task.time - elapsedTime;
+  return timeLeft > 0 ? (timeLeft / task.time) * task.reward : 0;
+}
+
 export default {
   calculateWeight,
   calculateTagRatio,
-  calculateTaskTime
+  calculateTaskTime,
+  calculateTaskReward
 };
