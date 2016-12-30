@@ -28,6 +28,18 @@ const helpTabs = [
     </div>
   },
   {
+    name: 'push',
+    content: <div>
+      <p>push</p>
+    </div>
+  },
+  {
+    name: 'pull',
+    content: <div>
+      <p>pull</p>
+    </div>
+  },
+  {
     name: 'branch',
     content: <div>
       <p>Branch is simply a pointer to specific commit. „master” is an only and default branch in a new repository.
@@ -38,12 +50,24 @@ const helpTabs = [
     </div>
   },
   {
+    name: 'checkout',
+    content: <div>
+      <p>checkout</p>
+    </div>
+  },
+  {
     name: 'merge',
     content: <div>
       <p>Merge is a procedure of joining two or more histories. For example, we can merge our feature branch into main
          branch as we finished working on it. Merge creates a merge commit which has two or more parent commits.</p>
       <p>Use <pre>git merge [branchX]</pre> to merge branchX into current branch
          or <pre>git merge [branchX] [branchY]</pre> to merge branchX into branchY.</p>
+    </div>
+  },
+  {
+    name: 'reset',
+    content: <div>
+      <p>reset</p>
     </div>
   },
   {
@@ -57,6 +81,30 @@ const helpTabs = [
          in project's source.</p>
       <p>Type <pre>git rebase [branchX]</pre> to rebase current branch onto branchX
          or <pre>git rebase [branchX] [branchY]</pre> to rebase branchY onto branchX.</p>
+    </div>
+  },
+  {
+    name: 'tag',
+    content: <div>
+      <p>tag</p>
+    </div>
+  },
+  {
+    name: 'gitflow/feature',
+    content: <div>
+      <p>gitflow/feature</p>
+    </div>
+  },
+  {
+    name: 'gitflow/release',
+    content: <div>
+      <p>gitflow/release</p>
+    </div>
+  },
+  {
+    name: 'gitflow/hotfix',
+    content: <div>
+      <p>gitflow/hotfix</p>
     </div>
   }
 ];
