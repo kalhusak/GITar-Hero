@@ -109,8 +109,6 @@ class Console extends Component {
     switch (event.keyCode) {
       case LEFT_CODE:
         if (consoleInput.selectionStart > 0) {
-          event.stopPropagation();
-          event.nativeEvent.stopImmediatePropagation();
           this.setState({
             selectionStart: consoleInput.selectionStart - 1,
             movingCursor: true
@@ -121,8 +119,6 @@ class Console extends Component {
 
       case RIGHT_CODE:
         if (consoleInput.selectionStart < consoleInput.value.length) {
-          event.stopPropagation();
-          event.nativeEvent.stopImmediatePropagation();
           this.setState({
             selectionStart: consoleInput.selectionStart + 1,
             movingCursor: true

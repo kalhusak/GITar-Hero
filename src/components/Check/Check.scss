@@ -12,10 +12,10 @@
   fill: none;
 }
 
-.check__path--checked {
+.check__path--bg, .check__path--checked {
   stroke-dashoffset: 0;
 }
 
 .check__path--bg {
-  stroke: hsl(120, 0%, 50%);
+  stroke: #bbb;
 }

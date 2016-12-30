@@ -1,66 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { values, take } from 'lodash';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './TaskList.scss';
 import Task from '../../components/Task';
-import TaskUtils from '../../utils/TaskUtils';
-import _ from 'lodash';
-import { TransitionMotion, spring } from 'react-motion';
 
 class TaskList extends Component {
 
-  getDefaultStyles () {
-    return this.props.tasks.map((task) => ({ ...task, style: { opacity: 0 } }));
-  }
-
-  getStyles () {
-    return this.props.tasks.map((task) => ({ ...task, style: { opacity: spring(1) } }));
-  }
-
-  mapStylesToTask (styles) {
-    return styles.map(({ key, data, style }, index) =>
-      <li key={key} style={style}>
-        <Task task={data.task} />
-      </li>);
-  }
-
-  willEnter () {
-    return {
-      height: 0,
-      opacity: 0
-    };
-  }
-
-  willLeave () {
-    return {
-      height: spring(0),
-      opacity: spring(0)
-    };
+  renderTasks () {
+    return take(this.props.tasks, 3).map((task, index) => <Task key={task.id} task={task} active={index === 0} />);
   }
 
   render () {
     return (
-      <div className='taskList'>
-        <TransitionMotion
-          defaultStyles={this.getDefaultStyles()}
-          styles={this.getStyles()}
-          willLeave={this.willLeave}
-          willEnter={this.willEnter}
-          >
-          { styles =>
-            <ul className='tasks-list'>
-              {this.mapStylesToTask(styles)}
-            </ul>
-           }
-        </TransitionMotion>
+      <div className='task-list'>
+        <ReactCSSTransitionGroup
+          transitionName='task-list__task'
+          transitionEnterTimeout={0}
+          transitionLeaveTimeout={0}>
+          { this.renderTasks() }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ tasks }) => {
   return {
-    tasks: _.reverse(_.slice(Object.values(state.tasks.byId))).map((task) =>
-      ({ key: task.id, data: { task } }))
+    tasks: values(tasks.byId)
   };
 };
 

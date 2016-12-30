@@ -1,77 +1,27 @@
 .task {
-  background-color: white;
-  color: black;
-  padding: 4px 4px 0 4px;
+  width: 400px;
+  background: rgba(white, 0.9);
   border-radius: 5px;
-  border-color: #d9d9d9;
-  border-width: medium;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-              0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-.title {
+.task__step {
+  display: flex;
+  padding-top: 10px;
+}
+
+.task__step-check {
+  display: flex;
   padding: 5px;
 }
 
-.steps-list{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.task__step-description {
+  display: flex;
+  font-size: 14px;
+  padding-top: 12px;
 }
 
-.steps-list li {
-  position: relative;
-  font-size: 15px;
-  box-shadow: 0 -1px 0 #ededed;
-  overflow: hidden;
-}
-
-.steps-list li:first-child {
-  box-shadow: 0 0 0 #ededed;
-}
-
-.steps-list li .toggle {
-  text-align: center;
-  width: 40px;
-  /* auto, since non-WebKit browsers doesn't support input styling */
-  height: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
-  border: none; /* Mobile Safari */
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.steps-list li .toggle:after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#d9d9d9" stroke-width="3"/></svg>');
-}
-
-.steps-list li .toggle:checked:after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#d9d9d9" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
-}
-
-.steps-list li label {
-  white-space: pre;
-  word-break:  keep-all;
-  padding: 5px 50px 5px 5px;
-  margin-left: 35px;
-  display: block;
-  line-height: 1.2;
-  font-weight: 300;
-  transition: color 0.4s;
-}
-
-.steps-list li:last-child label {
-  padding-bottom: 2px;
-}
-
-.executedTask {
-  color: #d9d9d9;
+.task__step-description--done {
+  color: #bbb;
   text-decoration: line-through;
-}
-
-.notExecutedTask {
-  color: #727272;
 }

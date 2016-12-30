@@ -27,12 +27,12 @@ class BottomDrawer extends Component {
   }
 
   renderTabNavigation () {
-    return helpTabs.map(({ name }) => {
+    return helpTabs.map(({ name }, index) => {
       let className = 'help-container__nav-item';
       if (this.props.selectedTab === name) {
         className += ' help-container__nav-item--active';
       }
-      return <a className={className} onClick={this.selectTab(name)}>{name}</a>;
+      return <a key={index} className={className} onClick={this.selectTab(name)}>{name}</a>;
     });
   }
 

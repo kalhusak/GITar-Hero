@@ -1,27 +1,37 @@
-.taskList {
-  background-color: none;
-  width: 300px;
-  right: 10px;
-  top: 0;
-  overflow: visible;
-  position: absolute;
-  z-index: 10;
+$timing-fn: cubic-bezier(0,.78,.78,.94);
+
+.task-list {
+  position: fixed;
+  right: 20px;
+  top: 20px;
 }
 
-.taskList {
-  padding: 2px;
+.task-list__task-enter {
+  opacity: 0;
+  transform: translateX(400px);
 }
 
-.tasks-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.task-list__task-enter.task-list__task-enter-active {
+  opacity: 1;
+  transition: all 0.5s $timing-fn;
+  transform: translateX(0px);
 }
 
-.tasks-list > li {
-  margin-top: 10px;
+.task-list__task-leave {
+  opacity: 1;
+  max-height: 400px;
+  transform: translateY(0px);
+  transition: all 0.5s $timing-fn;
+  overflow: hidden;
+
+  // Hack for single-step task's check
+  .check__path {
+    stroke-dashoffset: 0;
+  }
 }
 
-.taskListAnimation-appear {
-   opacity: 0.00;
+.task-list__task-leave.task-list__task-leave-active {
+  opacity: 0;
+  transform: translateY(-100px);
+  max-height: 0px;
 }
