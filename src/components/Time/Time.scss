@@ -1,20 +1,27 @@
-.time-container {
-  height: 30px;
-  width: 200px;
+$time-bar-height: 30px;
+
+.time {
+  height: $time-bar-height;
+  width: 100%;
   border-radius: 4px;
-  background: white;
   overflow: hidden;
-  position: fixed;
-  top: 100px;
-  left: 25px;
+  position: relative;
 }
 
-.time-container__bar {
+.time__bar {
   position: absolute;
   top: 0px;
   left: 0px;
   height: 100%;
   width: 100%;
-  transform-origin: left;
-  transform: scaleX(1);
+}
+
+.time__label {
+  font-size: 18px;
+  line-height: $time-bar-height;
+  text-align: center;
+}
+
+.time__label--white {
+  color: white;
 }

@@ -4,7 +4,7 @@ import Canvas from '../components/Canvas';
 import BottomDrawer from '../components/BottomDrawer';
 import TaskList from './TaskList';
 import Points from '../components/Points';
-import Time from '../components/Time';
+import './App.scss';
 
 class AppContainer extends Component {
   static propTypes = {
@@ -14,19 +14,16 @@ class AppContainer extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      points: 0,
-      time: 0
+      points: 0
     };
     setTimeout(() => {
       this.setState({
-        points: 0,
-        time: 10000
+        points: 0
       });
     });
     setTimeout(() => {
       this.setState({
-        points: 200,
-        time: 8000
+        points: 200
       });
     }, 6000);
     setTimeout(() => {
@@ -39,10 +36,9 @@ class AppContainer extends Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <div style={{ height: '100%' }}>
+        <div className='app'>
           <Canvas id='renderCanvas' store={this.props.store} />
           <Points value={this.state.points} />
-          <Time time={this.state.time} />
           <TaskList />
           <BottomDrawer />
         </div>
