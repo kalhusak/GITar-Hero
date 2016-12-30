@@ -11,12 +11,12 @@
         "steps": [{
           "description": "Initialize repository",
           "commands": ["git init"],
-          "tags": ["init"],
+          "tags": ["repo"],
           "type": "INIT"
         }, {
           "description": "Add all files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Init project\"",
@@ -47,7 +47,7 @@
         "steps": [{
           "description": "Add readme.txt file to index",
           "commands": ["git add readme.txt"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit readme file with message \"Add readme\"",
@@ -109,7 +109,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add menu list\"",
@@ -123,7 +123,7 @@
         }, {
           "description": "Add next files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add menu item animation\"",
@@ -136,7 +136,7 @@
           }
         }],
         "x": 388,
-        "y": 182
+        "y": 185
       }
     },
     "7": {
@@ -193,7 +193,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add header container\"",
@@ -207,7 +207,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add logo image\"",
@@ -221,7 +221,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add page title\"",
@@ -328,7 +328,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add content container\"",
@@ -342,7 +342,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Adjust scrollbar\"",
@@ -414,7 +414,7 @@
         "steps": [{
           "description": "Create branch release/0.1.0 and checkout in one step",
           "commands": ["git checkout -b release/0.1.0"],
-          "tags": ["checkout"],
+          "tags": ["checkout", "gitflow/release"],
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
@@ -423,7 +423,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Fix typo\"",
@@ -525,7 +525,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Add dialog template\"",
@@ -551,7 +551,7 @@
         "steps": [{
           "description": "Return to master",
           "commands": ["git checkout master"],
-          "tags": ["checkout", "hotfix"],
+          "tags": ["checkout", "gitflow/hotfix"],
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
@@ -569,7 +569,7 @@
         }, {
           "description": "Add new files to index",
           "commands": ["git add .", "git add -A"],
-          "tags": ["add"],
+          "tags": ["stage"],
           "type": "ADD"
         }, {
           "description": "Commit new files with message \"Change title margin\"",

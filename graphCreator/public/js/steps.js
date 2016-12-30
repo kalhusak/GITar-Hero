@@ -14,7 +14,7 @@ function addCommitStep (index, task) {
 function addInitStep (index, task) {
   var step = task.steps[index];
   if (!step) {
-    step = createStep('init', 'INIT');
+    step = createStep('init', 'INIT', 'repo');
     task.steps.push(step);
   }
   createStepElement(step, index, 'Init').insertBefore('#addNewStepProperty');
@@ -34,7 +34,7 @@ function addCheckoutStep (index, task) {
 function addAddStep (index, task) {
   var step = task.steps[index];
   if (!step) {
-    step = createStep('add', 'ADD');
+    step = createStep('add', 'ADD', 'stage');
     task.steps.push(step);
   }
   createStepElement(step, index, 'Add').insertBefore('#addNewStepProperty');
@@ -113,11 +113,11 @@ function addTagStep (index, task) {
   createTagStepElement(step, index, 'TAG').insertBefore('#addNewStepProperty');
 }
 
-function createStep (command, type) {
+function createStep (command, type, tags) {
   return {
     description: '',
     commands: 'git ' + command,
-    tags: command,
+    tags: tags ? tags : command,
     type: type
   };
 }

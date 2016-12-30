@@ -1,5 +1,6 @@
 import TaskUtils from './TaskUtils';
 import StatisticsUtils from './StatisticsUtils';
+import helpTabs from '../components/BottomDrawer/helpTabs';
 
 export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {
@@ -14,6 +15,27 @@ export function onInvalidCommand (state) {
     incrementTagProbes(tags, tag);
     calculateTagKnowledgeRatio(tags, tag);
   });
+}
+
+export function getNewTag (state) {
+  var step = TaskUtils.getCurrentStep(state);
+  for (var i=0; i<step.tags.length; i++) {
+    if (!state.tags[step.tags[i]]) {
+      return step.tags[i];
+    }
+  }
+  return null;
+}
+
+export function isHelpTabForTag (tag) {
+  if (tag) {
+    for (var i=0; i<helpTabs.length; i++) {
+      if (helpTabs[i].name === tag) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 function onCommand (state, execute) {
@@ -41,5 +63,7 @@ function calculateTagKnowledgeRatio (tags, tag) {
 
 export default {
   onValidCommand,
-  onInvalidCommand
+  onInvalidCommand,
+  getNewTag,
+  isHelpTabForTag
 };
