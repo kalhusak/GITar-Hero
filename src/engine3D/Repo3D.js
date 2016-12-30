@@ -7,6 +7,8 @@ import _ from 'lodash';
 // TODO remove
 let commitSeq = 0;
 
+export var branches;
+
 class Repo3D {
   constructor (scene) {
     this.onNewValidCommand = ::this.onNewValidCommand;
@@ -14,13 +16,7 @@ class Repo3D {
     this.scene = scene;
     this.HEAD = new Head(this.scene);
     this.branches = {};
-  }
-
-  renderLoop () {
-    let scene = this.scene;
-    this.runRenderLoop(function () {
-      scene.render();
-    });
+    branches = this.branches;
   }
 
   onNewValidCommand (type, data) {
@@ -29,18 +25,12 @@ class Repo3D {
         this.onInit();
         break;
       case 'COMMIT':
-        // TODO remove
-        data.name = '' + ++commitSeq;
         this.onCommit(data);
         break;
       case 'BRANCH':
         this.onBranch(data);
         break;
       case 'CHECKOUT':
-        // TODO remove
-        if (data.name === 'feature/new-task') {
-          data.name = 'master';
-        }
         this.onCheckout(data);
         break;
       case 'MERGE':
@@ -82,14 +72,14 @@ class Repo3D {
       return;
     }
 
-    var activeCommit = null;
     if (this.HEAD.isPointingToCommit()) {
-      activeCommit = this.HEAD.getObject();
+      var activeCommit = this.HEAD.getObject();
+      this.branches[data.name] = new Branch(data.name, activeCommit.getPosition(), this.scene);
     } else if (this.HEAD.isPointingToBranch()) {
       var activeBranch = this.HEAD.getObject();
-      activeCommit = _.last(activeBranch.commits);
+      var activeCommit = _.last(activeBranch.commits);
+      this.branches[data.name] = new Branch(data.name, activeCommit ? activeCommit.getPosition() : activeBranch.getPosition(), this.scene);
     }
-    this.branches[data.name] = new Branch(data.name, activeCommit, this.scene);
   }
 
   onCheckout (data) {
@@ -116,8 +106,15 @@ class Repo3D {
 
   onReset (data) {
     if (data.type === 'commit') {
-      if (this.HEAD.getObject() instanceof Branch) {
+      if (this.HEAD.isPointingToBranch()) {
         this.HEAD.getObject().resetToCommit(data.name);
+      } else if (this.HEAD.isPointingToCommit()) {
+        var activeBranch = CommitUtils.getBranchForCommit(this.HEAD.getObject(), this.branches);
+        if (!activeBranch) {
+          console.log('WARNING - can not find branch for commit: ' + this.HEAD.getObject().name);
+          return;
+        }
+        activeBranch.resetToCommit(data.name);
       }
     } else if (data.type === 'number') {
       this.activeBranch.resetOf(data.count);

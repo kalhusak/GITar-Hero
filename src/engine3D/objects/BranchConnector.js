@@ -2,6 +2,7 @@ import BABYLON from 'babylonjs';
 import _ from 'lodash';
 import Abstract3DObject from './Abstract3DObject';
 import { outline as outlineStyle } from '../style';
+import BranchUtils from '../utils/BranchUtils';
 
 const config = {
   radius: 2,
@@ -12,7 +13,9 @@ const config = {
   sideOrientation: BABYLON.Mesh.FRONTSIDE,
   enlogatingSpeed: 1,
   addOperation: 'ADD',
-  removeOperation: 'REMOVE'
+  removeOperation: 'REMOVE',
+  maxHeight: 7.0,
+  maxDelta: 11.0
 };
 
 export default class BranchConnector extends Abstract3DObject {
@@ -62,7 +65,24 @@ export default class BranchConnector extends Abstract3DObject {
 
     var bezier = BABYLON.Curve3.CreateCubicBezier(this.startPosition, point1, point2,
       this.endPosition, config.subdivisions);
-    return bezier.getPoints();
+    var points = bezier.getPoints();
+
+    var intersectedXs = [];
+    if (this.startPosition.x > this.endPosition.x) {
+      intersectedXs = BranchUtils.getIntersectedBranchPoints(this.endPosition.x, this.startPosition.x);
+    } else {
+      intersectedXs = BranchUtils.getIntersectedBranchPoints(this.startPosition.x, this.endPosition.x);
+    }
+    points.forEach((point) => {
+      intersectedXs.forEach((intersectedX, index) => {
+        var delta = point.x - intersectedX;
+        if (Math.abs(delta) < config.maxDelta) {
+          point.y += config.maxHeight * Math.cos(delta * ( (Math.PI/2) / config.maxDelta ));
+        }
+      });
+    });
+
+    return points;
   }
 
   _createMesh (name, path, instance) {
