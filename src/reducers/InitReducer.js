@@ -12,7 +12,7 @@ const defaultState = {
     startTime: 0
   },
   points: {
-    value: 20
+    value: 0
   }
 };
 
