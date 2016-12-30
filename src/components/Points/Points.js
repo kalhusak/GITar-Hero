@@ -23,16 +23,17 @@ class Points extends Component {
   animateCounter () {
     const { from, to, start, value } = this.state;
     const elapsedTime = Date.now() - start;
-    const currentValue = from + Math.round(this.ease(elapsedTime / transitionTime) * (to - from));
-
-    if (elapsedTime < transitionTime) {
-      requestAnimationFrame(this.animateCounter);
-    }
+    const currentValue = from +
+      Math.round(this.ease(Math.min(elapsedTime, transitionTime) / transitionTime) * (to - from));
 
     if (currentValue !== value) {
       this.setState({
         value: currentValue
       });
+    }
+
+    if (currentValue !== to) {
+      requestAnimationFrame(this.animateCounter);
     }
   }
 
