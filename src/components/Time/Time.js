@@ -27,12 +27,16 @@ export default class Time extends Component {
   }
 
   animateBar () {
+    if (this.unmounted) {
+      return;
+    }
+
     const { start } = this.state;
     const { time } = this.props;
     const now = Date.now();
 
     if (now < start + time) {
-      requestAnimationFrame(this.animateBar);
+      this.currentFrame = requestAnimationFrame(this.animateBar);
     }
 
     this.setState({
@@ -47,7 +51,7 @@ export default class Time extends Component {
         start: Date.now()
       });
 
-      requestAnimationFrame(this.animateBar);
+      this.currentFrame = requestAnimationFrame(this.animateBar);
     }
   }
 
@@ -57,6 +61,10 @@ export default class Time extends Component {
 
   componentDidMount () {
     this.startIfActive(this.props.active);
+  }
+
+  componentWillUnmount () {
+    this.unmounted = true;
   }
 
   renderTime () {
