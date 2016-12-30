@@ -16,8 +16,8 @@ class TaskList extends Component {
       <div className='task-list'>
         <ReactCSSTransitionGroup
           transitionName='task-list__task'
-          transitionEnterTimeout={0}
-          transitionLeaveTimeout={0}>
+          transitionEnterTimeout={800}
+          transitionLeaveTimeout={400}>
           { this.renderTasks() }
         </ReactCSSTransitionGroup>
       </div>

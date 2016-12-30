@@ -3,22 +3,29 @@
   background: rgba(white, 0.9);
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .task__step {
   display: flex;
-  padding-top: 10px;
+  padding: 3px 0px;
+  transition: background 0.3s ease-in-out;
+}
+
+.task__step--current {
+  background: #ddd;
 }
 
 .task__step-check {
   display: flex;
-  padding: 5px;
+  padding-left: 5px;
+  align-items: center;
 }
 
 .task__step-description {
   display: flex;
   font-size: 14px;
-  padding-top: 12px;
+  padding: 12px 5px;
 }
 
 .task__step-description--done {
