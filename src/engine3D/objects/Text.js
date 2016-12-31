@@ -4,10 +4,10 @@ import { cloneDeep } from 'lodash';
 let textSeq = 0;
 
 const config = {
-  letterWidthPx: 16,
-  widthRatio: 0.09,
+  letterWidthPx: 30,
+  widthRatio:  0.15,
   heightRatio: 0.1,
-  textSizePx: 25,
+  textSizePx: 47,
   textTextureHeightPx: 40,
   yPositionOffset: 7
 };
@@ -38,8 +38,10 @@ export default class Text {
     this.textPlane.position = cloneDeep(initPosition);
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
-    this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx * 3 / 4,
+    this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
       'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'yellow', 'transparent');
+
+    this.textPlane.renderEdges = true;
 
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
   }
