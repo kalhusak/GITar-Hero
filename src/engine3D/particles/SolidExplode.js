@@ -32,7 +32,6 @@ class SolidExplode extends BABYLON.SolidParticleSystem {
     this.setParticles();
 
     var updateParticles = () => {
-      console.log(this.particles[0].scale);
       if (this.particles[0].scale.x <= 0) {
         this.scene.unregisterBeforeRender(updateParticles);
         this.dispose();

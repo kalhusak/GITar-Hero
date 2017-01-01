@@ -15,7 +15,9 @@ const config = {
   addOperation: 'ADD',
   removeOperation: 'REMOVE',
   maxHeight: 7.0,
-  maxDelta: 11.0
+  maxDelta: 11.0,
+  enlogatingOperation: 'ENLOGATING',
+  shortenOperation: 'SHORTEN'
 };
 
 export default class BranchConnector extends Abstract3DObject {
@@ -24,6 +26,8 @@ export default class BranchConnector extends Abstract3DObject {
     this._createPath = ::this._createPath;
     this._createMesh = ::this._createMesh;
     this._animate = ::this._animate;
+    this._getAnimationPath = ::this._getAnimationPath;
+    this.disappear = ::this.disappear;
 
     this.startPosition = startPosition.clone();
     this.endPosition = endPosition.clone();
@@ -34,16 +38,22 @@ export default class BranchConnector extends Abstract3DObject {
     this.mesh.outlineWidth = outlineStyle.width;
     this.mesh.material = material;
 
-    this._animate(endEvent);
+    this._animate(config.enlogatingOperation, endEvent);
   }
 
-  _animate (endEvent) {
+  disappear () {
+    var endEvent = () => {
+      this.mesh.dispose();
+      this.mesh = null;
+    }
+    this._animate(config.shortenOperation, endEvent);
+  }
+
+  _animate (operation, endEvent) {
     // TODO make separate class for animation
     var index = 1;
     var elongating = () => {
-      var newPath = this.path.slice(0, index);
-      var pathEnd = _.fill(Array(this.path.length - index), _.last(newPath));
-      newPath = _.concat(newPath, pathEnd);
+      var newPath = this._getAnimationPath(index, operation);
       this.mesh = this._createMesh(null, newPath, this.mesh);
       index += config.enlogatingSpeed;
       if (index - 1 >= this.path.length) {
@@ -55,6 +65,20 @@ export default class BranchConnector extends Abstract3DObject {
     };
 
     this.scene.registerBeforeRender(elongating);
+  }
+
+  _getAnimationPath (index, operation) {
+    var newPath = [];
+    var endPath = [];
+    if (operation === config.enlogatingOperation) {
+      newPath = this.path.slice(0, index);
+      endPath = _.fill(Array(this.path.length - index), _.last(newPath));
+    } else if (operation === config.shortenOperation) {
+      newPath = this.path.slice(0, this.path.length - index);
+      endPath = this.path.length !== index ? _.fill(Array(index), _.last(newPath)) :
+        _.fill(Array(index), _.first(this.path));
+    }
+    return newPath = _.concat(newPath, endPath);
   }
 
   _createPath () {
