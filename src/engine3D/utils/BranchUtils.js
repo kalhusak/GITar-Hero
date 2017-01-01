@@ -12,6 +12,20 @@ export function getIntersectedBranchPoints (fromX, toX) {
   return intersectedX;
 }
 
+export function getSecondBranchForMergeCommit (mergeCommit, firstBranch) {
+  for (var branchName in branches) {
+    var branch = branches[branchName];
+    if (branch !== firstBranch) {
+      var commit = branch.getCommit(mergeCommit.name);
+      if (commit === mergeCommit) {
+        return branch;
+      }
+    }
+  }
+  return null;
+}
+
 export default {
-  getIntersectedBranchPoints
+  getIntersectedBranchPoints,
+  getSecondBranchForMergeCommit
 };

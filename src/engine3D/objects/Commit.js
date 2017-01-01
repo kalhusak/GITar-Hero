@@ -30,6 +30,7 @@ export default class Commit extends Abstract3DObject {
     this.mesh.outlineWidth = outlineStyle.width;
     this.mesh.material = material;
     this.text = new Text(message, textPosition, scene);
+    this.isMergeCommit = false;
   }
 
   disappear () {

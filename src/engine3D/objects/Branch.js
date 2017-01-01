@@ -9,6 +9,7 @@ import Text from './Text';
 import { branch as branchStyle } from '../style';
 import PushAnimation from '../animations/PushAnimation';
 import PullAnimation from '../animations/PullAnimation';
+import BranchUtils from '../utils/BranchUtils';
 
 const config = {
   partLength: 30,
@@ -26,6 +27,7 @@ class Branch extends Abstract3DObject {
     this.addCommit = ::this.addCommit;
     this.merge = ::this.merge;
     this.removeLastCommit = ::this.removeLastCommit;
+    this.removeEndConnector = ::this.removeEndConnector;
     this.resetToCommit = ::this.resetToCommit;
     this._resetToCommitRecursive = ::this._resetToCommitRecursive;
     this.push = ::this.push;
@@ -58,6 +60,7 @@ class Branch extends Abstract3DObject {
     if (lastCommit) {
       lastCommit.disappear();
     }
+    return lastCommit;
   }
 
   getPositionRef () {
@@ -69,6 +72,7 @@ class Branch extends Abstract3DObject {
       var name = 'mergeCommit_' + branch.name + '_' + this.name;
       var message = 'Merge ' + branch.name + ' to ' + this.name;
       var commit = new Commit(name, message, this.getPosition(), this.material, this.scene);
+      commit.isMergeCommit = true;
       this.addCommit(commit);
       branch.commits.push(commit);
     };
@@ -98,6 +102,11 @@ class Branch extends Abstract3DObject {
       endEvent, this.material, this.scene);
   }
 
+  removeEndConnector () {
+    this.endConnector.disappear();
+    this.endConnector = null;
+  }
+
   resetToCommit (commitName) {
     var commit = this.getCommit(commitName);
     if (commit) {
@@ -123,8 +132,13 @@ class Branch extends Abstract3DObject {
         return;
       } else {
         commitsCount--;
-        this.removeLastCommit();
+        var removedCommit = this.removeLastCommit();
         this.tube.shorten(_.last(this.commits), rec);
+
+        if (removedCommit && removedCommit.isMergeCommit) {
+          var secondBranch = BranchUtils.getSecondBranchForMergeCommit(removedCommit, this);
+          secondBranch.removeEndConnector();
+        }
       }
     };
     rec();
