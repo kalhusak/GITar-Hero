@@ -96,7 +96,8 @@ class BottomDrawer extends Component {
         style={preventInitialAnimation}>
         <div className={'bottom-drawer__auto-show' + (this.props.autoShowHelp
           ? ' bottom-drawer__auto-show--active' : '')}
-          onClick={this.toggleAutoShowHelp}>
+          onClick={this.toggleAutoShowHelp}
+          style={preventInitialAnimation}>
           <div className='bottom-drawer__auto-show-checkbox'>
             <Checkbox value={this.props.autoShowHelp} />
           </div>
