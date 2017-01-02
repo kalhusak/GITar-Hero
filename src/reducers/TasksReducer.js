@@ -29,6 +29,7 @@ function onNewValidCommand (state) {
 function onLastStepExecuted (state) {
   TaskUtils.deleteCurrentTask(state);
   state.current++;
+  state.startTime = Date.now();
   return state;
 }
 

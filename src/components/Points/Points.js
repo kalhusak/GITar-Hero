@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Points.scss';
 
 const transitionTime = 3000;
 
-export default class Points extends Component {
+class Points extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      value: props.value,
+      value: 0,
       from: 0,
       to: 0,
       start: 0
@@ -22,16 +23,25 @@ export default class Points extends Component {
   animateCounter () {
     const { from, to, start, value } = this.state;
     const elapsedTime = Date.now() - start;
-    const currentValue = from + Math.round(this.ease(elapsedTime / transitionTime) * (to - from));
+    const elapsedFract = this.ease(Math.min(elapsedTime, transitionTime) / transitionTime);
+    const currentValue = from + Math.round(elapsedFract * (to - from));
 
-    if (elapsedTime < transitionTime) {
-      requestAnimationFrame(this.animateCounter);
+    let scale = 1;
+    if (elapsedFract < 0.1) {
+      scale = 1 + elapsedFract;
+    } else if (elapsedFract < 0.4) {
+      scale = 1.4 - elapsedFract;
     }
 
     if (currentValue !== value) {
       this.setState({
-        value: currentValue
+        value: currentValue,
+        scale
       });
+    }
+
+    if (currentValue !== to) {
+      requestAnimationFrame(this.animateCounter);
     }
   }
 
@@ -51,8 +61,20 @@ export default class Points extends Component {
   }
 
   render () {
+    const pointsStyle = {
+      transform: `scale(${this.state.scale})`
+    };
+
     return <div className='points-container'>
-      <div className='points-container__points'>{this.state.value}</div>
+      <div className='points-container__points' style={pointsStyle}>{this.state.value}</div>
     </div>;
   }
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    value: state.points.value
+  };
+};
+
+export default connect(mapStateToProps)(Points);
