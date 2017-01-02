@@ -5,11 +5,32 @@ const initialState = [
   },
   {
     name: 'components',
-    type: 'directory',
     children: [
       {
         name: 'app.js',
         status: 'tracked'
+      }
+    ]
+  },
+  {
+    name: 'app.js',
+    status: 'tracked'
+  },
+  {
+    name: 'containers',
+    children: [
+      {
+        name: 'hehe.js',
+        status: 'tracked'
+      },
+      {
+        name: 'static',
+        children: [
+          {
+            name: 'app.js',
+            status: 'tracked'
+          }
+        ]
       }
     ]
   }

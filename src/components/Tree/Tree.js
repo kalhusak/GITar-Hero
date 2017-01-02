@@ -1,29 +1,36 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import File from '../File';
 import './Tree.scss';
 
 class Tree extends Component {
 
-  static propTypes = {
-    items: PropTypes.object.isRequired
-  };
+  renderFile ({ name, status }) {
+    return <div className='tree__item-inner'>
+      <div className='tree__file-branch' />
+      <div className='tree__item-name'>
+        <File name={name} status={status} />
+      </div>
+    </div>;
+  }
+
+  renderDirectory ({ name, children }, nestLevel) {
+    return <div>
+      <div className='tree__item-inner'>
+        <div className='tree__directory-branch' />
+        <div className='tree__item-name'>
+          {name}
+        </div>
+      </div>
+      {this.renderRecursively(children, nestLevel + 1)}
+    </div>;
+  }
 
   renderRecursively (items = [], nestLevel = 0) {
     return items.map((item, index) => {
-      if (item.type === 'directory') {
-        return <div key={index} className='tree_directory'>
-          {this.renderRecursively(item.children, nestLevel + 1)}
-        </div>;
-      } else {
-        const fileStyle = {
-          paddingLeft: `${nestLevel * 20}px`
-        };
-
-        return <div className='tree__file' style={fileStyle}>
-          <File key={index} name={item.name} status={item.status} />
-        </div>;
-      }
+      return <div key={index} className='tree__item'>
+        {item.children ? this.renderDirectory(item, nestLevel) : this.renderFile(item)}
+      </div>;
     });
   }
 
