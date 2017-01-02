@@ -43,6 +43,11 @@ function convertSteps(steps) {
           newStep.toCommitOrBranch = step.data.type;
           newStep.name = step.data.name;
           break;
+        case 'ADD':
+          newStep.newFiles = step.data.newFiles.length !== 0 ? step.data.newFiles.join(';') : "";
+          newStep.modifyFiles = step.data.modifyFiles.length !== 0 ? step.data.modifyFiles.join(';') : "";
+          newStep.removeFiles = step.data.removeFiles.length !== 0 ? step.data.removeFiles.join(';') : "";
+          break;
         case 'PULL':
           for (var i=0; i<step.data.newCommits.length; i++) {
             var commit = step.data.newCommits[i];
