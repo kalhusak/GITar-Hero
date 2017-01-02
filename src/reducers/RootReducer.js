@@ -3,7 +3,7 @@ import consoleReducer from './ConsoleReducer';
 import tasksReducer from './TasksReducer';
 import initReducer from './InitReducer';
 import lastActionReducer from './LastActionReducer';
-import helpDrawerReducer from './helpDrawerReducer';
+import helpDrawerReducer from './HelpDrawerReducer';
 import pointsReducer from './PointsReducer';
 
 const combine = combineReducers({
