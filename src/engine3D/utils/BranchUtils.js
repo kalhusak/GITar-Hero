@@ -25,7 +25,33 @@ export function getSecondBranchForMergeCommit (mergeCommit, firstBranch) {
   return null;
 }
 
+export function getCenterPositionOfBranches () {
+  var minX = 0.0, maxX = 0.0, minZ = 0.0, maxZ = 0.0;
+  for (var branchName in branches) {
+    var position = branches[branchName].getPosition();
+
+    // X
+    if (position.x > maxX) {
+      maxX = position.x;
+    } else if (position.x < minX) {
+      minX = position.x;
+    }
+
+    // Z
+    if (position.z > maxZ) {
+      maxZ = position.z;
+    } else if (position.z < minZ) {
+      minZ = position.z;
+    }
+  }
+  return {
+    x: (maxX + minX) / 2,
+    z: (maxZ + minZ) / 2
+  };
+}
+
 export default {
   getIntersectedBranchPoints,
-  getSecondBranchForMergeCommit
+  getSecondBranchForMergeCommit,
+  getCenterPositionOfBranches
 };
