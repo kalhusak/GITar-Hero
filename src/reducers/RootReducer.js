@@ -5,12 +5,14 @@ import initReducer from './InitReducer';
 import lastActionReducer from './LastActionReducer';
 import helpDrawerReducer from './HelpDrawerReducer';
 import pointsReducer from './PointsReducer';
+import treeReducer from './TreeReducer';
 
 const combine = combineReducers({
   console: consoleReducer,
   tasks: tasksReducer,
   lastAction: lastActionReducer,
   helpDrawer: helpDrawerReducer,
+  tree: treeReducer,
   points: pointsReducer
 });
 

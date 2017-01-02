@@ -4,6 +4,7 @@ import Canvas from '../components/Canvas';
 import BottomDrawer from '../components/BottomDrawer';
 import TaskList from './TaskList';
 import Points from '../components/Points';
+import Tree from '../components/Tree';
 import './App.scss';
 
 class AppContainer extends Component {
@@ -19,6 +20,7 @@ class AppContainer extends Component {
           <Points />
           <TaskList />
           <BottomDrawer />
+          <Tree />
         </div>
       </Provider>
     );
