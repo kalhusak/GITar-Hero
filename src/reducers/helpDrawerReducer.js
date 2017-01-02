@@ -3,8 +3,13 @@ import * as commandActions from '../actions/CommandActions';
 import * as helpDrawerActions from '../actions/HelpDrawerActions';
 import helpTabs from '../components/BottomDrawer/helpTabs';
 
+const getFromStorage = (propName, defaultValue = true) =>
+  typeof localStorage[propName] !== 'undefined' ? JSON.parse(localStorage[propName]) : defaultValue;
+
 const initialState = {
   isOpen: false,
+  initialInfo: getFromStorage('initialInfo'),
+  autoShowHelp: getFromStorage('autoShowHelp'),
   selectedTab: 'repo'
 };
 
@@ -13,12 +18,25 @@ export default function helpDrawerReducer (state = initialState, { type, payload
 
   switch (type) {
     case helpDrawerActions.SELECT_HELP_DRAWER_TAB:
-      newState.isOpen = true;
-      newState.selectedTab = payload.tab;
-      return newState;
+      if (state.autoShowHelp || !payload.auto || state.isOpen) {
+        newState.isOpen = true;
+        newState.selectedTab = payload.tab;
+        return newState;
+      }
+      return state;
 
     case helpDrawerActions.CLOSE_HELP_DRAWER:
       newState.isOpen = false;
+      return newState;
+
+    case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
+      newState.autoShowHelp = !newState.autoShowHelp;
+      localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);
+      return newState;
+
+    case helpDrawerActions.CLOSE_INITIAL_INFO:
+      newState.initialInfo = false;
+      localStorage.initialInfo = 'false';
       return newState;
 
     case commandActions.NEW_INVALID_COMMAND:
