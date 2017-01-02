@@ -5,7 +5,7 @@ import helpTabs from '../components/BottomDrawer/helpTabs';
 
 const initialState = {
   isOpen: false,
-  autoShowHelp: true,
+  autoShowHelp: typeof localStorage.autoShowHelp !== 'undefined' ? JSON.parse(localStorage.autoShowHelp) : true,
   selectedTab: 'repo'
 };
 
@@ -27,6 +27,7 @@ export default function helpDrawerReducer (state = initialState, { type, payload
 
     case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
       newState.autoShowHelp = !newState.autoShowHelp;
+      localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);
       return newState;
 
     case commandActions.NEW_INVALID_COMMAND:
