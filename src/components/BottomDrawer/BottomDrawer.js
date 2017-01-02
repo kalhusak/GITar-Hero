@@ -7,7 +7,8 @@ import { closeHelpDrawer,
   selectHelpDrawerTab,
   nextHelpDrawerTab,
   prevHelpDrawerTab,
-  toggleAutoShowHelp } from '../../actions/HelpDrawerActions';
+  toggleAutoShowHelp,
+  closeInitialInfo } from '../../actions/HelpDrawerActions';
 import helpTabs from './helpTabs';
 import './BottomDrawer.scss';
 
@@ -18,6 +19,7 @@ class BottomDrawer extends Component {
     this.handleKeyDown = ::this.handleKeyDown;
     this.selectTab = ::this.selectTab;
     this.toggleAutoShowHelp = ::this.toggleAutoShowHelp;
+    this.closeInitialInfo = ::this.closeInitialInfo;
     this.initialRender = true;
   }
 
@@ -81,6 +83,10 @@ class BottomDrawer extends Component {
     this.props.dispatch(toggleAutoShowHelp());
   }
 
+  closeInitialInfo () {
+    this.props.dispatch(closeInitialInfo());
+  }
+
   render () {
     const getClasses = (className) => {
       return this.props.isOpen ? `${className} ${className}--visible` : className;
@@ -94,6 +100,12 @@ class BottomDrawer extends Component {
         style={preventInitialAnimation} />
       <div className={getClasses('bottom-drawer__container')}
         style={preventInitialAnimation}>
+        <div className={'bottom-drawer__initial-info' +
+          (this.props.initialInfo ? '' : ' bottom-drawer__initial-info--hidden')}
+          style={preventInitialAnimation}>
+          <div>type "help" to get some tips</div>
+          <button onClick={this.closeInitialInfo} className='bottom-drawer__initial-info-btn'>ok</button>
+        </div>
         <div className={'bottom-drawer__auto-show' + (this.props.autoShowHelp
           ? ' bottom-drawer__auto-show--active' : '')}
           onClick={this.toggleAutoShowHelp}
