@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { values, take } from 'lodash';
+import { values } from 'lodash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './TaskList.scss';
 import Task from '../../components/Task';
@@ -8,12 +8,13 @@ import Task from '../../components/Task';
 class TaskList extends Component {
 
   renderTasks () {
-    return take(this.props.tasks, 3).map((task, index) => <Task key={task.id} task={task} active={index === 0} />);
+    return this.props.tasks.map((task, index) => <Task key={task.id} task={task} active={index === 0} />);
   }
 
   render () {
     return (
       <div className='task-list'>
+        <div className='task-list__overlay' />
         <ReactCSSTransitionGroup
           transitionName='task-list__task'
           transitionEnterTimeout={800}

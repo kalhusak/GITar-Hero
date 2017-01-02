@@ -1,13 +1,25 @@
 $timing-fn: cubic-bezier(0,.78,.78,.94);
+$background-color: #33334c;
 
 .task-list {
   position: fixed;
   right: 20px;
   top: 20px;
+  height: calc(100% - 120px);
+  background: rgba($background-color, 0.8);
 }
 
 .task-list .task:not(:first-child) {
   opacity: 0.5;
+}
+
+.task-list__overlay {
+  position: absolute;
+  left: -20%;
+  top: 0;
+  box-shadow: inset 0px -30px 50px 0px $background-color;
+  width: 140%;
+  z-index: 1;
 }
 
 .task-list__task-enter {
