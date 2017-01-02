@@ -6,11 +6,12 @@ $background-color: #33334c;
   right: 20px;
   top: 20px;
   height: calc(100% - 120px);
-  background: rgba($background-color, 0.8);
+  overflow: hidden;
 }
 
 .task-list .task:not(:first-child) {
-  opacity: 0.5;
+  filter: grayscale(100%);
+  opacity: 0.8;
 }
 
 .task-list__overlay {
@@ -20,6 +21,7 @@ $background-color: #33334c;
   box-shadow: inset 0px -30px 50px 0px $background-color;
   width: 140%;
   z-index: 1;
+  height: 100%;
 }
 
 .task-list__task-enter {

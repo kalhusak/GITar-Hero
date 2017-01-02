@@ -10,7 +10,7 @@ export default class Checkbox extends Component {
 
   render () {
     return (
-      <div className='checkbox'>
+      <div className={'checkbox' + (this.props.value ? ' checkbox--active' : '')}>
         <div className='checkbox__check'>
           <Check checked={this.props.value} size={20} colorInactive='transparent' colorActive='white' />
         </div>

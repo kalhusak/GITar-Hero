@@ -5,6 +5,7 @@ import helpTabs from '../components/BottomDrawer/helpTabs';
 
 const initialState = {
   isOpen: false,
+  autoShowHelp: true,
   selectedTab: 'repo'
 };
 
@@ -13,12 +14,19 @@ export default function helpDrawerReducer (state = initialState, { type, payload
 
   switch (type) {
     case helpDrawerActions.SELECT_HELP_DRAWER_TAB:
-      newState.isOpen = true;
-      newState.selectedTab = payload.tab;
-      return newState;
+      if (state.autoShowHelp || !payload.auto || state.isOpen) {
+        newState.isOpen = true;
+        newState.selectedTab = payload.tab;
+        return newState;
+      }
+      return state;
 
     case helpDrawerActions.CLOSE_HELP_DRAWER:
       newState.isOpen = false;
+      return newState;
+
+    case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
+      newState.autoShowHelp = !newState.autoShowHelp;
       return newState;
 
     case commandActions.NEW_INVALID_COMMAND:

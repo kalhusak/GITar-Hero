@@ -1,10 +1,14 @@
 .checkbox {
   width: 10px;
   height: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #aaa;
   position: relative;
   margin: 3px;
   border-radius: 1px;
+}
+
+.checkbox--active {
+  border-color: #ddd;
 }
 
 .checkbox__check {
