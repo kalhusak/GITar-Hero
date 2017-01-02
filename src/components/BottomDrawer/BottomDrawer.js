@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { find } from 'lodash';
 import Console from '../Console';
+import Checkbox from '../Checkbox';
 import { closeHelpDrawer,
   selectHelpDrawerTab,
   nextHelpDrawerTab,
@@ -87,6 +88,14 @@ class BottomDrawer extends Component {
         style={preventInitialAnimation} />
       <div className={getClasses('bottom-drawer__container')}
         style={preventInitialAnimation}>
+        <div className='bottom-drawer__auto-show'>
+          <div className='bottom-drawer__auto-show-checkbox'>
+            <Checkbox />
+          </div>
+          <span>
+            auto open help for related task's first occur
+          </span>
+        </div>
         <Console />
         <div className='bottom-drawer__help-container'>
           <nav className='help-container__nav'>

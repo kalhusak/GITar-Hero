@@ -1,0 +1,14 @@
+.checkbox {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ddd;
+  position: relative;
+  margin: 3px;
+  border-radius: 1px;
+}
+
+.checkbox__check {
+  position: absolute;
+  top: -7px;
+  left: -5px;
+}

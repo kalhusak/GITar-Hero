@@ -6,6 +6,8 @@ export default class Check extends Component {
   static defaultSize = 30;
   static propTypes = {
     checked: PropTypes.bool.isRequired,
+    colorActive: PropTypes.string,
+    colorInactive: PropTypes.string,
     size: PropTypes.number
   };
 
@@ -19,8 +21,10 @@ export default class Check extends Component {
 
     return (
       <svg viewBox='0 0 64 64' style={checkStyle}>
-        <path className='check__path check__path--bg' d={pathDef} />
-        <path className={'check__path' + ((checked) ? ' check__path--checked' : '')} d={pathDef} />
+        <path className='check__path check__path--bg'
+          d={pathDef} style={{ stroke: this.props.colorInactive }} />
+        <path className={'check__path' + ((checked) ? ' check__path--checked' : '')}
+          d={pathDef} style={{ stroke: this.props.colorActive }} />
       </svg>
     );
   }
