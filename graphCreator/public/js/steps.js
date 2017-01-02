@@ -35,9 +35,12 @@ function addAddStep (index, task) {
   var step = task.steps[index];
   if (!step) {
     step = createStep('add', 'ADD', 'stage');
+    step.newFiles = "";
+    step.modifyFiles = "";
+    step.removeFiles = "";
     task.steps.push(step);
   }
-  createStepElement(step, index, 'Add').insertBefore('#addNewStepProperty');
+  createAddStepElement(step, index, 'Add').insertBefore('#addNewStepProperty');
 }
 
 function addPushStep (index, task) {

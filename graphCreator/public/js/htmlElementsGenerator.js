@@ -12,6 +12,14 @@ function createCheckoutStepElement (step, index, label) {
   return createStepElement(step, index, label, additionalProperties);
 }
 
+function createAddStepElement (step, index, label) {
+  var additionalProperties = [];
+  additionalProperties.push(createPropertyElement('newFilesInput' + index, 'New files', step, 'newFiles'));
+  additionalProperties.push(createPropertyElement('modifyFilesInput' + index, 'Modify files', step, 'modifyFiles'));
+  additionalProperties.push(createPropertyElement('removeFilesInput' + index, 'Remove files', step, 'removeFiles'));
+  return createStepElement(step, index, label, additionalProperties);
+}
+
 function createBranchStepElement (step, index, label) {
   var additionalProperties = [];
   additionalProperties.push(createPropertyElement('nameInput' + index, 'Name', step, 'name'));

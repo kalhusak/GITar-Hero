@@ -47,6 +47,13 @@ function prepareSteps(steps) {
             name: step.name
           }
           break;
+        case 'ADD':
+          newStep.data = {
+            newFiles: step.newFiles ? step.newFiles.split(";") : [],
+            modifyFiles: step.modifyFiles ? step.modifyFiles.split(";") : [],
+            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
+          }
+          break;
         case 'PULL':
           var newCommits = [];
           for (var i=1; i<=3; i++) {
