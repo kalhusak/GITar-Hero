@@ -4,7 +4,7 @@ import * as helpDrawerActions from '../actions/HelpDrawerActions';
 import helpTabs from '../components/BottomDrawer/helpTabs';
 
 const getFromStorage = (propName, defaultValue = true) =>
-  typeof localStorage[propName] !== 'undefined' ? JSON.parse(localStorage[propName]) : defaultValue
+  typeof localStorage[propName] !== 'undefined' ? JSON.parse(localStorage[propName]) : defaultValue;
 
 const initialState = {
   isOpen: false,
