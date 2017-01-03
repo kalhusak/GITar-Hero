@@ -1,4 +1,4 @@
-import { first, find } from 'lodash';
+import { first, find, remove } from 'lodash';
 
 export function pushNode (subtree, path, status) {
   const name = first(path);
@@ -6,9 +6,15 @@ export function pushNode (subtree, path, status) {
 
   if (path.length === 1) {
     if (node) {
-      node.status = status;
+      if (status === 'removed') {
+        remove(subtree, node);
+      } else {
+        node.status = status;
+      }
     } else {
-      subtree.push({ name, status });
+      if (status !== 'removed') {
+        subtree.push({ name, status });
+      }
     }
   } else {
     if (!node) {
@@ -27,12 +33,28 @@ export function addPath (subtree, target) {
   pushNode(subtree, target.split('/'), 'staged');
 }
 
-export function addAll (subtree) {
+function forAllFiles (subtree, callback) {
   subtree.forEach(node => {
     if (node.children) {
-      addAll(node.children);
+      forAllFiles(node.children, callback);
     } else {
+      callback(node);
+    }
+  });
+}
+
+export function addAll (subtree) {
+  forAllFiles(subtree, node => {
+    if (node.status === 'modified') {
       node.status = 'staged';
+    }
+  });
+}
+
+export function commit (subtree) {
+  forAllFiles(subtree, node => {
+    if (node.status === 'staged') {
+      node.status = 'unmodified';
     }
   });
 }

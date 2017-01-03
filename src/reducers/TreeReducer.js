@@ -6,11 +6,13 @@ import * as TreeUtils from '../utils/TreeUtils';
 const initialState = [];
 
 export default function treeReducer (state = initialState, { type, payload }) {
+  let newState;
+
   switch (type) {
     case commandActions.NEW_VALID_COMMAND:
       switch (payload.step.type) {
         case 'ADD':
-          const newState = cloneDeep(state);
+          newState = cloneDeep(state);
           const [, target] = payload.command.match(/^git add ([a-zA-Z.-]*)/);
 
           if (target === '-A') {
@@ -21,18 +23,26 @@ export default function treeReducer (state = initialState, { type, payload }) {
 
           return newState;
 
+        case 'COMMIT':
+          newState = cloneDeep(state);
+
+          TreeUtils.commit(newState);
+          return newState;
+
         default:
           return state;
       }
 
     case treeActions.MODIFY_TREE:
-      const newState = cloneDeep(state);
+      newState = cloneDeep(state);
       const { newFiles, modifyFiles, removeFiles } = payload.changes;
 
       newFiles
         .concat(modifyFiles)
-        .concat(removeFiles)
         .forEach(path => TreeUtils.pushNode(newState, path.split('/'), 'modified'));
+
+      removeFiles
+        .forEach(path => TreeUtils.pushNode(newState, path.split('/'), 'removed'));
 
       return newState;
 
