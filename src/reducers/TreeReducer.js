@@ -1,14 +1,14 @@
 const initialState = [
   {
     name: 'readme.txt',
-    status: 'tracked'
+    status: 'modified'
   },
   {
     name: 'components',
     children: [
       {
         name: 'app.js',
-        status: 'tracked'
+        status: 'staged'
       }
     ]
   },
@@ -21,7 +21,7 @@ const initialState = [
     children: [
       {
         name: 'hehe.js',
-        status: 'tracked'
+        status: 'added'
       },
       {
         name: 'static',

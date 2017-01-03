@@ -1,5 +1,5 @@
 .tree {
-  width: 300px;
+  width: 250px;
   height: 350px;
   background: rgba(white, 0.9);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -17,7 +17,7 @@
   padding-left: 5px;
   height: 100%;
   max-width: calc(100% - 25px);
-  overflow: hidden;
+  overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }

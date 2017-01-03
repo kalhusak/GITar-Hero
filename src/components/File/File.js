@@ -9,8 +9,21 @@ export default class File extends Component {
   };
 
   render () {
+    const classNames = ['file'];
+
+    switch (this.props.status) {
+      case 'staged':
+        classNames.push('file--green');
+        break;
+      case 'added':
+        classNames.push('file--red');
+        break;
+    }
+
     return (
-      <div className='file'>{this.props.name}</div>
+      <div className={classNames.join(' ')}>
+        {this.props.name}
+      </div>
     );
   }
 

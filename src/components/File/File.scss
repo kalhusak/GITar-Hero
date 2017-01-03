@@ -1,3 +1,21 @@
 .file {
   display: inline-block;
+  border-radius: 2px;
+  transition: all 0.3s ease-out;
+  padding: 1px 3px;
+  margin-top: -1px;
+  max-width: 100%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.file--green {
+  background: hsl(0, 50%, 50%);
+  color: white;
+}
+
+.file--red {
+  background: hsl(120, 50%, 50%);
+  color: white;
 }
