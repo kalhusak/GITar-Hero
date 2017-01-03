@@ -3,7 +3,7 @@ import Particles from './Particles';
 import flare from './textures/flare.png';
 
 const backgroundConfig = {
-  sceneColor: new BABYLON.Color3(0.05, 0.05, 0.05),
+  sceneColor: new BABYLON.Color3(0.08, 0.08, 0.08),
   targetOffset: new BABYLON.Vector3(0, -40, 400),
   texture: flare,
   minEmitBox: new BABYLON.Vector3(-6, -6, 0),
@@ -26,12 +26,12 @@ class Scene extends BABYLON.Scene {
     this.clearColor = backgroundConfig.sceneColor;
 
     this.initBackgroundParticles();
-    // this.initFog();
+    this.initFog();
   }
 
   initFog () {
     this.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    this.fogDensity = 0.007;
+    this.fogDensity = 0.002;
     this.fogColor = backgroundConfig.sceneColor;
   }
 

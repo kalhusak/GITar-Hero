@@ -56,7 +56,7 @@ class Repo3D {
     var master = new Branch('master', null, this.scene);
     this.branches['master'] = master;
     this.HEAD.pointTo(master);
-    this.HEAD.particles.start();
+    // this.HEAD.particles.start();
   }
 
   onCommit (data) {
