@@ -1,4 +1,4 @@
-import TaskUtils from '../utils/TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 import _ from 'lodash';
 
 const defaultState = {

@@ -1,5 +1,5 @@
 import createAction from './CreateAction';
-import TaskUtils from './TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 import TaskSequence from './TaskSequence';
 
 export {

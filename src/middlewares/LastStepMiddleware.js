@@ -1,5 +1,5 @@
 import * as taskActions from '../actions/TaskActions';
-import TaskUtils from '../utils/TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 import config from '../config';
 
 export default ({ getState }) => (next) => (action) => {

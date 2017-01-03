@@ -1,3 +1,6 @@
+import { get } from 'lodash';
+import * as treeActions from '../actions/TreeActions';
+
 const initialState = [
   {
     name: 'readme.txt',
@@ -36,8 +39,14 @@ const initialState = [
   }
 ];
 
-export default function treeReducer (state = initialState, action) {
-  switch (action.type) {
+export default function treeReducer (state = initialState, { type, payload }) {
+  switch (type) {
+    case treeActions.MODIFY_TREE:
+      if (payload.changes) {
+        debugger;
+      }
+      return state;
+
     default:
       return state;
   }
