@@ -11,6 +11,16 @@
   font-size: 12px;
 }
 
+.tree__heading {
+  font-size: 16px;
+  margin: -10px 0px 20px 10px;
+}
+
+.tree__empty-state {
+  text-align: center;
+  color: #777;
+}
+
 .tree__item-name {
   position: relative;
   top: -8px;
@@ -19,6 +29,7 @@
   max-width: calc(100% - 25px);
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: #444;
 }
 
 .tree__file-branch, .tree__directory-branch {

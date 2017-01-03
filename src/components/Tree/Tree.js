@@ -34,10 +34,15 @@ class Tree extends Component {
     });
   }
 
+  renderEmptyState () {
+    return <div className='tree__empty-state'>directory is empty :-(</div>;
+  }
+
   render () {
     return (
       <div className='tree'>
-        {this.renderRecursively(this.props.tree)}
+        <h2 className='tree__heading'>working tree</h2>
+        { this.props.tree.length > 0 ? this.renderRecursively(this.props.tree) : this.renderEmptyState() }
       </div>
     );
   }
