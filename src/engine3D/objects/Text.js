@@ -4,17 +4,17 @@ import { cloneDeep } from 'lodash';
 let textSeq = 0;
 
 const config = {
-  letterWidthPx: 30,
-  widthRatio:  0.15,
-  heightRatio: 0.1,
-  textSizePx: 47,
-  textTextureHeightPx: 40,
+  letterWidthPx: 90,
+  widthRatio:  0.00025,
+  heightRatio: 0.02,
+  textSizePx: 150,
+  textTextureHeightPx: 130,
   yPositionOffset: 7
 };
 
 export default class Text {
 
-  constructor (text, initPosition, scene, options = { hasAlpha: true }) {
+  constructor (text, initPosition, scene, options) {
     this._updatePosition = ::this._updatePosition;
     this.scene = scene;
 
@@ -22,9 +22,9 @@ export default class Text {
     var textPlaneTextureHeight = config.textTextureHeightPx;
     this.textPlaneTexture = new BABYLON.DynamicTexture('dynamicText' + textSeq,
       { width: textPlaneTextureWidth, height: textPlaneTextureHeight }, scene, true);
-    this.textPlaneTexture.hasAlpha = options.hasAlpha;
+    this.textPlaneTexture.hasAlpha = options.hasAlpha ? options.hasAlpha : true;
 
-    var textPlaneWidth = textPlaneTextureWidth * config.widthRatio;
+    var textPlaneWidth = textPlaneTextureWidth * config.widthRatio * config.letterWidthPx;
     var textPlaneHeight = textPlaneTextureHeight * config.heightRatio;
     this.textPlane = BABYLON.MeshBuilder.CreatePlane('textPlane' + textSeq,
       { width: textPlaneWidth, height: textPlaneHeight, updatable: false }, scene);
@@ -38,21 +38,46 @@ export default class Text {
     this.textPlane.position = cloneDeep(initPosition);
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
+    // this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
+    //   'bold ' + (config.textSizePx + 5) + 'px Roboto Mono', options.color || 'blue', 'transparent');
+    //
     this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
-      'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'yellow', 'transparent');
+       'bold ' + config.textSizePx + 'px Roboto Mono', options.color || '#E64A19', 'transparent');
+    // this.textPlane.renderEdges = true;
+    //
+    // var y = config.textTextureHeightPx / 2 + config.textSizePx / 2;
+    // // var textMid = (text.length * config.textSizePx) / 2;
+    // var x = (text.length - 1) * 20.0 / 2.0;
+    //
+    // for (var i = 0; i < text.length; i++) {
+    //
+    //   this.textPlaneTexture.drawText(text[i], x - 5, y + 4,
+    //     'bold ' + (config.textSizePx + 15) + 'px Roboto Mono', options.color || 'black', 'transparent');
+    //
+    //   this.textPlaneTexture.drawText(text[i], x, y,
+    //     'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'red', 'transparent');
+    //
+    //
+    //   x = x + config.textSizePx - 20.0;
+    // }
+    //
+    // console.log(text, text.length);
 
-    this.textPlane.renderEdges = true;
 
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
   }
 
   _updatePosition (initPosition) {
-    var pos = this.textPlane.position;
-    if (pos.x !== initPosition.x) {
-      pos.x = initPosition.x;
-    }
-    if (pos.z !== initPosition.z) {
-      pos.z = initPosition.z;
+    if (this.textPlane) {
+      var pos = this.textPlane.position;
+      if (pos) {
+        if (pos.x !== initPosition.x) {
+          pos.x = initPosition.x;
+        }
+        if (pos.z !== initPosition.z) {
+          pos.z = initPosition.z;
+        }
+      }
     }
   }
 }
