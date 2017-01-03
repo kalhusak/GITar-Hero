@@ -11,7 +11,7 @@ export default class FollowObject {
     this._moveCameraTargetToObjectIfNeed = ::this._moveCameraTargetToObjectIfNeed;
     this._moveCameraTargetToObject = ::this._moveCameraTargetToObject;
     this._isCameraNextToObject = ::this._isCameraNextToObject;
-    this.addZOffset = ::this.addZOffset;
+    this.addOffsetInPlace = ::this.addOffsetInPlace;
 
     this.scene = scene;
     this.object3D = null;
@@ -24,27 +24,26 @@ export default class FollowObject {
     });
   }
 
-  addZOffset (value) {
-    this.offset.z += value;
+  addOffsetInPlace (offset) {
+    this.offset.addInPlace(offset);
   }
 
   _moveCameraTargetToObjectIfNeed () {
-    if (this.object3D !== null && !this._isCameraNextToObject()) {
-      if (!this.isMoving) {
-        this._moveCameraTargetToObject();
-        this.isMoving = true;
-      }
-    } else {
-      this.isMoving = false;
+    if (this.object3D !== null && !this._isCameraNextToObject() && !this.isMoving) {
+      this._moveCameraTargetToObject();
+      this.isMoving = true;
     }
   }
 
   _moveCameraTargetToObject () {
-    MoveUtils.moveTo(this.cameraTarget, this.object3D, config.cameraTargetSpeed, this.scene, this.offset);
+    var endEvent = () => {
+      this.isMoving = false;
+    }
+    MoveUtils.moveTo(this.cameraTarget, this.object3D, config.cameraTargetSpeed, this.scene, this.offset, endEvent);
   }
 
   _isCameraNextToObject () {
-    var cameraTargetPosition = this.cameraTarget.getPosition().add(this.offset);
-    return cameraTargetPosition.equals(this.object3D.getPosition());
+    var targetPosition = this.object3D.getPosition().add(this.offset);
+    return this.cameraTarget.getPosition().equals(targetPosition);
   }
 }

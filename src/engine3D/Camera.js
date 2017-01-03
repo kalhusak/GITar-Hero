@@ -1,5 +1,4 @@
 import BABYLON from 'babylonjs';
-import BranchUtils from './utils/BranchUtils'
 
 const config = {
   name: 'followCamera',
@@ -7,6 +6,7 @@ const config = {
   radius: 80,
   rotationOffset: 180,
   heightOffset: 30,
+  heightOffsetSpeed: 10,
   acceleration: 0.01,
   maxCameraSpeed: 5
 };
@@ -33,16 +33,16 @@ class Camera extends BABYLON.FollowCamera {
   }
 
   onWheel (event) {
-    var center = BranchUtils.getCenterPositionOfBranches();
-    if (event.deltaY > 0) {
-      this.heightOffset += 8;
-      this.maxCameraSpeed += 2;
-      this.followObject.addZOffset(3);
-    } else if (this.heightOffset - 8 >= config.heightOffset) {
-      this.heightOffset -= 8;
-      this.maxCameraSpeed -= 2;
-      this.followObject.addZOffset(-3);
+    var factor = 0.0;
+    if (event.deltaY >= 0 && this.heightOffset < 500) {
+      factor = 1;
+    } else if (event.deltaY < 0 && this.heightOffset - 10 >= config.heightOffset) {
+      factor = -1;
     }
+
+    this.heightOffset += config.heightOffsetSpeed * factor;
+    this.maxCameraSpeed += 5 * factor;
+    this.followObject.addOffsetInPlace(new BABYLON.Vector3(0, 0, -3 * factor));
   }
 }
 

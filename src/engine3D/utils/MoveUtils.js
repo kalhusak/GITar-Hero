@@ -1,11 +1,11 @@
 import BABYLON from 'babylonjs';
 
-export function getXZTranslationVector (translatedObject, targetObject, speed, offset) {
-  var dx = targetObject.getPosition().x - translatedObject.getPosition().x;
-  var dz = targetObject.getPosition().z - translatedObject.getPosition().z;
+export function getXZTranslationVector (translatedPosition, targetPosition, speed, offset) {
+  var dx = targetPosition.x - translatedPosition.x;
+  var dz = targetPosition.z - translatedPosition.z;
   if (offset) {
-    dx -= offset.x;
-    dz -= offset.z;
+    dx += offset.x;
+    dz += offset.z;
   }
   if (Math.abs(dx) <= speed && Math.abs(dz) <= speed) {
     return new BABYLON.Vector3(dx, 0, dz);
@@ -17,12 +17,15 @@ export function getXZTranslationVector (translatedObject, targetObject, speed, o
   }
 }
 
-export function moveTo (translatedObject, targetObject, speed, scene, offset) {
+export function moveTo (translatedObject, targetObject, speed, scene, offset, endEvent) {
   var moveToAnimation = () => {
-    var translation = getXZTranslationVector(translatedObject, targetObject, speed, offset);
+    var translation = getXZTranslationVector(translatedObject.getPosition(), targetObject.getPosition(), speed, offset);
     translatedObject.getPositionRef().addInPlace(translation);
     if (translation.equals(new BABYLON.Vector3.Zero())) {
       scene.unregisterBeforeRender(moveToAnimation);
+      if (endEvent) {
+        endEvent();
+      }
     }
   };
   scene.registerBeforeRender(moveToAnimation);
