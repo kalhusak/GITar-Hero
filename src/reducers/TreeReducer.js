@@ -1,51 +1,40 @@
-import { get } from 'lodash';
+import { cloneDeep, first } from 'lodash';
 import * as treeActions from '../actions/TreeActions';
 
-const initialState = [
-  {
-    name: 'readme.txt',
-    status: 'modified'
-  },
-  {
-    name: 'components',
-    children: [
-      {
-        name: 'app.js',
-        status: 'staged'
-      }
-    ]
-  },
-  {
-    name: 'app.js',
-    status: 'tracked'
-  },
-  {
-    name: 'containers',
-    children: [
-      {
-        name: 'hehe.js',
-        status: 'added'
-      },
-      {
-        name: 'static',
-        children: [
-          {
-            name: 'app.js',
-            status: 'tracked'
-          }
-        ]
-      }
-    ]
+const initialState = [];
+
+const pushToTree = (subtree, path, status) => {
+  if (path.length === 1) {
+    subtree.push({
+      name: first(path),
+      status
+    });
+  } else {
+    const name = first(path);
+    let dir = find(subtree, { name });
+
+    if (!dir) {
+      dir = {
+        name,
+        children: []
+      };
+      subtree.push(dir);
+    }
+
+    pushToTree(dir.children, path.slice(1), status);
   }
-];
+};
 
 export default function treeReducer (state = initialState, { type, payload }) {
   switch (type) {
     case treeActions.MODIFY_TREE:
-      if (payload.changes) {
-        debugger;
-      }
-      return state;
+      const newState = cloneDeep(state);
+
+      payload.changes.newFiles.forEach(path => pushToTree(newState, path.split('/'), 'added'));
+      payload.changes.modifyFiles.forEach(path => pushToTree(newState, path.split('/'), 'modified'));
+      payload.changes.removeFiles.forEach(path => pushToTree(newState, path.split('/'), 'removed'));
+
+      return newState;
 
     default:
       return state;
