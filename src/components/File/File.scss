@@ -1,27 +1,30 @@
 .file {
   display: inline-block;
   border-radius: 2px;
-  transition: all 0.3s ease-out;
   padding: 1px 3px;
   margin-top: -1px;
   max-width: 100%;
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  animation: tree-item 0.3s cubic-bezier(.2,1.27,.47,1.44);
+  animation: file-enter 0.3s cubic-bezier(.2,1.27,.47,1.44);
+
+  &.file--green, &.file--red {
+    color: white;
+  }
 }
 
 .file--green {
   background: hsl(120, 50%, 50%);
-  color: white;
+  animation: file-stage 0.3s cubic-bezier(.2,1.27,.47,1.44);
 }
 
 .file--red {
   background: hsl(0, 50%, 50%);
-  color: white;
+  animation: file-modify 0.3s cubic-bezier(.2,1.27,.47,1.44);
 }
 
-@keyframes tree-item {
+@keyframes file-enter {
   from {
     opacity: 0;
     transform: scale(0.5);
@@ -29,6 +32,38 @@
 
   to {
     opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes file-modify {
+  0% {
+    background: hsl(120, 50%, 50%);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    background: hsl(0, 50%, 50%);
+    transform: scale(1);
+  }
+}
+
+@keyframes file-stage {
+  0% {
+    background: hsl(0, 50%, 50%);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    background: hsl(120, 50%, 50%);
     transform: scale(1);
   }
 }

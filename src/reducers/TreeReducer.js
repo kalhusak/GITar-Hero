@@ -1,38 +1,38 @@
-import { cloneDeep, first } from 'lodash';
+import { cloneDeep } from 'lodash';
 import * as treeActions from '../actions/TreeActions';
+import * as commandActions from '../actions/CommandActions';
+import * as TreeUtils from '../utils/TreeUtils';
 
 const initialState = [];
 
-const pushToTree = (subtree, path, status) => {
-  if (path.length === 1) {
-    subtree.push({
-      name: first(path),
-      status
-    });
-  } else {
-    const name = first(path);
-    let dir = find(subtree, { name });
-
-    if (!dir) {
-      dir = {
-        name,
-        children: []
-      };
-      subtree.push(dir);
-    }
-
-    pushToTree(dir.children, path.slice(1), status);
-  }
-};
-
 export default function treeReducer (state = initialState, { type, payload }) {
   switch (type) {
+    case commandActions.NEW_VALID_COMMAND:
+      switch (payload.step.type) {
+        case 'ADD':
+          const newState = cloneDeep(state);
+          const [, target] = payload.command.match(/^git add ([a-zA-Z.-]*)/);
+
+          if (target === '-A') {
+            TreeUtils.addAll(newState);
+          } else {
+            TreeUtils.addPath(newState, target);
+          }
+
+          return newState;
+
+        default:
+          return state;
+      }
+
     case treeActions.MODIFY_TREE:
       const newState = cloneDeep(state);
+      const { newFiles, modifyFiles, removeFiles } = payload.changes;
 
-      payload.changes.newFiles.forEach(path => pushToTree(newState, path.split('/'), 'added'));
-      payload.changes.modifyFiles.forEach(path => pushToTree(newState, path.split('/'), 'modified'));
-      payload.changes.removeFiles.forEach(path => pushToTree(newState, path.split('/'), 'removed'));
+      newFiles
+        .concat(modifyFiles)
+        .concat(removeFiles)
+        .forEach(path => TreeUtils.pushNode(newState, path.split('/'), 'modified'));
 
       return newState;
 
