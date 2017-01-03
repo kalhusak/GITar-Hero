@@ -2,6 +2,7 @@ import Branch from './objects/Branch';
 import Commit from './objects/Commit';
 import Head from './Head';
 import CommitUtils from './utils/CommitUtils';
+import Tag from './objects/Tag';
 import _ from 'lodash';
 
 // TODO remove
@@ -44,6 +45,9 @@ class Repo3D {
         break;
       case 'PULL':
         this.onPull(data);
+        break;
+      case 'TAG':
+        this.onTag(data);
         break;
     }
   }
@@ -148,6 +152,25 @@ class Repo3D {
       activeBranch.pull(data.newCommits);
     } else {
       console.log('WARNING - execute push on detached HEAD');
+    }
+  }
+
+  onTag (data) {
+    var commit = null;
+    if (this.HEAD.isPointingToCommit()) {
+      commit = this.HEAD.getObject();
+    } else if (this.HEAD.isPointingToBranch()) {
+      var activeBranch = this.HEAD.getObject();
+      commit = _.last(activeBranch.commits);
+    } else {
+      console.log('WARNING - adding tag at detached head');
+      return;
+    }
+
+    if (commit) {
+      var tag = new Tag(data.name, commit, this.scene);
+    } else {
+      console.log('WARNING - no commit found for tag');
     }
   }
 }

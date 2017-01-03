@@ -3,7 +3,7 @@ import CommitDisappear from '../animations/CommitDisappear';
 import CommitAppear from '../animations/CommitAppear';
 import Abstract3DObject from './Abstract3DObject';
 import Text from './Text';
-import { outline as outlineStyle } from '../style';
+import { outline as outlineStyle, commit as commitStyle } from '../style';
 
 let commitConfig = {
   segments: 16,
@@ -29,7 +29,7 @@ export default class Commit extends Abstract3DObject {
     this.mesh.outlineColor = outlineStyle.color;
     this.mesh.outlineWidth = outlineStyle.width;
     this.mesh.material = material;
-    this.text = new Text(message, textPosition, scene);
+    this.text = new Text(message, textPosition, scene, { color: commitStyle.nameTextColor });
     this.isMergeCommit = false;
   }
 

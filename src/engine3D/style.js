@@ -8,7 +8,16 @@ export const outline = {
 
 export const branch = {
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
-  specularPower: 8
+  specularPower: 8,
+  nameTextColor: '#408040'
+};
+
+export const commit = {
+  nameTextColor: '#92409e'
+};
+
+export const tag = {
+  nameTextColor: '#e2e756'
 };
 
 export default {

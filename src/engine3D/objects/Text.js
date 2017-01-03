@@ -4,17 +4,17 @@ import { cloneDeep } from 'lodash';
 let textSeq = 0;
 
 const config = {
-  letterWidthPx: 30,
-  widthRatio:  0.15,
-  heightRatio: 0.1,
-  textSizePx: 47,
-  textTextureHeightPx: 40,
+  letterWidthPx: 90,
+  widthRatio:  0.0225,
+  heightRatio: 0.02,
+  textSizePx: 150,
+  textTextureHeightPx: 130,
   yPositionOffset: 7
 };
 
 export default class Text {
 
-  constructor (text, initPosition, scene, options = { hasAlpha: true }) {
+  constructor (text, initPosition, scene, options) {
     this._updatePosition = ::this._updatePosition;
     this.scene = scene;
 
@@ -22,7 +22,7 @@ export default class Text {
     var textPlaneTextureHeight = config.textTextureHeightPx;
     this.textPlaneTexture = new BABYLON.DynamicTexture('dynamicText' + textSeq,
       { width: textPlaneTextureWidth, height: textPlaneTextureHeight }, scene, true);
-    this.textPlaneTexture.hasAlpha = options.hasAlpha;
+    this.textPlaneTexture.hasAlpha = options.hasAlpha ? options.hasAlpha : true;
 
     var textPlaneWidth = textPlaneTextureWidth * config.widthRatio;
     var textPlaneHeight = textPlaneTextureHeight * config.heightRatio;
@@ -35,24 +35,27 @@ export default class Text {
     this.textPlane.material.specularColor = new BABYLON.Color3(0, 0, 0);
     this.textPlane.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
     this.textPlane.material.backFaceCulling = false;
+
     this.textPlane.position = cloneDeep(initPosition);
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
     this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
-      'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'yellow', 'transparent');
-
-    this.textPlane.renderEdges = true;
+       'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'pink', 'transparent');
 
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
   }
 
   _updatePosition (initPosition) {
-    var pos = this.textPlane.position;
-    if (pos.x !== initPosition.x) {
-      pos.x = initPosition.x;
-    }
-    if (pos.z !== initPosition.z) {
-      pos.z = initPosition.z;
+    if (this.textPlane) {
+      var pos = this.textPlane.position;
+      if (pos) {
+        if (pos.x !== initPosition.x) {
+          pos.x = initPosition.x;
+        }
+        if (pos.z !== initPosition.z) {
+          pos.z = initPosition.z;
+        }
+      }
     }
   }
 }
