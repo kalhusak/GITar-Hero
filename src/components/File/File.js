@@ -11,13 +11,10 @@ export default class File extends Component {
   render () {
     const classNames = ['file'];
 
-    switch (this.props.status) {
-      case 'staged':
-        classNames.push('file--green');
-        break;
-      case 'added':
-        classNames.push('file--red');
-        break;
+    if (['added', 'modified', 'removed'].includes(this.props.status)) {
+      classNames.push('file--red');
+    } else if (this.props.status === 'staged') {
+      classNames.push('file--green');
     }
 
     return (

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import File from '../File';
 import './Tree.scss';
@@ -28,18 +27,11 @@ class Tree extends Component {
   }
 
   renderRecursively (items = [], nestLevel = 0) {
-    const renderItems = () => items.map((item, index) => {
+    return items.map((item, index) => {
       return <div key={index} className='tree__item'>
         {item.children ? this.renderDirectory(item, nestLevel) : this.renderFile(item)}
       </div>;
     });
-
-    return <ReactCSSTransitionGroup
-      transitionName='tree__item'
-      transitionEnterTimeout={300}
-      transitionLeaveTimeout={300}>
-      { renderItems() }
-    </ReactCSSTransitionGroup>;
   }
 
   render () {
