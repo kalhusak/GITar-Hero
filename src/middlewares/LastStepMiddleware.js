@@ -12,7 +12,7 @@ export default ({ getState }) => (next) => (action) => {
       next(taskActions.lastTaskExecuted());
     }
 
-    if (TaskUtils.getTasksSize(state.tasks) < config.task_list_size) {
+    if (TaskUtils.getTasksSize(state.tasks) < config.taskListSize) {
       next(taskActions.tooFewTasks());
     }
   }

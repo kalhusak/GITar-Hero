@@ -1,6 +1,5 @@
 import { find, remove } from 'lodash';
 
-// TODO Move to utils
 const stringOverlapping = (str1, str2) => {
   if (str1 === str2) {
     return str1;
@@ -68,15 +67,27 @@ const generateTreeBuilder = (pattern) => {
 };
 
 const permuteBranchNames = generateTreeBuilder(':branch:');
+const permuteFileNames = generateTreeBuilder(':file:');
 
-export const generateAutocompletionTree = (allowedCommands, branches = []) => {
+export const generateAutocompletionTree = (allowedCommands, branches = [], files = []) => {
   const branchesAutocompletionTree = generateTreeFromOverlappingStrings(branches);
+  const filesAutocompletionTree = generateTreeFromOverlappingStrings(files);
   return {
     pattern: '',
     children: [
       {
         pattern: 'git ',
-        children: allowedCommands.map(command => permuteBranchNames(`git ${command}`, branchesAutocompletionTree))
+        children: allowedCommands
+          .map(command => {
+            if (command.includes(':file:')) {
+              return permuteFileNames(`git ${command}`, filesAutocompletionTree);
+            } else {
+              return permuteBranchNames(`git ${command}`, branchesAutocompletionTree);
+            }
+          })
+      },
+      {
+        pattern: 'help'
       }
     ]
   };

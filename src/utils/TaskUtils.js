@@ -16,7 +16,7 @@ export function getTasksSize (tasksState) {
 }
 
 export function fillTaskList (tasksState) {
-  let howManyAdd = config.task_list_size - getTasksSize(tasksState);
+  let howManyAdd = config.taskListSize - getTasksSize(tasksState);
 
   for (let i = 0; i < howManyAdd; i++) {
     let newTask = taskFactory.next(tasksState.tags);
