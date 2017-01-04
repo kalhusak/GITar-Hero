@@ -1,38 +1,10 @@
 import React, { Component } from 'react';
+import { isEqual } from 'lodash';
 import Config from '../../config';
-import { identity, flattenDeep, isEqual } from 'lodash';
 import { connect } from 'react-redux';
 import { enterCommand } from '../../actions/ConsoleActions';
-import { generateAutocompletionTree } from './utils/Autocompletion.js';
+import * as ConsoleUtils from '../../utils/ConsoleUtils';
 import './Console.scss';
-
-// TODO Move to utils directory
-// Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
-const searchForTheOnlyOne = (collection = [], predicate = identity) => {
-  let match;
-
-  collection.every(item => {
-    if (predicate(item)) {
-      if (match) {
-        match = null;
-        return false;
-      }
-      match = item;
-    }
-    return true;
-  });
-
-  return match;
-};
-
-const treeToPathList = (tree, path = '') => {
-  return flattenDeep(tree.map(node => {
-    if (node.children) {
-      return treeToPathList(node.children, `${node.name}/`);
-    }
-    return path + node.name;
-  }));
-};
 
 class Console extends Component {
 
@@ -52,7 +24,8 @@ class Console extends Component {
       focus: false,
       movingCursor: false
     };
-    this.autocompletionTree = generateAutocompletionTree(Config.allowedCommands, this.props.branches, this.props.files);
+    this.autocompletionTree =
+      ConsoleUtils.generateAutocompletionTree(Config.allowedCommands, this.props.branches, this.props.files);
   }
 
   onFocus () {
@@ -77,25 +50,10 @@ class Console extends Component {
     this.setMovingCursorTimeout();
   }
 
-  searchForHint (searchValue, { children }) {
-    if (children) {
-      let match = searchForTheOnlyOne(children, node =>
-        searchValue.startsWith(node.pattern) && node.pattern.length < searchValue.length);
-      if (match) {
-        return this.searchForHint(searchValue, match);
-      }
-
-      match = searchForTheOnlyOne(children, node => node.pattern.startsWith(searchValue));
-      if (match) {
-        return match.pattern;
-      }
-    }
-  }
-
   tryToComplete () {
     const { currentValue } = this.state;
     const { consoleInput } = this.refs;
-    const hint = this.searchForHint(currentValue, this.autocompletionTree);
+    const hint = ConsoleUtils.searchForHint(currentValue, this.autocompletionTree);
 
     if (hint) {
       consoleInput.value = hint;
@@ -255,7 +213,8 @@ class Console extends Component {
 
   componentWillReceiveProps (newProps) {
     if (!isEqual(newProps.branches, this.props.branches) || !isEqual(newProps.files, this.props.files)) {
-      this.autocompletionTree = generateAutocompletionTree(Config.allowedCommands, newProps.branches, newProps.files);
+      this.autocompletionTree =
+        ConsoleUtils.generateAutocompletionTree(Config.allowedCommands, newProps.branches, newProps.files);
     }
   }
 
@@ -289,7 +248,7 @@ class Console extends Component {
 
 export default connect(({ tree }) => {
   return {
-    files: treeToPathList(tree).concat(['-A']),
+    files: ConsoleUtils.treeToPathList(tree).concat(['-A']),
     branches: ['master', 'develop']
   };
 })(Console);

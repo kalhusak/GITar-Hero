@@ -1,4 +1,46 @@
-import { find, remove } from 'lodash';
+import { identity, flattenDeep, find, remove } from 'lodash';
+
+// Iterates over elements of collection, returning the element if it's the only one predicate returns truthy for
+const searchForTheOnlyOne = (collection = [], predicate = identity) => {
+  let match;
+
+  collection.every(item => {
+    if (predicate(item)) {
+      if (match) {
+        match = null;
+        return false;
+      }
+      match = item;
+    }
+    return true;
+  });
+
+  return match;
+};
+
+export const treeToPathList = (tree, path = '') => {
+  return flattenDeep(tree.map(node => {
+    if (node.children) {
+      return treeToPathList(node.children, `${node.name}/`);
+    }
+    return path + node.name;
+  }));
+};
+
+export const searchForHint = (searchValue, { children }) => {
+  if (children) {
+    let match = searchForTheOnlyOne(children, node =>
+      searchValue.startsWith(node.pattern) && node.pattern.length < searchValue.length);
+    if (match) {
+      return searchForHint(searchValue, match);
+    }
+
+    match = searchForTheOnlyOne(children, node => node.pattern.startsWith(searchValue));
+    if (match) {
+      return match.pattern;
+    }
+  }
+};
 
 const stringOverlapping = (str1, str2) => {
   if (str1 === str2) {
