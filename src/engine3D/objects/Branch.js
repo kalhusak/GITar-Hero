@@ -126,6 +126,14 @@ class Branch extends Abstract3DObject {
     var pullAnimation = new PullAnimation(this, this.scene, newCommits);
   }
 
+  hideCommitsNames () {
+    this.commits.forEach(c => c.hideName());
+  }
+
+  showCommitsNames () {
+    this.commits.forEach(c => c.showName());
+  }
+
   _resetToCommitRecursive (commitsCount) {
     var rec = () => {
       if (commitsCount === 0) {

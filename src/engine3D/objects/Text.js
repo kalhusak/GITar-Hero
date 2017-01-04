@@ -16,6 +16,8 @@ export default class Text {
 
   constructor (text, initPosition, scene, options) {
     this._updatePosition = ::this._updatePosition;
+    this.hide = ::this.hide;
+    this.show = ::this.show;
     this.scene = scene;
 
     var textPlaneTextureWidth = config.letterWidthPx * text.length;
@@ -58,4 +60,13 @@ export default class Text {
       }
     }
   }
+
+  hide () {
+    this.textPlane.isVisible = false;
+  }
+
+  show () {
+    this.textPlane.isVisible = true;
+  }
+
 }
