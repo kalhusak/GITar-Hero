@@ -9,7 +9,10 @@ const config = {
   heightRatio: 0.02,
   textSizePx: 150,
   textTextureHeightPx: 130,
-  yPositionOffset: 7
+  yPositionOffset: 7,
+  animationFrames: 30,
+  fadeDuration: 0.5,
+  appearDuration: 0.5
 };
 
 export default class Text {
@@ -19,6 +22,7 @@ export default class Text {
     this.hide = ::this.hide;
     this.show = ::this.show;
     this.scene = scene;
+    this.text = text;
 
     var textPlaneTextureWidth = config.letterWidthPx * text.length;
     var textPlaneTextureHeight = config.textTextureHeightPx;
@@ -44,6 +48,7 @@ export default class Text {
     this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
        'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'pink', 'transparent');
 
+    this.show();
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
   }
 
@@ -62,11 +67,15 @@ export default class Text {
   }
 
   hide () {
-    this.textPlane.isVisible = false;
+    var duration = config.animationFrames * config.fadeDuration;
+    var fading = new BABYLON.Animation.CreateAndStartAnimation('fade' + this.text, this.textPlane, 'visibility',
+      config.animationFrames, duration, 1, 0, 0, null, () => { this.isVisible = false; });
   }
 
   show () {
-    this.textPlane.isVisible = true;
+    var duration = config.animationFrames * config.appearDuration
+    var appear = new BABYLON.Animation.CreateAndStartAnimation('appear' + this.text, this.textPlane, 'visibility',
+      config.animationFrames, duration, 0, 1, 0, null, () => { this.isVisible = true; });
   }
 
 }
