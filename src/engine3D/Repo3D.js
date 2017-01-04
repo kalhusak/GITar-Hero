@@ -184,6 +184,7 @@ class Repo3D {
 
     if (commit) {
       var tag = new Tag(data.name, commit, this.scene);
+      commit.tag = tag;
     } else {
       console.log('WARNING - no commit found for tag');
     }
