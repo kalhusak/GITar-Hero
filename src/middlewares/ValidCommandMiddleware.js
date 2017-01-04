@@ -1,14 +1,25 @@
 import * as commandActions from '../actions/CommandActions';
 import * as taskActions from '../actions/TaskActions';
+import * as treeActions from '../actions/TreeActions';
 import { autoOpenHelpDrawerTab } from '../actions/HelpDrawerActions';
-import TaskUtils from '../utils/TaskUtils';
+import { pick } from 'lodash';
+import * as TaskUtils from '../utils/TaskUtils';
 import TagUtils from '../utils/TagUtils';
 import StatisticsUtils from '../utils/StatisticsUtils';
 
 export default ({ getState }) => (next) => (action) => {
   next(action);
   if (action.type === commandActions.NEW_VALID_COMMAND) {
-    action = getNextAction(getState());
+    const state = getState();
+    const currentStep = TaskUtils.getCurrentStep(state.tasks);
+
+    if (currentStep && currentStep.data) {
+      if (currentStep.data.newFiles || currentStep.data.modifyFiles || currentStep.data.removeFiles) {
+        next(treeActions.modifyTree(pick(currentStep.data, ['newFiles', 'modifyFiles', 'removeFiles'])));
+      }
+    }
+
+    action = getNextAction(state);
     if (action) {
       next(action);
     }

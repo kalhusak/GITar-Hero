@@ -1,7 +1,7 @@
 import CommandResolver from '../resolvers/CommandResolver';
 import * as commandActions from '../actions/CommandActions';
 import * as consoleActions from '../actions/ConsoleActions';
-import TaskUtils from '../utils/TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 
 export default ({ getState }) => (next) => (action) => {
   if (action.type === consoleActions.ENTER_COMMAND) {

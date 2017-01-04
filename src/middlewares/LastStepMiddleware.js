@@ -1,5 +1,5 @@
 import * as taskActions from '../actions/TaskActions';
-import TaskUtils from '../utils/TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 import config from '../config';
 
 export default ({ getState }) => (next) => (action) => {
@@ -12,7 +12,7 @@ export default ({ getState }) => (next) => (action) => {
       next(taskActions.lastTaskExecuted());
     }
 
-    if (TaskUtils.getTasksSize(state.tasks) < config.task_list_size) {
+    if (TaskUtils.getTasksSize(state.tasks) < config.taskListSize) {
       next(taskActions.tooFewTasks());
     }
   }

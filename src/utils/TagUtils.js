@@ -1,4 +1,4 @@
-import TaskUtils from './TaskUtils';
+import * as TaskUtils from '../utils/TaskUtils';
 import StatisticsUtils from './StatisticsUtils';
 import helpTabs from '../components/BottomDrawer/helpTabs';
 
