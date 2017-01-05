@@ -3,7 +3,7 @@ import BABYLON from 'babylonjs';
 let particleSeq = 0;
 class SolidExplode extends BABYLON.SolidParticleSystem {
 
-  constructor (scene, initPosition) {
+  constructor (scene, initPosition, material) {
     super('solidParticleSystem' + particleSeq, scene);
     this._initParticles = ::this._initParticles;
     this._recycleParticle = ::this._recycleParticle;
@@ -19,6 +19,7 @@ class SolidExplode extends BABYLON.SolidParticleSystem {
     this.addShape(this.particle, 500);
     this.mesh = this.buildMesh();
     this.mesh.position = this.initPosition;
+    this.mesh.material = material;
     this.particle.dispose();
 
     this.initParticles = this._initParticles;

@@ -10,7 +10,7 @@ class CommitDisappear extends AbstractCommitAnimation {
   }
 
   _animate () {
-    var particles = new SolidExplodeParticles(this.scene, this.commit.getPosition());
+    var particles = new SolidExplodeParticles(this.scene, this.commit.getPosition(), this.commit.mesh.material);
     this.commit.mesh.dispose();
     this.commit.text.textPlane.dispose();
     this.commit.mesh = null;
