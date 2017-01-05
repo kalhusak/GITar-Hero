@@ -18,40 +18,48 @@ const config = {
 export default class Text {
 
   constructor (text, initPosition, scene, options) {
+    this._draw = ::this._draw;
     this._updatePosition = ::this._updatePosition;
     this.hide = ::this.hide;
     this.show = ::this.show;
     this.scene = scene;
     this.text = text;
 
-    console.log(options.color || new BABYLON.Color3(0, 0, 0));
+    var textureWidth = config.letterWidthPx * text.length;
+    var textureHeight = config.textTextureHeightPx;
 
-    var textPlaneTextureWidth = config.letterWidthPx * text.length;
-    var textPlaneTextureHeight = config.textTextureHeightPx;
-    this.textPlaneTexture = new BABYLON.DynamicTexture('dynamicText' + textSeq,
-      { width: textPlaneTextureWidth, height: textPlaneTextureHeight }, scene, true);
-    this.textPlaneTexture.hasAlpha = options.hasAlpha ? options.hasAlpha : true;
+    this.texture = new BABYLON.DynamicTexture('dynamicText' + textSeq,
+      { width: textureWidth, height: textureHeight }, scene, true);
 
-    var textPlaneWidth = textPlaneTextureWidth * config.widthRatio;
-    var textPlaneHeight = textPlaneTextureHeight * config.heightRatio;
+    var textPlaneWidth = textureWidth * config.widthRatio;
+    var textPlaneHeight = textureHeight * config.heightRatio;
+
     this.textPlane = BABYLON.MeshBuilder.CreatePlane('textPlane' + textSeq,
       { width: textPlaneWidth, height: textPlaneHeight, updatable: false }, scene);
 
-    this.textPlane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
-    this.textPlane.material = new BABYLON.StandardMaterial('textPlaneMaterial' + textSeq, scene);
-    this.textPlane.material.opacityTexture = this.textPlaneTexture;
-    this.textPlane.material.specularColor = new BABYLON.Color3(1, 1, 1);
-    this.textPlane.material.emissiveColor = options.color || new BABYLON.Color3(0, 0, 0);
-    this.textPlane.material.backFaceCulling = false;
+    var material = new BABYLON.StandardMaterial('textPlaneMaterial' + textSeq, scene);
+    material.opacityTexture = this.texture;
+    material.diffuseTexture = this.texture;
+    material.specularColor = options.specularColor || new BABYLON.Color3(0, 0, 0);
+    material.emissiveColor = options.emissiveColor || new BABYLON.Color3(0.8, 0.8, 0.8);
+    material.specularPower = options.specularPower || 0;
+    material.backFaceCulling = false;
 
+    this.textPlane.material = material;
+    this.textPlane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
     this.textPlane.position = cloneDeep(initPosition);
+
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
-    this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
-       'bold ' + config.textSizePx + 'px Roboto Mono', 'white', 'transparent');
-
+    this._draw('white');
+    this._draw(options.color || 'red');
     this.show();
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
+  }
+
+  _draw (color) {
+    this.texture.drawText(this.text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
+       'bold ' + config.textSizePx + 'px Roboto Mono', color, 'transparent');
   }
 
   _updatePosition (initPosition) {

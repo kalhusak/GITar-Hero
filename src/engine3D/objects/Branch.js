@@ -47,7 +47,7 @@ class Branch extends Abstract3DObject {
       this.startConnector = this._createStartConnector();
     }
 
-    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene, { color: branchStyle.nameTextColor });
+    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene, branchStyle.textStyle);
   }
 
   addCommit (commit, onEndEvent) {
