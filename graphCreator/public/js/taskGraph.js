@@ -44,12 +44,13 @@ function prepareSteps(steps) {
         case 'CHECKOUT':
           newStep.data = {
             type: step.toCommitOrBranch,
-            name: step.name
+            name: step.name,
+            newFiles: step.newFiles ? step.newFiles.split(";") : [],
+            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
           }
           break;
         case 'ADD':
           newStep.data = {
-            newFiles: step.newFiles ? step.newFiles.split(";") : [],
             modifyFiles: step.modifyFiles ? step.modifyFiles.split(";") : [],
             removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
           }
@@ -60,7 +61,9 @@ function prepareSteps(steps) {
             if (step['commitMessage' + i]) {
               newCommits.push({
                 name: step['commitName' + i],
-                message: step['commitMessage' + i]
+                message: step['commitMessage' + i],
+                newFiles: step['newFiles' + i] ? step['newFiles' + i].split(";") : [],
+                removeFiles: step['removeFiles' + i] ? step['removeFiles' + i].split(";") : []
               });
             }
           }
@@ -76,13 +79,17 @@ function prepareSteps(steps) {
         case 'MERGE':
           newStep.data = {
             sourceBranch: step.sourceBranch,
-            targetBranch: step.targetBranch
+            targetBranch: step.targetBranch,
+            newFiles: step.newFiles ? step.newFiles.split(";") : [],
+            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
           }
           break;
         case 'RESET':
           newStep.data = {
             type: step.commitOrNumber,
-            name: step.value
+            name: step.value,
+            newFiles: step.newFiles ? step.newFiles.split(";") : [],
+            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
           }
           break;
         case 'TAG':

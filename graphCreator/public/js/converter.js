@@ -42,19 +42,29 @@ function convertSteps(steps) {
         case 'CHECKOUT':
           newStep.toCommitOrBranch = step.data.type;
           newStep.name = step.data.name;
+          newStep.newFiles = step.data.newFiles.length !== 0 ? step.data.newFiles.join(';') : "";
+          newStep.removeFiles = step.data.removeFiles.length !== 0 ? step.data.removeFiles.join(';') : "";
           break;
         case 'ADD':
-          newStep.newFiles = step.data.newFiles.length !== 0 ? step.data.newFiles.join(';') : "";
           newStep.modifyFiles = step.data.modifyFiles.length !== 0 ? step.data.modifyFiles.join(';') : "";
           newStep.removeFiles = step.data.removeFiles.length !== 0 ? step.data.removeFiles.join(';') : "";
           break;
         case 'PULL':
-          for (var i=0; i<step.data.newCommits.length; i++) {
+          for (var i=0; i<3; i++) {
             var commit = step.data.newCommits[i];
-            newStep['commitName' + (i+1)] = commit.name;
-            newStep['commitMessage' + (i+1)] = commit.message;
-            if (!isNaN(commit.name) && commit.name >= refSequence) {
-              refSequence = parseInt(commit.name) + 1;
+            if (commit) {
+              newStep['commitName' + (i+1)] = commit.name;
+              newStep['commitMessage' + (i+1)] = commit.message;
+              newStep['newFiles' + (i+1)] = commit.newFiles.length !== 0 ? commit.newFiles.join(';') : "";
+              newStep['removeFiles' + (i+1)] = commit.removeFiles.length !== 0 ? commit.removeFiles.join(';') : "";
+              if (!isNaN(commit.name) && commit.name >= refSequence) {
+                refSequence = parseInt(commit.name) + 1;
+              }
+            } else {
+              newStep['commitName' + (i+1)] = "";
+              newStep['commitMessage' + (i+1)] = "";
+              newStep['newFiles' + (i+1)] = "";
+              newStep['removeFiles' + (i+1)] = "";
             }
           }
           break;
@@ -64,10 +74,14 @@ function convertSteps(steps) {
         case 'MERGE':
           newStep.sourceBranch = step.data.sourceBranch;
           newStep.targetBranch = step.data.targetBranch;
+          newStep.newFiles = step.data.newFiles.length !== 0 ? step.data.newFiles.join(';') : "";
+          newStep.removeFiles = step.data.removeFiles.length !== 0 ? step.data.removeFiles.join(';') : "";
           break;
         case 'RESET':
           newStep.commitOrNumber = step.data.type;
           newStep.value = step.data.name;
+          newStep.newFiles = step.data.newFiles.length !== 0 ? step.data.newFiles.join(';') : "";
+          newStep.removeFiles = step.data.removeFiles.length !== 0 ? step.data.removeFiles.join(';') : "";
           break;
         case 'TAG':
           newStep.name = step.data.name;

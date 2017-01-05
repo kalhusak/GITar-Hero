@@ -26,6 +26,8 @@ function addCheckoutStep (index, task) {
     step = createStep('checkout', 'CHECKOUT');
     step.toCommitOrBranch = 'branch';
     step.name = '';
+    step.newFiles = "";
+    step.removeFiles = "";
     task.steps.push(step);
   }
   createCheckoutStepElement(step, index, 'Checkout').insertBefore('#addNewStepProperty');
@@ -35,7 +37,6 @@ function addAddStep (index, task) {
   var step = task.steps[index];
   if (!step) {
     step = createStep('add', 'ADD', 'stage');
-    step.newFiles = "";
     step.modifyFiles = "";
     step.removeFiles = "";
     task.steps.push(step);
@@ -58,10 +59,16 @@ function addPullStep (index, task) {
     step = createStep('pull', 'PULL');
     step.commitName1 = getNextRef();
     step.commitMessage1 = '';
+    step.newFiles1 = "";
+    step.removeFiles1 = "";
     step.commitName2 = getNextRef();
     step.commitMessage2 = '';
+    step.newFiles2 = "";
+    step.removeFiles2 = "";
     step.commitName3 = getNextRef();
     step.commitMessage3 = '';
+    step.newFiles3 = "";
+    step.removeFiles3 = "";
     task.steps.push(step);
   }
   for (var i=1; i<=3; i++) {
@@ -89,6 +96,8 @@ function addMergeStep (index, task) {
     step = createStep('merge', 'MERGE');
     step.sourceBranch = '';
     step.targetBranch = '';
+    step.newFiles = "";
+    step.removeFiles = "";
     task.steps.push(step);
   }
   createMergeStepElement(step, index, 'Merge').insertBefore('#addNewStepProperty');
@@ -100,6 +109,8 @@ function addResetStep (index, task) {
     step = createStep('reset', 'RESET');
     step.commitOrNumber = 'number';
     step.value = '1';
+    step.newFiles = "";
+    step.removeFiles = "";
     task.steps.push(step);
   }
   createResetStepElement(step, index, 'Reset').insertBefore('#addNewStepProperty');
