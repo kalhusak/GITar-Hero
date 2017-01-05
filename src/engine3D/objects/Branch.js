@@ -47,7 +47,7 @@ class Branch extends Abstract3DObject {
       this.startConnector = this._createStartConnector();
     }
 
-    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene, { color: branchStyle.nameTextColor });
+    this.text = new Text(name, this.tube.getLastPointPositionRef(), scene, branchStyle.textStyle);
   }
 
   addCommit (commit, onEndEvent) {
@@ -124,6 +124,14 @@ class Branch extends Abstract3DObject {
 
   pull (newCommits) {
     var pullAnimation = new PullAnimation(this, this.scene, newCommits);
+  }
+
+  hideCommitsNames () {
+    this.commits.forEach(c => c.hideName());
+  }
+
+  showCommitsNames () {
+    this.commits.forEach(c => c.showName());
   }
 
   _resetToCommitRecursive (commitsCount) {

@@ -15,6 +15,8 @@ export default class Commit extends Abstract3DObject {
   constructor (ref, message, position, material, scene) {
     super(ref, scene);
     this._createSphere = ::this._createSphere;
+    this.hideName = ::this.hideName;
+    this.showName = ::this.showName;
     this.disappear = ::this.disappear;
 
     this.ref = ref;
@@ -29,8 +31,22 @@ export default class Commit extends Abstract3DObject {
     this.mesh.outlineColor = outlineStyle.color;
     this.mesh.outlineWidth = outlineStyle.width;
     this.mesh.material = material;
-    this.text = new Text(message, textPosition, scene, { color: commitStyle.nameTextColor });
+    this.text = new Text(message, textPosition, scene, commitStyle.textStyle);
     this.isMergeCommit = false;
+  }
+
+  hideName () {
+    this.text.hide();
+    if (this.tag) {
+      this.tag.hide();
+    }
+  }
+
+  showName () {
+    this.text.show();
+    if (this.tag) {
+      this.tag.hide();
+    }
   }
 
   disappear () {

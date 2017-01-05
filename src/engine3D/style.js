@@ -6,21 +6,31 @@ export const outline = {
   width: 0.3
 };
 
+// Text style can have specularColor(color3), emissiveColor(color3), specularPower(float), color(rgb string)
+
 export const branch = {
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
-  nameTextColor: '#408040'
+  textStyle: {
+    color: '#408040'
+  }
 };
 
 export const commit = {
-  nameTextColor: '#92409e'
+  textStyle: {
+    color: '#92409e'
+  }
 };
 
 export const tag = {
-  nameTextColor: '#e2e756'
+  textStyle: {
+    color: '#e2e756'
+  }
 };
 
 export default {
   outline,
-  branch
+  branch,
+  commit,
+  tag
 };

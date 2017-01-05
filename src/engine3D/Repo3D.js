@@ -88,17 +88,32 @@ class Repo3D {
 
   onCheckout (data) {
     if (data.type === 'branch') {
+      this._hideActiveBranchNames();
       if (!this.branches[data.name]) {
         this.onBranch(data);
       }
-      this.HEAD.pointTo(this.branches[data.name]);
+      var newBranch = this.branches[data.name];
+      newBranch.showCommitsNames();
+      this.HEAD.pointTo(newBranch);
     } else if (data.type === 'commit') {
       var commit = CommitUtils.findByNameInBranches(data.name, this.branches);
       if (commit) {
+        this._hideActiveBranchNames();
+        var branch = CommitUtils.getBranchForCommit(commit, this.branches);
+        branch.showCommitsNames();
         this.HEAD.pointTo(commit);
       } else {
         console.log('WARNING - can not find commit with name: ' + data.name);
       }
+    }
+  }
+
+  _hideActiveBranchNames () {
+    if (this.HEAD.isPointingToBranch()) {
+      this.HEAD.getObject().hideCommitsNames();
+    } else if (this.HEAD.isPointingToCommit()) {
+      var branch = CommitUtils.getBranchForCommit(this.HEAD.getObject(), this.branches);
+      branch.hideCommitsNames();
     }
   }
 
@@ -169,6 +184,7 @@ class Repo3D {
 
     if (commit) {
       var tag = new Tag(data.name, commit, this.scene);
+      commit.tag = tag;
     } else {
       console.log('WARNING - no commit found for tag');
     }
