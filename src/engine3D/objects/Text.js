@@ -11,8 +11,8 @@ const config = {
   textTextureHeightPx: 130,
   yPositionOffset: 7,
   animationFrames: 30,
-  fadeDuration: 0.5,
-  appearDuration: 0.5
+  fadeDuration: 1,
+  appearDuration: 1
 };
 
 export default class Text {
@@ -23,6 +23,8 @@ export default class Text {
     this.show = ::this.show;
     this.scene = scene;
     this.text = text;
+
+    console.log(options.color || new BABYLON.Color3(0, 0, 0));
 
     var textPlaneTextureWidth = config.letterWidthPx * text.length;
     var textPlaneTextureHeight = config.textTextureHeightPx;
@@ -37,16 +39,16 @@ export default class Text {
 
     this.textPlane.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_ALL;
     this.textPlane.material = new BABYLON.StandardMaterial('textPlaneMaterial' + textSeq, scene);
-    this.textPlane.material.diffuseTexture = this.textPlaneTexture;
-    this.textPlane.material.specularColor = new BABYLON.Color3(0, 0, 0);
-    this.textPlane.material.emissiveColor = new BABYLON.Color3(1, 1, 1);
+    this.textPlane.material.opacityTexture = this.textPlaneTexture;
+    this.textPlane.material.specularColor = new BABYLON.Color3(1, 1, 1);
+    this.textPlane.material.emissiveColor = options.color || new BABYLON.Color3(0, 0, 0);
     this.textPlane.material.backFaceCulling = false;
 
     this.textPlane.position = cloneDeep(initPosition);
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
     this.textPlaneTexture.drawText(text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
-       'bold ' + config.textSizePx + 'px Roboto Mono', options.color || 'pink', 'transparent');
+       'bold ' + config.textSizePx + 'px Roboto Mono', 'white', 'transparent');
 
     this.show();
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
@@ -68,13 +70,13 @@ export default class Text {
 
   hide () {
     var duration = config.animationFrames * config.fadeDuration;
-    var fading = new BABYLON.Animation.CreateAndStartAnimation('fade' + this.text, this.textPlane, 'visibility',
+    var fade = new BABYLON.Animation.CreateAndStartAnimation('fade' + this.text, this.textPlane.material, 'alpha',
       config.animationFrames, duration, 1, 0, 0, null, () => { this.isVisible = false; });
   }
 
   show () {
-    var duration = config.animationFrames * config.appearDuration
-    var appear = new BABYLON.Animation.CreateAndStartAnimation('appear' + this.text, this.textPlane, 'visibility',
+    var duration = config.animationFrames * config.appearDuration;
+    var appear = new BABYLON.Animation.CreateAndStartAnimation('appear' + this.text, this.textPlane.material, 'alpha',
       config.animationFrames, duration, 0, 1, 0, null, () => { this.isVisible = true; });
   }
 

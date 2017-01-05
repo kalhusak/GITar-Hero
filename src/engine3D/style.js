@@ -9,15 +9,15 @@ export const outline = {
 export const branch = {
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
-  nameTextColor: '#408040'
+  nameTextColor: new BABYLON.Color3(0, 1, 0)
 };
 
 export const commit = {
-  nameTextColor: '#92409e'
+  nameTextColor: new BABYLON.Color3(1, 0, 0)
 };
 
 export const tag = {
-  nameTextColor: '#e2e756'
+  nameTextColor: new BABYLON.Color3(0, 0, 1)
 };
 
 export default {
