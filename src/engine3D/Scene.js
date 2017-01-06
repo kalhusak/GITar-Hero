@@ -11,7 +11,11 @@ const backgroundConfig = {
   direction1: new BABYLON.Vector3(-50, -50, -100),
   direction2: new BABYLON.Vector3(50, 50, -100),
   minTime: 2,
-  maxTime: 6
+  maxTime: 6,
+  emitRate: 300,
+  minEmitPower: 0.5,
+  maxEmitPower: 1.5,
+  speed: 0.002
 }
 
 class Scene extends BABYLON.Scene {
@@ -36,8 +40,8 @@ class Scene extends BABYLON.Scene {
   }
 
   initBackgroundParticles () {
-    const { sceneColor, targetOffset, minEmitBox, maxEmitBox, direction1, direction2, minTime, maxTime } = backgroundConfig;
-
+    const { sceneColor, targetOffset, direction1, direction2, minTime, maxTime } = backgroundConfig;
+    const { emitRate, minEmitPower, maxEmitPower, speed, minEmitBox, maxEmitBox } = backgroundConfig;
     const emitterMaterial = new BABYLON.StandardMaterial('emitterMaterial', this);
     emitterMaterial.emissiveColor = sceneColor;
 
@@ -49,6 +53,7 @@ class Scene extends BABYLON.Scene {
     // particles.setEmitBox(minEmitBox, maxEmitBox);
     particles.setDirections(direction1, direction2);
     particles.setLifeTimes(minTime, maxTime);
+    particles.setEmitParams(emitRate, minEmitPower, maxEmitPower, speed);
 
     this.emitter = emitter;
     this.light.excludedMeshes = [this.emitter];
