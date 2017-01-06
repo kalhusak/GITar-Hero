@@ -28,8 +28,8 @@ const config = {
 };
 
 class Particles extends BABYLON.ParticleSystem {
-  constructor (name, emitter, scene, texture = flare) {
-    super(`${name}_particles`, config.maxNumberOfParticles, scene);
+  constructor (name, emitter, scene, number = config.maxNumberOfParticles, texture = flare) {
+    super(`${name}_particles`, number, scene);
 
     this.setEmitter = ::this.setEmitter;
     this.setEmitParams = ::this.setEmitParams;
