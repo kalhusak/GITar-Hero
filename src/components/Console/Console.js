@@ -122,7 +122,7 @@ class Console extends Component {
         break;
 
       case ENTER_CODE:
-        if (currentValue !== '') {
+        if (currentValue !== '' || Config.noCommandValidation) {
           this.enterCommand(currentValue);
           previousValues.unshift({
             id: commandId,

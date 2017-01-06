@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, first } from 'lodash';
 import * as treeActions from '../actions/TreeActions';
 import * as commandActions from '../actions/CommandActions';
 import * as TreeUtils from '../utils/TreeUtils';
@@ -13,7 +13,7 @@ export default function treeReducer (state = initialState, { type, payload }) {
       switch (payload.step.type) {
         case 'ADD':
           newState = cloneDeep(state);
-          const [, target] = payload.command.match(/^git add ([a-zA-Z.-]*)/);
+          const [, target] = first(payload.step.commands).match(/^git add ([a-zA-Z.-]*)/);
 
           if (['-A', '.'].includes(target)) {
             TreeUtils.stageAll(newState);

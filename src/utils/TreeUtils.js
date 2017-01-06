@@ -23,7 +23,7 @@ function pushNode (subtree, path, status, changeType) {
       subtree.push(node);
     }
 
-    pushNode(node.children, path.slice(1), status);
+    pushNode(node.children, path.slice(1), status, changeType);
   }
 };
 
@@ -62,7 +62,7 @@ export function removeFile (subtree, path) {
 }
 
 export function modifyFile (subtree, path) {
-  pushNode(subtree, path.split('/'), 'unstaged');
+  pushNode(subtree, path.split('/'), 'unstaged', 'modified');
 }
 
 function forAllFiles (subtree, callback, path = []) {
