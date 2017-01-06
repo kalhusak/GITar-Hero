@@ -2,19 +2,22 @@ import * as commandActions from '../actions/CommandActions';
 import * as taskActions from '../actions/TaskActions';
 import * as treeActions from '../actions/TreeActions';
 import { autoOpenHelpDrawerTab } from '../actions/HelpDrawerActions';
-import { pick } from 'lodash';
 import * as TaskUtils from '../utils/TaskUtils';
 import TagUtils from '../utils/TagUtils';
 import StatisticsUtils from '../utils/StatisticsUtils';
 
 export default ({ getState }) => (next) => (action) => {
-  next(action);
   if (action.type === commandActions.NEW_VALID_COMMAND) {
-    const currentStep = TaskUtils.getCurrentStep(getState().tasks);
-    if (currentStep && currentStep.data) {
-      if (currentStep.data.newFiles || currentStep.data.modifyFiles || currentStep.data.removeFiles) {
-        next(treeActions.modifyTree(pick(currentStep.data, ['newFiles', 'modifyFiles', 'removeFiles'])));
-      }
+    const doneStep = TaskUtils.getCurrentStep(getState().tasks);
+    next(action);
+    const nextStep = TaskUtils.getCurrentStep(getState().tasks);
+
+    if (doneStep.data && doneStep.data.after) {
+      next(treeActions.modifyTree(doneStep.data.after));
+    }
+
+    if (nextStep.data && nextStep.data.before) {
+      next(treeActions.modifyTree(nextStep.data.before));
     }
 
     const currentTask = TaskUtils.getCurrentTask(getState().tasks);
@@ -28,5 +31,7 @@ export default ({ getState }) => (next) => (action) => {
     if (newTag && TagUtils.isHelpTabForTag(newTag)) {
       next(autoOpenHelpDrawerTab(newTag));
     }
+  } else {
+    next(action);
   }
 };

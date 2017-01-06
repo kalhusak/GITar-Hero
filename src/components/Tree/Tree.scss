@@ -1,6 +1,6 @@
 .tree {
   width: 250px;
-  height: 350px;
+  max-height: calc(100% - 230px);
   background: rgba(white, 0.9);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   position: fixed;
@@ -8,7 +8,7 @@
   left: 20px;
   border-radius: 4px;
   padding: 20px 10px 10px 0px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .tree__heading {
