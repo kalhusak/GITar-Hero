@@ -11,7 +11,7 @@ export default class File extends Component {
   render () {
     const classNames = ['file'];
 
-    if (this.props.status === 'modified') {
+    if (this.props.status === 'unstaged') {
       classNames.push('file--red');
     } else if (this.props.status === 'staged') {
       classNames.push('file--green');

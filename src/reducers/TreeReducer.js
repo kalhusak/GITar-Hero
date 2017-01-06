@@ -15,10 +15,10 @@ export default function treeReducer (state = initialState, { type, payload }) {
           newState = cloneDeep(state);
           const [, target] = payload.command.match(/^git add ([a-zA-Z.-]*)/);
 
-          if (target === '-A') {
+          if (['-A', '.'].includes(target)) {
             TreeUtils.addAll(newState);
           } else {
-            TreeUtils.addPath(newState, target);
+            TreeUtils.addFile(newState, target);
           }
 
           return newState;
@@ -37,12 +37,14 @@ export default function treeReducer (state = initialState, { type, payload }) {
       newState = cloneDeep(state);
       const { newFiles, modifyFiles, removeFiles } = payload.changes;
 
-      newFiles
-        .concat(modifyFiles)
-        .forEach(path => TreeUtils.pushNode(newState, path.split('/'), 'modified'));
+      (newFiles || [])
+        .forEach(path => TreeUtils.addFile(newState, path));
 
-      removeFiles
-        .forEach(path => TreeUtils.pushNode(newState, path.split('/'), 'removed'));
+      (modifyFiles || [])
+        .forEach(path => TreeUtils.modifyFile(newState, path));
+
+      (removeFiles || [])
+        .forEach(path => TreeUtils.removeFile(newState, path));
 
       return newState;
 

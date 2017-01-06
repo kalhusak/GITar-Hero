@@ -1,14 +1,25 @@
 import config from '../config';
-import { unset } from 'lodash';
+import { unset, first } from 'lodash';
 import taskFactory from '../factories/TaskFactory';
 
 export function getCurrentTask (tasksState) {
   return tasksState.byId[tasksState.current];
 }
 
+export function getNextTask (tasksState) {
+  return tasksState.byId[tasksState.current + 1];
+}
+
 export function getCurrentStep (tasksState) {
-  var task = getCurrentTask(tasksState);
-  return task.steps[task.currentStepIndex];
+  let task = getCurrentTask(tasksState);
+  let step = task.steps[task.currentStepIndex];
+
+  if (!step) {
+    task = getNextTask(tasksState);
+    return task && first(task.steps);
+  }
+
+  return step;
 }
 
 export function getTasksSize (tasksState) {

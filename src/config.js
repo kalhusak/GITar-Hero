@@ -1,5 +1,5 @@
 const config = {
-  taskListSize: 1,
+  taskListSize: 2,
   allowedCommands: [
     'init',
     'add :file:',
