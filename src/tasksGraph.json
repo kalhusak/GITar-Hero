@@ -142,8 +142,7 @@
           "type": "ADD",
           "data": {
             "before": {
-              "modifyFiles": ["src/components/menuAnimation.js", "src/components/menu.js", "src/components/menu.css"],
-              "removeFiles": ["src/config.js"]
+              "modifyFiles": ["src/components/menuAnimation.js", "src/components/menu.js", "src/components/menu.css"]
             }
           }
         }, {
@@ -326,7 +325,7 @@
             "type": "commit",
             "name": "mergeCommit_feature/header_develop",
             "after": {
-              "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+              "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg"]
             }
           }
         }, {
@@ -359,7 +358,7 @@
             "sourceBranch": "develop",
             "targetBranch": "feature/header",
             "after": {
-              "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+              "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg"]
             }
           }
         }, {
@@ -542,7 +541,7 @@
             "type": "branch",
             "name": "master",
             "after": {
-              "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
+              "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
             }
           }
         }, {
@@ -554,7 +553,7 @@
             "sourceBranch": "master",
             "targetBranch": "release/0.1.0",
             "after": {
-              "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
+              "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
             }
           }
         }, {
