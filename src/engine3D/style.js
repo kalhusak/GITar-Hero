@@ -6,8 +6,6 @@ export const outline = {
   width: 0.3
 };
 
-// Text style can have specularColor(color3), emissiveColor(color3), specularPower(float), color(rgb string)
-
 export const branch = {
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
@@ -16,6 +14,7 @@ export const branch = {
   }
 };
 
+// Text style can have specularColor(color3), emissiveColor(color3), specularPower(float), color(rgb string)
 export const commit = {
   textStyle: {
     color: '#92409e'
@@ -28,9 +27,21 @@ export const tag = {
   }
 };
 
+export const ground = {
+  flat: false,
+  wavy: true,
+  hideWhenScroll: false,
+  maxHeight: 10,
+  speed: 0.002,
+  fogDensity: 0.7, // from 0.0 to 1.0
+  heightMap: 'heightMap.png',
+  texture: 'codeTexture.png'
+};
+
 export default {
   outline,
   branch,
+  ground,
   commit,
   tag
 };
