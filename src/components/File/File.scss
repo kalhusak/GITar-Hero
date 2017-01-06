@@ -37,33 +37,25 @@
 }
 
 @keyframes file-modify {
-  0% {
+  from {
     background: hsl(120, 50%, 50%);
-    transform: scale(1);
+    transform: scale(0.5);
   }
 
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
+  to {
     background: hsl(0, 50%, 50%);
     transform: scale(1);
   }
 }
 
 @keyframes file-stage {
-  0% {
+  from {
+    transform: scale(0.5);
     background: hsl(0, 50%, 50%);
+  }
+
+  to {
     transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  100% {
     background: hsl(120, 50%, 50%);
-    transform: scale(1);
   }
 }

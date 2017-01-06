@@ -6,15 +6,9 @@ function pushNode (subtree, path, status) {
 
   if (path.length === 1) {
     if (node) {
-      if (status === 'removed') {
-        remove(subtree, node);
-      } else {
-        node.status = status;
-      }
+      node.status = status;
     } else {
-      if (status !== 'removed') {
-        subtree.push({ name, status });
-      }
+      subtree.push({ name, status });
     }
   } else {
     if (!node) {
@@ -29,12 +23,34 @@ function pushNode (subtree, path, status) {
   }
 };
 
+function removeNode (subtree, path) {
+  const name = first(path);
+  let node = find(subtree, { name });
+
+  if (node) {
+    if (path.length === 1) {
+      remove(subtree, node);
+    } else {
+      if (node.children) {
+        removeNode(node.children, path.slice(1));
+        if (node.children.length === 0) {
+          remove(subtree, node);
+        }
+      }
+    }
+  }
+}
+
 export function addFile (subtree, path) {
   pushNode(subtree, path.split('/'), 'unmodified');
 }
 
+export function stageFile (subtree, path) {
+  pushNode(subtree, path.split('/'), 'staged');
+}
+
 export function removeFile (subtree, path) {
-  pushNode(subtree, path.split('/'), 'removed');
+  removeNode(subtree, path.split('/'));
 }
 
 export function modifyFile (subtree, path) {
@@ -51,7 +67,7 @@ function forAllFiles (subtree, callback) {
   });
 }
 
-export function addAll (subtree) {
+export function stageAll (subtree) {
   forAllFiles(subtree, node => {
     if (node.status === 'unstaged') {
       node.status = 'staged';

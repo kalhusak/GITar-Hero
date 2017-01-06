@@ -16,9 +16,9 @@ export default function treeReducer (state = initialState, { type, payload }) {
           const [, target] = payload.command.match(/^git add ([a-zA-Z.-]*)/);
 
           if (['-A', '.'].includes(target)) {
-            TreeUtils.addAll(newState);
+            TreeUtils.stageAll(newState);
           } else {
-            TreeUtils.addFile(newState, target);
+            TreeUtils.stageFile(newState, target);
           }
 
           return newState;

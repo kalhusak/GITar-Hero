@@ -19,8 +19,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["index.html", "package.json", "src/app.js", "src/app.css"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["index.html", "package.json", "src/app.js", "src/app.css"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Init project\"",
@@ -54,8 +55,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["readme.txt"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["readme.txt"]
+            }
           }
         }, {
           "description": "Commit readme file with message \"Add readme\"",
@@ -93,9 +95,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "develop",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "develop"
           }
         }],
         "x": 390,
@@ -114,9 +114,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "feature/menu",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "feature/menu"
           }
         }, {
           "description": "Add new files to index",
@@ -124,8 +122,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/app.js", "index.html"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/app.js", "index.html"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add menu list\"",
@@ -142,8 +141,10 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/components/menuAnimation.js", "src/components/menu.js", "src/components/menu.css"],
-            "removeFiles": ["src/config.js"]
+            "before": {
+              "modifyFiles": ["src/components/menuAnimation.js", "src/components/menu.js", "src/components/menu.css"],
+              "removeFiles": ["src/config.js"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add menu item animation\"",
@@ -174,8 +175,10 @@
           "data": {
             "type": "branch",
             "name": "develop",
-            "newFiles": [],
-            "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js"]
+            "after": {
+              "newFiles": [],
+              "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js"]
+            }
           }
         }, {
           "description": "Merge feature/menu to develop without fastforward",
@@ -185,8 +188,9 @@
           "data": {
             "sourceBranch": "develop",
             "targetBranch": "feature/menu",
-            "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js"],
-            "removeFiles": []
+            "after": {
+              "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js"]
+            }
           }
         }, {
           "description": "Create upstream branch for develop and push to it",
@@ -212,9 +216,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "feature/header",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "feature/header"
           }
         }, {
           "description": "Add new files to index",
@@ -222,8 +224,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/containers/header.js", "src/containers/header.css", "index.html", "src/app.js"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/containers/header.js", "src/containers/header.css", "index.html", "src/app.js"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add header container\"",
@@ -240,8 +243,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["static/images/header.jpg", "static/images/headerTemp.jpg", "src/app.css", "src/containers/header.css"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["static/images/header.jpg", "static/images/headerTemp.jpg", "src/app.css", "src/containers/header.css"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add logo image\"",
@@ -258,8 +262,10 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["index.html", "src/containers/header.css", "src/containers/header.js"],
-            "removeFiles": ["static/images/headerTemp.jpg"]
+            "before": {
+              "modifyFiles": ["index.html", "src/containers/header.css", "src/containers/header.js"],
+              "removeFiles": ["static/images/headerTemp.jpg"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add page title\"",
@@ -290,8 +296,9 @@
           "data": {
             "type": "branch",
             "name": "develop",
-            "newFiles": [],
-            "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+            "after": {
+              "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+            }
           }
         }, {
           "description": "Merge feature/header to develop without fastforward",
@@ -301,8 +308,9 @@
           "data": {
             "sourceBranch": "develop",
             "targetBranch": "feature/header",
-            "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"],
-            "removeFiles": []
+            "after": {
+              "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg"]
+            }
           }
         }, {
           "description": "Try to push commits to upstream",
@@ -317,8 +325,9 @@
           "data": {
             "type": "commit",
             "name": "mergeCommit_feature/header_develop",
-            "newFiles": [],
-            "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+            "after": {
+              "removeFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+            }
           }
         }, {
           "description": "Download changes from origin",
@@ -329,13 +338,16 @@
             "newCommits": [{
               "name": 7,
               "message": "Merge feature/login-form to develop",
-              "newFiles": ["src/components/login-form.js", "src/components/login-form.css"],
-              "removeFiles": []
-            }, {
+              "after": {
+                "newFiles": ["src/components/login-form.js", "src/components/login-form.css"]
+              }
+            },
+            {
               "name": 8,
               "message": "Merge feature/logout-form to develop",
-              "newFiles": ["src/components/logout-form.js", "src/components/logout-form.css"],
-              "removeFiles": []
+              "after": {
+                "newFiles": ["src/components/logout-form.js", "src/components/logout-form.css"]
+              }
             }]
           }
         }, {
@@ -346,8 +358,9 @@
           "data": {
             "sourceBranch": "develop",
             "targetBranch": "feature/header",
-            "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"],
-            "removeFiles": []
+            "after": {
+              "newFiles": ["src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg"]
+            }
           }
         }, {
           "description": "Push commits to upstream",
@@ -373,9 +386,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "feature/content",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "feature/content"
           }
         }, {
           "description": "Add new files to index",
@@ -383,8 +394,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/containers/content.js", "src/containers/content.css", "index.html", "src/app.js"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/containers/content.js", "src/containers/content.css", "index.html", "src/app.js"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add content container\"",
@@ -401,8 +413,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["index.html", "src/app.js", "src/containers/content.css"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["index.html", "src/app.js", "src/containers/content.css"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Adjust scrollbar\"",
@@ -433,8 +446,9 @@
           "data": {
             "type": "branch",
             "name": "develop",
-            "newFiles": [],
-            "removeFiles": ["src/containers/content.js", "src/containers/content.css"]
+            "after": {
+              "removeFiles": ["src/containers/content.js", "src/containers/content.css"]
+            }
           }
         }, {
           "description": "Download changes from upstream with rebase instead of merge",
@@ -445,8 +459,9 @@
             "newCommits": [{
               "name": 12,
               "message": "feature/configuration-module",
-              "newFiles": ["src/application-config.js"],
-              "removeFiles": []
+              "after": {
+                "newFiles": ["src/application-config.js"]
+              }
             }]
           }
         }, {
@@ -457,8 +472,9 @@
           "data": {
             "sourceBranch": "develop",
             "targetBranch": "feature/content",
-            "newFiles": ["src/containers/content.js", "src/containers/content.css"],
-            "removeFiles": []
+            "after": {
+              "newFiles": ["src/containers/content.js", "src/containers/content.css"]
+            }
           }
         }, {
           "description": "Push commits to upstream",
@@ -484,9 +500,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "release/0.1.0",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "release/0.1.0"
           }
         }, {
           "description": "Add new files to index",
@@ -494,8 +508,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/app.js", "src/components/menu.js"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/app.js", "src/components/menu.js"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Fix typo\"",
@@ -526,8 +541,9 @@
           "data": {
             "type": "branch",
             "name": "master",
-            "newFiles": [],
-            "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
+            "after": {
+              "removeFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
+            }
           }
         }, {
           "description": "Merge release/0.1.0 to master without fastforward",
@@ -537,8 +553,9 @@
           "data": {
             "sourceBranch": "master",
             "targetBranch": "release/0.1.0",
-            "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"],
-            "removeFiles": []
+            "after": {
+              "newFiles": ["src/components/menu.js", "src/components/menuItemList.json", "src/components/menu.css", "src/config.js", "src/components/menuAnimation.js", "src/containers/header.js", "src/containers/header.css", "static/images/header.jpg", "static/images/headerTemp.jpg", "src/components/login-form.js", "src/components/login-form.css", "src/components/logout-form.js", "src/components/logout-form.css", "src/application-config.js", "src/containers/content.js", "src/containers/content.css"]
+            }
           }
         }, {
           "description": "Mark this commit as a tag",
@@ -561,9 +578,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "develop",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "develop"
           }
         }, {
           "description": "Merge release/0.1.0 to develop without fastforward",
@@ -572,9 +587,7 @@
           "type": "MERGE",
           "data": {
             "sourceBranch": "develop",
-            "targetBranch": "release/0.1.0",
-            "newFiles": [],
-            "removeFiles": []
+            "targetBranch": "release/0.1.0"
           }
         }, {
           "description": "Push commits to upstream",
@@ -600,9 +613,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "feature/dialog",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "feature/dialog"
           }
         }, {
           "description": "Add new files to index",
@@ -610,8 +621,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/components/dialog.js", "src/components/dialog.css", "index.html", "src/app.css"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/components/dialog.js", "src/components/dialog.css", "index.html", "src/app.css"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Add dialog template\"",
@@ -642,8 +654,9 @@
           "data": {
             "type": "branch",
             "name": "master",
-            "newFiles": [],
-            "removeFiles": ["src/components/dialog.js", "src/components/dialog.css"]
+            "after": {
+              "removeFiles": ["src/components/dialog.js", "src/components/dialog.css"]
+            }
           }
         }, {
           "description": "Create branch hotfix/title-margin and checkout in one step",
@@ -652,9 +665,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "hotfix/title-margin",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "hotfix/title-margin"
           }
         }, {
           "description": "Add new files to index",
@@ -662,8 +673,9 @@
           "tags": ["stage"],
           "type": "ADD",
           "data": {
-            "modifyFiles": ["src/containers/header.css", "src/app.css"],
-            "removeFiles": []
+            "before": {
+              "modifyFiles": ["src/containers/header.css", "src/app.css"]
+            }
           }
         }, {
           "description": "Commit new files with message \"Change title margin\"",
@@ -693,9 +705,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "master",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "master"
           }
         }, {
           "description": "Merge hotfix/title-margin to master without fastforward",
@@ -704,9 +714,7 @@
           "type": "MERGE",
           "data": {
             "sourceBranch": "master",
-            "targetBranch": "hotfix/title-margin",
-            "newFiles": [],
-            "removeFiles": []
+            "targetBranch": "hotfix/title-margin"
           }
         }, {
           "description": "Mark this commit as a tag",
@@ -724,9 +732,7 @@
           "type": "CHECKOUT",
           "data": {
             "type": "branch",
-            "name": "develop",
-            "newFiles": [],
-            "removeFiles": []
+            "name": "develop"
           }
         }, {
           "description": "Merge hotfix/title-margin to develop without fastforward",
@@ -735,9 +741,7 @@
           "type": "MERGE",
           "data": {
             "sourceBranch": "develop",
-            "targetBranch": "hotfix/title-margin",
-            "newFiles": [],
-            "removeFiles": []
+            "targetBranch": "hotfix/title-margin"
           }
         }],
         "x": 384.49249267578125,
