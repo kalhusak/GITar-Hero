@@ -5,11 +5,11 @@ import './Tree.scss';
 
 class Tree extends Component {
 
-  renderFile ({ name, status }) {
+  renderFile ({ name, status, removed, changeType }) {
     return <div className='tree__item-inner'>
       <div className='tree__file-branch' />
       <div className='tree__item-name'>
-        <File name={name} status={status} />
+        <File name={name} status={status} changeType={changeType} />
       </div>
     </div>;
   }

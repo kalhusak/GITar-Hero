@@ -35,7 +35,7 @@ export default function treeReducer (state = initialState, { type, payload }) {
 
     case treeActions.MODIFY_TREE:
       newState = cloneDeep(state);
-      const { newFiles, modifyFiles, removeFiles } = payload.changes;
+      const { newFiles, modifyFiles, removeFiles, unstagedRemoveFiles } = payload.changes;
 
       (newFiles || [])
         .forEach(path => TreeUtils.addFile(newState, path));
@@ -45,6 +45,9 @@ export default function treeReducer (state = initialState, { type, payload }) {
 
       (removeFiles || [])
         .forEach(path => TreeUtils.removeFile(newState, path));
+
+      (unstagedRemoveFiles || [])
+        .forEach(path => TreeUtils.unstagedRemoveFile(newState, path));
 
       return newState;
 
