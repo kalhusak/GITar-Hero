@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import IScroll from 'iscroll';
 import { connect } from 'react-redux';
 import File from '../File';
 import './Tree.scss';
@@ -52,17 +51,11 @@ class Tree extends Component {
   }
 
   componentDidMount () {
-    this.scroller = new IScroll(this.refs.scroller, { mouseWheel: true });
     this.refs.scroller.addEventListener('wheel', this.onWheel);
   }
 
   componentWillUnmount () {
     this.refs.scroller.removeEventListener('wheel', this.onWheel);
-    this.scroller.destroy();
-  }
-
-  componentDidUpdate () {
-    this.scroller.refresh();
   }
 
   render () {

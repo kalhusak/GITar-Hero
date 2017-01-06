@@ -25,6 +25,7 @@
 .tree__inner {
   padding-bottom: 4px;
   padding-top: 34px;
+  padding-right: 30px;
 }
 
 .tree__items {
@@ -48,8 +49,9 @@
 
 .tree__scroller {
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   height: 100%;
+  width: calc(100% + 30px);
 }
 
 .tree__empty-state {
