@@ -17,6 +17,10 @@ export default ({ getState }) => (next) => (action) => {
     }
 
     if (nextStep.data && nextStep.data.before) {
+      if (nextStep.type === 'ADD' && nextStep.data.before.removeFiles) {
+        nextStep.data.before.unstagedRemoveFiles = nextStep.data.before.removeFiles;
+        nextStep.data.before.removeFiles = [];
+      }
       next(treeActions.modifyTree(nextStep.data.before));
     }
 
