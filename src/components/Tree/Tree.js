@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import IScroll from 'iscroll';
 import { connect } from 'react-redux';
 import File from '../File';
 import './Tree.scss';
@@ -34,15 +35,47 @@ class Tree extends Component {
     });
   }
 
+  renderItems () {
+    return <div className='tree__items'>
+      {this.renderRecursively(this.props.tree)}
+    </div>;
+  }
+
   renderEmptyState () {
-    return <div className='tree__empty-state'>directory is empty :-(</div>;
+    if (this.props.tree.length === 0) {
+      return <div className='tree__empty-state'>directory is empty :-(</div>;
+    }
+  }
+
+  onWheel (event) {
+    event.stopPropagation();
+  }
+
+  componentDidMount () {
+    this.scroller = new IScroll(this.refs.scroller, { mouseWheel: true });
+    this.refs.scroller.addEventListener('wheel', this.onWheel);
+  }
+
+  componentWillUnmount () {
+    this.refs.scroller.removeEventListener('wheel', this.onWheel);
+    this.scroller.destroy();
+  }
+
+  componentDidUpdate () {
+    this.scroller.refresh();
   }
 
   render () {
     return (
       <div className='tree'>
         <h2 className='tree__heading'>working tree</h2>
-        { this.props.tree.length > 0 ? this.renderRecursively(this.props.tree) : this.renderEmptyState() }
+        <div ref='scroller' className='tree__scroller'>
+          <div className='tree__inner'>
+            { this.renderItems() }
+          </div>
+        </div>
+        <div className='tree__shadow-bottom' />
+        { this.renderEmptyState() }
       </div>
     );
   }
