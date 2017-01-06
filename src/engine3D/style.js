@@ -11,7 +11,19 @@ export const branch = {
   specularPower: 8
 };
 
+export const ground = {
+  flat: false,
+  wavy: true,
+  hideWhenScroll: false,
+  maxHeight: 10,
+  speed: 0.002,
+  fogDensity: 0.7, // from 0.0 to 1.0
+  heightMap: 'heightMap.png',
+  texture: 'codeTexture.png'
+};
+
 export default {
   outline,
-  branch
+  branch,
+  ground
 };

@@ -19,8 +19,8 @@ class Engine3D extends BABYLON.Engine {
     this.scene = new Scene(this);
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
-    this._renderTextOutline();
     this.ground = new Ground(this.camera, this.scene);
+    this._renderTextOutline();
     this.renderLoop();
   }
 
