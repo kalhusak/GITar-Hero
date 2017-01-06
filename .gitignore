@@ -7,3 +7,7 @@ dist
 coverage
 
 .idea/
+
+thesis/*.aux
+thesis/*.toc
+thesis/*.gz

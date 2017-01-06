@@ -1,4 +1,5 @@
 const config = {
+  noCommandValidation: true, // option to debug whole tasks path just by pressing enter
   taskListSize: 2,
   allowedCommands: [
     'init',

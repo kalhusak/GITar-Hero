@@ -1,0 +1,153 @@
+\documentclass[11pt,a4paper,polish,thesis]{dcsbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+\begin{document}
+	
+	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magalena Łątkowska}
+	\title{Internetowa gra edukacyjna ucząca podstaw pracy~z~programem~git}
+	\subtitle{Praca inżynierska}
+	\supervisor{dr~hab.~inż.~Marek Andrzej Wojciechowski}
+	\date{Poznań, 2017}
+	\maketitle
+	\frontmatter
+	\tableofcontents{}
+	\mainmatter
+	
+	\chapter{Wstęp}
+	
+	\section{Zasady odnośnie pisania pracy}
+	
+	\begin{itemize}
+	
+		\item Piszemy w formie bezosobowej. Można też niby w 1.os liczby mnogiej czyli "Zrobiliśmy...", ale niektórzy akceptują tylko bezosobową, czyli "Zrobiono...".
+		
+		\item słów niepolskich - ,,Nie można więc bezpośrednio
+		w tekście używać słów angielskich. Jeżeli już — powinny być wyróżnione kursywą'' - niektórzy podobno bardzo hejcą za angielskie słowa niestety.
+			
+		\item Jak chodzi o bibliografię, to w wolnej chwili dołączcie linki do stron z jakich korzystaliście, ja to potem ogarnę i zapiszę w takiej formie jak trzeba. Ale spokojnie, bo robienie bibliografii raczej zostawię na koniec.
+		
+		\item Ogólnie nie przejmujcie się strukturą, formatowaniem czy innymi formalnymi bzdetami, ja potem będę to ogarniać żeby było wg zasad więc nie traćcie czasu na ogarnianie takich rzeczy.
+	\end{itemize}
+	
+	Między innymi: 
+	skąd wgl pomysł - bo Git jest super i konieczny a ciężko się go samemu nauczyć, nauka z wielu źródeł jest chujowa, większość ma tylko blade pojęcie a potem idzie do pracy i dupa - co z tego że nauczyli się na studiach programować jak nie potrafią korzystać z Gita i współpracować z zespołem
+		
+	\section*{Cel i zakres pracy}
+	
+	cel - nauka fajna łatwa i przyjemna, oraz praktyczna, obycie z typowymi scenariuszami jakie mogą być potrzebne w pracy
+	
+	Coś o tym dlaczego akurat przeglądarkowa gra, czemu z grafiką 3D itp.
+	
+	Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.
+	
+	\chapter{Podstawy teoretyczne}
+	
+	\section{Sysytem kontroli wersji Git}
+	\textit{Może rozdział powinien się nazywać ,,Wstęp teoretyczny'', albo od razu ,,System kontroli wersji Git'' lub samo ,,Git'', i wtedy bez tej podsekcji - i tak w rozdziale nie może być tylko jedna}
+	
+	Krótki opis systemów kontroli wersji, do czego służą i jakie dają korzyści. Wyjaśnienie dlaczego Git się wyróżnia, co ma szczególnego i bardziej obszerny jego opis. 
+	
+	Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.
+	
+	\chapter{Projekt}
+	
+	\section{Założenia}
+	
+	Najważniejsze cele, co ma spełniać gra, czego ma nauczyć i w jaki sposób
+	
+	\section{Przebieg gry}
+	
+	Krótki opis rozgrywki i elementów interfejsu (może screeny? nie jestem pewna czy już w sekcji ,,projekt'' czy dopiero w sekcji ,,implementacja'')
+	
+	\section{Zadania}
+	
+	Ta sekcja nie tyle ma być o zadaniach w sensie Taskach, taskGraph.json itp, ale o zadaniach w kontekście co ma zrobić użytkownik, czego i w jaki sposób ma się przy tym nauczyć.
+	
+	\subsection{Konstrukcja zadania}
+	Na początku krótki opis zadania, że składa się z kroków itd.
+	
+	\subsection{Podpowiedzi/Pomoc}
+	Nie wiem jak nazwać tę subsekcję, bo HelpDrawer to nie do końca pomoc czy podpowiedzi, tylko content do nauczenia, nie umiem tego ładnie nazwać na razie.
+	
+	Coś że gdy w zadaniu jest krok z nową komendą to wyskakuje pomoc i co w niej jest itp.
+	
+	\subsection{Punkty za rozwiązanie}
+	Coś o punktacji, że zadania należy realizować w określonym czasie, dlaczego zrobiliśmy tak - aby samouczek był bardziej grą, wciągjącą, ulubione słowo Tymona - gamifikacja, korzyści z takiego podejścia itp.
+
+	Opis konstrukcji zadania i kroku, z czego się składają itp. gdzieś raczej w implementacji
+	
+	Coś o tagach i TagKnowledgeRatio???
+	
+	\chapter{Implementacja}
+	
+	\section{Wykorzystane technologie}
+	
+	\subsection{Redux}
+	
+	krótki opis i zalety, czemu wybraliśmy
+	
+	\subsection{React}
+	
+	krótki opis i zalety, czemu wybraliśmy
+	
+	\subsection{Babylon.js}
+	
+	krótki opis i zalety, czemu wybraliśmy
+	
+	\subsection{Pozostałe?}
+	
+	\section{GraphCreator}
+	Na początku może opis konstrukcji zadania i kroku, z czego się składają itp. 
+	Że są w jsonie i uciążliwe byłoby pisanie ich poprzez modyfikację jsona, dlatego właśnie powstał GraphCreator.
+	Do czego służy, jak się z niego korzysta, potem subsekcja o implementacji.
+	
+	\section{Komponenty/elementy(?) aplikacji}
+	
+	\subsection{Lista zadań}
+	
+	Screen jakiś, jak działa, o implementacji
+	
+	\subsection{Konsola}
+	
+	Screen jakiś, jak działa, o implementacji
+	
+	\subsection{Pomoc (HelpDrawer)}
+	
+	Screen jakiś, jak działa, o implementacji
+	
+	\subsection{Drzewko repo}
+	
+	Screen jakiś, jak działa, o implementacji
+	
+	\subsection{Canvas}
+	
+	Tutaj krótko co to, że wyłapuje zmiany stanu i jak wpisano dobrą komendę to przekazuje do Engine3D który jest odpowiedzialny za grafikę i robi co ma się stać.
+	
+	\section{Grafika 3D}
+	Tu będzie sporo, do tego stopnie sporo, że nie wiem jeszcze jak to zaplanować i porozdzielać, względem czego.
+	
+	Czy np podsekcje takie jak:
+	repo3d - gałęzie, commity, co to są i jak powstają na akcje, o ich teksturze, obramowaniu, w tym o solidExplode
+	ground - co to, jak działa itp
+	particle w tle
+	(wg elementów aplikacji)
+	
+	Czy może raczej podsekcje wg 'elementów' Babylona:
+	Meshe, SolidParticle, Particle, Materiały, Tekstury, Shadery
+	
+	
+	\chapter{Podsumowanie}
+	
+	\appendix
+	
+	\chapter{Przewodnik użytkownika}
+	
+	Praktyczne info dla opornego użytkownika, jak ma korzystać, między innymi że jest opcja scrolla aby oddalić, jakie przyciski do obsługi helpa itp. itd., krótki opis fragmentu rozgrywki co się dzieje po czym i dlaczego i jak ma na to reagować użytkownik i takie tam.
+	
+	\backmatter
+	
+\end{document}
