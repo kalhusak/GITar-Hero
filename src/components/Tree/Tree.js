@@ -18,7 +18,7 @@ class Tree extends Component {
     return <div>
       <div className='tree__item-inner'>
         <div className='tree__directory-branch' />
-        <div className='tree__item-name'>
+        <div className='tree__item-name tree__item-name--directory'>
           {name}
         </div>
       </div>
