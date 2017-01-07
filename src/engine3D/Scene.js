@@ -1,9 +1,9 @@
 import BABYLON from 'babylonjs';
 import Particles from './Particles';
-import flare from './textures/flare.png';
+import flare from '../static/textures/flare.png';
+import { scene as sceneStyle } from './style.js';
 
 const backgroundConfig = {
-  sceneColor: new BABYLON.Color3(0.08, 0.08, 0.08),
   targetOffset: [new BABYLON.Vector3(0, -40, 100),
                 new BABYLON.Vector3(100, -40, 100),
                 new BABYLON.Vector3(-100, -40, 100),
@@ -34,20 +34,23 @@ class Scene extends BABYLON.Scene {
     this.initFog = ::this.initFog;
 
     this.light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(3, 1, -3), this);
-    this.clearColor = backgroundConfig.sceneColor;
+    this.clearColor = sceneStyle.color;
 
     this.initBackgroundParticles();
-    this.initFog();
+    if (sceneStyle.fog === true) {
+      this.initFog();
+    }
   }
 
   initFog () {
     this.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    this.fogDensity = 0.002;
-    this.fogColor = backgroundConfig.sceneColor;
+    this.fogDensity = sceneStyle.fogDensity;
+    this.fogColor = sceneStyle.color;
   }
 
   initBackgroundParticles () {
-    const { sceneColor, targetOffset, direction1, direction2, minTime, maxTime } = backgroundConfig;
+    const sceneColor = sceneStyle.color;
+    const { targetOffset, direction1, direction2, minTime, maxTime } = backgroundConfig;
     const { emitRate, minEmitPower, maxEmitPower, speed, minEmitBox, maxEmitBox } = backgroundConfig;
     const { minSize, maxSize } = backgroundConfig;
 
@@ -57,8 +60,8 @@ class Scene extends BABYLON.Scene {
     let emittersArray = [];
     let particlesArray = [];
 
-    for(let i = 0; i < targetOffset.length; i ++) {
-      let emitter = new BABYLON.Mesh.CreateBox('emitter' + i, 2, this);
+    for (let i = 0; i < targetOffset.length; i++) {
+      let emitter = new BABYLON.Mesh.CreateBox('emitter' + i, 0.5, this);
       emitter.position = targetOffset[i];
       emitter.material = emitterMaterial;
       emittersArray.push(emitter);
@@ -79,7 +82,7 @@ class Scene extends BABYLON.Scene {
   updateBackgroundParticlesEmitter (newPosition) {
     const { targetOffset } = backgroundConfig;
     let len = Math.min(this.backgroundParticles.length, targetOffset.length);
-    for(let i = 0; i < len; i++){
+    for (let i = 0; i < len; i++) {
       this.backgroundParticles[i].emitter.position = newPosition.add(targetOffset[i]);
     }
   }

@@ -1,5 +1,5 @@
 import BABYLON from 'babylonjs';
-import flare from './textures/flare.png';
+import flare from '../static/textures/flare.png';
 
 const config = {
   maxNumberOfParticles: 2000,
