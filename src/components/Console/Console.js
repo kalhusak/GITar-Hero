@@ -91,7 +91,7 @@ class Console extends Component {
         break;
 
       case UP_CODE:
-        index = Math.min(history + 1, previousValues.length - 1);
+        index = Math.min(history + 1, Math.max(previousValues.length - 1, 0));
         value = previousValues[index].value;
         this.setState({
           history: index,
