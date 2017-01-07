@@ -1,32 +1,44 @@
+@import "../../variables";
+
 .task {
-  width: 400px;
-  background: rgba(white, 0.9);
+  width: 350px;
+  background: white;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 20px;
+  padding-bottom: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .task__step {
   display: flex;
-  padding: 3px 0px;
-  transition: background 0.3s ease-in-out;
+  padding: 8px 0px;
+  align-items: center;
+}
+
+.task__description {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: #eee;
+  font-weight: light;
 }
 
 .task__step--current {
-  background: #ddd;
+  font-weight: bold;
 }
 
 .task__step-check {
   display: flex;
-  padding-left: 5px;
-  align-items: center;
+  height: 24px;
+  padding: 0px 10px;
 }
 
 .task__step-description {
   display: flex;
-  font-size: 14px;
-  padding: 12px 5px;
+  font-size: 12px;
+  padding-right: 10px;
 }
 
 .task__step-description--done {

@@ -1,44 +1,40 @@
+@import "../../variables";
+
 $timing-fn: cubic-bezier(0,.78,.78,.94);
 $background-color: #33334c;
 
 .task-list {
   position: fixed;
   right: 20px;
-  top: 20px;
+  top: 0px;
   height: calc(100% - 120px);
   overflow: hidden;
 }
 
-.task-list .task:not(:first-child) {
-  filter: grayscale(100%);
-  opacity: 0.8;
-}
-
-.task-list__overlay {
-  position: absolute;
-  left: -20%;
-  top: 0;
-  box-shadow: inset 0px -30px 50px 0px $background-color;
-  width: 140%;
-  z-index: 1;
-  height: 100%;
+.task-list__label {
+  font-size: 18px;
+  height: 100px;
+  line-height: 100px;
+  color: white;
+  text-align: center;
 }
 
 .task-list__task-enter {
   opacity: 0;
-  transform: translateX(400px);
+  transform: scale(0);
 }
 
 .task-list__task-enter.task-list__task-enter-active {
   opacity: 1;
-  transition: all 0.4s $timing-fn 0.4s;
-  transform: translateX(0px);
+  transition: all 0.4s $timing-fn;
+  transform: scale(1);
 }
 
 .task-list__task-leave {
   opacity: 1;
-  transform: translateY(0px);
-  transition: all 0.4s $timing-fn;
+  transform: scale(1);
+  position: absolute;
+  top: 100px;
 
   // Hack for single-step task's check
   .check__path {
@@ -48,5 +44,5 @@ $background-color: #33334c;
 
 .task-list__task-leave.task-list__task-leave-active {
   opacity: 0;
-  transform: translateY(-100px);
+  transform: scale(0);
 }

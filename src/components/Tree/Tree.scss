@@ -1,23 +1,68 @@
 .tree {
   width: 250px;
-  max-height: calc(100% - 230px);
-  background: rgba(white, 0.9);
+  height: calc(100% - 220px);
+  background: white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   position: fixed;
   top: 100px;
   left: 20px;
   border-radius: 4px;
-  padding: 20px 10px 10px 0px;
-  font-size: 11px;
+  padding: 10px 15px;
+  font-size: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tree__shadow-bottom {
+  position: absolute;
+  width: 100%;
+  height: 10px;
+  left: 0px;
+  bottom: 0px;
+  box-shadow: 0px -5px 10px 5px white;
+}
+
+.tree__inner {
+  padding-bottom: 4px;
+  padding-top: 34px;
+  padding-right: 30px;
+}
+
+.tree__items {
+  margin-top: 12px;
+  margin-left: -15px;
 }
 
 .tree__heading {
   font-size: 16px;
-  margin: -10px 0px 20px 10px;
+  line-height: 16px;
+  position: absolute;
+  padding-top: 16px;
+  padding-bottom: 2px;
+  width: 100%;
+  margin: 0;
+  top: 0;
+  background: white;
+  box-shadow: 0px 5px 10px 5px white;
+  z-index: 1;
+}
+
+.tree__scroller {
+  position: relative;
+  overflow: auto;
+  height: 100%;
+  width: calc(100% + 30px);
 }
 
 .tree__empty-state {
-  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #777;
 }
 
@@ -30,6 +75,10 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #444;
+}
+
+.tree__item-name--directory {
+  font-weight: bold;
 }
 
 .tree__file-branch, .tree__directory-branch {

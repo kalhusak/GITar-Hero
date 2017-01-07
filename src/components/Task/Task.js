@@ -20,7 +20,7 @@ export default class Task extends Component {
         className={'task__step' + (active && index === task.currentStepIndex ? ' task__step--current' : '')}
         key={index}>
         <div className='task__step-check'>
-          <Check checked={done} />
+          <Check checked={done} size={24} />
         </div>
         <div className={'task__step-description' + (done ? ' task__step-description--done' : '')}>
           {step.description}
@@ -30,11 +30,14 @@ export default class Task extends Component {
   }
 
   render () {
-    const { task: { title, time }, active } = this.props;
+    const { task: { title, time, description }, active } = this.props;
 
     return (
       <div className='task'>
         <Time label={title} time={time * 1000} active={active} />
+        <div className='task__description'>
+          {description}
+        </div>
         <div className='task__subtasks'>
           {this.renderSubtasks()}
         </div>
