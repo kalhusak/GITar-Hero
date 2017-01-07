@@ -30,9 +30,9 @@ export const tag = {
 export const ground = {
   flat: false,
   wavy: true,
-  hideWhenScroll: false,
+  hideWhenScroll: true,
   maxHeight: 10,
-  speed: 0.002,
+  speed: 0.0003,
   fogDensity: 0.7, // from 0.0 to 1.0
   heightMap: 'heightMap.png',
   texture: 'codeTexture.png'
