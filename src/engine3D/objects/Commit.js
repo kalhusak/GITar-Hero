@@ -45,7 +45,7 @@ export default class Commit extends Abstract3DObject {
   showName () {
     this.text.show();
     if (this.tag) {
-      this.tag.hide();
+      this.tag.show();
     }
   }
 
