@@ -10,15 +10,13 @@ export const branch = {
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
   textStyle: {
-    color: '#408040'
+    color: '#FFFFFF'
   }
 };
 
 // Text style can have specularColor(color3), emissiveColor(color3), specularPower(float), color(rgb string)
 export const commit = {
-  textStyle: {
-    color: '#92409e'
-  }
+  brightningColor: new BABYLON.Color3(0.1, 0.1, 0.1)
 };
 
 export const tag = {

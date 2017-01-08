@@ -2,6 +2,7 @@ import BABYLON from 'babylonjs';
 import CommitDisappear from '../animations/CommitDisappear';
 import CommitAppear from '../animations/CommitAppear';
 import Abstract3DObject from './Abstract3DObject';
+import ColorUtils from '../utils/ColorUtils';
 import Text from './Text';
 import { outline as outlineStyle, commit as commitStyle } from '../style';
 
@@ -14,6 +15,7 @@ export default class Commit extends Abstract3DObject {
 
   constructor (ref, message, position, material, scene) {
     super(ref, scene);
+
     this._createSphere = ::this._createSphere;
     this.hideName = ::this.hideName;
     this.showName = ::this.showName;
@@ -31,7 +33,11 @@ export default class Commit extends Abstract3DObject {
     this.mesh.outlineColor = outlineStyle.color;
     this.mesh.outlineWidth = outlineStyle.width;
     this.mesh.material = material;
-    this.text = new Text(message, textPosition, scene, commitStyle.textStyle);
+
+    var brightningColor = commitStyle.brightningColor || new BABYLON.Color3(0.1, 0.1, 0.1);
+    var commitColor = this.mesh.material.diffuseColor;
+    var textColor = ColorUtils.addColors(brightningColor, commitColor);
+    this.text = new Text(message, textPosition, scene, { color: textColor.toHexString() });
     this.isMergeCommit = false;
   }
 
