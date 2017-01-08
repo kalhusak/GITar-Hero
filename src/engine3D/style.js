@@ -2,7 +2,7 @@ import BABYLON from 'babylonjs';
 
 export const scene = {
   color: new BABYLON.Color3(0.1, 0.1, 0.1),
-  fog: true,
+  fog: false,
   fogDensity: 0.002
 };
 
