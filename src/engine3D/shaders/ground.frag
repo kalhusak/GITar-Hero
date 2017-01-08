@@ -8,9 +8,10 @@ varying vec2 vUvWithOffset;
 uniform sampler2D codeTexture;
 uniform float hideWhenScroll;
 uniform float fogDensity;
+uniform vec4 fogColor;
 uniform float meshLength;
 
-const vec4 fogColor = vec4(0.2, 0.2, 0.3, 1.0); // Set to background/clear color
+//const vec4 fogColor = vec4(0.2, 0.2, 0.3, 1.0); // Set to background/clear color
 
 void main() {
     vec4 textureColor = texture2D(codeTexture, vUvWithOffset);

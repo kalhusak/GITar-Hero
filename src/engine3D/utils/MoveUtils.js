@@ -21,6 +21,8 @@ export function moveTo (translatedObject, targetObject, speed, scene, offset, en
   var moveToAnimation = () => {
     var translation = getXZTranslationVector(translatedObject.getPosition(), targetObject.getPosition(), speed, offset);
     translatedObject.getPositionRef().addInPlace(translation);
+    scene.updateBackgroundParticlesEmitter(translatedObject.getPosition());
+
     if (translation.equals(new BABYLON.Vector3.Zero())) {
       scene.unregisterBeforeRender(moveToAnimation);
       if (endEvent) {

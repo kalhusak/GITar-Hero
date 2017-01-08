@@ -1,5 +1,11 @@
 import BABYLON from 'babylonjs';
 
+export const scene = {
+  color: new BABYLON.Color3(0.1, 0.1, 0.1),
+  fog: false,
+  fogDensity: 0.002
+};
+
 export const outline = {
   enable: true,
   color: new BABYLON.Color3(0, 0, 0),
@@ -30,13 +36,14 @@ export const ground = {
   wavy: true,
   hideWhenScroll: false,
   maxHeight: 10,
-  speed: 0.002,
+  speed: 0.0006,
   fogDensity: 0.7, // from 0.0 to 1.0
   heightMap: 'heightMap.png',
-  texture: 'codeTexture.png'
+  texture: 'codeTexture3.png'
 };
 
 export default {
+  scene,
   outline,
   branch,
   ground,
