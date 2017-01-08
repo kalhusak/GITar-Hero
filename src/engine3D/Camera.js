@@ -34,16 +34,18 @@ class Camera extends BABYLON.FollowCamera {
   }
 
   onWheel (event) {
-    var factor = 0.0;
-    if (event.deltaY >= 0 && this.heightOffset < 500) {
-      factor = 1;
-    } else if (event.deltaY < 0 && this.heightOffset - 10 >= config.heightOffset) {
-      factor = -1;
+    var factor = event.deltaY >= 0 ? 1 : -1;
+    var newHeightOffset = this.heightOffset + config.heightOffsetSpeed * factor;
+    if (newHeightOffset >= config.heightOffset && newHeightOffset <= 300 && this.followObject.offset.equals(BABYLON.Vector3.Zero())) {
+      this.heightOffset = newHeightOffset;
+      this.maxCameraSpeed += 5 * factor;
+      this.cameraAcceleration += 0.01 * factor;
+      if ( this.followObject.cameraTargetSpeed === 3.0)
+        this.followObject.cameraTargetSpeed = 1.5;
+    } else if (newHeightOffset >= config.heightOffset && (this.position.z > -100 || factor < 0)) {
+      this.followObject.addOffsetInPlace(new BABYLON.Vector3(0, 0, -10 * factor));
+      this.followObject.cameraTargetSpeed = 3.0;
     }
-
-    this.heightOffset += config.heightOffsetSpeed * factor;
-    this.maxCameraSpeed += 5 * factor;
-    this.followObject.addOffsetInPlace(new BABYLON.Vector3(0, 0, -3 * factor));
   }
 
   getPosition () {
