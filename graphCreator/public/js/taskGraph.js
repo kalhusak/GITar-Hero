@@ -45,14 +45,18 @@ function prepareSteps(steps) {
           newStep.data = {
             type: step.toCommitOrBranch,
             name: step.name,
-            newFiles: step.newFiles ? step.newFiles.split(";") : [],
-            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
+            after: {
+              newFiles: stringToArray(step.newFiles),
+              removeFiles: stringToArray(step.removeFiles)
+            }
           }
           break;
         case 'ADD':
           newStep.data = {
-            modifyFiles: step.modifyFiles ? step.modifyFiles.split(";") : [],
-            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
+            before: {
+                modifyFiles: stringToArray(step.modifyFiles),
+                removeFiles: stringToArray(step.removeFiles)
+            }
           }
           break;
         case 'PULL':
@@ -62,8 +66,10 @@ function prepareSteps(steps) {
               newCommits.push({
                 name: step['commitName' + i],
                 message: step['commitMessage' + i],
-                newFiles: step['newFiles' + i] ? step['newFiles' + i].split(";") : [],
-                removeFiles: step['removeFiles' + i] ? step['removeFiles' + i].split(";") : []
+                after: {
+                  newFiles: stringToArray(step['newFiles' + i]),
+                  removeFiles: stringToArray(step['removeFiles' + i])
+                }
               });
             }
           }
@@ -80,16 +86,20 @@ function prepareSteps(steps) {
           newStep.data = {
             sourceBranch: step.sourceBranch,
             targetBranch: step.targetBranch,
-            newFiles: step.newFiles ? step.newFiles.split(";") : [],
-            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
+            after: {
+              newFiles: stringToArray(step.newFiles),
+              removeFiles: stringToArray(step.removeFiles)
+            }
           }
           break;
         case 'RESET':
           newStep.data = {
             type: step.commitOrNumber,
             name: step.value,
-            newFiles: step.newFiles ? step.newFiles.split(";") : [],
-            removeFiles: step.removeFiles ? step.removeFiles.split(";") : []
+            after: {
+              newFiles: stringToArray(step.newFiles),
+              removeFiles: stringToArray(step.removeFiles)
+            }
           }
           break;
         case 'TAG':
@@ -130,4 +140,8 @@ function getRootId (nodes, edges) {
     }
   }
   return null;
+}
+
+function stringToArray(string) {
+  return string ? string.split(";") : [];
 }
