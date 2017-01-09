@@ -157,6 +157,7 @@ document.onload = (function(d3, saveAs, Blob, undefined){
             thisGraph.updateGraph();
           }catch(err){
             window.alert("Error parsing uploaded file\nerror message: " + err.message);
+            console.log(err);
             return;
           }
         };
