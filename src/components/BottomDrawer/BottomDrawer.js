@@ -123,7 +123,9 @@ class BottomDrawer extends Component {
             {this.renderTabNavigation()}
           </nav>
           <div className='help-container__current-tab'>
-            {this.renderCurrentTab()}
+            <div className='help-container__current-tab-scroller'>
+              {this.renderCurrentTab()}
+            </div>
           </div>
         </div>
       </div>
