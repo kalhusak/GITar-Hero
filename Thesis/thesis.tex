@@ -68,7 +68,19 @@
 	Ta sekcja nie tyle ma być o zadaniach w sensie Taskach, taskGraph.json itp, ale o zadaniach w kontekście co ma zrobić użytkownik, czego i w jaki sposób ma się przy tym nauczyć.
 	
 	\subsection{Konstrukcja zadania}
-	Na początku krótki opis zadania, że składa się z kroków itd.
+	Pojedyncze zadanie reprezentowane jest w postaci obiektu. W każdym z nich znajdują się informacje o tytule zadania, jego opis, który służy ukazaniu użytkownikowi celu oraz problemu jaki należy rozwiązać w danym zadaniu. Może on być na przykład przedstawiony w postaci zlecenia dodania jakiejś funkcjonalności lub naprawienia błędu. 
+	
+Aby nagradzać użytkownika punktami za szybko wykonane zadanie zdecydowano się na określenie czasu na wykonanie zadania. Czas jest obliczany w momencie dodawania nowego zadania na podstawie ilości dotychczas wykonany zadań, a także wartości minimalnej oraz maksymalnej czasu w jakim można to zadanie wykonać.
+	 
+Ponad to zadania posiadają listę następników, tj. identyfikatory zadań, które mogą wystąpić po aktualnym zadaniu, gdyż hierarchia zadań ułożona jest w postaci grafu skierowanego. Zdecydowano się na taką strukturą ze względu na to, że daje ona możliwość sekwencjonowania zadań, a zarazem pozwala na element losowości, gdyż kolejne zadania wybierane są w sposób losowy z puli z następników aktualnego zadania. Dzięki takiej reprezentacji nigdy nie zdarzy się sytuacja, w której następnym zadaniem będzie zadanie nieadekwatne do aktualnego stanu repozytorium.
+
+
+Zadania zawierają również listę kroków, które należy spełnić, aby problem został uznany za rozwiązany. 
+Dzięki podziałowi zadania na kroki użytkownik uczy się jak należy postępować i jakich użyć komend, aby sprostać postawionemu zadaniu. Ma to również na celu automatyzowanie zachowania użytkownika w prawdziwych przypadkach, z którymi może się spotkać w domu lub pracy. Na każdy krok składa się opis co należy w nim zrealizować. W systemie git możliwe jest wykonanie pewnych akcji przy użyciu różnych komend czy przełączników. W tym celu każdy krok zawiera listę komend, które użytkownik może zastosować, by uznać, że krok został wykonany poprawnie. Krok jest równoznaczny z wykonaniem pojedynczej komendy w systemie git.
+
+ Dla każdego kroku określamy listę tagów. Przez tagi rozumiemy etykiety jakie nadajemy krokom w celu określenia zagadnienia jakiego uczą. Etykiety te są związane z wykonywanymi komendami. Jednym z przykładowych tagów może być 'commit', który jest nadawany danemu krokowi, gdy realizujemy w danym kroku akcję zatwierdzania zmian w naszym repozytorium. W zadaniach istnieje wiele tagów takich jak: 'branch', 'checkout', 'merge', 'pull', 'push', itd.  Gdy użytkownik poprawnie wykona dany krok to zwiększany jest wskaźnik powodzenia dla wszystkich etykiet przypisanych do danego kroku. Przechowywane są informacje o etykietach w postaci ilości wykonanych kroków z daną etykietą oraz ilość tych pozytywnych wywołań. W ten sposób można określić w czym użytkownik sobie gorzej radzi. Ta informacja jest brana pod uwagę przy losowaniu kolejnych zadań, gdyż dla możliwych następników wyliczana jest waga na podstawie etykiet jakie mają w swoich krokach. Obliczenie wagi dla zadania polega na zsumowaniu kwadratów ilorazu wartości 1 oraz wyznaczonego wskaźnika dla kolejnych tagów w krokach zadania, będącego ilorazem poprawnie wykonanych kroków z całkowitą liczbą prób dla tej etykiety. Dzięki takiemu zabiegowi zwiększane jest prawdopodobieństwo wylosowania kolejnego zadania posiadającego etykiety w swoich krokach, z którymi użytkownik miał większy problem. Przykład kroku, w którym wykorzystywana jest więcej niż jedna etykieta może stanowić wykonanie komendy pozwalającej na jednoczesne utworzenie gałęzi w repozytorium oraz przejście na nią, w tym przypadku przypisanymi wartościami będą 'branch' oraz 'checkout'. 
+
+	Kolejnymi elementami będącymi częścią kroków w zadaniu są typ oraz dane, które niesie ze sobą dany krok. Typ pozwala na określenie jaką akcję należy wykonać po stronie grafiki 3D, by odwzorować aktualny stan repozytorium. Dane wykorzystywane są w różny sposób. Dostarczają informację np. o nazwie 'commita' czy 'brancha'. Mogą też określać jakie pliki powinny zostać dodane lub usunięte z repozytorium przy wykonywaniu akcji 'pull'. Innym razem niosą informację czy 'checkout' powinien być realizowany na 'branch', a może na konkretny 'commit'. 
 	
 	\subsection{Podpowiedzi/Pomoc}
 	Nie wiem jak nazwać tę subsekcję, bo HelpDrawer to nie do końca pomoc czy podpowiedzi, tylko content do nauczenia, nie umiem tego ładnie nazwać na razie.
@@ -76,11 +88,13 @@
 	Coś że gdy w zadaniu jest krok z nową komendą to wyskakuje pomoc i co w niej jest itp.
 	
 	\subsection{Punkty za rozwiązanie}
-	Coś o punktacji, że zadania należy realizować w określonym czasie, dlaczego zrobiliśmy tak - aby samouczek był bardziej grą, wciągjącą, ulubione słowo Tymona - gamifikacja, korzyści z takiego podejścia itp.
-
-	Opis konstrukcji zadania i kroku, z czego się składają itp. gdzieś raczej w implementacji
 	
-	Coś o tagach i TagKnowledgeRatio???
+	W projekcie wprowadzono elementy gamifikacji np. poprzez punkty za rozwiązanie zadań. Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. 
+
+
+	Elementy takie jak punkty powodują, że gra wciąga użytkownika. Z każdym rozegraniem, użytkownik stara się pobić swój dotychczasowy wynik. W ten sposób co raz to szybciej i pewniej będzie wykonywał zadania oraz komendy. Dodatkowo punkty wprowadzają elementy rywalizacji pomiędzy użytkownikami. Użytkownicy będą starać się zajmować najwyższe miejsce w rankingu, co powoduję, że będą wykorzystywać aplikacje w celu uzyskania poprawy wyniku. 
+
+	
 	
 	\chapter{Implementacja}
 	
@@ -92,11 +106,13 @@
 	
 	\subsection{React}
 	
-	krótki opis i zalety, czemu wybraliśmy
+
 	
 	\subsection{Babylon.js}
+
+	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript wykorzystywaną przede wszystkim do tworzenia gier wideo w przeglądarkach. Pierwsza odsłona została wydana w 2013 roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że jest silnikiem 3D posiada wspaniałe narzędzia do tworzenia, wyświetlania i teksturowania szkieletów w przestrzeni. Przez to, że kierowana jest głównie do twórców gier posiada wiele dodatkowych funkcji jak generowanie krawędzi, gotowych obiektów ułatwiających pracę programiście typu tworzenia obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny, czy wbudowane kamery np. FollowCamera - kamera śledząca, automatycznie podążająca za obiektem. 
 	
-	krótki opis i zalety, czemu wybraliśmy
+	Rozważana była jeszcze inna biblioteka 3D, a mianowicie Three.js wydana w 2009 roku, również oparta na podstawie webGL. Po zapoznaniu i przetestowaniu obu silników wybór padł na Babylon.js. Głównymi czynnikami skłaniającymi nas w stronę Babylon'a była płynność, którą zapewniał w przeciwieństwie do Three.js oraz prostota użycia. Przy renderowaniu tego samego, wybranego obiektu Babylon.js spisywał się lepiej o kilka klatek. Poza tym Babylon.js jest dobrze udokumentowany, posiada bogatą bazę poradników oraz społeczność wykorzystujące tę bibliotekę jest duża i stale rośnie.
 	
 	\subsection{Pozostałe?}
 	
