@@ -71,12 +71,18 @@ class BottomDrawer extends Component {
     }
   }
 
+  onWheel (event) {
+    event.stopPropagation();
+  }
+
   componentDidMount () {
     document.body.addEventListener('keydown', this.handleKeyDown);
+    this.refs.drawer.addEventListener('wheel', this.onWheel);
   }
 
   componentWillUnmount () {
     document.body.removeEventListener('keydown', this.handleKeyDown);
+    this.refs.drawer.removeEventListener('wheel', this.onWheel);
   }
 
   toggleAutoShowHelp () {
@@ -95,7 +101,7 @@ class BottomDrawer extends Component {
     const preventInitialAnimation = this.initialRender ? { transition: 'none' } : null;
     this.initialRender = false;
 
-    return <div>
+    return <div ref='drawer'>
       <div className={getClasses('bottom-drawer__overlay')} onClick={this.closeDrawer}
         style={preventInitialAnimation} />
       <div className={getClasses('bottom-drawer__container')}
