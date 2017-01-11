@@ -80,6 +80,8 @@ class Branch extends Abstract3DObject {
     var adjustEvent = () => {
       if (deltaParts <= 0) {
         this.tube.addParts(1, mergeEvent);
+      } else {
+        branch.tube.addParts(0, mergeEvent);
       }
       branch.addEndConnector(endConnectorEndPosition);
     };
@@ -146,6 +148,7 @@ class Branch extends Abstract3DObject {
         if (removedCommit && removedCommit.isMergeCommit) {
           var secondBranch = BranchUtils.getSecondBranchForMergeCommit(removedCommit, this);
           secondBranch.removeEndConnector();
+          secondBranch.removeLastCommit();
         }
       }
     };
