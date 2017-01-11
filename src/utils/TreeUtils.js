@@ -7,10 +7,16 @@ function pushNode (subtree, path, status, changeType) {
   if (path.length === 1) {
     if (node) {
       node.status = status;
-
       if (changeType) {
         node.changeType = changeType;
       }
+    } else if (name === '*') {
+      subtree.forEach(node => {
+        node.status = status;
+        if (changeType) {
+          node.changeType = changeType;
+        }
+      });
     } else {
       subtree.push({ name, status, changeType: 'added' });
     }
@@ -22,7 +28,6 @@ function pushNode (subtree, path, status, changeType) {
       };
       subtree.push(node);
     }
-
     pushNode(node.children, path.slice(1), status, changeType);
   }
 };
