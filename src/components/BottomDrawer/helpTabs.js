@@ -7,8 +7,8 @@ const helpTabs = [
     name: 'repo',
     content: <div>
       <p>Git repository (repo) contains your project’s code with it’s whole history.</p>
-      <p>Init new git repository in current directory using <span className='help-container__git-command'>git init</span>
-         or clone existing one using <span className='help-container__git-command'>git clone [url]</span>.</p>
+      <p>Init new git repository in current directory using <span className='help-container__git-command'>git init
+        </span> or clone existing one using <span className='help-container__git-command'>git clone [url]</span>.</p>
       <p>You can initialize git repository in an empty directory or one that already contains a project.
         Don't worry, any of your files will be changed, git will create a .git subdirectory containing everything it
         needs to work. Right after <span className='help-container__git-command'>git init</span> command your project
@@ -23,10 +23,10 @@ const helpTabs = [
     name: 'stage',
     content: <div>
       <p>If you want to start tracking a file or save changes of already tracked file, you need to add it to your
-        staging area. All staged files will be saved in a forthcoming commit.</p>
+        staging area (index). All staged files will be saved in a forthcoming commit.</p>
       <p>Add a file to staging area with <span className='help-container__git-command'>git add [filename]</span>.
-        Use <span className='help-container__git-command'>git add -A</span>
-        to stage all untracked and modified files found in repo directory.</p>
+        Use <span className='help-container__git-command'>git add -A</span> to stage all untracked and modified files
+        found in repo directory.</p>
       <p>You can unstage a file using <span className='help-container__git-command'>git reset HEAD [filename]</span>.</p>
       <p>Note that modifying a staged file won't change that file in the staging area.
         This means that if you want to save the most recent version of that file, you need to stage it again.</p>
@@ -42,8 +42,8 @@ const helpTabs = [
       <p>Commit contain a snapshot of your whole project, not only the changes commited.
         This means that at any time you can revert all files back to the state they were
         or simply check how they looked like, when the commit was done.</p>
-      <p>To revert your project back to the state at a specific commit use
-        <span className='help-container__git-command'>git checkout [commitHash]</span>.</p>
+      <p>To revert your project back to the state at a specific commit use <span className='help-container__git-command'>
+        git checkout [commitHash]</span>.</p>
     </div>
   },
   {
@@ -56,17 +56,14 @@ const helpTabs = [
       <p>Create branches when working on new specific feature or fix.</p>
       <p>Use <span className='help-container__git-command'>git branch [branch]</span> to create new branch pointing
         to current commit.</p>
-      <p>Switch branches using <span className='help-container__git-command'>git checkout [branch]</span></p>
-      <p>Create & switch to branch using <span className='help-container__git-command'>git checkout -b [branch]</span></p>
-      <p>Tracking branch is a local branch set to track a remote branch - called upstream branch - from remote
-        repository (see also: remote repos). Tracking branch has a direct relationship with it's upstream branch.
-        If you're on a tracking branch and run <span className='help-container__git-command'>git pull</span> or
-        <span className='help-container__git-command'>git push</span>, git knows which remote branch you want to
-        synchronize with.</p>
-      <p>To set an upstream branch of an existing local branch use <span className='help-container__git-command'>
-      git branch -u [remote]/[remotebranch]</span>.</p>
-      <p>To create & switch to a new local branch tracking a remote branch use
-        <span className='help-container__git-command'>git checkout -b [branch] [remotename]/[remotebranch]</span>.</p>
+      <p>Switch branches using <span className='help-container__git-command'>git checkout [branch]</span>.</p>
+      <p>Create & switch to branch using <span className='help-container__git-command'>git checkout -b [branch]</span>.</p>
+      <p>Tracking branch is a local branch set to track a remote branch - called upstream branch - from remote repository (see also: remote
+        repos). Tracking branch has a direct relationship with it's upstream branch. If you're on a tracking branch and
+        run <span className='help-container__git-command'>git pull</span> or <span className='help-container__git-command'>git push</span>,
+        git knows which remote branch you want to synchronize with.</p>
+      <p>To set an upstream branch of an existing local branch use <span className='help-container__git-command'> git branch -u [remote]/[remotebranch]</span>.</p>
+      <p>To create & switch to a new local branch tracking a remote branch use <span className='help-container__git-command'>git checkout -b [branch] [remotename]/[remotebranch]</span>.</p>
     </div>
   },
   {
@@ -94,7 +91,7 @@ const helpTabs = [
         branch, when we finish working on it.</p>
       <p>Use <span className='help-container__git-command'>git merge [branchX]</span> to merge branchX into current branch
         or <span className='help-container__git-command'>git merge [branchX] [branchY]</span> to merge branchX into branchY.</p>
-      <p>There are to basic types of merge:
+      <p>There are two basic types of merge:
         <ul>
           <li><b>fast-forward</b> - If the commit of the branch your merging into is a direct ancestor of branch
             your merging in, the pointer of a branch you're on will be simply moved forward. In this case, all commits
@@ -147,14 +144,12 @@ const helpTabs = [
             affects not only your staging area but also your working directory. Be careful with this option, because
             it may cause you lose your work (even commited).</li>
         </ul>
-        <p>You can unstage a file with <span className='help-container__git-command'>git reset [filename]</span>. This
-          command is equivalent to <span className='help-container__git-command'>git reset --mixed HEAD [filename]
-          </span>. It changes only your staging area. If you run this command without specifying a file, all your
-          changes will be unstaged.</p>
-        <p>Although <span className='help-container__git-command'>git reset --hard [commit]</span> can cause some
-          damage, it might also be very helpful. If you want to revert and delete a commit you're currently on and
-          return to a state saved in a previous one, you can accomplish it with
-          <span className='help-container__git-command'>git reset --hard HEAD~</span>. For example, this can be used to
+        <p>You can unstage a file with <span className='help-container__git-command'>git reset [filename]</span>. This command is equivalent
+          to <span className='help-container__git-command'>git reset --mixed HEAD [filename]</span>. It changes only your staging area.
+          If you run this command without specifying a file, all your changes will be unstaged.</p>
+        <p>Although <span className='help-container__git-command'>git reset --hard [commit]</span> can cause some damage, it might also be very
+          helpful. If you want to revert and delete a commit you're currently on and return to a state saved in a previous one, you can
+          accomplish it with <span className='help-container__git-command'>git reset --hard HEAD~</span>. For example, this can be used to
           revert a merge action.</p>
       </p>
     </div>
@@ -192,14 +187,14 @@ const helpTabs = [
     name: 'pull',
     content: <div>
       <p>To get most recent data from a remote repo you need to fetch it. Usually you also want to merge it with your
-        local repo. There is a command that does both fetching and merging -
-        <span className='help-container__git-command'>git pull [remote] [remotebranch]</span>. Running it generally
-        fetches data from specified remote repo and automatically tries to merge it into your local branch.</p>
-      <p>By default, after fetching data pull command runs <span className='help-container__git-command'>git merge</span>
-        to merge the retrieved branch into the current one. You can change that behaviour with --rebase option to tell
-        git it should run <span className='help-container__git-command'>git rebase</span> instead.</p>
-      <p>If your current branch is set up to track a remote branch, you can use
-        <span className='help-container__git-command'>git pull</span> without any parameters to automatically fetch and
+        local repo. There is a command that does both fetching and merging - <span className='help-container__git-command'>
+          git pull [remote] [remotebranch]</span>. Running it generally fetches data from specified remote repo and
+        automatically tries to merge it into your local branch.</p>
+      <p>By default, after fetching data, pull command runs <span className='help-container__git-command'>git merge
+        </span> to merge the retrieved branch into the current one. You can change that behaviour with --rebase option
+        to tell git it should run <span className='help-container__git-command'>git rebase</span> instead.</p>
+      <p>If your current branch is set up to track a remote branch, you can use <span className='help-container__git-command'>
+        git pull</span> without any parameters to automatically fetch and
         then merge that remote branch into your current branch.</p>
     </div>
   },
@@ -211,13 +206,16 @@ const helpTabs = [
         But it works only if nobody has pushed in the meantime. If you have an outdated version of remote repo, your
         push will be rejected. First you’ll have to fetch the changes you don't have and merge them with yours before
         you’ll be allowed to push.</p>
-      <p>When you're on a local branch that tracks a remote branch you can run
-        <span className='help-container__git-command'>git push</span> without any parameters. Git knows exactly to which
+      <p>When you're on a local branch that tracks a remote branch you can run <span className='help-container__git-command'>
+        git push</span> without any parameters. Git knows exactly to which
         remote and which branch it should push.</p>
       <p>If you want your local branch to track a specific remote branch, you can set it while pushing to a remote with
         <span className='help-container__git-command'>git push -u [remote] [remotebranch]</span>. Next time you push
         from this branch you won't have to specify any parametrs. Git will push to the remote branch you configured
-        as an upstream branch.</p>
+        as an upstream branch. Note that if you use this command to push and start tracking a remote branch that didn't
+        exist on a remote, that remote branch will be created. If you want to create a remote branch which has a
+        different name than a local one, you can do it with <span className='help-container__git-command'>git push -u
+          [remote] [localbranch]:[remotebranch]</span>.</p>
     </div>
   },
   {
