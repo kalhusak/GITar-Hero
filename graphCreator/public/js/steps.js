@@ -20,6 +20,15 @@ function addInitStep (index, task) {
   createStepElement(step, index, 'Init').insertBefore('#addNewStepProperty');
 }
 
+function addRemoteStep (index, task) {
+  var step = task.steps[index];
+  if (!step) {
+    step = createStep('remote', 'REMOTE', 'remote repos');
+    task.steps.push(step);
+  }
+  createStepElement(step, index, 'Remote').insertBefore('#addNewStepProperty');
+}
+
 function addCheckoutStep (index, task) {
   var step = task.steps[index];
   if (!step) {

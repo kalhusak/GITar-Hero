@@ -52,6 +52,9 @@ function addStep (index, type) {
     case 'INIT':
       addInitStep(index, selectedNode);
       break;
+    case 'REMOTE':
+      addRemoteStep(index, selectedNode);
+      break;
     case 'CHECKOUT':
       addCheckoutStep(index, selectedNode);
       break;
