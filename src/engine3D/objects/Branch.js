@@ -57,7 +57,7 @@ class Branch extends Abstract3DObject {
 
   removeLastCommit () {
     var lastCommit = this.commits.pop();
-    if (lastCommit) {
+    if (lastCommit && lastCommit.mesh) {
       lastCommit.disappear();
     }
     return lastCommit;
