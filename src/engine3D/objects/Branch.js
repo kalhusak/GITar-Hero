@@ -127,7 +127,7 @@ class Branch extends Abstract3DObject {
   }
 
   pull (data) {
-    if (data.commonParentName) {
+    if (data.commonParentName && data.newCommits && data.newCommits.length > 0) {
       let newCommitsCount = data.newCommits.length;
       var commitsToRebase = CommitUtils.getAllBeforeCommonParent(this.commits, data.commonParentName);
       var rebaseAnimation = new RebaseCommitsAnimation(commitsToRebase, newCommitsCount, this.scene);
