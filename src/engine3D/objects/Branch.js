@@ -132,12 +132,17 @@ class Branch extends Abstract3DObject {
       var commitsToRebase = CommitUtils.getAllBeforeCommonParent(this.commits, data.commonParentName);
       var rebaseAnimation = new RebaseCommitsAnimation(commitsToRebase, newCommitsCount, this.scene);
       this.tube.removeParts(commitsToRebase.length, () => {
+        this.scene.getEngine().camera.stop();
         var pullAnimation = new PullAnimation(this, this.scene, data.newCommits, () => {
+          this.scene.getEngine().camera.start();
           this.tube.addParts(commitsToRebase.length);
         });
       });
     } else {
-      var pullAnimation = new PullAnimation(this, this.scene, data.newCommits);
+      this.scene.getEngine().camera.stop();
+      var pullAnimation = new PullAnimation(this, this.scene, data.newCommits, () => {
+        this.scene.getEngine().camera.start();
+      });
     }
   }
 

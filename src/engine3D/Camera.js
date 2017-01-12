@@ -17,6 +17,8 @@ class Camera extends BABYLON.FollowCamera {
     super(config.name, config.initPosition, scene);
     this.getPosition = ::this.getPosition;
     this.onWheel = ::this.onWheel;
+    this.stop = ::this.stop;
+    this.start = ::this.start;
 
     this.scene = scene;
     this.scene.activeCamera = this;
@@ -50,6 +52,14 @@ class Camera extends BABYLON.FollowCamera {
 
   getPosition () {
     return this.position.clone();
+  }
+
+  stop () {
+    this.followObject.isStopped = true;
+  }
+
+  start () {
+    this.followObject.isStopped = false;
   }
 }
 

@@ -19,6 +19,7 @@ export default class FollowObject {
     this.object3D = null;
     this.cameraTarget = new CameraTarget('HeadCameraTarget', scene);
     this.isMoving = false;
+    this.isStopped = false;
     this.offset = BABYLON.Vector3.Zero();
     this.cameraTargetSpeed = config.cameraTargetSpeed;
 
@@ -35,7 +36,7 @@ export default class FollowObject {
   }
 
   _moveCameraTargetToObjectIfNeed () {
-    if (this.object3D !== null && !this._isCameraNextToObject() && !this.isMoving) {
+    if (!this.isStopped && this.object3D !== null && !this._isCameraNextToObject() && !this.isMoving) {
       this._moveCameraTargetToObject();
       this.isMoving = true;
     }
