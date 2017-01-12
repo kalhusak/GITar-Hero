@@ -41,10 +41,10 @@ export default class Commit extends Abstract3DObject {
     this.isMergeCommit = false;
   }
 
-  hideName () {
-    this.text.hide();
+  hideName (onEnd) {
+    this.text.hide(this.tag ? null : onEnd);
     if (this.tag) {
-      this.tag.hide();
+      this.tag.hide(onEnd);
     }
   }
 

@@ -76,10 +76,10 @@ export default class Text {
     }
   }
 
-  hide () {
+  hide (onEnd) {
     var duration = config.animationFrames * config.fadeDuration;
     var fade = new BABYLON.Animation.CreateAndStartAnimation('fade' + this.text, this.textPlane.material, 'alpha',
-      config.animationFrames, duration, 1, 0, 0, null, () => { this.isVisible = false; });
+      config.animationFrames, duration, 1, 0, 0, null, () => { this.isVisible = false; if (onEnd) { onEnd(); } });
   }
 
   show () {
