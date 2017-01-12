@@ -91,6 +91,7 @@ Dzięki podziałowi zadania na kroki użytkownik uczy się jak należy postępow
 	%
 	W projekcie wprowadzono elementy gamifikacji np. poprzez punkty za rozwiązanie zadań. Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. 
 
+% points with ranking ? ? ?
 
 	Elementy takie jak punkty powodują, że gra wciąga użytkownika. Z każdym rozegraniem, użytkownik stara się pobić swój dotychczasowy wynik. W ten sposób co raz to szybciej i pewniej będzie wykonywał zadania oraz komendy. Dodatkowo punkty wprowadzają elementy rywalizacji pomiędzy użytkownikami. Użytkownicy będą starać się zajmować najwyższe miejsce w rankingu, co powoduję, że będą wykorzystywać aplikacje w celu uzyskania poprawy wyniku. 
 
@@ -147,7 +148,7 @@ Dzięki podziałowi zadania na kroki użytkownik uczy się jak należy postępow
 	
 	\subsection{Canvas}
 	
-	Tutaj krótko co to, że wyłapuje zmiany stanu i jak wpisano dobrą komendę to przekazuje do Engine3D który jest odpowiedzialny za grafikę i robi co ma się stać.
+	W projekcie skorzystano z komponentu 'canvas' z html w wersji 5. Pozwala on na wyświetlanie grafiki w przeglądarce. Służy jako kontener dla graficznego silnika 3D, pochodzącego z biblioteki babylon. 
 	
 	\section{Grafika 3D}
 	Tu będzie sporo, do tego stopnie sporo, że nie wiem jeszcze jak to zaplanować i porozdzielać, względem czego.
@@ -164,13 +165,13 @@ Dzięki podziałowi zadania na kroki użytkownik uczy się jak należy postępow
 	
 
 	\subsection{Repozytorium 3D}
-		Aby odwzorowywać stan repozytorium na ekranie został stworzony odpowiedni kontroler. Ma on za zadanie reagować na realizowane przez użytkownika komendy i zarządzać elementami grafiki 3d. Nasłuchuje na wykonywane akcje i w zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. 
+		Aby odwzorowywać stan repozytorium na ekranie został stworzony odpowiedni kontroler. Ma on za zadanie reagować na realizowane przez użytkownika komendy i zarządzać elementami grafiki 3D. Nasłuchuje na wykonywane akcje i w zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. W kontroler ten zawiera listę gałęzi będących w stanie repozytorium. % husaku i imosiaku
 
 	\subsection{Branch}
-	Obiekt 3d reprezentujący gałąź systemu git jest tworzony przy pomocy funkcji CreateTube z biblioteki Babylon.js. 
+	Obiekt 3D reprezentujący gałąź systemu git jest tworzony przy pomocy funkcji CreateTube z biblioteki Babylon.js. 
 Funkcja ta generuje siatkę wierzchołków, na podstawie podanej listy punktów określających ścieżkę, w kształcie tuby. Pozwala również na określenie średnicy oraz
 szczegółowości siatki. Parametry te zostały dobrane w taki sposób, aby wygenerować tubę, której przekrój przypomina koło przy jednoczesnym zachowaniu jak najmniejszej liczby użytych wierzchołków. Jedna gałąź może składać się z dwóch rodzajów siatki. Pierwsza z nich reprezentuje główny człon. Ścieżka użyta do jej wygenerowania zawiera tylko dwa punkty wyznaczające początek i koniec tuby. Dzięki temu można osiągnąć dowolnie długi odcinek nie zwiększając przy tym liczby wierzchołków. SPRAWDZIC I OPISAC PROBLEM Z IN FRUSTRUM. Drugi rodzaj siatki wykorzystywany jest do wygenerowania tuby będącej łącznikiem między gąłęziami. Do wyznaczenia ścieżki skorzystano z funkcji pomocniczej generującą krzywą Beziera. Funkcja ta przyjmuje dwa punkty określające początek i koniec ścieżki oraz dwa inne określające jej kształt. SPRAWDZIC KRZYWE BEZIERA. 
-
+% husaku i imosiaku
 
 	\subsection{Commit}
 	Zatwierdzenie zmian w repozytorium git w grafice trójwymiarowej jest przedstawione w postaci kuli umieszczonej na gałęzi, której dotyczy. Funkcja CreateSphere pochodząca z babylon'a buduje siatkę wierzchołków w kształcie sfery o określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną. W momencie utworzenia kuli  pojawia się nad nią napis z wiadomością przekazywaną przy zatwierdzaniu zmian, którego kolor jest niewiele jaśniejszy niż kolor samego obiektu. Ponadto może również zostać dodany tekst z numerem wersji tzw. tag, znajdujący się nieco powyżej tekstu z wiadomością. Sam tekst jest wyświetlany tylko dla 'commitów' na gałęzi, na której aktualnie znajduje się użytkownik, a jego pojawienie się , czy ukrycie jest animowane. 
@@ -190,16 +191,17 @@ Dlatego też by tekst był w pełni koloru, rysuje się pod nim ten sam tekst, a
 	Obiekt ten jest wykorzystywany przy ukazywaniu wiadomości i tagów z wersją dotyczących zatwierdzenia zmian, a także przy wyświetlaniu nazw gałęzi.
 
 	
- 	% repo 3d jak kontroler akcji
- 	% branch i animacje, akcje
- 	% tag i text
- 	% colors i shaders
- 	% ground
- 	% background i particles
- 	% animations
- 	% head
-	% follow camera i zooming
-	
+ 	% repo 3d jak kontroler akcji husaku i imosiaku
+ 	% branch i animacje, akcje husaku i imosiaku
+ 	% colors i shaders husaku ? 
+ 	% ground husaku ?
+ 	% background i particles magda?
+
+\subsection{Kamera}
+
+Nieodzownym elementem w projekcie z grafiką 3D jest kamera. W przypadku GitHero kamera jest kamerą śledzącą obiekt i rozszerza standardowe możliwości 'FollowCamera' z babylon'a. Określa się dla niej rotację, odległość oraz wysokość z której ma spoglądać na śledzony obiekt, a także prędkość podążania, czy przyspieszenie. Obiekt, za którym kamera ma podążać to tzw. 'followObject'. Obiekt śledzony wyznacza % head i zalezy od tego co ustawi sie w repo3d -  tutaj dopisac o tym follow obiekcie i head albo wczesniej dac head i potem napisac ze kamera za nim podaza skonsultowac z husakiem %
+
+Kamera reaguje również na przewijanie myszką. W momencie przewijania w tył kamera zwiększa swoją wysokość, prędkość oraz przyspieszenie. Maksymalna wysokość jest ograniczona tak, by móc przeglądać z perspektywy lotu ptaka na stan repozytorium. Natomiast przewijanie w przód powoduje zmniejszanie wysokości oraz ustalenie pozycji do śledzenia obiektu w odpowiedniej odległości. 	
 	
 	\chapter{Podsumowanie}
 	
