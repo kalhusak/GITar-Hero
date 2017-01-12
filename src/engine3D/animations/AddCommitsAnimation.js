@@ -1,9 +1,10 @@
 import Commit from '../objects/Commit';
 
 class AddCommitsAnimation {
-  constructor (commits, branch, scene) {
+  constructor (commits, branch, scene, endEvent) {
     this._animate = ::this._animate;
     this._addCommit = ::this._addCommit;
+    this.endEvent = endEvent;
     this.commits = commits;
     this.branch = branch;
     this.scene = scene;
@@ -24,7 +25,7 @@ class AddCommitsAnimation {
     if (index + 1 < this.commits.length) {
       this.branch.addCommit(commit, this._animate);
     } else {
-      this.branch.addCommit(commit);
+      this.branch.addCommit(commit, this.endEvent);
     }
   }
 }

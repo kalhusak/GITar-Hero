@@ -158,14 +158,14 @@ class Repo3D {
 
   onPull (data) {
     if (this.HEAD.isPointingToBranch()) {
-      this.HEAD.getObject().pull(data.newCommits);
+      this.HEAD.getObject().pull(data);
     } else if (this.HEAD.isPointingToCommit()) {
       var activeBranch = CommitUtils.getBranchForCommit(this.HEAD.getObject(), this.branches);
       if (!activeBranch) {
         console.log('WARNING - can not find branch for commit: ' + this.HEAD.getObject().name);
         return;
       }
-      activeBranch.pull(data.newCommits);
+      activeBranch.pull(data);
     } else {
       console.log('WARNING - execute push on detached HEAD');
     }

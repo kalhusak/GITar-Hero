@@ -1,3 +1,5 @@
+import { find } from 'lodash';
+
 export function findByNameInBranches (name, branches) {
   for (var branchName in branches) {
     var commit = branches[branchName].getCommit(name);
@@ -18,7 +20,20 @@ export function getBranchForCommit (commit, branches) {
   return null;
 }
 
+export function getAllBeforeCommonParent (commits, commonParentName) {
+  var commitsBefore = [];
+  for (var i = commits.length - 1; i >= 0; i--) {
+      var commit = commits[i];
+      if (commit.name === commonParentName) {
+        break;
+      }
+      commitsBefore.push(commit);
+  }
+  return commitsBefore;
+}
+
 export default {
   findByNameInBranches,
-  getBranchForCommit
+  getBranchForCommit,
+  getAllBeforeCommonParent
 };

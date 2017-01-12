@@ -18,6 +18,12 @@ export default class Abstract3DObject {
   }
 
   setPosition (position) {
+    this.mesh.position.x = position.x;
+    this.mesh.position.y = position.y;
+    this.mesh.position.z = position.z;
+  }
+
+  setPositionRef (position) {
     this.mesh.position = position;
   }
 }
