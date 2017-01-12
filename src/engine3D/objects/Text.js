@@ -24,6 +24,7 @@ export default class Text {
     this.show = ::this.show;
     this.scene = scene;
     this.text = text;
+    this.options = options;
 
     var textureWidth = config.letterWidthPx * text.length;
     var textureHeight = config.textTextureHeightPx;
@@ -64,15 +65,8 @@ export default class Text {
 
   _updatePosition (initPosition) {
     if (this.textPlane) {
-      var pos = this.textPlane.position;
-      if (pos) {
-        if (pos.x !== initPosition.x) {
-          pos.x = initPosition.x;
-        }
-        if (pos.z !== initPosition.z) {
-          pos.z = initPosition.z;
-        }
-      }
+      this.textPlane.position = cloneDeep(initPosition);
+      this.textPlane.position.y += config.yPositionOffset + (this.options.offset || 0);
     }
   }
 
