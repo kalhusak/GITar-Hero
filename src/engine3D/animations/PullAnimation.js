@@ -23,8 +23,10 @@ class PullAnimation extends AbstractPushPullAnimation {
       this.commits.forEach((commit) => {
         commit.dispose();
       });
-      if (this.newCommits) {
-        var addCommitsAnimation = new AddCommitsAnimation(this.newCommits, this.activeBranch, this.scene);
+      if (this.newCommits && this.newCommits.length > 0) {
+        var addCommitsAnimation = new AddCommitsAnimation(this.newCommits, this.activeBranch, this.scene, this.endEvent);
+      } else if (this.endEvent) {
+        this.endEvent();
       }
     }
     this.passedTime += this.scene.elapsedTime / 1000;

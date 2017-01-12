@@ -1,4 +1,5 @@
 import BABYLON from 'babylonjs';
+import { cloneDeep } from 'lodash';
 
 const config = {
   duration: 0.6,
@@ -6,11 +7,12 @@ const config = {
 };
 
 class AbstractPushPullAnimation {
-  constructor (branch, scene, newCommits) {
+  constructor (branch, scene, newCommits, endEvent) {
     this._animate = ::this._animate;
     this._cloneBranch = ::this._cloneBranch;
     this._cloneCommits = ::this._cloneCommits;
     this.scene = scene;
+    this.endEvent = endEvent;
     this.newCommits = newCommits;
     this.passedTime = 0.0;
     this.activeBranch = branch;
@@ -35,7 +37,7 @@ class AbstractPushPullAnimation {
     var commits = [];
     branch.commits.forEach((commit) => {
       var mesh = BABYLON.Mesh.CreateSphere(commit.ref + '_push_pull', 16, 10, this.scene);
-      mesh.position = commit.getPosition();
+      mesh.position = commit.initialPosition ? cloneDeep(commit.initialPosition) : commit.getPosition();
       mesh.material = material;
       mesh.position.y = config.height;
       commits.push(mesh);

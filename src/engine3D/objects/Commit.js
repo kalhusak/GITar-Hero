@@ -37,7 +37,7 @@ export default class Commit extends Abstract3DObject {
     var brightningColor = commitStyle.brightningColor || new BABYLON.Color3(0.1, 0.1, 0.1);
     var commitColor = this.mesh.material.diffuseColor;
     var textColor = ColorUtils.addColors(brightningColor, commitColor);
-    this.text = new Text(message, textPosition, scene, { color: textColor.toHexString() });
+    this.text = new Text(message, this.getPositionRef(), scene, { color: textColor.toHexString() });
     this.isMergeCommit = false;
   }
 

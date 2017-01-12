@@ -9,7 +9,9 @@ import Text from './Text';
 import { branch as branchStyle } from '../style';
 import PushAnimation from '../animations/PushAnimation';
 import PullAnimation from '../animations/PullAnimation';
+import RebaseCommitsAnimation from '../animations/RebaseCommitsAnimation';
 import BranchUtils from '../utils/BranchUtils';
+import CommitUtils from '../utils/CommitUtils';
 
 const config = {
   partLength: 30,
@@ -124,8 +126,24 @@ class Branch extends Abstract3DObject {
     var pushAnimation = new PushAnimation(this, this.scene);
   }
 
-  pull (newCommits) {
-    var pullAnimation = new PullAnimation(this, this.scene, newCommits);
+  pull (data) {
+    if (data.commonParentName && data.newCommits && data.newCommits.length > 0) {
+      let newCommitsCount = data.newCommits.length;
+      var commitsToRebase = CommitUtils.getAllBeforeCommonParent(this.commits, data.commonParentName);
+      var rebaseAnimation = new RebaseCommitsAnimation(commitsToRebase, newCommitsCount, this.scene);
+      this.tube.removeParts(commitsToRebase.length, () => {
+        this.scene.getEngine().camera.stop();
+        var pullAnimation = new PullAnimation(this, this.scene, data.newCommits, () => {
+          this.scene.getEngine().camera.start();
+          this.tube.addParts(commitsToRebase.length);
+        });
+      });
+    } else {
+      this.scene.getEngine().camera.stop();
+      var pullAnimation = new PullAnimation(this, this.scene, data.newCommits, () => {
+        this.scene.getEngine().camera.start();
+      });
+    }
   }
 
   hideCommitsNames () {
