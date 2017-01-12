@@ -50,6 +50,7 @@ function convertSteps(steps) {
           newStep.removeFiles = arrayToString(step.data.before ? step.data.before.removeFiles : null);
           break;
         case 'PULL':
+          newStep.commonParentName = step.data.commonParentName || "";
           for (var i=0; i<3; i++) {
             var commit = step.data.newCommits[i];
             if (commit) {

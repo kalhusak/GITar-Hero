@@ -74,7 +74,8 @@ function prepareSteps(steps) {
             }
           }
           newStep.data = {
-            newCommits
+            newCommits,
+            commonParentName: step.commonParentName
           }
           break;
         case 'BRANCH':

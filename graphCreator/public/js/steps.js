@@ -66,6 +66,7 @@ function addPullStep (index, task) {
   var step = task.steps[index];
   if (!step) {
     step = createStep('pull', 'PULL');
+    step.commonParentName = "";
     step.commitName1 = getNextRef();
     step.commitMessage1 = '';
     step.newFiles1 = "";

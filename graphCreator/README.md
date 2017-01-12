@@ -17,5 +17,7 @@ Operation:
 3.  Pull can have three new commits. Filled message means that there is
     a new commit with this name in upstream.
 
-4.  In merge step target branch is merged to source branch.
+4. To do pull with rebase commonParentName property must be set to common parent commit name.
+
+5.  In merge step target branch is merged to source branch.
     e.g 'git merge feature/menu develop' - source: develop, target: feature/menu

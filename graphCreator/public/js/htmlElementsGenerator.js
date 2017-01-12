@@ -47,6 +47,7 @@ function createResetStepElement (step, index, label) {
 
 function createPullStepElement (step, index, label) {
   var additionalProperties = [];
+  additionalProperties.push(createPropertyElement('commonParentNameInput', 'commonParentName', step, 'commonParentName'));
   additionalProperties.push(createPropertyElement('commitName1Input' + index, '1. name', step, 'commitName1'));
   additionalProperties.push(createPropertyElement('commitMessage1Input' + index, '1. message', step, 'commitMessage1'));
   additionalProperties.push(createPropertyElement('newFiles1Input' + index, '1.  new files', step, 'newFiles1'));
