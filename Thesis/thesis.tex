@@ -23,8 +23,7 @@
 	
 	\section{Zasady odnośnie pisania pracy}
 	
-	\begin{itemize}
-	
+	\begin{itemize}	
 		\item Piszemy w formie bezosobowej. Można też niby w 1.os liczby mnogiej czyli "Zrobiliśmy...", ale niektórzy akceptują tylko bezosobową, czyli "Zrobiono...".
 		
 		\item słów niepolskich - ,,Nie można więc bezpośrednio
@@ -53,53 +52,88 @@
 	
 	Krótki opis systemów kontroli wersji, do czego służą i jakie dają korzyści. Wyjaśnienie dlaczego Git się wyróżnia, co ma szczególnego i bardziej obszerny jego opis. 
 	
+	W opisie Gita o tym czym jest repozytorium, przestrzeń robocza, indeks, indeksowanie zmian, zatwierdzanie zmian, rewizja, gałąź, HEAD, łączenie gałęzi, cofanie zmian, rebase, repozytorium zdalne, push, pull, gałąź zdalna, śledzenie gałęzi zdalnej. W nawiasach do wszytskie angielskie pojęcia. 
+	
 	Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.
+	
+	Ogólnie myślę że tak z 2-3 strony?
+	
+	\section{Gitflow}
+	
+	Podział na gałęzie, master, develop, feature, fix, hotfix, release
 	
 	\chapter{Projekt}
 	
 	\section{Założenia}
+		
+	Głównym celem samouczka GITar-Hero jest zapoznanie użytkownika z~podstawowymi poleceniami systemu kontroli wersji Git, w~sposób przyjemny i~zrozumiały. Gra, przez połączenie nauki i rozrywki, ma za zadanie zachęcić i ułatwić proces uczenia się. Kolorowa i ruchoma grafika 3D uatrakcyjnia tę naukę, a możliwość zdobywania punktów i naturalna chęć osiągnięcia jak najlepszego wyniku dodatkowo mobilizuje użytkownika. 
 	
-	Najważniejsze cele, co ma spełniać gra, czego ma nauczyć i w jaki sposób
+	Z założenia, ważniejsze od dogłębnego zrozumienia strony teoretycznej systemu Git, było nauczenie właściwego korzystania z poleceń. Gra ma służyć jako samouczek, uczący praktycznego wykorzystania systemu wersji i~pokazujący typowy scenariusz, jaki najczęściej występuje podczas wytwarzania oprogramowania. Po zagraniu w grę użytkownik powinien już swobodnie wykonywać komendy systemu Git, zarówno pracując indywidualnie, jak i potrafić właściwie współpracować z zespołem. 
 	
+	Celem było pokazanie, że wbrew panującej powszechnie opinii, korzystanie z systemu kontroli wersji Git nie musi przysparzać problemów ani trudności. Ponadto gra ma przyzwyczaić użytkownika do korzystania z wiersza poleceń. Jeżeli ma się opanowane komendy, jakie należy wprowadzać w konsoli, z reguły będzie się potrafiło skorzystać z dowolnego programu z graficznym interfejsem do obsługi systemu Git. W drugą stronę taka zależność nie występuje. W związku z tym, tylko umiejętność korzystania z systemu Git w wierszu poleceń pozwala swobodnie korzystać z tego systemu kontroli wersji, niezależnie od środowiska i zainstalowanych programów.
+	 
 	\section{Przebieg gry}
 	
-	Krótki opis rozgrywki i elementów interfejsu (może screeny? nie jestem pewna czy już w sekcji ,,projekt'' czy dopiero w sekcji ,,implementacja'')
+	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z krótką instrukcją rozpoczyna się gra. U góry, po prawej stronie, wyświetla się aktualne zadanie i pierwszy krok, który należy wykonać. Z założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się pomoc z zakładką informującą czym jest repozytorium sytemu kontroli wersji i jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się na tym etapie w folderze z repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie działa na stan repozytorium i pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend. 
+	
+	Po poprawnym wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnych punktów za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas. 
+	
+	Kolejne zadania stopniowo wprowadzają nowe komendy. Ich poziom trudności rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w dowolnej chwili wpisać w konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł poszukać potrzebnych mu informacji. 
+	
+	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, zawierające informację o liczbie popełnionych błędów i komendach, z~którymi miał najwięcej problemów. 
 	
 	\section{Zadania}
 	
-	Ta sekcja nie tyle ma być o zadaniach w sensie Taskach, taskGraph.json itp, ale o zadaniach w kontekście co ma zrobić użytkownik, czego i w jaki sposób ma się przy tym nauczyć.
+	Scenariusz rozgrywki składa się z zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Użytkownik uczy się najpierw o tym, czym jest repozytorium. Poznaje dwie podstawowe metody pozyskania takiego repozytorium --- poprzez sklonowanie istniejącego lub przez założenie go w wybranym folderze z~projektem. W~kolejnym etapie zapoznaje się z~pojęciami takimi jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Potrafi rozróżnić co oznacza plik aktualny, zmodyfikowany, nieśledzony lub niezaindeksowany. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować. 
 	
-	Dzięki podziałowi zadania na kroki użytkownik uczy się jak należy postępować i jakich użyć komend, aby sprostać postawionemu zadaniu. Ma to również na celu automatyzowanie zachowania użytkownika w prawdziwych przypadkach, z którymi może się spotkać w domu lub pracy. Na każdy krok składa się opis co należy w nim zrealizować. W systemie git możliwe jest wykonanie pewnych akcji przy użyciu różnych komend czy przełączników.
+	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian. 
+
+	Kolejnym etapem jest nauka scalania, lub inaczej łączenia gałęzi. Rozróżnione są przy tym odmienne sposoby na wykonanie tej operacji. Następnie pojawia się podstawowy sposób wycofywania zmian i~usuwania wykonanych wcześniej rewizji. 
 	
-	\subsection{Podpowiedzi/Pomoc}
-	Nie wiem jak nazwać tę subsekcję, bo HelpDrawer to nie do końca pomoc czy podpowiedzi, tylko content do nauczenia, nie umiem tego ładnie nazwać na razie.
+	Kiedy użytkownik opanuje już komendy i~sposób pracy w lokalnym repozytorium, wprowadzane jest pojęcie zdalnego repozytorium oraz sposoby komunikacji i~synchronizacji z~nim. W~zadaniach pojawiają się komendy dotyczące ściągania i~przesyłania zmian. Poruszany jest także temat zdalnych gałęzi i~sposoby skonfigurowania lokalnej gałęzi śledzącej zdalną.
 	
-	Coś że gdy w zadaniu jest krok z nową komendą to wyskakuje pomoc i co w niej jest itp.
+	Ponadto podczas nauki poleceń systemu Git użytkownik zapoznaje się też z~dobrymi praktykami i~metodyką Gitflow, co uczy go właściwych nawyków i~odpowiedniego porządkowania pracy nad projektem. Zaznajamia się z~koncepcją tworzenia osobnych gałęzi przeznaczonych do implementacji nowych funkcji lub naprawy błędów.
+	
+	Zadania są podzielone na kroki, dzięki czemu użytkownik uczy się charakterystycznych sekwencji poleceń, często występujących razem. Ma to również na celu zautomatyzowanie zachowania użytkownika w prawdziwych przypadkach, z którymi może się spotkać w domu lub pracy. W systemie Git czasem możliwe jest użycie kilku różnych poleceń, aby osiągnąć ten sam rezultat. Zadania i kroki dopuszczają wszystkie właściwe komendy.
+	
+	\subsection{Pomoc}
+	
+	Wszystkie materiały dydaktyczne znajdują się w pomocy. Jest ona podzielona na zakładki, z~których każda dotyczy jednej komendy lub pojęcia. Treść zawarta w niej wystarcza, aby osoba nie znająca poleceń systemu Git była w stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W przypadku niektórych pojęć jest jednak bardziej obszerna i wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i przydatne do właściwego zrozumienia systemu Git.
+	
+	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
 	
 	\subsection{Punkty za rozwiązanie}
-	%
-	W projekcie wprowadzono elementy gamifikacji np. poprzez punkty za rozwiązanie zadań. Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. 
 
-	% points with ranking ? ? ?
-
-	Elementy takie jak punkty powodują, że gra wciąga użytkownika. Z każdym rozegraniem, użytkownik stara się pobić swój dotychczasowy wynik. W ten sposób co raz to szybciej i pewniej będzie wykonywał zadania oraz komendy. Dodatkowo punkty wprowadzają elementy rywalizacji pomiędzy użytkownikami. Użytkownicy będą starać się zajmować najwyższe miejsce w rankingu, co powoduję, że będą wykorzystywać aplikacje w celu uzyskania poprawy wyniku. 
-
+	%Tak w ogóle to chyba najpiej wywalić subsekcje o punktach, a ten akapit poniższy dać gdzie indziej
+	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i pewniej będzie korzystał z poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do tego aby zająć jak najwyższe miejsce w rankingu. 
 	
+	Punkty obliczane są na podstawie czasu, w jakim użytkownik rozwiązał zadanie. 
+	
+	
+	%Ten akapit chyba do wywalenia, a na pewno do zmiany -najpierw trzeba wgl ustalic jak to będzie z tymi punktami
+	\textit{	Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. }
 	
 	\chapter{Implementacja}
 	
 	\section{Wykorzystane technologie}
 	
-	\subsection{Redux}
+	\subsection{Języki}
 	
-	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów.
-	Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym i karkołomnym. 
+	\subsubsection{JavaScript}
+	
+	\subsubsection{GLSL}
+	
+	\subsection{Biblioteki}
+	
+	\subsubsection{Redux}
+	
+	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym i karkołomnym. 
 	
 	Jednym z rozwiązań jest właśnie skorzystanie z biblioteki Redux dla aplikacji pisanych w języku JavaScript. Głównym jej założeniem jest przejrzysty stan aplikacji, który może zmieniać się tylko w określonych momentach i~zawsze w~przewidywalny sposób. 
 	
 	Stan jest zdefiniowany jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej po prostu zwykłym obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty.	Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo co spowodowało zmianę. 
 	
-	Kluczowym elementem Reduxa są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i deterministyczny. Oznacza to, że określony stan aplikacji i określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z których każda modyfikuje tylko określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i modyfikować.
+	Kluczowym elementem Reduxa są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i~wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i~deterministyczny. Oznacza to, że określony stan aplikacji i~określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z~których każda wpływa tylko na określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i~modyfikować.
 	
 	Podsumowując, Redux opiera się na trzech fundamentalnych zasadach:	
 	\begin{itemize}
@@ -108,9 +142,9 @@
 		\item wpływ danej akcji na sposób przekształcenia stanu określają funkcje zwane \textit{reducers}.
 	\end{itemize}
 
-	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać ~tej biblioteki ponieważ jest łatwa w~użyciu i pozwala w~wygodny sposób zarządzać stanem aplikacji. 
+	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji. 
 	
-	\subsection{React.js}
+	\subsubsection{React.js}
 	 
 	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę React. 
 	 Została ona stworzona w 2013 roku przez zespół programistów Facebook'a, aby rozwiązać problem tworzenia dużych aplikacji, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest udostępniona na zasadzie otwartego źródła (ang. \textit{open-source}) w serwisie github.com. React pozwala określić jak aplikacja powinna wyglądać w różnych momentach, a samo odświeżanie interfejsu dzieje się automatycznie, gdy zmienią się dane dotyczące komponentów. Dodatkowo ogromną zaletą tej biblioteki jest fakt, że potrafi ona określić co dokładnie uległo zmianie, a~w~rezultacie ponownie wyrenderowć tylko fragmenty, które rzeczywiście tego wymagają.
@@ -124,13 +158,13 @@
 	Zdecydowano się na wykorzystanie biblioteki React.js, ponieważ aplikacje napisane z~jej użyciem wymagają mniejszego nakładu pracy aby działać responsywnie i szybko. Dodatkowo biblioteka ta doskonale współpracuje z Reduxem, w którym stan całej aplikacji przechowywany jest w jednym obiekcie nazywanym stanem. Wystarczy odpowiednie jego fragmenty podpiąć do konkretnych komponentów, aby interfejs automatycznie reagował na jego zmiany. 
 		
 		
-	\subsection{Babylon.js}
+	\subsubsection{Babylon.js}
 
-	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript wykorzystywaną przede wszystkim do tworzenia gier wideo w przeglądarkach. Pierwsza odsłona została wydana w 2013 roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że jest silnikiem 3D posiada wspaniałe narzędzia do tworzenia, wyświetlania i teksturowania szkieletów w przestrzeni. Przez to, że kierowana jest głównie do twórców gier posiada wiele dodatkowych funkcji jak generowanie krawędzi, gotowych obiektów ułatwiających pracę programiście typu tworzenia obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny, czy wbudowane kamery np. FollowCamera - kamera śledząca, automatycznie podążająca za obiektem. 
+	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że Babylon.js jest silnikiem 3D, posiada wspaniałe narzędzia do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada wiele dodatkowych funkcji takich jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem. 
 	
-	Rozważana była jeszcze inna biblioteka 3D, a mianowicie Three.js wydana w 2009 roku, również oparta na podstawie webGL. Po zapoznaniu i przetestowaniu obu silników wybór padł na Babylon.js. Głównymi czynnikami skłaniającymi nas w stronę Babylon'a była płynność, którą zapewniał w przeciwieństwie do Three.js oraz prostota użycia. Przy renderowaniu tego samego, wybranego obiektu Babylon.js spisywał się lepiej o kilka klatek. Poza tym Babylon.js jest dobrze udokumentowany, posiada bogatą bazę poradników oraz społeczność wykorzystujące tę bibliotekę jest duża i stale rośnie.
+	Rozważana była jeszcze inna biblioteka 3D, a mianowicie Three.js wydana w 2009 roku, również oparta na~webGL. Po zapoznaniu i~przetestowaniu obu silników wybór padł na Babylon.js. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do Three.js. Przy renderowaniu tego samego, wybranego obiektu, Babylon.js spisywał się lepiej o kilka klatek. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
 	
-	\subsection{Pozostałe?}
+	\subsubsection{Pozostałe}
 	
 	\section{Scenariusz rozgrywki}
 	
@@ -152,6 +186,7 @@
 	
 	Opis zadania służy ukazaniu użytkownikowi celu oraz problemu, jaki należy rozwiązać w danym zadaniu. Może to być na przykład rozszerzenie funkcjonalności lub naprawa błędu.
 	
+	%Tu też do zmiany jak ustalimy co z punktami
 	\textit{Aby nagradzać użytkownika punktami za szybko wykonane zadanie, zdecydowano się na określenie czasu na wykonanie zadania. Jest on obliczany w momencie dodawania nowego zadania na podstawie ilości dotychczas wykonanych zadań, a także wartości minimalnej oraz maksymalnej czasu zdefiniowanych w danym zadaniu.}
 	
 	Zbiór następników zawiera identyfikatory zadań, które mogą wystąpić po aktualnym. Hierarchia zadań ułożona jest w postaci grafu skierowanego, tak więc wszystkie wierzchołki, do których istnieją krawędzie wychodzące z wierzchołka reprezentującego dane zadanie, są jego następnikami. 
@@ -203,16 +238,16 @@
 		
 	\begin{figure}
 		\centering
-		\includegraphics[width=15cm]{graphCreator01}
-		\caption{Interfejs graficzny graphCreatora}
-		\label{fig:graphCreator}
+		\includegraphics[width=12cm]{graphCreator01}
+		\caption{Interfejs graficzny narzędzia TaskCreator}
+		\label{fig:taskCreator}
 	\end{figure}
 	
-	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny służący do wypełniania pól zadania i definiowania listy kroków. Jest on widoczny na rysunku~\ref{fig:graphCreator} po prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz czasy wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności jak również dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków. 
+	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny służący do wypełniania pól zadania i definiowania listy kroków. Jest on widoczny na rysunku~\ref{fig:taskCreator} po prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz czasy wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności jak również dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków. 
 	
 	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w wybrane miejsce. Żeby edytować wierzchołek należy go wybrać poprzez kliknięcie. Z kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki a następnie przeciągniecie kursora znad jednego węzła na drugi utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete. 
 	
-	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W tym celu wystarczy kliknąć drugi przycisk w lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i zapisze dane do pliku taskGraph.json. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji graphCreator naciskając pierwszy przycisk w lewym dolnym rogu ekranu i wybierając plik do wczytania.
+	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W tym celu wystarczy kliknąć drugi przycisk w lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i zapisze dane do pliku taskGraph.json. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w lewym dolnym rogu ekranu i wybierając plik do wczytania.
 	
 	\section{Komponenty/elementy(?) aplikacji}
 	
