@@ -6,7 +6,7 @@ import BranchUtils from '../utils/BranchUtils';
 
 const config = {
   radius: 2,
-  tessellation: 16,
+  tessellation: 32,
   curveFactor: 20,
   subdivisions: 40,
   cap: BABYLON.Mesh.CAP_ALL,

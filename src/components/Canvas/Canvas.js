@@ -30,6 +30,8 @@ class Canvas extends Component {
     if (lastAction.type === commandActions.NEW_VALID_COMMAND) {
       const { type, data } = lastAction.payload.step;
       this.engine.onNewValidCommand(type, data);
+    } else if (lastAction.type === commandActions.NEW_INVALID_COMMAND) {
+      this.engine.onNewInvalidCommand();
     }
   }
 

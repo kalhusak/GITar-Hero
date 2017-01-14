@@ -5,7 +5,7 @@ import { outline as outlineStyle } from '../style';
 
 const config = {
   radius: 2,
-  tessellation: 16,
+  tessellation: 32,
   cap: BABYLON.Mesh.CAP_ALL,
   sideOrientation: BABYLON.Mesh.FRONTSIDE,
   enlogatingSpeed: 1,

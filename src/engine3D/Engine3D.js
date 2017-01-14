@@ -12,6 +12,7 @@ class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
     super(canvas, config.antialiasing);
     this.onNewValidCommand = ::this.onNewValidCommand;
+    this.onNewInvalidCommand = ::this.onNewInvalidCommand;
     this.renderLoop = ::this.renderLoop;
     this.scene = new Scene(this);
     this.repo3D = new Repo3D(this.scene);
@@ -34,6 +35,10 @@ class Engine3D extends BABYLON.Engine {
 
   onNewValidCommand (type, data) {
     this.repo3D.onNewValidCommand(type, data);
+  }
+
+  onNewInvalidCommand () {
+    this.camera.shake();
   }
 }
 
