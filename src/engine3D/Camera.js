@@ -1,4 +1,5 @@
 import BABYLON from 'babylonjs';
+import CameraShakeAnimation from './animations/CameraShakeAnimation';
 
 const config = {
   name: 'followCamera',
@@ -17,6 +18,7 @@ class Camera extends BABYLON.FollowCamera {
     super(config.name, config.initPosition, scene);
     this.getPosition = ::this.getPosition;
     this.onWheel = ::this.onWheel;
+    this.shake = ::this.shake;
     this.stop = ::this.stop;
     this.start = ::this.start;
 
@@ -48,6 +50,10 @@ class Camera extends BABYLON.FollowCamera {
       this.followObject.addOffsetInPlace(new BABYLON.Vector3(0, 0, -10 * factor));
       this.followObject.cameraTargetSpeed = 3.0;
     }
+  }
+
+  shake () {
+    var cameraShakeAnimation = new CameraShakeAnimation(this, this.scene);
   }
 
   getPosition () {
