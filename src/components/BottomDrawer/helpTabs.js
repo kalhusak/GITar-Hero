@@ -238,21 +238,60 @@ const helpTabs = [
     </div>
   },
   {
+    name: 'gitflow',
+    content: <div>
+      <p>Gitflow is a set of guidelines to help you organise work on a project and record its history in an easily readable form.
+        The main idea is that repo uses two main branches with infinite lifetime.</p>
+      <ul>
+        <li><b>master</b> - contains only production-ready versions of a project, each commit is tagged with a version number, all commits on this branch form a release history</li>
+        <li><b>develop</b> - includes latest development changes, acts as an integration branch for new features</li>
+      </ul>
+      <p>Main development work is done on dedicated topic branches, and when the new feature is finished, the branch is
+        merged into develop (read more: gitflow/feature).</p>
+      <p>If the code on a develop branch is stable and ready to be released, it can be joined with the master branch.
+        But it isn't done by simply merging a develop into master, there are some rules how to accomplish that (read
+        more: gitflow/release). Including new changes into main master branch is called a new production release.</p>
+    </div>
+  },
+  {
     name: 'gitflow/feature',
     content: <div>
-      <p>gitflow/feature</p>
+      <p>Every new feature should be developed on a dedicated branch, called feature branch or topic branch.
+        It exists only as long as the work on it is in progress. When the feature is ready, this branch is merged
+        into develop. It might also be discarded, if the new feature is unsuccessful or unwanted. Important thing is
+        that feature branches should never be merged directly into master.</p>
+      <p>Create feature branch by branching off from develop.</p>
+      <p>When you're done working on it, merge it back into develop.</p>
+      <p>Feature branch should have a name like 'feature/...'.</p>
     </div>
   },
   {
     name: 'gitflow/release',
     content: <div>
-      <p>gitflow/release</p>
+      <p>When the develop branch reaches a stable point and all features that should be included in next release are
+        already merged into it, it is time to create a new release branch. No significant work should be done on such
+        branches, only minor bug fixes and other small changes required before a production release. In the meantime,
+        new features can be merged into develop, but they won't be included in the current release.</p>
+      <p>When everything is ready, release branch is merged into master first. The commit should be tagged with current
+        version name. Release branch is also merged into develop, because you want your main development branch to include
+        changes from it.</p>
+      <p>Create release branch by branching off from develop.</p>
+      <p>When you're ready to make a release, merge it back into master, tag it with a current version name, and then
+        merge it into develop too.</p>
+      <p>Release branch should have a name like 'release/...', where three dots are replaced by version number.</p>
     </div>
   },
   {
     name: 'gitflow/hotfix',
     content: <div>
-      <p>gitflow/hotfix</p>
+      <p>Hotfix branches are used to quickly fix a problem discovered in current production release. When a critical bug
+        requires immediate reaction, switch from master to a new hotfix branch. It should contain only changes related
+        to solving the problem, no new features or significant modifications. This is the only type of branch that should
+        fork directly from master.</p>
+      <p>The main idea is that work on the develop branch can continue, while production fix is being prepared.</p>
+      <p>Create hotfix branch by branching off from master.</p>
+      <p>When you make necessary fixes, merge it back both into master and develop (or release branch, if it currently exists).</p>
+      <p>Hotfix branch should have a name like 'hotfix/...'.</p>
     </div>
   }
 ];
