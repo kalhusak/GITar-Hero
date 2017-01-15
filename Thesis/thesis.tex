@@ -60,7 +60,47 @@
 	
 	\section{Gitflow}
 	
-	Podział na gałęzie, master, develop, feature, fix, hotfix, release
+	Praca z wykorzystaniem systemu Git może przebiegać w zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i pomóc w sprawnym zarządzaniu i wydawaniu nowych wersji oprogramowania. Jedną z bardziej popularnych metodyk jest Gitflow. Określa ona cykl pracy, oparty na korzystaniu z różnych gałęzi, z których każda ma dokładnie określoną rolę. 
+	
+	\subsection{Podstawowe założenia}
+	
+	Zamiast korzystać jedynie z domyślnej gałęzi \textit{master}, Gitflow wykorzystuje dwie główne gałęzie do rejestrowania historii projektu. Jedną z nich jest gałąź produkcyjna \textit{master}, na której przechowywane są tylko oficjalne wydania (ang. \textit{release}). Druga służy jako gałąź deweloperska i jest nazywana \textit{develop}. Przeznaczona jest do integracji bieżących prac programistycznych i nowych funkcji.
+	
+	Obie wspomniane gałęzie w idealnym przypadku powinny składać się jedynie z rewizji powstałych poprzez scalenie gałęzi (ang. \textit{merge commits}). Nie powinno się pracować i zatwierdzać zmian bezpośrednio na nich. Wszystkie modyfikacje kodu należy przeprowadzać na osobnych, dedykowanych gałęziach, tworzonych tymczasowo, w dokładnie określonym celu. Koncepcja Gitflow wyróżnia trzy rodzaje takich gałęzi:
+	\begin{itemize}
+		\item wprowadzające nowe funkcje (ang. \textit{feature branch}),
+		\item przygotowujące do opublikowania nowego wydania (ang. \textit{release branch}),
+		\item zawierające niezbędne i szybkie poprawki (ang. \textit{hotfix branch}).
+	\end{itemize}
+	Z racji braku polskich odpowiedników nazw wymienionych powyżej gałęzi, w przypadku odniesienia do nich, w dalszej części pracy wykorzystywane będzie oryginalne nazewnictwo angielskie.
+	
+	Z technicznego punktu widzenia typy gałęzi wykorzystywanych w Gitflow niczym się nie różnią, są to zwykłe gałęzie systemu Git. Są one szczególne jedynie pod względem konkretnych celów w jakich są używane i pewnych ograniczeń dotyczących procesu tworzenia ich i łączenia. Każdy rodzaj może powstać jedynie przez rozgałęzienie z określonej gałęzi (produkcyjnej lub deweloperskiej), a na koniec musi zostać połączony ze ściśle ustaloną gałęzią lub gałęziami.
+	
+	\subsection{Rozszerzanie funkcjonalności}
+	
+	Jednym z podstawowych założeń Gitflow jest implementowanie każdej nowej funkcji oprogramowania na osobnej, dedykowanej gałęzi typu \textit{feature branch}, której nazwa powinna zaczynać się od ,,feature/''. Taka gałąź może powstać jedynie poprzez rozgałęzienie z głównej gałęzi \textit{develop}. Z założenia ma składać się wyłącznie z rewizji zawierających zmiany dotyczące danej nowej funkcji i istnieć tak długo, jak długo trwać będzie proces implementacji.
+	
+	Kiedy cel zostanie zrealizowany, gałąź typu \textit{feature branch} powinna być połączona z gałęzią \textit{develop}. Istotne jest aby operacja scalania nie została wykonana poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli zwykłe przesunięcie wskaźnika HEAD. Chodzi o to by główna gałąź deweloperska nie zawierała wszystkich rewizji pochodzących z gałęzi dołączanej, a jedynie jedną powstałą jako łącznik dwóch gałęzi (ang. \textit{merge commit}). W przeciwnym wypadku określenie, które rewizje dotyczą wprowadzenia konkretnej funkcji, wymagałoby dokładnego przejrzenia zawieranych przez nie zmian. A w rezultacie znacznie trudniej byłoby usunąć pojedynczą funkcję z głównej gałęzi. 
+	
+	Po włączeniu zmian z gałęzi przeznaczonej do implementacji nowej funkcji do głównej gałęzi \textit{develop}, 
+	należy usunąć tymczasową gałąź.
+	
+	\subsection{Przygotowywanie nowego wydania}
+	
+	Kiedy stan kodu aplikacji jest stabilny i działa zgodnie z oczekiwaniami, a wszystkie funkcje które powinny się znaleźć w nowym wydaniu oprogramowania są już zaimplementowane i włączone do głównej gałęzi deweloperskiej, należy rozpocząć proces publikacji nowej wersji. Zgodnie z koncepcją Gitflow, wszystkie niezbędne ostatnie poprawki i drobne zmiany dotyczące przygotowania nowego wydania, powinny zostać przeprowadzone na osobnej, specjalnie utworzonej w tym celu gałęzi, nazywanej \textit{release branch}.
+	
+	Tworzenie takiej gałęzi odbywa się poprzez rozgałęzienie z gałęzi \textit{develop}. W tym momencie ustala się też numer wydania, czyli numer wersji publikowanego oprogramowania. Nazwa gałęzi powinna być formatu ,,release/numer-wydania''.
+	Od tego momentu wszystkie zmiany zachodzące na głównej gałęzi \textit{develop} będą dotyczyć następnej publikacji, nie zostaną uwzględnione w aktualnym wydaniu. Dzięki utworzeniu gałęzi typu \textit{release}, prace mogą iść dwutorowo,  poprzez przygotowywanie publikacji nowej wersji, oraz równolegle rozwijanie i rozszerzanie funkcjonalności oprogramowania. Jako przygotowanie do wydania rozumie się poprawę drobnych błędów takich jak literówki i inne niewielkie niedociągnięcia.
+	
+	W momencie w którym oprogramowanie będzie już przygotowane do opublikowania, należy scalić gąłąź \textit{release} z główną gałęzią produkcyjną \textit{master}. Analogicznie jak w przypadku scalania gałęzi typu \textit{feature branch}, należy  zwrócić uwagę, aby operacja połączenia nie polegała na przewinięciu do przodu. Konieczne jest aby w wyniku jej wykonania utworzona została nowa rewizja. Należy jej nadać etykietę (ang. \textit{tag}) z numerem wydania, aby ułatwić wyszukiwanie konkretnych wersji oprogramowania na gałęzi produkcyjnej. Następnie należy również scalić gałąź dotyczącą najnowszego opublikowanego właśnie wydania z gałęzią \textit{develop}. Gałęzie typu \textit{relese} są tymczasowe, więc po włączeniu jej do obu głównych gałęzi należy ją usunąć.
+	
+	\subsection{Naprawa błędów wymagających szybkiego rozwiązania}
+	
+	Kolejnym typem gałęzi wykorzystywanych w koncepcji Gitflow są gałęzie nazywane \textit{hotfix branches}, przeznaczone do naprawy niecierpiących zwłoki błędów, odkrytych w opublikowanym oprogramowaniu, najczęściej zgłoszonych przez użytkowników końcowych. Dotyczy to takich wad i problemów, które są zbyt poważne, aby mogły zostać naprawione dopiero w następnym wydaniu. W przypadku mniej istotnych niedociągnięć wystarczy poprawić dane aspekty w normalnym trybie pracy i włączyć je do gałęzi \textit{develop}, żeby zostały uwzględnione przy kolejnej publikacji przez gałąź typu \textit{release}. 
+	
+	Gałąź typu \textit{hotfix} jest jedynym rodzajem gałęzi, który powstaje poprzez rozgałęzienie z głównej gałęzi produkcyjnej \textit{master}. Jej nazwa powinna zaczynać się od wyrażenia ,,hotfix/''. Taka gałąź zawiera tylko zmiany dotyczące naprawy wykrytego błędu, które powinny być wykonane w możliwie najkrótszym czasie. Kiedy problem zostanie rozwiązany, przeznaczoną mu gałąź należy połączyć z powrotem z gałęzią \textit{master}. W tym przypadku również należy dokonać łączenia nie poprzez przewijanie do przodu. W rezultacie na głównej gałęzi produkcyjnej powstaje nowa rewizja, której należy nadać etykietę z nowym numerem wersji. Skutkiem jest publikacja nowego wydania oprogramowania, która, w przeciwieństwie do procesu z wykorzystaniem gałęzi typu \textit{release} nie była planowana. 
+	
+	Kolejnym krokiem jest scalenie gałezi \textit{hotfix} z główną gałęzią \textit{develop}. Jeżeli istnieje w danym momencie gałąź typu \textit{release}, to do niej również należy włączyć zmiany dotyczące naprawy błędu. Na koniec należy usunąć tymczasową gałąź.
 	
 	\chapter{Projekt}
 	
