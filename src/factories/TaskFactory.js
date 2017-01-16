@@ -2,6 +2,8 @@ import taskSequence from '../utils/TaskSequence';
 import statisticsUtils from '../utils/StatisticsUtils';
 import taskProvider from '../providers/TaskProvider';
 
+const pointsMultiplier = 2;
+
 class TaskFactory {
 
   constructor () {
@@ -15,7 +17,7 @@ class TaskFactory {
       newTask.currentStepIndex = 0;
       newTask.time = statisticsUtils.calculateTaskTime(newTask.minTime,
       newTask.defaultTime, taskProvider.getTasksCount());
-      newTask.reward = newTask.minTime * taskProvider.getTasksCount() * 10;
+      newTask.reward = pointsMultiplier * newTask.steps.length;
       newTask.id = taskSequence.nextTask();
     }
     return newTask;
