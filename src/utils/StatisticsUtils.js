@@ -21,7 +21,7 @@ function calculateTaskTime (minTaskTime, defaultTaskTime, tasksCount) {
 
 function calculateTaskReward (task, elapsedTime) {
   var timeLeft = task.time - elapsedTime;
-  return timeLeft > 0 ? Math.ceil((timeLeft / task.time) * task.reward) : 0;
+  return timeLeft > 0 ? timeLeft * task.reward : 0;
 }
 
 export default {
