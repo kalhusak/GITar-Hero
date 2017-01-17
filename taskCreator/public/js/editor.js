@@ -1,8 +1,7 @@
 var selectedNode;
 var titleInput;
 var descriptionInput;
-var minTimeInput;
-var defaultTimeInput;
+var timeInput;
 init();
 
 function onSelectNode (node) {
@@ -32,8 +31,7 @@ function onDeleteStepClick (index) {
 function fillEditor () {
   titleInput.value = selectedNode.title || '';
   descriptionInput.value = selectedNode.description || '';
-  minTimeInput.value = selectedNode.minTime || '';
-  defaultTimeInput.value = selectedNode.defaultTime || '';
+  timeInput.value = selectedNode.time || '';
 }
 
 function fillSteps () {
@@ -94,25 +92,19 @@ function onDescriptionChange () {
   selectedNode.description = descriptionInput.value;
 }
 
-function onMinTimeChange () {
-  selectedNode.minTime = parseInt(minTimeInput.value);
-}
-
-function onDefaultTimeChange () {
-  selectedNode.defaultTime = parseInt(defaultTimeInput.value);
+function onTimeChange () {
+  selectedNode.time = parseInt(timeInput.value);
 }
 
 function init () {
   selectedNode = null;
   titleInput = document.getElementById('titleInput');
   descriptionInput = document.getElementById('descriptionInput');
-  minTimeInput = document.getElementById('minTimeInput');
-  defaultTimeInput = document.getElementById('defaultTimeInput');
+  timeInput = document.getElementById('timeInput');
 
   titleInput.addEventListener('input', onTitleChange);
   descriptionInput.addEventListener('input', onDescriptionChange);
-  minTimeInput.addEventListener('input', onMinTimeChange);
-  defaultTimeInput.addEventListener('input', onDefaultTimeChange);
+  timeInput.addEventListener('input', onTimeChange);
 
   clear();
   clearSteps();
@@ -126,14 +118,12 @@ function clearSteps () {
 function disable (isDisable) {
   titleInput.disabled = isDisable;
   descriptionInput.disabled = isDisable;
-  minTimeInput.disabled = isDisable;
-  defaultTimeInput.disabled = isDisable;
+  timeInput.disabled = isDisable;
   document.getElementById('addStepButton').disabled = isDisable;
 }
 
 function clear () {
   titleInput.value = '';
   descriptionInput.value = '';
-  minTimeInput.value = '';
-  defaultTimeInput.value = '';
+  timeInput.value = '';
 }
