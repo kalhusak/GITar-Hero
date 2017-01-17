@@ -6,7 +6,6 @@
       "task": {
         "title": "Merge release into develop",
         "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are some changes on the remote that you don't have.",
-        "time": 100,
         "steps": [
           {
             "description": "Return to develop",
@@ -107,7 +106,8 @@
                     "removeFiles": []
                   }
                 }
-              ]
+              ],
+              "commonParentName": ""
             }
           },
           {
@@ -142,6 +142,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 100,
         "x": 794.1616,
         "y": -1349.845
       }
@@ -153,7 +154,6 @@
       "task": {
         "title": "Make first release",
         "description": "Your project is starting to look good. It is time to make first release. But first you have to fix some typos.",
-        "time": 60,
         "steps": [
           {
             "description": "Create branch release/0.1.0 and checkout in one step",
@@ -209,6 +209,7 @@
             }
           }
         ],
+        "time": 60,
         "x": 573.47,
         "y": -538.2563
       }
@@ -220,7 +221,6 @@
       "task": {
         "title": "Merge release",
         "description": "Let's merge our release into master, tag it, and push to remote to share it with the world. You should also merge your release branch into develop.",
-        "time": 160,
         "steps": [
           {
             "description": "Return to master",
@@ -363,6 +363,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 160,
         "x": 574.7583,
         "y": -679.9274
       }
@@ -374,7 +375,6 @@
       "task": {
         "title": "Add dialogs to your page",
         "description": "You just did your first release but it doesn't mean the work is over. Add dialogs to your page. Start working on a new feature and share your work, so others can collaborate.",
-        "time": 60,
         "steps": [
           {
             "description": "Create branch feature/dialog and checkout in one step",
@@ -441,6 +441,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 60,
         "x": 997.19495,
         "y": -761.67096
       }
@@ -452,7 +453,6 @@
       "task": {
         "title": "Oh no! Title margin needs fixing",
         "description": "Looks like you have to stop working on your dialogs, there is something to fix on a master branch. Switch back to it, create a hotfix branch and fix what needs fixing.",
-        "time": 70,
         "steps": [
           {
             "description": "Return to master",
@@ -529,6 +529,7 @@
             }
           }
         ],
+        "time": 70,
         "x": 569.334,
         "y": -840.03375
       }
@@ -540,7 +541,6 @@
       "task": {
         "title": "Merge hotfix to master",
         "description": "Phew, looks like you saved the day and successfully fixed margin. Merge it into master and tag as 0.1.1. And in the end, push it to origin.",
-        "time": 55,
         "steps": [
           {
             "description": "Switch back to master",
@@ -604,6 +604,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 55,
         "x": 569.83167,
         "y": -1003.8531
       }
@@ -615,7 +616,6 @@
       "task": {
         "title": "Start project",
         "description": "At first you have to create a new Git repository and tell Git, which project files you want to track.",
-        "time": 120,
         "steps": [
           {
             "description": "Initialize repo in your current directory",
@@ -682,8 +682,9 @@
             }
           }
         ],
-        "x": 627.63306,
-        "y": 782.3572
+        "time": 120,
+        "x": 640.6958651757813,
+        "y": 951.9416116210938
       }
     },
     "18": {
@@ -693,7 +694,6 @@
       "task": {
         "title": "Describe your project",
         "description": "This is a good habit to create a file describing your project called README.",
-        "time": 35,
         "steps": [
           {
             "description": "Start tracking your new file README.txt",
@@ -728,18 +728,19 @@
             }
           }
         ],
-        "x": 628.5261,
-        "y": 633.6102
+        "time": 35,
+        "x": 640.3467787109375,
+        "y": 809.25326640625
       }
     },
     "19": {
       "children": [
-        20
+        20,
+        38
       ],
       "task": {
         "title": "Do some work",
         "description": "You were working for some time, and decided to take a snapshot of your project to record it's current state.",
-        "time": 55,
         "steps": [
           {
             "description": "Add only files from your src folder. (Tip: you can use \"*\" in your command)",
@@ -794,8 +795,9 @@
             }
           }
         ],
-        "x": 634.48444,
-        "y": 493.48648
+        "time": 55,
+        "x": 642.3994790625,
+        "y": 655.523833515625
       }
     },
     "20": {
@@ -805,7 +807,6 @@
       "task": {
         "title": "Development branch",
         "description": "I's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
-        "time": 100,
         "steps": [
           {
             "description": "Create a new branch called \"develop\"",
@@ -839,6 +840,7 @@
             }
           }
         ],
+        "time": 100,
         "x": 789.129,
         "y": 376.77652
       }
@@ -850,7 +852,6 @@
       "task": {
         "title": "Add menu bar",
         "description": "When you start working on a new functionality, you should create brand new branch for it. Do some work on a dedicated branch to implement menu bar for your project.",
-        "time": 75,
         "steps": [
           {
             "description": "Create and checkout to branch feature/menu in one step",
@@ -947,6 +948,7 @@
             }
           }
         ],
+        "time": 75,
         "x": 934.3175,
         "y": 262.13147
       }
@@ -958,7 +960,6 @@
       "task": {
         "title": "Merge menu to branch develop",
         "description": "You finished working on a menu. As it is ready, you can now include it in your development branch.",
-        "time": 90,
         "steps": [
           {
             "description": "Return to branch develop",
@@ -1010,6 +1011,7 @@
             }
           }
         ],
+        "time": 90,
         "x": 788.2963,
         "y": 163.77069
       }
@@ -1021,7 +1023,6 @@
       "task": {
         "title": "Create header of your page",
         "description": "You finished menu and included it to your main development branch. But your page is still rather empty.\nLet's create a header. It's best to do it on another topic branch dedicated especially for this feature.",
-        "time": 70,
         "steps": [
           {
             "description": "Checkout to a new branch feature/header",
@@ -1114,6 +1115,7 @@
             }
           }
         ],
+        "time": 70,
         "x": 930.5279,
         "y": 57.77622
       }
@@ -1125,7 +1127,6 @@
       "task": {
         "title": "Merge header to develop branch",
         "description": "Let's say you think you finished working on a header. You merge it into develop, and realize, there is one more thing to do to complete header. Revert that merge, do some changes and then merge again.",
-        "time": 240,
         "steps": [
           {
             "description": "Switch to branch develop",
@@ -1304,6 +1305,7 @@
             }
           }
         ],
+        "time": 240,
         "x": 778.9805,
         "y": -52.130383
       }
@@ -1315,7 +1317,6 @@
       "task": {
         "title": "Add remote repository",
         "description": "So far all your git operations where local. You can add a remote repo to synchronize with. This way you can share your work and collaborate on a project with everyone who has access to that remote repository.",
-        "time": 200,
         "steps": [
           {
             "description": "Add a remote repository from https://github.com/johny/project.git and name it origin",
@@ -1337,7 +1338,8 @@
             ],
             "type": "PULL",
             "data": {
-              "newCommits": []
+              "newCommits": [],
+              "commonParentName": ""
             }
           },
           {
@@ -1351,6 +1353,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 200,
         "x": 780.66486,
         "y": -200.75575
       }
@@ -1362,7 +1365,6 @@
       "task": {
         "title": "Add content to your page",
         "description": "Okay, you have to eventually deal with content of your page. You know what to do - switch to a dedicated branch, do some work and commit it.",
-        "time": 65,
         "steps": [
           {
             "description": "Create branch feature/content and checkout in one step",
@@ -1454,6 +1456,7 @@
             }
           }
         ],
+        "time": 65,
         "x": 951.56085,
         "y": -279.21033
       }
@@ -1465,7 +1468,6 @@
       "task": {
         "title": "Merge content to develop branch",
         "description": "You have to merge content into develop. But you're no longer working alone. There is a shared version of your project on a remote and you want to synchronize with it. You need to check, if anyone hasn't pushed something to develop before you. ",
-        "time": 80,
         "steps": [
           {
             "description": "Return to develop",
@@ -1509,7 +1511,8 @@
                     "removeFiles": []
                   }
                 }
-              ]
+              ],
+              "commonParentName": ""
             }
           },
           {
@@ -1545,6 +1548,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 80,
         "x": 778.2937,
         "y": -393.80496
       }
@@ -1556,7 +1560,6 @@
       "task": {
         "title": "Merge hotfix to develop",
         "description": "Okay, so you just merged your hotfix branch to master and pushed it to remote. Let's do the same with branch develop - merge hotfix into it and push it.",
-        "time": 60,
         "steps": [
           {
             "description": "Switch to develop",
@@ -1614,7 +1617,8 @@
                     "removeFiles": []
                   }
                 }
-              ]
+              ],
+              "commonParentName": ""
             }
           },
           {
@@ -1628,6 +1632,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 60,
         "x": 772.4425,
         "y": -1071.1346
       }
@@ -1639,7 +1644,6 @@
       "task": {
         "title": "Another release",
         "description": "You should make another release. Switch to a new dedicated branch, add a version.txt file, then merge into master and push to origin.",
-        "time": 100,
         "steps": [
           {
             "description": "Create branch release/0.2.0 and checkout in one step",
@@ -1758,6 +1762,7 @@
             "type": "PUSH"
           }
         ],
+        "time": 100,
         "x": 563.4909,
         "y": -1250.0688
       }
@@ -1769,7 +1774,6 @@
       "task": {
         "title": "Finish dialogs",
         "description": "Now, when the situation is under control, you can finish working on dialogs. Switch to feature branch, make last changes and commit them. Lastly, merge it into develop and push to an upstream branch.",
-        "time": 90,
         "steps": [
           {
             "description": "Switch back to branch feature/dialog",
@@ -1804,7 +1808,8 @@
             ],
             "type": "PULL",
             "data": {
-              "newCommits": []
+              "newCommits": [],
+              "commonParentName": ""
             }
           },
           {
@@ -1887,8 +1892,206 @@
             }
           }
         ],
+        "time": 90,
         "x": 974.8319,
         "y": -1155.7566
+      }
+    },
+    "38": {
+      "children": [
+        39,
+        20
+      ],
+      "task": {
+        "title": "Change style of your app",
+        "description": "Have a second look at your project. Something just doesn't seem right. Change some styles to improve the overall impression.",
+        "steps": [
+          {
+            "description": "Stage changes made in src/app.css",
+            "commands": [
+              "git add src/app.css"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit your improvements with message \"Change style\"",
+            "commands": [
+              "git commit -m \"Change style\""
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "61",
+              "message": "Change style"
+            }
+          },
+          {
+            "description": "That still wasn`t enough, so you just made more improvements. Stage all files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "index.html",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Your app looks much better now - commit with message \"Improved design\"",
+            "commands": [
+              "git commit -m \"Improved design\""
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "62",
+              "message": "Improved design"
+            }
+          }
+        ],
+        "time": 70,
+        "x": 496.91302490234375,
+        "y": 581.264892578125
+      }
+    },
+    "39": {
+      "children": [
+        40,
+        20
+      ],
+      "task": {
+        "title": "Update project description",
+        "description": "You realized that you should be update some files with more suitable project description and version number. Modify it and than make a commit.",
+        "steps": [
+          {
+            "description": "You have made necessary updates, it is time to stage all files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "package.json",
+                  "README.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "After changing project version, add file package.json to index again",
+            "commands": [
+              "git add package.json"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "package.json"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "All what is left to do is to commit with message \"Update project info\"",
+            "commands": [
+              "git commit -m \"Update project info\""
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "63",
+              "message": "Update project info"
+            }
+          }
+        ],
+        "time": 50,
+        "x": 458.74359130859375,
+        "y": 428.3623352050781
+      }
+    },
+    "40": {
+      "children": [
+        20
+      ],
+      "task": {
+        "title": "Refactor your code",
+        "description": "You are a perfectionist and want to make code look better. Refactor it and commit those pretty lines of code.",
+        "steps": [
+          {
+            "description": "After refactoring most of files, stage everything",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.js",
+                  "src/app.css",
+                  "index.html"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit changes with message \"Refactor\"",
+            "commands": [
+              "git commit -m \"Refactor\""
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "64",
+              "message": "Refactor"
+            }
+          }
+        ],
+        "time": 35,
+        "x": 540.6464538574219,
+        "y": 295.59825134277344
       }
     }
   }
