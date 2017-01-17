@@ -15,8 +15,7 @@ class TaskFactory {
     if (taskProvider.hasNext()) {
       newTask = taskProvider.next(tags);
       newTask.currentStepIndex = 0;
-      newTask.time = statisticsUtils.calculateTaskTime(newTask.minTime,
-      newTask.defaultTime, taskProvider.getTasksCount());
+      newTask.time = statisticsUtils.calculateTaskTime(newTask.time, taskProvider.getTasksCount());
       newTask.reward = pointsMultiplier * newTask.steps.length;
       newTask.id = taskSequence.nextTask();
     }
