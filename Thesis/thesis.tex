@@ -67,7 +67,7 @@
 		\item Rozproszone --- wykorzystujące model P2P, w~którym wszystkie komputery są sobie równoważne (nie ma jednego określonego serwera), a~kopie repozytorium znajdują się na każdej z~jednostek.
 	\end{itemize}
 
-	Kolejność, w~jakiej zostały one wymienione jest nieprzypadkowa, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania przez zespoły programistów najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największe bezpieczeństwo danych. W~przypadku awarii serwera w~scentralizowanym systemie, utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
+	Porządek, w~jakim zostały one wymienione, jest nieprzypadkowy, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania przez zespoły programistów najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największe bezpieczeństwo danych. W~przypadku awarii serwera w~scentralizowanym systemie, utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
 	
 	\begin{figure}
 		\centering
@@ -77,8 +77,52 @@
 	\end{figure}
 
 	Na rysunku~\ref{fig:vcs_interest} przedstawiony jest wykres ilustrujący relatywną popularność czterech znanych systemów kontroli wersji w~wyszukiwarce Google, na przestrzeni ostatnich 13~lat. Uwzględnione zostały dwa scentralizowane (CVS i Subversion) oraz dwa rozproszone systemy kontroli wersji (Git i~Mercurial). Wyraźnie widać, że popularność tych pierwszych znacząco spadła względem rozproszonego modelu, który wciąż zyskuje na popularności. Przewaga systemu Git nad pozostałymi nie ulega wątpliwości, jest on aktualnie ponad czterokrotnie częściej wyszukiwany w~Google niż Mercurial czy Subversion, co przekłada się na stale rosnącą liczbę użytkowników.
-	
+
 	\section{System kontroli wersji Git}
+
+	System kontroli wersji Git stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W związku z tym postanowili napisać własny, doskonalszy od poprzedniego. Z~założenia miał to być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
+
+	\subsection{Cechy charakterystyczne}
+	Stworzony przez nich system kontroli wersji Git różni się znacząco od wcześniejszych systemów, szczególnie tych scentralizowanych. W odmienny sposób przechowuje nowe wersje plików. W przeciwieństwie do poprzedników zapamiętuje cały stan repozytorium, a nie jedynie różnicę pomiędzy plikami. Dla zwiększenia efektywności, jeśli plik nie został zmodyfikowany, to nie jest kopiowany tylko przechowywana jest referencja do jego aktualnej wersji.
+
+	Kolejną istotną różnicą jest możliwość pracy lokalnej, bez ciągłej potrzeby łączenia się z~serwerem, nawet przy pracy nad projektem zespołowym. System Git pozwala wprowadzać zmiany i~zatwierdzać je bez dostępu do sieci. Komunikacja z innymi jednostkami w~celu synchronizacji danych może odbyć się w~dowolnym momencie. Wcześniejsze scentralizowane systemy, takie jak Subversion, nie pozwalały na taki model pracy, gdyż większość operacji wymagała połączenia z~serwerem, co wpływało także na dłuższy czas.
+
+	Git przypisuje do zapisanych stanów projektu czterdziestoznakowe skróty SHA-1. Dzięki tym sumom kontrolnym zauważy każdą, nawet najmniejszą zmianę wprowadzoną na kontrolowanym pliku, niezależnie od sposobu przeprowadzenia modyfikacji.
+
+	Jako najważniejszą zaletę systemu Git powszechnie uznaje się efektywny system rozgałęziania i~łączenia gałęzi. W~przeciwieństwie do starszych systemów kontroli wersji, Git umożliwia natychmiastowe utworzenie nowej gałęzi, oraz bardzo szybkie przełączanie się pomiędzy gałęziami. Ta cecha sprawia, że równoległa praca jest o~wiele mniej problematyczna. Znacząco ułatwia to rozwój oprogramowania jednocześnie w~kilku różnych i~niezależnych kierunkach. Tak optymalne operacje na gałęziach są możliwe dzięki potraktowaniu gałęzi jako wskaźnika na rewizję, o~czym więcej w~sekcji %\ref{Gałęzie}.
+
+	\subsection{Repozytorium}
+
+	Aby w pełni zrozumieć, czym jest Git, należy zacząć od wytłumaczenia kilku pojęć. Przez zwykłe repozytorium systemu Git określa się folder, przechowujący całą dotychczasową historię projektu i wszystkie zapisane wersje śledzonych plików, oraz przestrzeń roboczą (ang. \textit{working directory}), w której znajdują się bieżące pliki. Git wyróżnia także repozytoria surowe (ang. \textit{bare}), służące przede wszystkim do synchronizacji i wymiany zmian. Nie posiadają one obszaru roboczego, ponieważ nie są przeznaczone do tego, aby w nich pracować.
+
+	Repozytorium systemu Git można samodzielnie utworzyć w dowolnym folderze na dysku, lub pobrać poprzez sklonowanie istniejącego. Pierwsza metoda może dotyczyć zarówno pustego katalogu jak i~takiego, który już zawiera projekt. Podczas inicjalizacji repozytorium zostanie utworzony osobny podkatalog .git, obejmujący wszystkie pliki potrzebne systemowi Git do działania. Pozostała zawartość folderu, w którym utworzono repozytorium, pozostanie niezmieniona. Drugi sposób polega na sklonowaniu istniejącego repozytorium do wybranego katalogu na dysku. Pobrany zostanie folder .git, wraz z całą zawartością, oraz obszar roboczy ze wszystkimi plikami projektu.
+
+	\subsection{Tworzenie rewizji}
+
+	Jak wspomniano wcześniej, w folderze każdego projektu kontrolowanego przez Git znajduje się podkatalog .git, zawierający całą dostępną historię i wszystkie dane dotyczące repozytorium, między innymi takie jak utworzone gałęzie. Mieści się w nim plik index. Za każdym razem, kiedy uznamy, że aktualny stan naszego projektu wart jest zapisania, trzeba samodzielnie zatwierdzić wprowadzone zmiany. Odbywa się to dwuetapowo.
+
+	Najpierw należy określić, które pliki chce się zapisać w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}). Następnie zatwierdza się zmiany, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i oznaczone są jednoznacznie je identyfikującą sumą kontrolną wyliczoną przez funkcję skrótu SHA-1, generującą 40-znakowy ciąg na podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętana jest także dokładna godzina zatwierdzenia zmian i autor.
+
+	Pliki znajdujące się w projekcie kontrolowanym przez system Git można podzielić na następujące kategorie:
+	\begin{itemize}
+		\item aktualne - w obszarze roboczym znajduje się identyczna wersja pliku jak w ostatnio wykonanej rewizji,
+		\item zmodyfikowane - od czasu zatwierdzenia zmian w pliku zostały wprowadzone pewne modyfikacje, nie dodane do indeksu (a więc gdyby w tym momencie utworzona została rewizja, to nie zawierałaby tych zmian),
+		\item zaindeksowane - od czasu zatwierdzenia zmian plik został zmieniony, ale następnie dodano go do indeksu (czyli zarówno w obszarze roboczym, jak i~w~indeksie, znajduje się ta sama wersja --- będzie ona zapisana przy kolejnej rewizji).
+		\item nieśledzone - pliki występujące w obszarze roboczym, ale nie znajdujące się ani w~repozytorium, ani w~indeksie --- w~tym stanie jest początkowo każdy nowo dodany do obszaru roboczego plik,
+		\item ignorowane - pliki nieśledzone, wyszczególnione w~specjalnym pliku .gitignore, informującym system Git których plików ma nie uwzględniać i~nigdy nie indeksować.
+	\end{itemize}
+
+	\subsection{Gałęzie} \label{Gałęzie}
+	co to gałąź, co to HEAD, stan detached HEAD
+
+	\subsubsection{Łączenie gałęzi}
+	merge i rebase
+
+	\subsection{Repozytoria zdalne}
+	co to, co to fetch, pull, push
+
+	\subsubsection{o trackingu}
+
 
 	\textit{W opisie Gita o tym czym jest repozytorium, przestrzeń robocza, indeks, indeksowanie zmian, zatwierdzanie zmian, rewizja, gałąź, HEAD, łączenie gałęzi, cofanie zmian, rebase, repozytorium zdalne, push, pull, gałąź zdalna, śledzenie gałęzi zdalnej. W nawiasach do wszystkie angielskie pojęcia.}
 	
