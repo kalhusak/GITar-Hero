@@ -6,8 +6,7 @@
       "task": {
         "title": "Merge release into develop",
         "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are some changes on the remote that you don't have.",
-        "minTime": 60,
-        "defaultTime": 100,
+        "time": 100,
         "steps": [
           {
             "description": "Return to develop",
@@ -154,8 +153,7 @@
       "task": {
         "title": "Make first release",
         "description": "Your project is starting to look good. It is time to make first release. But first you have to fix some typos.",
-        "minTime": 30,
-        "defaultTime": 60,
+        "time": 60,
         "steps": [
           {
             "description": "Create branch release/0.1.0 and checkout in one step",
@@ -222,8 +220,7 @@
       "task": {
         "title": "Merge release",
         "description": "Let's merge our release into master, tag it, and push to remote to share it with the world. You should also merge your release branch into develop.",
-        "minTime": 80,
-        "defaultTime": 160,
+        "time": 160,
         "steps": [
           {
             "description": "Return to master",
@@ -377,8 +374,7 @@
       "task": {
         "title": "Add dialogs to your page",
         "description": "You just did your first release but it doesn't mean the work is over. Add dialogs to your page. Start working on a new feature and share your work, so others can collaborate.",
-        "minTime": 30,
-        "defaultTime": 60,
+        "time": 60,
         "steps": [
           {
             "description": "Create branch feature/dialog and checkout in one step",
@@ -456,8 +452,7 @@
       "task": {
         "title": "Oh no! Title margin needs fixing",
         "description": "Looks like you have to stop working on your dialogs, there is something to fix on a master branch. Switch back to it, create a hotfix branch and fix what needs fixing.",
-        "minTime": 35,
-        "defaultTime": 70,
+        "time": 70,
         "steps": [
           {
             "description": "Return to master",
@@ -545,8 +540,7 @@
       "task": {
         "title": "Merge hotfix to master",
         "description": "Phew, looks like you saved the day and successfully fixed margin. Merge it into master and tag as 0.1.1. And in the end, push it to origin.",
-        "minTime": 35,
-        "defaultTime": 55,
+        "time": 55,
         "steps": [
           {
             "description": "Switch back to master",
@@ -621,8 +615,7 @@
       "task": {
         "title": "Start project",
         "description": "At first you have to create a new Git repository and tell Git, which project files you want to track.",
-        "minTime": 35,
-        "defaultTime": 120,
+        "time": 120,
         "steps": [
           {
             "description": "Initialize repo in your current directory",
@@ -700,8 +693,7 @@
       "task": {
         "title": "Describe your project",
         "description": "This is a good habit to create a file describing your project called README.",
-        "minTime": 15,
-        "defaultTime": 35,
+        "time": 35,
         "steps": [
           {
             "description": "Start tracking your new file README.txt",
@@ -747,8 +739,7 @@
       "task": {
         "title": "Do some work",
         "description": "You were working for some time, and decided to take a snapshot of your project to record it's current state.",
-        "minTime": 30,
-        "defaultTime": 55,
+        "time": 55,
         "steps": [
           {
             "description": "Add only files from your src folder. (Tip: you can use \"*\" in your command)",
@@ -814,8 +805,7 @@
       "task": {
         "title": "Development branch",
         "description": "I's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
-        "minTime": 30,
-        "defaultTime": 100,
+        "time": 100,
         "steps": [
           {
             "description": "Create a new branch called \"develop\"",
@@ -860,8 +850,7 @@
       "task": {
         "title": "Add menu bar",
         "description": "When you start working on a new functionality, you should create brand new branch for it. Do some work on a dedicated branch to implement menu bar for your project.",
-        "minTime": 40,
-        "defaultTime": 75,
+        "time": 75,
         "steps": [
           {
             "description": "Create and checkout to branch feature/menu in one step",
@@ -969,8 +958,7 @@
       "task": {
         "title": "Merge menu to branch develop",
         "description": "You finished working on a menu. As it is ready, you can now include it in your development branch.",
-        "minTime": 30,
-        "defaultTime": 90,
+        "time": 90,
         "steps": [
           {
             "description": "Return to branch develop",
@@ -1033,8 +1021,7 @@
       "task": {
         "title": "Create header of your page",
         "description": "You finished menu and included it to your main development branch. But your page is still rather empty.\nLet's create a header. It's best to do it on another topic branch dedicated especially for this feature.",
-        "minTime": 40,
-        "defaultTime": 70,
+        "time": 70,
         "steps": [
           {
             "description": "Checkout to a new branch feature/header",
@@ -1138,8 +1125,7 @@
       "task": {
         "title": "Merge header to develop branch",
         "description": "Let's say you think you finished working on a header. You merge it into develop, and realize, there is one more thing to do to complete header. Revert that merge, do some changes and then merge again.",
-        "minTime": 100,
-        "defaultTime": 240,
+        "time": 240,
         "steps": [
           {
             "description": "Switch to branch develop",
@@ -1329,8 +1315,7 @@
       "task": {
         "title": "Add remote repository",
         "description": "So far all your git operations where local. You can add a remote repo to synchronize with. This way you can share your work and collaborate on a project with everyone who has access to that remote repository.",
-        "minTime": 45,
-        "defaultTime": 200,
+        "time": 200,
         "steps": [
           {
             "description": "Add a remote repository from https://github.com/johny/project.git and name it origin",
@@ -1377,8 +1362,7 @@
       "task": {
         "title": "Add content to your page",
         "description": "Okay, you have to eventually deal with content of your page. You know what to do - switch to a dedicated branch, do some work and commit it.",
-        "minTime": 35,
-        "defaultTime": 65,
+        "time": 65,
         "steps": [
           {
             "description": "Create branch feature/content and checkout in one step",
@@ -1481,8 +1465,7 @@
       "task": {
         "title": "Merge content to develop branch",
         "description": "You have to merge content into develop. But you're no longer working alone. There is a shared version of your project on a remote and you want to synchronize with it. You need to check, if anyone hasn't pushed something to develop before you. ",
-        "minTime": 50,
-        "defaultTime": 80,
+        "time": 80,
         "steps": [
           {
             "description": "Return to develop",
@@ -1573,8 +1556,7 @@
       "task": {
         "title": "Merge hotfix to develop",
         "description": "Okay, so you just merged your hotfix branch to master and pushed it to remote. Let's do the same with branch develop - merge hotfix into it and push it.",
-        "minTime": 35,
-        "defaultTime": 60,
+        "time": 60,
         "steps": [
           {
             "description": "Switch to develop",
@@ -1657,8 +1639,7 @@
       "task": {
         "title": "Another release",
         "description": "You should make another release. Switch to a new dedicated branch, add a version.txt file, then merge into master and push to origin.",
-        "minTime": 60,
-        "defaultTime": 100,
+        "time": 100,
         "steps": [
           {
             "description": "Create branch release/0.2.0 and checkout in one step",
@@ -1788,8 +1769,7 @@
       "task": {
         "title": "Finish dialogs",
         "description": "Now, when the situation is under control, you can finish working on dialogs. Switch to feature branch, make last changes and commit them. Lastly, merge it into develop and push to an upstream branch.",
-        "minTime": 50,
-        "defaultTime": 90,
+        "time": 90,
         "steps": [
           {
             "description": "Switch back to branch feature/dialog",

@@ -5,13 +5,12 @@ function saveAsTaskGraph (nodes, edges, Blob, saveAs) {
     newNodes[node.id] = {
       children: getChildren(node.id, edges),
       task: {
-          title: node.title,
-          description: node.description,
-          minTime: node.minTime,
-          defaultTime: node.defaultTime,
-          steps: prepareSteps(node.steps),
-          x: node.x,
-          y: node.y
+        title: node.title,
+        description: node.description,
+        steps: prepareSteps(node.steps),
+        time: node.time,
+        x: node.x,
+        y: node.y
       }
     };
   });
