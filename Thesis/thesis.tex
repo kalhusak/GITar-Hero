@@ -3,9 +3,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 \usepackage{graphicx} \graphicspath{ {images/} }
-\usepackage[section]{placeins}
+\usepackage[hidelinks]{hyperref}
+\usepackage{placeins}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{3}
+
+\newcommand*{\captionsource}[2]{%
+	\caption[{#1}]{%
+		#1%
+		\\\hspace{\linewidth}%
+		\textbf{Źródło: } #2%
+	}%
+}
 
 \begin{document}
 	
@@ -46,21 +55,38 @@
 	Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.
 	
 	\chapter{Podstawy teoretyczne}
+
+	Systemy kontroli wersji służą do przechowywania historii plików, czyli jak sama nazwa wskazuje do kontrolowania ich różnych wersji. Dzięki temu można sprawdzić, jak zmodyfikowany został plik, a w razie potrzeby przywrócić jego poprzedni stan. Jest to szczególnie przydatne w sytuacji, w której zajdzie konieczność wycofania wprowadzonych zmian, na przykład z powodu zmiany koncepcji lub błędów.
+
+	Systemy kontroli wersji pełnią często kluczową rolę w przypadku współpracy grupy osób nad jednym projektem. Pomagają łączyć zmiany wprowadzone przez różne osoby na tych samych plikach i służą jako narzędzie do komunikacji i synchronizacji zmian. Najczęściej są wykorzystywane przy wytwarzaniu oprogramowania, ale mogą być używane także do kontroli jakichkolwiek plików. Ich zastosowanie zastępuje popularną ze względu na swoją prostotę metodę robienia kopii zapasowych na dysku poprzez zwykłe przekopiowywanie plików.
+
+	Wyróżnia się trzy podstawowe rodzaje systemów wersji.
+	\begin{itemize}
+		\item Lokalne --- umożliwiające pracę na jednym komputerze, nie pozwalające na synchronizację ze zdalnym repozytorium. Wykorzystywane są rzadko, głównie w~przypadku samodzielnej pracy nad indywidualnym projektem.
+		\item Scentralizowane --- oparte na architekturze klient-serwer, w~której repozytorium przechowywane jest na jednym zdalnym serwerze, z~którym synchronizują się wszyscy użytkownicy.
+		\item Rozproszone --- wykorzystujące model P2P, w~którym wszystkie komputery są sobie równoważne (nie ma jednego określonego serwera), a~kopie repozytorium znajdują się na każdej z~jednostek.
+	\end{itemize}
+
+	Kolejność, w~jakiej zostały one wymienione jest nieprzypadkowa, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania przez zespoły programistów najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największe bezpieczeństwo danych. W~przypadku awarii serwera w~scentralizowanym systemie, utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
 	
-	\section{Sysytem kontroli wersji Git}
-	\textit{Może rozdział powinien się nazywać ,,Wstęp teoretyczny'', albo od razu ,,System kontroli wersji Git'' lub samo ,,Git'', i wtedy bez tej podsekcji - i tak w rozdziale nie może być tylko jedna}
+	\begin{figure}
+		\centering
+		\includegraphics[width=12cm]{vcs_interest}
+		\captionsource{Zainteresowanie systemami kontroli wersji w wyszukiwarce Google, dane od stycznia 2004 do stycznia 2017}{\url{https://www.google.com/trends/explore?date=2004-01-01\%202017-01-01\&q=\%2Fm\%2F05vqwg,\%2Fm\%2F012ct9,\%2Fm\%2F08441\_,\%2Fm\%2F09d6g\&hl=en-US}}
+		\label{fig:vcs_interest}
+	\end{figure}
+
+	Na rysunku~\ref{fig:vcs_interest} przedstawiony jest wykres ilustrujący relatywną popularność czterech znanych systemów kontroli wersji w~wyszukiwarce Google, na przestrzeni ostatnich 13~lat. Uwzględnione zostały dwa scentralizowane (CVS i Subversion) oraz dwa rozproszone systemy kontroli wersji (Git i~Mercurial). Wyraźnie widać, że popularność tych pierwszych znacząco spadła względem rozproszonego modelu, który wciąż zyskuje na popularności. Przewaga systemu Git nad pozostałymi nie ulega wątpliwości, jest on aktualnie ponad czterokrotnie częściej wyszukiwany w~Google niż Mercurial czy Subversion, co przekłada się na stale rosnącą liczbę użytkowników.
 	
-	Krótki opis systemów kontroli wersji, do czego służą i jakie dają korzyści. Wyjaśnienie dlaczego Git się wyróżnia, co ma szczególnego i bardziej obszerny jego opis. 
+	\section{System kontroli wersji Git}
+
+	\textit{W opisie Gita o tym czym jest repozytorium, przestrzeń robocza, indeks, indeksowanie zmian, zatwierdzanie zmian, rewizja, gałąź, HEAD, łączenie gałęzi, cofanie zmian, rebase, repozytorium zdalne, push, pull, gałąź zdalna, śledzenie gałęzi zdalnej. W nawiasach do wszystkie angielskie pojęcia.}
 	
-	W opisie Gita o tym czym jest repozytorium, przestrzeń robocza, indeks, indeksowanie zmian, zatwierdzanie zmian, rewizja, gałąź, HEAD, łączenie gałęzi, cofanie zmian, rebase, repozytorium zdalne, push, pull, gałąź zdalna, śledzenie gałęzi zdalnej. W nawiasach do wszytskie angielskie pojęcia. 
-	
-	Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.
-	
-	Ogólnie myślę że tak z 2-3 strony?
+	\textit{Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
 	
 	\section{Gitflow}
 	
-	Praca z wykorzystaniem systemu Git może przebiegać w zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i pomóc w sprawnym zarządzaniu i wydawaniu nowych wersji oprogramowania. Jedną z bardziej popularnych metodyk jest Gitflow. Określa ona cykl pracy, oparty na korzystaniu z różnych gałęzi, z których każda ma dokładnie określoną rolę. 
+	Praca z~wykorzystaniem systemu Git może przebiegać w~zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i~pomóc w~sprawnym zarządzaniu i~wydawaniu nowych wersji oprogramowania. Jedną z~bardziej popularnych metodyk jest Gitflow, opracowana przez Vincenta Driessena. Określa ona cykl pracy, oparty na korzystaniu z~różnych gałęzi, z~których każda ma dokładnie zdefiniowaną rolę.
 	
 	\subsection{Podstawowe założenia}
 	
