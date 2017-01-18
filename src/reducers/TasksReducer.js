@@ -1,26 +1,34 @@
 import * as commandActions from '../actions/CommandActions';
 import * as taskActions from '../actions/TaskActions';
 import * as TaskUtils from '../utils/TaskUtils';
+import * as tutorialActions from '../actions/TutorialActions';
 import TagUtils from '../utils/TagUtils';
-import _ from 'lodash';
+import { cloneDeep } from 'lodash';
 
 export default function tasksReducers (state = {}, action) {
   switch (action.type) {
+    case tutorialActions.CLOSE_TUTORIAL:
+      return onTutorialFinished(cloneDeep(state));
     case commandActions.NEW_VALID_COMMAND:
-      return onNewValidCommand(_.cloneDeep(state));
+      return onNewValidCommand(cloneDeep(state));
     case taskActions.LAST_STEP_EXECUTED:
-      return onLastStepExecuted(_.cloneDeep(state));
+      return onLastStepExecuted(cloneDeep(state));
     case taskActions.TOO_FEW_TASKS:
-      return onTooFewTasks(_.cloneDeep(state));
+      return onTooFewTasks(cloneDeep(state));
     case commandActions.NEW_INVALID_COMMAND:
-      return onNewInvalidCommand(_.cloneDeep(state));
+      return onNewInvalidCommand(cloneDeep(state));
     default:
       return state;
   }
 }
 
+function onTutorialFinished (state) {
+  state.startTime = Date.now();
+  return state;
+}
+
 function onNewValidCommand (state) {
-  var task = TaskUtils.getCurrentTask(state);
+  const task = TaskUtils.getCurrentTask(state);
   TagUtils.onValidCommand(state);
   task.currentStepIndex++;
   return state;

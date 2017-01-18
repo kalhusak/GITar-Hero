@@ -29,6 +29,5 @@ export default function initReducer (state = defaultState, action) {
 
 function onTooFewTasks (state) {
   TaskUtils.fillTaskList(state.tasks);
-  state.tasks.startTime = Date.now();
   return state;
 }
