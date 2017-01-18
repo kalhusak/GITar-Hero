@@ -2,13 +2,10 @@ import { cloneDeep, findIndex } from 'lodash';
 import * as commandActions from '../actions/CommandActions';
 import * as helpDrawerActions from '../actions/HelpDrawerActions';
 import helpTabs from '../components/BottomDrawer/helpTabs';
-
-const getFromStorage = (propName, defaultValue = true) =>
-  typeof localStorage[propName] !== 'undefined' ? JSON.parse(localStorage[propName]) : defaultValue;
+import { getFromStorage } from '../utils/LocalStorageHelper';
 
 const initialState = {
   isOpen: false,
-  initialInfo: getFromStorage('initialInfo'),
   autoShowHelp: getFromStorage('autoShowHelp'),
   selectedTab: 'repo'
 };
@@ -32,11 +29,6 @@ export default function helpDrawerReducer (state = initialState, { type, payload
     case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
       newState.autoShowHelp = !newState.autoShowHelp;
       localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);
-      return newState;
-
-    case helpDrawerActions.CLOSE_INITIAL_INFO:
-      newState.initialInfo = false;
-      localStorage.initialInfo = 'false';
       return newState;
 
     case commandActions.NEW_INVALID_COMMAND:

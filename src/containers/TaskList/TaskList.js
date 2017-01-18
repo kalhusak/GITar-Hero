@@ -8,7 +8,8 @@ import Task from '../../components/Task';
 class TaskList extends Component {
 
   renderTasks () {
-    return take(this.props.tasks, 1).map((task, index) => <Task key={task.id} task={task} active={index === 0} />);
+    return take(this.props.tasks, 1).map((task, index) =>
+      <Task key={task.id} task={task} active={index === 0 && !this.props.tutorial} />);
   }
 
   render () {
@@ -28,9 +29,10 @@ class TaskList extends Component {
   }
 };
 
-const mapStateToProps = ({ tasks }) => {
+const mapStateToProps = ({ tasks, tutorial }) => {
   return {
-    tasks: values(tasks.byId)
+    tasks: values(tasks.byId),
+    tutorial: tutorial.current
   };
 };
 
