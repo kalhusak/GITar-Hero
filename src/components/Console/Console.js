@@ -216,6 +216,11 @@ class Console extends Component {
       this.autocompletionTree =
         ConsoleUtils.generateAutocompletionTree(Config.allowedCommands, newProps.branches, newProps.files);
     }
+
+    if (this.props.tutorial && !newProps.tutorial) {
+      this.refs.consoleInput.focus();
+      this.onFocus();
+    }
   }
 
   onMouseDown (event) {
@@ -233,7 +238,7 @@ class Console extends Component {
 
     return (
       <div className={consoleClasses.join(' ')}>
-        <input autoFocus ref='consoleInput' className='console__input'
+        <input ref='consoleInput' className='console__input'
           onChange={this.onChange} onKeyDown={this.onKeyDown}
           onMouseDown={this.onMouseDown} onFocus={this.onFocus}
           onBlur={this.onBlur} value={this.state.currentValue} />
@@ -246,9 +251,10 @@ class Console extends Component {
   }
 };
 
-export default connect(({ tree }) => {
+export default connect(({ tree, tutorial }) => {
   return {
     files: ConsoleUtils.treeToPathList(tree).concat(['-A']),
-    branches: ['master', 'develop']
+    branches: ['master', 'develop'],
+    tutorial: tutorial.current
   };
 })(Console);
