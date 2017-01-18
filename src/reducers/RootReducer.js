@@ -6,6 +6,7 @@ import lastActionReducer from './LastActionReducer';
 import helpDrawerReducer from './HelpDrawerReducer';
 import pointsReducer from './PointsReducer';
 import treeReducer from './TreeReducer';
+import tutorialReducer from './TutorialReducer';
 
 const combine = combineReducers({
   console: consoleReducer,
@@ -13,7 +14,8 @@ const combine = combineReducers({
   lastAction: lastActionReducer,
   helpDrawer: helpDrawerReducer,
   tree: treeReducer,
-  points: pointsReducer
+  points: pointsReducer,
+  tutorial: tutorialReducer
 });
 
 export default (state, action) => {

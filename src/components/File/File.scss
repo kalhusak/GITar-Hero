@@ -10,6 +10,8 @@
   animation: file-enter 0.3s cubic-bezier(.2,1.27,.47,1.44);
   display: flex;
   align-items: center;
+  background: white;
+  color: black;
 
   &.file--green, &.file--red {
     color: white;
