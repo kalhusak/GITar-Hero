@@ -4,7 +4,7 @@
 \usepackage{babel}
 \usepackage{graphicx} \graphicspath{ {images/} }
 \usepackage[hidelinks]{hyperref}
-\usepackage{placeins}
+\usepackage[section]{placeins}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{3}
 
@@ -12,9 +12,17 @@
 	\caption[{#1}]{%
 		#1%
 		\\\hspace{\linewidth}%
-		\textbf{Źródło: } #2%
+		\textbf{Źródło: }\raggedright{#2}%
 	}%
 }
+
+%\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+%	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+%	\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+%	\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+%	\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+%	\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+%	\do\Y\do\Z}
 
 \begin{document}
 	
@@ -101,7 +109,7 @@
 
 	Jak wspomniano wcześniej, w folderze każdego projektu kontrolowanego przez Git znajduje się podkatalog .git, zawierający całą dostępną historię i wszystkie dane dotyczące repozytorium, między innymi takie jak utworzone gałęzie. Mieści się w nim plik index. Za każdym razem, kiedy uznamy, że aktualny stan naszego projektu wart jest zapisania, trzeba samodzielnie zatwierdzić wprowadzone zmiany. Odbywa się to dwuetapowo.
 
-	Najpierw należy określić, które pliki chce się zapisać w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}). Następnie zatwierdza się zmiany, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i oznaczone są jednoznacznie je identyfikującą sumą kontrolną wyliczoną przez funkcję skrótu SHA-1, generującą 40-znakowy ciąg na podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętana jest także dokładna godzina zatwierdzenia zmian i autor.
+	Najpierw należy określić, które pliki chce się zapisać w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}) komendą \textit{git add}. Następnie zatwierdza się zmiany poleceniem \textit{git commit}, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i~oznaczone są jednoznacznie je identyfikującą sumą kontrolną wyliczoną przez funkcję skrótu \mbox{SHA-1}, generującą 40-znakowy ciąg na podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętana jest także dokładna godzina zatwierdzenia zmian, autor oraz przodek (ang \textit{parent commit}).
 
 	Pliki znajdujące się w projekcie kontrolowanym przez system Git można podzielić na następujące kategorie:
 	\begin{itemize}
@@ -112,26 +120,122 @@
 		\item ignorowane - pliki nieśledzone, wyszczególnione w~specjalnym pliku .gitignore, informującym system Git których plików ma nie uwzględniać i~nigdy nie indeksować.
 	\end{itemize}
 
-	\subsection{Gałęzie} \label{Gałęzie}
-	co to gałąź, co to HEAD, stan detached HEAD
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=14cm]{git_file-types}
+		\captionsource{Możliwe stany pliku w projekcie kontrolowanym przez system Git}{\url{https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository}}
+		\label{fig:git_file-types}
+	\end{figure}
+	\FloatBarrier
+
+	\subsection{Gałęzie} \label{Galezie}
+	W systemie Git istotną rolę pełnią gałęzie, będące w rzeczywistości wskaźnikami na rewizje.
+	Każde repozytorium zawiera zaraz po utworzeniu dokładnie jedną, domyślną gałąź o nazwie \textit{master}. Wskazuje ona na najnowszą rewizję, czyli na samym początku na rewizję inicjującą. Po wykonaniu operacji zatwierdzenia wskaźnik aktualnej gałęzi automatycznie przesuwa się do przodu, na nowo powstałą rewizję. W tym miejscu należy przypomnieć, że system Git przyporządkowuje rewizjom skróty \mbox{SHA-1}, służący jako identyfikatory. Dla każdej gałęzi przechowywany jest plik tekstowy przechowujący skrót rewizji na którą dana gałąź wskazuje. Oznacza to, że przesunięcie gałęzi sprowadza się jedynie do zmiany identyfikatora SHA-1 w pliku dotyczącym tej gałęzi.
+
+	W systemie Git utworzenie nowej gałęzi jest niemalże natychmiastowe, ponieważ polega jedynie na dodaniu wskaźnika na rewizję. Oznacza to stworzenie pliku tekstowego o takiej samej nazwie jak nazwa gałęzi, który zawierać będzie czterdziestoznakowy identyfikator wskazywanej rewizji. Operacja dodawania gałęzi jest bardzo szybka, nie wymaga bowiem kopiowania całego repozytorium.
+	Wykonuje się ją poleceniem \textit{git branch}.
+
+	Istnieje także szczególny wskaźnik HEAD, przechowujący informację o aktualnie aktywnej gałęzi. W odróżnieniu od zwykłej gałęzi nie wskazuje on na konkretną rewizję, lecz na gałąź. Jeżeli zostanie utworzona nowa rewizja, to wpis w pliku dotyczącym bieżącej gałęzi uaktualni się. W rezultacie HEAD będzie również wskazywał na najnowszą rewizję, choć zawartość jego pliku nie uległa zmianie~---~wskaźnik HEAD nadal wskazuje na aktywną gałąź.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=12cm]{git_HEAD}
+		\captionsource{Repozytorium zawierające trzy rewizje, z~bieżącą gałęzią \textit{master}}{\url{https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell}}
+		\label{fig:git_HEAD}
+	\end{figure}
+
+	Na rysunku \ref{fig:git_HEAD} przedstawione jest repozytorium, w którym utworzone zostały trzy rewizje. Ich skróty SHA-1 zaczynają się od następujących ciągów znaków: 98ca9, 34ac2 i f30ab. Każda z nich przechowuje zapamiętany stan projektu, czyli migawkę (ang. \textit{snapshot}). W~prezentowanym repozytorium są dwie gałęzie, \textit{v1.0} oraz \textit{master}. Wskaźnik symboliczny HEAD wskazuje na gałąź \textit{master}, co oznacza, że jest ona gałęzią aktywną.
+
+	System Git umożliwia przełączanie się pomiędzy gałęziami za pomocą polecenia \textit{git checkout}. Przełączenie się na gałąź jest równoznaczne z~przywróceniem obszaru roboczego do stanu, jaki został zapisany we~wskazywanej przez nią rewizji. Możliwe jest również przełączenie się bezpośrednio na konkretną rewizję, nie wskazywaną przez żadną gałąź, poprzez podanie jej skrótu SHA-1. Spowoduje to przejście do stanu nazywanego w języku angielskim \textit{detached HEAD}, w~którym żadna gałąź nie jest gałęzią aktywną. Jeżeli w tym stanie wykonana zostanie operacja zatwierdzania, to utworzona rewizja nie będzie zawarta w~żadnej gałęzi, a~co za tym idzie może zostać łatwo utracona. W~związku z~tym nie należy pracować w stanie \textit{detached HEAD}. W~przypadku, w~którym konieczna jest kontynuacja projektu od konkretnej rewizji, należy najpierw utworzyć nową gałąź wskazującą na daną rewizję, a~następnie się na nią przełączyć.
 
 	\subsubsection{Łączenie gałęzi}
-	merge i rebase
+	Zmiany wprowadzone na osobnych gałęziach w systemie Git można połączyć, aby otrzymać wersję projektu zawierającą modyfikacje z kilku gałęzi. Istnieją dwa sposoby na wykonanie operacji łączenia, scalanie (ang. \textit{merge}) oraz zmiana bazy (ang. \textit{rebase}). Ostateczny rezultat jest identyczny, różnica między tymi sposobami polega przede wszystkim na innej historii projektu. 
+
+	\paragraph{Scalanie}
+
+	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z których jedna jest zawarta w drugiej. Przez zawieranie się gałęzi określa się sytuację, w której jedna gałąź zawiera ciąg rewizji, a druga składa się z identycznego ciągu do którego dodane zostały nowe rewizje. Innymi słowy, z pierwszej gałęzi można w prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
+
+	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli przesunięcie wskaźnika zawartej gałęzi do najnowszej rewizji wskazywanej przez gałąź dołączaną.
+
+	W przypadku łączenia gałęzi rozłącznych, czyli takich, w których żadna nie jest zawarta w drugiej, nie jest możliwe scalenie poprzez przewinięcie do przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od której historie gałęzi się różnią, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang. \textit{three-way merge}), w wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=12cm]{git_merge-no-ff-result}
+		\captionsource{Repozytorium po wykonaniu operacji scalania rozłącznych gałęzi}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
+		\label{fig:git_merge-no-ff-result}
+	\end{figure}
+
+	Przykład przeprowadzenia operacji scalania rozłącznych gałęzi jest przedstawiony na rysunku \ref{fig:git_merge-no-ff-result}. Do gałęzi \textit{master}, która wcześniej wskazywała na rewizję C4, dołączone zostały zmiany z gałęzi \textit{iss53}. W wyniku tego powstała nowa rewizja C5.
+
+	%\begin{figure}
+	%	\centering
+	%	\includegraphics[width=12cm]{git_merge-ff}
+	%	\captionsource{Repozytorium przed wykonaniem operacji scalania przez przewinięcie do przodu}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
+	%	\label{fig:git_merge-ff}
+	%\end{figure}
+
+	%\begin{figure}
+	%	\centering
+	%	\includegraphics[width=12cm]{git_merge-ff-result}
+	%	\captionsource{Repozytorium po wykonaniu operacji scalania przez przewinięcie do przodu}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
+	%	\label{fig:git_merge-ff-result}
+	%\end{figure}
+
+	%\begin{figure}
+	%	\centering
+	%	\includegraphics[width=12cm]{git_merge-no-ff}
+	%	\captionsource{Repozytorium przed wykonaniem operacji scalania rozłącznych gałęzi}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
+	%	\label{fig:git_merge-no-ff}
+	%\end{figure}
+
+	\FloatBarrier
+
+	\paragraph{Zmiana bazy}
+
+	Innym sposobem integracji zmian z różnych gałęzi niż scalanie jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do przodu. Ostatecznie stan plików projektu jest identyczny z tym, jaki powstałby w wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w historii projektu --- po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=12cm]{git_rebase-result}
+		\captionsource{Repozytorium po wykonaniu operacji zmiany bazy gałęzi \textit{experiment} }{\url{https://git-scm.com/book/en/v2/Git-Branching-Rebasing}}
+		\label{fig:git_rebase-result}
+	\end{figure}
+
+	Operacja zmiany bazy została zaprezentowana na rysunku \ref{fig:git_rebase-result}. Rewizje z gałęzi, której bazę zmieniono, nadal są w repozytorium. Zostaną usunięte dopiero w wyniku optymalizacji rozmiaru bazy danych repozytorium, wraz ze wszystkimi rewizjami nie zawartymi w żadnej gałęzi.
+
+	\FloatBarrier
 
 	\subsection{Repozytoria zdalne}
-	co to, co to fetch, pull, push
+	co to, jak sie dodaje
 
-	\subsubsection{o trackingu}
+	\paragraph{Pobieranie zmian}
+	fetch, pull
 
+	\paragraph{Wypychanie zmian}
+	push
 
-	\textit{W opisie Gita o tym czym jest repozytorium, przestrzeń robocza, indeks, indeksowanie zmian, zatwierdzanie zmian, rewizja, gałąź, HEAD, łączenie gałęzi, cofanie zmian, rebase, repozytorium zdalne, push, pull, gałąź zdalna, śledzenie gałęzi zdalnej. W nawiasach do wszystkie angielskie pojęcia.}
-	
+	\subsubsection{Gałęzie śledzące}
+	co to, jak sie ustawia, korzysci
+
+	%GDZIES JESZCZE MUSI BYĆ O:
+	% - tagach
+	% - wycofywaniu zmian (reset)
+
 	\textit{Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
-	
+
 	\section{Gitflow}
-	
+
 	Praca z~wykorzystaniem systemu Git może przebiegać w~zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i~pomóc w~sprawnym zarządzaniu i~wydawaniu nowych wersji oprogramowania. Jedną z~bardziej popularnych metodyk jest Gitflow, opracowana przez Vincenta Driessena. Określa ona cykl pracy, oparty na korzystaniu z~różnych gałęzi, z~których każda ma dokładnie zdefiniowaną rolę.
-	
+
+	\begin{figure}
+		\centering
+		\includegraphics{gitflow}
+		\captionsource{Typowy cykl pracy według Gitflow}{Oryginalna ilustracja angielska : \url{http://nvie.com/img/git-model@2x.pngS}}
+		\label{fig:gitflow}
+	\end{figure}
+
+
 	\subsection{Podstawowe założenia}
 	
 	Zamiast korzystać jedynie z domyślnej gałęzi \textit{master}, Gitflow wykorzystuje dwie główne gałęzie do rejestrowania historii projektu. Jedną z nich jest gałąź produkcyjna \textit{master}, na której przechowywane są tylko oficjalne wydania (ang. \textit{release}). Druga służy jako gałąź deweloperska i jest nazywana \textit{develop}. Przeznaczona jest do integracji bieżących prac programistycznych i nowych funkcji.
