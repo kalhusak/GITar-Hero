@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Engine3D } from '../../engine3D';
 import * as commandActions from '../../actions/CommandActions';
 import './Canvas.scss';
 
-class Canvas extends Component {
+export default class Canvas extends Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired
+  };
 
   constructor (props) {
     super(props);
-
     this.onStateChange = ::this.onStateChange;
   }
 
@@ -15,18 +17,9 @@ class Canvas extends Component {
     return false;
   }
 
-  componentDidMount () {
-    var canvas = document.getElementById(this.props.id);
-    // width and height from css are loaded after creating engine and then is small resolution
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-
-    this.engine = new Engine3D(canvas);
-    this.props.store.subscribe(this.onStateChange);
-  }
-
   onStateChange () {
-    var lastAction = this.props.store.getState().lastAction;
+    const { lastAction } = this.props.store.getState();
+
     if (lastAction.type === commandActions.NEW_VALID_COMMAND) {
       const { type, data } = lastAction.payload.step;
       this.engine.onNewValidCommand(type, data);
@@ -35,14 +28,14 @@ class Canvas extends Component {
     }
   }
 
-  render () {
-    return (<canvas id={this.props.id} className='renderCanvas' />);
+  componentDidMount () {
+    this.refs.canvas.style.width = '100%';
+    this.refs.canvas.style.height = '100%';
+    this.engine = new Engine3D(this.refs.canvas);
+    this.props.store.subscribe(this.onStateChange);
   }
 
+  render () {
+    return <canvas ref='canvas' className='canvas' />;
+  }
 };
-
-Canvas.propTypes = {
-  id: React.PropTypes.string
-};
-
-export default Canvas;

@@ -29,7 +29,7 @@ class AppContainer extends Component {
       <Provider store={this.props.store}>
         <div className='app'>
           <Tutorial show={this.props.tutorial} onClose={this.onTutorialClose}>
-            <Canvas id='renderCanvas' store={this.props.store} />
+            <Canvas store={this.props.store} />
             <Points />
             <TutorialItem enabled={this.props.tutorial === 'taskList'}>
               <TaskList />

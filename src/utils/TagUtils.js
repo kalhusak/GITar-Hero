@@ -1,6 +1,6 @@
 import * as TaskUtils from '../utils/TaskUtils';
 import StatisticsUtils from './StatisticsUtils';
-import helpTabs from '../components/BottomDrawer/helpTabs';
+import helpTabs from '../containers/BottomDrawer/helpTabs';
 
 export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {

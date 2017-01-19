@@ -5,7 +5,6 @@ import File from '../../components/File';
 import './Tree.scss';
 
 class Tree extends Component {
-
   renderFile ({ name, status, removed, changeType }) {
     return <div className='tree__item-inner'>
       <div className='tree__file-branch' />
