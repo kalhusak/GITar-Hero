@@ -207,22 +207,33 @@
 	\FloatBarrier
 
 	\subsection{Repozytoria zdalne}
-	co to, jak sie dodaje
+	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w sieci. Służą one do synchronizacji zmian w projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na pobieraniu i~przesyłaniu do niego danych, dotyczących wersji projektu i~stanu plików.
+
+	Jeżeli repozytorium lokalne powstało w wyniku wywołania komendy \textit{git clone}, to jest kopią repozytorium zdalnego, podanego jako parametr polecenia i istnieje między nimi powiązanie.
+	Z jednym repozytorium lokalnym może być związanych kilka różnych repozytoriów zdalnych, które są najczęściej repozytoriami surowymi, czyli nie posiadającym obszaru roboczego. Powiązanie dodaje się komendą \textit{git remote add}, w której określa się adres repozytorium zdalnego i~nadaje się mu dowolną nazwę. Domyślnie repozytorium zdalne, które zostało sklonowane, nosi nazwę \textit{origin}.
 
 	\paragraph{Pobieranie zmian}
-	fetch, pull
+	Synchronizacja repozytorium lokalnego z repozytorium zdalnym wymaga pobrania danych z serwera. Służy do tego polecenie \textit{git pull}, które pobiera rewizje znajdujące się w repozytorium zdalnym, niewystępujące w~lokalnej historii projektu. Wywołanie tej komendy nie modyfikuje aktualnych plików w obszarze roboczym, ponieważ zmiany z serwera zostały pobrane, ale nie zintegrowane z bieżącą wersją.
+
+	Repozytoria zdalne, tak jak zwykłe repozytoria lokalne, posiadają gałęzie (co najmniej jedną, domyślnie nazwaną \textit{master}). Pobieranie zmian polega na pobraniu rewizji z konkretnej, zdalnej gałęzi. W celu dołączenia ich do własnej wersji projektu należy połączyć gałęzie~---~zdalną oraz lokalną. Operacja integrowania zmian przebiega w identyczny sposób, jak w~przypadku łączenia dwóch gałęzi lokalnych i może być przeprowadzona poprzez scalanie lub zmianę bazy.
+
+	Do pobrania zmian z repozytorium zdalnego można zamiast polecenia \textit{git fetch} użyć komendy \textit{git pull}, która najpierw pobiera brakujące rewizje, a następnie dołącza je do aktywnej gałęzi. Domyślnie operacja łączenia wykonywana jest poprzez scalanie, ale za pomocą odpowiedniego przełącznika można poinformować system Git, aby zamiast tego przeprowadził zmianę bazy. 
 
 	\paragraph{Wypychanie zmian}
-	push
+	Przesyłanie rewizji utworzonych w lokalnym repozytorium na serwer realizowane jest poleceniem \textit{git push}, przyjmującym jako parametry nazwę zdalnego repozytorium oraz zdalną gałąź. Komenda zadziała tylko jeżeli na serwerze nie ma żadnych nowych, nie pobranych wcześniej zmian. W~przypadku, w~którym w~repozytorium zdalnym znajdują się rewizje nie dołączone do repozytorium lokalnego, próba wypchnięcia własnych zmian zostanie odrzucona. Konieczne będzie pobranie brakujących rewizji i dołączenie ich do posiadanej wersji projektu. Przesłanie zmian do repozytorium zdalnego jest możliwe dopiero gdy gałąź zdalna zawiera się w lokalnej gałęzi.
 
-	\subsubsection{Gałęzie śledzące}
-	co to, jak sie ustawia, korzysci
+	\paragraph{Gałęzie śledzące}
+	Podczas wykonywania poleceń służących do pobierania lub wypychania rewizji konieczne jest określenie repozytorium zdalnego i jego gałęzi, z którą należy zsynchronizować zmiany. System Git umożliwia skonfigurowanie gałęzi lokalnej jako gałęzi śledzącej, mającej bezpośrednie powiązanie ze wskazaną gałęzią z repozytorium zdalnego. Dzięki temu podczas wykonywania polecenia \textit{git pull} lub \textit{git push} z gałęzi śledzącej nie trzeba podawać żadnych parametrów, ponieważ synchronizacja domyślnie przeprowadzana jest z gałęzią śledzoną.
+
+	Lokalną gałąź śledzącą nazywa się w języku angielskim \textit{tracking branch}, a powiązaną z nią gałąź \textit{upstream branch}. W systemie Git istnieje też termin \textit{remote-tracking branch}, odnoszący się do referencji do zdalnej gałęzi. Wskazuje ona na rewizję, na jaką wskazywała dana zdalna gałąź podczas ostatniej komunikacji z serwerem. W przeciwieństwie do zwykłych gałęzi tych referencji nie można samodzielnie przesunąć. Uaktualniają się automatycznie, na skutek wymiany danych z repozytorium zdalnym.
+
+	Operacja klonowania repozytorium automatycznie ustawia lokalną główną gałąź jako śledzącą. W repozytorium utworzonym poleceniem \textit{git init} nie ma domyślnie powiązanych zdalnych repozytoriów, a co za tym idzie żadnych gałęzi śledzących.
 
 	%GDZIES JESZCZE MUSI BYĆ O:
 	% - tagach
 	% - wycofywaniu zmian (reset)
 
-	\textit{Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
+	\textit{Jakaś subsekcja o tym, dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
 
 	\section{Gitflow}
 
