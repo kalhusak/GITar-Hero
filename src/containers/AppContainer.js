@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import Canvas from '../components/Canvas';
 import BottomDrawer from './BottomDrawer';
 import TaskList from './TaskList';
-import Points from '../components/Points';
-import Tree from '../components/Tree';
+import Points from './Points';
+import Tree from './Tree';
 import TutorialItem from '../components/TutorialItem';
 import Tutorial from '../components/Tutorial';
+import { closeTutorial } from '../actions/TutorialActions';
 import './App.scss';
 
 class AppContainer extends Component {
@@ -14,23 +15,31 @@ class AppContainer extends Component {
     store: PropTypes.object.isRequired
   }
 
+  constructor (props) {
+    super(props);
+    this.onTutorialClose = ::this.onTutorialClose;
+  }
+
+  onTutorialClose () {
+    this.props.dispatch(closeTutorial());
+  }
+
   render () {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-          <Tutorial>
+          <Tutorial show={this.props.tutorial} onClose={this.onTutorialClose}>
             <Canvas id='renderCanvas' store={this.props.store} />
             <Points />
-            <TutorialItem name='taskList'>
+            <TutorialItem enabled={this.props.tutorial === 'taskList'}>
               <TaskList />
             </TutorialItem>
-            <TutorialItem name='console'>
+            <TutorialItem enabled={this.props.tutorial === 'console'}>
               <BottomDrawer />
             </TutorialItem>
-            <TutorialItem name='tree'>
+            <TutorialItem enabled={this.props.tutorial === 'tree'}>
               <Tree />
             </TutorialItem>
-            <TutorialItem name='intro' />
           </Tutorial>
         </div>
       </Provider>
@@ -38,4 +47,4 @@ class AppContainer extends Component {
   }
 }
 
-export default AppContainer;
+export default connect(state => ({ tutorial: state.tutorial.current }))(AppContainer);

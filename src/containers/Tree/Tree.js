@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pick } from 'lodash';
-import File from '../File';
+import File from '../../components/File';
 import './Tree.scss';
 
 class Tree extends Component {
