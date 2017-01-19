@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { pick } from 'lodash';
 import File from '../File';
 import './Tree.scss';
 
@@ -74,6 +75,4 @@ class Tree extends Component {
   }
 }
 
-export default connect(({ tree }) => {
-  return { tree };
-})(Tree);
+export default connect(state => pick(state, ['tree']))(Tree);

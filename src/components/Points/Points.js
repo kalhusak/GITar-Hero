@@ -64,10 +64,4 @@ class Points extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    value: state.points.value
-  };
-};
-
-export default connect(mapStateToProps)(Points);
+export default connect(state => ({ value: state.points.value }))(Points);
