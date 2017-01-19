@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider, connect } from 'react-redux';
-import Canvas from '../components/Canvas';
+import Canvas from './Canvas';
 import BottomDrawer from './BottomDrawer';
 import TaskList from './TaskList';
 import Points from './Points';
