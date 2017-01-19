@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { find, pick } from 'lodash';
-import Console from '../Console';
-import Checkbox from '../Checkbox';
+import Console from '../../components/Console';
+import Checkbox from '../../components/Checkbox';
 import { enterCommand } from '../../actions/ConsoleActions';
 import { closeHelpDrawer,
   selectHelpDrawerTab,

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import Canvas from '../components/Canvas';
-import BottomDrawer from '../components/BottomDrawer';
+import BottomDrawer from './BottomDrawer';
 import TaskList from './TaskList';
 import Points from '../components/Points';
 import Tree from '../components/Tree';
