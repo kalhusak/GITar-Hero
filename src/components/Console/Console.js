@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { isEqual } from 'lodash';
 import Config from '../../config';
-import { connect } from 'react-redux';
-import { enterCommand } from '../../actions/ConsoleActions';
 import * as ConsoleUtils from '../../utils/ConsoleUtils';
 import './Console.scss';
 
-class Console extends Component {
+export default class Console extends Component {
+  static propTypes = {
+    enabled: PropTypes.bool,
+    files: PropTypes.array.isRequired,
+    branches: PropTypes.array.isRequired,
+    onCommandEnter: PropTypes.func.isRequired
+  };
 
   constructor (props) {
     super(props);
@@ -158,8 +162,7 @@ class Console extends Component {
   }
 
   enterCommand (command) {
-    const { dispatch } = this.props;
-    dispatch(enterCommand(command.trim().replace(/\s\s+/g, ' ')));
+    this.props.onCommandEnter(command.trim().replace(/\s\s+/g, ' '));
   }
 
   renderFloatingCommand () {
@@ -214,10 +217,14 @@ class Console extends Component {
   componentWillReceiveProps (newProps) {
     if (!isEqual(newProps.branches, this.props.branches) || !isEqual(newProps.files, this.props.files)) {
       this.autocompletionTree =
-        ConsoleUtils.generateAutocompletionTree(Config.allowedCommands, newProps.branches, newProps.files);
+        ConsoleUtils.generateAutocompletionTree(
+          Config.allowedCommands,
+          newProps.branches,
+          ConsoleUtils.treeToPathList(newProps.files).concat(['-A'])
+        );
     }
 
-    if (this.props.tutorial && !newProps.tutorial) {
+    if (!this.props.enabled && newProps.enabled) {
       this.refs.consoleInput.focus();
       this.onFocus();
     }
@@ -250,11 +257,3 @@ class Console extends Component {
     );
   }
 };
-
-export default connect(({ tree, tutorial }) => {
-  return {
-    files: ConsoleUtils.treeToPathList(tree).concat(['-A']),
-    branches: ['master', 'develop'],
-    tutorial: tutorial.current
-  };
-})(Console);
