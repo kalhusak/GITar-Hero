@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import File from '../File';
+import { pick } from 'lodash';
+import File from '../../components/File';
 import './Tree.scss';
 
 class Tree extends Component {
-
   renderFile ({ name, status, removed, changeType }) {
     return <div className='tree__item-inner'>
       <div className='tree__file-branch' />
@@ -74,6 +74,4 @@ class Tree extends Component {
   }
 }
 
-export default connect(({ tree }) => {
-  return { tree };
-})(Tree);
+export default connect(state => pick(state, ['tree']))(Tree);

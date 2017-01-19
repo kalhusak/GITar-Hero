@@ -1,7 +1,7 @@
 import { cloneDeep, findIndex } from 'lodash';
 import * as commandActions from '../actions/CommandActions';
 import * as helpDrawerActions from '../actions/HelpDrawerActions';
-import helpTabs from '../components/BottomDrawer/helpTabs';
+import helpTabs from '../containers/BottomDrawer/helpTabs';
 import { getFromStorage } from '../utils/LocalStorageHelper';
 
 const initialState = {

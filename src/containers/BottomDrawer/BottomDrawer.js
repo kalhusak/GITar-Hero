@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { find } from 'lodash';
-import Console from '../Console';
-import Checkbox from '../Checkbox';
+import { find, pick } from 'lodash';
+import Console from '../../components/Console';
+import Checkbox from '../../components/Checkbox';
+import { enterCommand } from '../../actions/ConsoleActions';
 import { closeHelpDrawer,
   selectHelpDrawerTab,
   nextHelpDrawerTab,
@@ -18,6 +19,7 @@ class BottomDrawer extends Component {
     this.handleKeyDown = ::this.handleKeyDown;
     this.selectTab = ::this.selectTab;
     this.toggleAutoShowHelp = ::this.toggleAutoShowHelp;
+    this.onConsoleCommandEnter = ::this.onConsoleCommandEnter;
     this.initialRender = true;
   }
 
@@ -32,7 +34,7 @@ class BottomDrawer extends Component {
   renderTabNavigation () {
     return helpTabs.map(({ name }, index) => {
       let className = 'help-container__nav-item';
-      if (this.props.selectedTab === name) {
+      if (this.props.helpDrawer.selectedTab === name) {
         className += ' help-container__nav-item--active';
       }
       return <a key={index} className={className} onClick={this.selectTab(name)}>{name}</a>;
@@ -40,11 +42,11 @@ class BottomDrawer extends Component {
   }
 
   renderCurrentTab () {
-    return find(helpTabs, { name: this.props.selectedTab }).content;
+    return find(helpTabs, { name: this.props.helpDrawer.selectedTab }).content;
   }
 
   handleKeyDown ({ target, keyCode }) {
-    const { isOpen, dispatch } = this.props;
+    const { helpDrawer: { isOpen }, dispatch } = this.props;
 
     if (isOpen) {
       const [CODE_ESC, CODE_LEFT, CODE_RIGHT] = [27, 37, 39];
@@ -87,9 +89,13 @@ class BottomDrawer extends Component {
     this.props.dispatch(toggleAutoShowHelp());
   }
 
+  onConsoleCommandEnter (command) {
+    this.props.dispatch(enterCommand(command));
+  }
+
   render () {
     const getClasses = (className) => {
-      return this.props.isOpen ? `${className} ${className}--visible` : className;
+      return this.props.helpDrawer.isOpen ? `${className} ${className}--visible` : className;
     };
 
     const preventInitialAnimation = this.initialRender ? { transition: 'none' } : null;
@@ -100,18 +106,22 @@ class BottomDrawer extends Component {
         style={preventInitialAnimation} />
       <div className={getClasses('bottom-drawer__container')}
         style={preventInitialAnimation}>
-        <div className={'bottom-drawer__auto-show' + (this.props.autoShowHelp
+        <div className={'bottom-drawer__auto-show' + (this.props.helpDrawer.autoShowHelp
           ? ' bottom-drawer__auto-show--active' : '')}
           onClick={this.toggleAutoShowHelp}
           style={preventInitialAnimation}>
           <div className='bottom-drawer__auto-show-checkbox'>
-            <Checkbox value={this.props.autoShowHelp} />
+            <Checkbox value={this.props.helpDrawer.autoShowHelp} />
           </div>
           <span>
             auto open help for related task's first occur
           </span>
         </div>
-        <Console />
+        <Console
+          enabled={!this.props.tutorial}
+          files={this.props.tree}
+          branches={['develop', 'master']}
+          onCommandEnter={this.onConsoleCommandEnter} />
         <div className='bottom-drawer__help-container'>
           <nav className='help-container__nav'>
             {this.renderTabNavigation()}
@@ -127,6 +137,6 @@ class BottomDrawer extends Component {
   }
 };
 
-export default connect(({ helpDrawer }) => {
-  return helpDrawer;
-})(BottomDrawer);
+const mapStateToProps = state => pick(state, ['helpDrawer', 'tree', 'tutorial']);
+
+export default connect(mapStateToProps)(BottomDrawer);
