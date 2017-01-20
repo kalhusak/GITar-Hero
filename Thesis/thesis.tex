@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,polish,thesis]{dcsbook}
+\documentclass[12pt,a4paper,polish,thesis]{dcsbook}
 
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
@@ -15,6 +15,8 @@
 		\textbf{Źródło: }\raggedright{#2}%
 	}%
 }
+
+\linespread{1.3}
 
 %\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
 %	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
@@ -66,82 +68,85 @@
 
 	Systemy kontroli wersji służą do przechowywania historii plików, czyli jak sama nazwa wskazuje do kontrolowania ich różnych wersji. Dzięki temu można sprawdzić, jak zmodyfikowany został plik, a w razie potrzeby przywrócić jego poprzedni stan. Jest to szczególnie przydatne w sytuacji, w której zajdzie konieczność wycofania wprowadzonych zmian, na przykład z powodu zmiany koncepcji lub błędów.
 
-	Systemy kontroli wersji pełnią często kluczową rolę w przypadku współpracy grupy osób nad jednym projektem. Pomagają łączyć zmiany wprowadzone przez różne osoby na tych samych plikach i służą jako narzędzie do komunikacji i synchronizacji zmian. Najczęściej są wykorzystywane przy wytwarzaniu oprogramowania, ale mogą być używane także do kontroli jakichkolwiek plików. Ich zastosowanie zastępuje popularną ze względu na swoją prostotę metodę robienia kopii zapasowych na dysku poprzez zwykłe przekopiowywanie plików.
+	 W~przypadku współpracy grupy osób nad jednym projektem systemy kontroli wersji pełnią często kluczową rolę. Pomagają łączyć zmiany wprowadzone przez różne osoby na tych samych plikach i~służą jako narzędzie do komunikacji i~synchronizacji zmian. Najczęściej są wykorzystywane przy wytwarzaniu oprogramowania, ale mogą być używane także do kontroli jakichkolwiek plików. Ich zastosowanie zastępuje popularną ze względu na swoją prostotę metodę robienia kopii zapasowych na dysku, polegającą na zwykłym przekopiowywaniu plików.
 
-	Wyróżnia się trzy podstawowe rodzaje systemów wersji.
+	Wyróżnia się trzy podstawowe rodzaje systemów kontroli wersji.
 	\begin{itemize}
-		\item Lokalne --- umożliwiające pracę na jednym komputerze, nie pozwalające na synchronizację ze zdalnym repozytorium. Wykorzystywane są rzadko, głównie w~przypadku samodzielnej pracy nad indywidualnym projektem.
-		\item Scentralizowane --- oparte na architekturze klient-serwer, w~której repozytorium przechowywane jest na jednym zdalnym serwerze, z~którym synchronizują się wszyscy użytkownicy.
-		\item Rozproszone --- wykorzystujące model P2P, w~którym wszystkie komputery są sobie równoważne (nie ma jednego określonego serwera), a~kopie repozytorium znajdują się na każdej z~jednostek.
+		\item \textbf{Lokalne} --- umożliwiające pracę na jednym komputerze, nie pozwalające na synchronizację ze zdalnym repozytorium. Wykorzystywane są rzadko, głównie w~przypadku samodzielnej pracy nad indywidualnym projektem.
+		\item \textbf{Scentralizowane} --- korzystające z~architektury klient-serwer, w~której repozytorium przechowywane jest na jednym zdalnym serwerze, z~którym synchronizują się wszyscy użytkownicy.
+		\item \textbf{Rozproszone} --- wykorzystujące model P2P, w~którym wszystkie komputery są sobie równoważne (nie ma jednego określonego serwera), a~kopie repozytorium znajdują się na każdej z~jednostek.
 	\end{itemize}
 
-	Porządek, w~jakim zostały one wymienione, jest nieprzypadkowy, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania przez zespoły programistów najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największe bezpieczeństwo danych. W~przypadku awarii serwera w~scentralizowanym systemie, utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
+	Porządek, w~jakim zostały wymienione rodzaje systemów, jest nieprzypadkowy, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największy stopień bezpieczeństwa danych. W~przypadku awarii serwera w~scentralizowanym systemie utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
 	
-	\begin{figure}
+	\begin{figure}[h]
 		\centering
-		\includegraphics[width=12cm]{vcs_interest}
+		\includegraphics[width=16cm]{vcs_interest}
 		\captionsource{Zainteresowanie systemami kontroli wersji w wyszukiwarce Google, dane od stycznia 2004 do stycznia 2017}{\url{https://www.google.com/trends/explore?date=2004-01-01\%202017-01-01\&q=\%2Fm\%2F05vqwg,\%2Fm\%2F012ct9,\%2Fm\%2F08441\_,\%2Fm\%2F09d6g\&hl=en-US}}
 		\label{fig:vcs_interest}
 	\end{figure}
 
-	Na rysunku~\ref{fig:vcs_interest} przedstawiony jest wykres ilustrujący relatywną popularność czterech znanych systemów kontroli wersji w~wyszukiwarce Google, na przestrzeni ostatnich 13~lat. Uwzględnione zostały dwa scentralizowane (CVS i Subversion) oraz dwa rozproszone systemy kontroli wersji (Git i~Mercurial). Wyraźnie widać, że popularność tych pierwszych znacząco spadła względem rozproszonego modelu, który wciąż zyskuje na popularności. Przewaga systemu Git nad pozostałymi nie ulega wątpliwości, jest on aktualnie ponad czterokrotnie częściej wyszukiwany w~Google niż Mercurial czy Subversion, co przekłada się na stale rosnącą liczbę użytkowników.
-
+	Na rysunku~\ref{fig:vcs_interest} przedstawiony jest wykres ilustrujący relatywną popularność czterech znanych systemów kontroli wersji w~wyszukiwarce Google, na przestrzeni ostatnich 13~lat. Uwzględnione zostały dwa scentralizowane (CVS i~Subversion) oraz dwa rozproszone systemy kontroli wersji (Git i~Mercurial). Wyraźnie widać, że popularność tych pierwszych znacząco spadła względem rozproszonego modelu, który wciąż zyskuje na popularności. Przewaga systemu Git nad pozostałymi nie ulega wątpliwości, jest on aktualnie ponad czterokrotnie częściej wyszukiwany w~Google niż Mercurial czy Subversion, co przekłada się na stale rosnącą liczbę użytkowników.
+	
+	Obecnie systemy kontroli wersji są tak popularne, że zdecydowana większość programistów korzysta z~nich na~co~dzień. Praca polegająca na wytwarzaniu oprogramowania wykonywana jest najczęściej zespołowo, a~do efektywnej współpracy system kontroli wersji jest bezwzględnie potrzebny. Znajomość i~umiejętność sprawnego korzystania z takich systemów jest więc niezbędna programistom, którzy zamierzają pracować w~większych przedsiębiorstwach i~korporacjach.
+	
 	\section{System kontroli wersji Git}
 
-	System kontroli wersji Git stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W związku z tym postanowili napisać własny, doskonalszy od poprzedniego. Z~założenia miał to być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
+	System kontroli wersji Git stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W~związku z~tym postanowili napisać własny, doskonalszy od~poprzedniego. Z~założenia miał to~być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
 
 	\subsection{Cechy charakterystyczne}
-	Stworzony przez nich system kontroli wersji Git różni się znacząco od wcześniejszych systemów, szczególnie tych scentralizowanych. W odmienny sposób przechowuje nowe wersje plików. W przeciwieństwie do poprzedników zapamiętuje cały stan repozytorium, a nie jedynie różnicę pomiędzy plikami. Dla zwiększenia efektywności, jeśli plik nie został zmodyfikowany, to nie jest kopiowany tylko przechowywana jest referencja do jego aktualnej wersji.
+	Stworzony przez Linusa Torvaldsa system kontroli wersji Git różni się znacząco od wcześniejszych systemów, szczególnie tych scentralizowanych. W odmienny sposób przechowuje nowe wersje plików. W przeciwieństwie do poprzedników zapamiętuje cały stan repozytorium, a~nie jedynie różnicę pomiędzy plikami. Dla zwiększenia efektywności, jeśli plik nie został zmodyfikowany, to nie jest kopiowany tylko przechowywana jest referencja do~jego aktualnej wersji.
 
-	Kolejną istotną różnicą jest możliwość pracy lokalnej, bez ciągłej potrzeby łączenia się z~serwerem, nawet przy pracy nad projektem zespołowym. System Git pozwala wprowadzać zmiany i~zatwierdzać je bez dostępu do sieci. Komunikacja z innymi jednostkami w~celu synchronizacji danych może odbyć się w~dowolnym momencie. Wcześniejsze scentralizowane systemy, takie jak Subversion, nie pozwalały na taki model pracy, gdyż większość operacji wymagała połączenia z~serwerem, co wpływało także na dłuższy czas.
+	Kolejną istotną różnicą jest możliwość pracy lokalnej, bez ciągłej potrzeby łączenia się z~serwerem, nawet przy pracy nad projektem zespołowym. System Git pozwala wprowadzać zmiany i~zatwierdzać je bez dostępu do sieci. Komunikacja z innymi jednostkami w~celu synchronizacji danych może odbyć się w~dowolnym momencie. Wcześniejsze scentralizowane systemy, takie jak Subversion, nie pozwalały na taki model pracy. Większość operacji wymagała połączenia z~serwerem, co~wpływało na dłuższy czas wykonywania.
 
 	Git przypisuje do zapisanych stanów projektu czterdziestoznakowe skróty SHA-1. Dzięki tym sumom kontrolnym zauważy każdą, nawet najmniejszą zmianę wprowadzoną na kontrolowanym pliku, niezależnie od sposobu przeprowadzenia modyfikacji.
 
-	Jako najważniejszą zaletę systemu Git powszechnie uznaje się efektywny system rozgałęziania i~łączenia gałęzi. W~przeciwieństwie do starszych systemów kontroli wersji, Git umożliwia natychmiastowe utworzenie nowej gałęzi, oraz bardzo szybkie przełączanie się pomiędzy gałęziami. Ta cecha sprawia, że równoległa praca jest o~wiele mniej problematyczna. Znacząco ułatwia to rozwój oprogramowania jednocześnie w~kilku różnych i~niezależnych kierunkach. Tak optymalne operacje na gałęziach są możliwe dzięki potraktowaniu gałęzi jako wskaźnika na rewizję, o~czym więcej w~sekcji %\ref{Gałęzie}.
+	Jako najważniejszą zaletę systemu Git powszechnie uznaje się efektywny system rozgałęziania i~łączenia gałęzi. W~przeciwieństwie do starszych systemów kontroli wersji, Git umożliwia natychmiastowe utworzenie nowej gałęzi, oraz bardzo szybkie przełączanie się pomiędzy gałęziami. Ta cecha sprawia, że równoległa praca jest o~wiele mniej problematyczna. Znacząco ułatwia to rozwój oprogramowania jednocześnie w~kilku różnych i~niezależnych kierunkach. Tak optymalne operacje na gałęziach są możliwe dzięki potraktowaniu gałęzi jako wskaźnika na rewizję, o~czym więcej w~sekcji \ref{Galezie}.
 
 	\subsection{Repozytorium}
 
-	Aby w pełni zrozumieć, czym jest Git, należy zacząć od wytłumaczenia kilku pojęć. Przez zwykłe repozytorium systemu Git określa się folder, przechowujący całą dotychczasową historię projektu i wszystkie zapisane wersje śledzonych plików, oraz przestrzeń roboczą (ang. \textit{working directory}), w której znajdują się bieżące pliki. Git wyróżnia także repozytoria surowe (ang. \textit{bare}), służące przede wszystkim do synchronizacji i wymiany zmian. Nie posiadają one obszaru roboczego, ponieważ nie są przeznaczone do tego, aby w nich pracować.
+	Aby w pełni zrozumieć, czym jest Git, należy zacząć od wytłumaczenia kilku pojęć. Przez zwykłe repozytorium systemu Git określa się folder, przechowujący całą dotychczasową historię projektu i wszystkie zapisane wersje śledzonych plików, oraz przestrzeń roboczą (ang. \textit{working directory}), w której znajdują się bieżące pliki. Git wyróżnia także repozytoria surowe (ang. \textit{bare}), służące przede wszystkim do~synchronizacji i~wymiany zmian. Nie posiadają one obszaru roboczego, ponieważ nie są przeznaczone do tego, aby w~nich pracować.
 
 	Repozytorium systemu Git można samodzielnie utworzyć w dowolnym folderze na dysku, lub pobrać poprzez sklonowanie istniejącego. Pierwsza metoda może dotyczyć zarówno pustego katalogu jak i~takiego, który już zawiera projekt. Podczas inicjalizacji repozytorium zostanie utworzony osobny podkatalog .git, obejmujący wszystkie pliki potrzebne systemowi Git do działania. Pozostała zawartość folderu, w którym utworzono repozytorium, pozostanie niezmieniona. Drugi sposób polega na sklonowaniu istniejącego repozytorium do wybranego katalogu na dysku. Pobrany zostanie folder .git, wraz z całą zawartością, oraz obszar roboczy ze wszystkimi plikami projektu.
 
 	\subsection{Tworzenie rewizji}
+	Za każdym razem, kiedy uznamy, że aktualny stan naszego projektu wart jest zapisania, trzeba samodzielnie zatwierdzić wprowadzone zmiany. Odbywa się to dwuetapowo.
 
-	Jak wspomniano wcześniej, w folderze każdego projektu kontrolowanego przez Git znajduje się podkatalog .git, zawierający całą dostępną historię i wszystkie dane dotyczące repozytorium, między innymi takie jak utworzone gałęzie. Mieści się w nim plik index. Za każdym razem, kiedy uznamy, że aktualny stan naszego projektu wart jest zapisania, trzeba samodzielnie zatwierdzić wprowadzone zmiany. Odbywa się to dwuetapowo.
+	Najpierw należy określić, które pliki powinny zostać zapisane w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}) komendą \textit{git add}. W tym miejscu należy wytłumaczyć, czym jest indeks. Jak wspomniano wcześniej, w~folderze każdego projektu kontrolowanego przez Git znajduje się podkatalog .git, zawierający całą dostępną historię i wszystkie dane dotyczące repozytorium. Mieści się w nim plik index, przechowujący listę plików, których zmiany zostaną uwzględnione w najbliższej rewizji.
 
-	Najpierw należy określić, które pliki chce się zapisać w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}) komendą \textit{git add}. Następnie zatwierdza się zmiany poleceniem \textit{git commit}, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i~oznaczone są jednoznacznie je identyfikującą sumą kontrolną wyliczoną przez funkcję skrótu \mbox{SHA-1}, generującą 40-znakowy ciąg na podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętana jest także dokładna godzina zatwierdzenia zmian, autor oraz przodek (ang \textit{parent commit}).
+	Następnie zatwierdza się zmiany poleceniem \textit{git commit}, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i~oznaczone są jednoznacznie je identyfikującą sumą kontrolną. Wyliczona jest przez funkcję skrótu \mbox{SHA-1}, generującą 40-znakowy ciąg na~podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętywana jest także dokładna godzina zatwierdzenia zmian, autor oraz przodek rewizji (ang \textit{parent commit}). Przodkiem określa się rewizję bezpośrednio poprzedzającą daną rewizję. Warto w tym miejscu zaznaczyć, że rewizje powstałe w~wyniku scalenia gałęzi mają więcej niż jednego rodzica. Więcej na temat gałęzi w~sekcji~\ref{Galezie}.
 
 	Pliki znajdujące się w projekcie kontrolowanym przez system Git można podzielić na następujące kategorie:
 	\begin{itemize}
-		\item aktualne - w obszarze roboczym znajduje się identyczna wersja pliku jak w ostatnio wykonanej rewizji,
-		\item zmodyfikowane - od czasu zatwierdzenia zmian w pliku zostały wprowadzone pewne modyfikacje, nie dodane do indeksu (a więc gdyby w tym momencie utworzona została rewizja, to nie zawierałaby tych zmian),
-		\item zaindeksowane - od czasu zatwierdzenia zmian plik został zmieniony, ale następnie dodano go do indeksu (czyli zarówno w obszarze roboczym, jak i~w~indeksie, znajduje się ta sama wersja --- będzie ona zapisana przy kolejnej rewizji).
+		\item aktualne --- w obszarze roboczym znajduje się identyczna wersja pliku jak w~ostatnio wykonanej rewizji,
+		\item zmodyfikowane --- od czasu zatwierdzenia zmian w pliku zostały wprowadzone pewne modyfikacje, nie dodane do indeksu (a~więc gdyby w~tym momencie utworzona została rewizja, to nie zawierałaby tych zmian),
+		\item zaindeksowane --- od czasu zatwierdzenia zmian plik został zmieniony, a następnie dodany do~indeksu (czyli zarówno w obszarze roboczym, jak i~w~indeksie, znajduje się ta sama wersja --- będzie ona zapisana przy kolejnej rewizji).
 		\item nieśledzone - pliki występujące w obszarze roboczym, ale nie znajdujące się ani w~repozytorium, ani w~indeksie --- w~tym stanie jest początkowo każdy nowo dodany do obszaru roboczego plik,
-		\item ignorowane - pliki nieśledzone, wyszczególnione w~specjalnym pliku .gitignore, informującym system Git których plików ma nie uwzględniać i~nigdy nie indeksować.
+		\item ignorowane --- pliki nieśledzone, wyszczególnione w~specjalnym pliku .gitignore, informującym system Git których plików ma nie uwzględniać i~nigdy nie indeksować.
 	\end{itemize}
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=14cm]{git_file-types}
-		\captionsource{Możliwe stany pliku w projekcie kontrolowanym przez system Git}{\url{https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository}}
+		\includegraphics[width=11.3cm]{git_file-types}
+		\captionsource{Możliwe stany pliku w projekcie kontrolowanym przez system Git}{\mbox{\url{https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository}}}
 		\label{fig:git_file-types}
 	\end{figure}
 	\FloatBarrier
-	
+
 	\paragraph{Etykiety}
-	System Git umożliwia oznaczanie wybranych rewizji etykietami za pomocą polecenia \textit{git tag}. Wykorzystywane jest to najczęściej do oznaczania ważnych wersji projektu, przede wszystkim na gałęzi produkcyjnej, przy publikacji nowego wydania. Do wyszukania konkretnej rewizji w historii projektu konieczne jest podanie skrótu SHA-1, identyfikującego daną rewizję, ale można w tym celu posłużyć się znacznikiem. Dzięki temu odnalezienie istotnych wersji oprogramowania jest łatwiejsze. 
-	
+	System Git umożliwia oznaczanie wybranych rewizji etykietami, zwanymi także znacznikami, za pomocą polecenia \textit{git tag}. Etykiety wykorzystywane są najczęściej do oznaczania ważnych wersji projektu, przede wszystkim na gałęzi produkcyjnej przy publikacji nowego wydania. Do wyszukania konkretnej rewizji w~historii projektu konieczne jest podanie skrótu SHA-1, identyfikującego daną rewizję, ale można w~tym celu posłużyć się znacznikiem. Dzięki temu odnalezienie istotnych wersji oprogramowania jest łatwiejsze.
+
 	Etykiety nadawane rewizjom można podzielić na dwa typy:
 	\begin{itemize}
-		\item etykiety lekkie (ang. \textit{lightweight tags}) - przechowujące jedynie skrót SHA-1 wskazywanej rewizji,
-		\item etykiety opisane (ang. \textit{annotated tags}) - zawierające poza skrótem SHA-1 rewizji także datę utworzenia, autora i opcjonalnie dodatkowy komentarz.
+		\item lekkie (ang. \textit{lightweight tags}) --- przechowujące jedynie skrót SHA-1 wskazywanej rewizji,
+		\item opisane (ang. \textit{annotated tags}) --- zawierające poza skrótem SHA-1 rewizji także datę utworzenia, autora i~opcjonalnie dodatkowy komentarz.
 	\end{itemize}
 
 	\subsection{Gałęzie} \label{Galezie}
 	W systemie Git istotną rolę pełnią gałęzie, będące w rzeczywistości wskaźnikami na rewizje.
-	Każde repozytorium zawiera zaraz po utworzeniu dokładnie jedną, domyślną gałąź o nazwie \textit{master}. Wskazuje ona na najnowszą rewizję, czyli na samym początku na rewizję inicjującą. Po wykonaniu operacji zatwierdzenia wskaźnik aktualnej gałęzi automatycznie przesuwa się do przodu, na nowo powstałą rewizję. W tym miejscu należy przypomnieć, że system Git przyporządkowuje rewizjom skróty \mbox{SHA-1}, służący jako identyfikatory. Dla każdej gałęzi przechowywany jest plik tekstowy przechowujący skrót rewizji na którą dana gałąź wskazuje. Oznacza to, że przesunięcie gałęzi sprowadza się jedynie do zmiany identyfikatora SHA-1 w pliku dotyczącym tej gałęzi.
+	Każde repozytorium zawiera zaraz po utworzeniu dokładnie jedną, domyślną gałąź o nazwie \textit{master}. Wskazuje ona na najnowszą rewizję, czyli na samym początku na rewizję inicjującą. Po wykonaniu operacji zatwierdzenia wskaźnik aktualnej gałęzi automatycznie przesuwa się do przodu, na nowo powstałą rewizję. W~tym miejscu należy przypomnieć, że system Git przyporządkowuje rewizjom skróty \mbox{SHA-1}, służące jako identyfikatory. Dla każdej gałęzi przechowywany jest plik tekstowy, przechowujący skrót rewizji, na którą dana gałąź wskazuje. Oznacza to, że przesunięcie gałęzi sprowadza się jedynie do zmiany identyfikatora \mbox{SHA-1} w~pliku dotyczącym tej gałęzi.
 
-	W systemie Git utworzenie nowej gałęzi jest niemalże natychmiastowe, ponieważ polega jedynie na dodaniu wskaźnika na rewizję. Oznacza to stworzenie pliku tekstowego o takiej samej nazwie jak nazwa gałęzi, który zawierać będzie czterdziestoznakowy identyfikator wskazywanej rewizji. Operacja dodawania gałęzi jest bardzo szybka, nie wymaga bowiem kopiowania całego repozytorium.
+	W systemie Git utworzenie nowej gałęzi jest niemalże natychmiastowe, ponieważ polega jedynie na dodaniu wskaźnika na rewizję. Wiąże się to ze stworzeniem pliku tekstowego, o takiej samej nazwie jak nazwa gałęzi, który zawierać będzie czterdziestoznakowy identyfikator wskazywanej rewizji. Operacja dodawania gałęzi jest bardzo szybka, nie wymaga bowiem kopiowania całego repozytorium.
 	Wykonuje się ją poleceniem \textit{git branch}.
 
 	Istnieje także szczególny wskaźnik HEAD, przechowujący informację o aktualnie aktywnej gałęzi. W odróżnieniu od zwykłej gałęzi nie wskazuje on na konkretną rewizję, lecz na gałąź. Jeżeli zostanie utworzona nowa rewizja, to wpis w pliku dotyczącym bieżącej gałęzi uaktualni się. W rezultacie HEAD będzie również wskazywał na najnowszą rewizję, choć zawartość jego pliku nie uległa zmianie~---~wskaźnik HEAD nadal wskazuje na aktywną gałąź.
@@ -158,15 +163,15 @@
 	System Git umożliwia przełączanie się pomiędzy gałęziami za pomocą polecenia \textit{git checkout}. Przełączenie się na gałąź jest równoznaczne z~przywróceniem obszaru roboczego do stanu, jaki został zapisany we~wskazywanej przez nią rewizji. Możliwe jest również przełączenie się bezpośrednio na konkretną rewizję, nie wskazywaną przez żadną gałąź, poprzez podanie jej skrótu SHA-1. Spowoduje to przejście do stanu nazywanego w języku angielskim \textit{detached HEAD}, w~którym żadna gałąź nie jest gałęzią aktywną. Jeżeli w tym stanie wykonana zostanie operacja zatwierdzania, to utworzona rewizja nie będzie zawarta w~żadnej gałęzi, a~co za tym idzie może zostać łatwo utracona. W~związku z~tym nie należy pracować w stanie \textit{detached HEAD}. W~przypadku, w~którym konieczna jest kontynuacja projektu od konkretnej rewizji, należy najpierw utworzyć nową gałąź wskazującą na daną rewizję, a~następnie się na nią przełączyć.
 
 	\subsubsection*{Łączenie gałęzi}
-	Zmiany wprowadzone na osobnych gałęziach w systemie Git można połączyć, aby otrzymać wersję projektu zawierającą modyfikacje z kilku gałęzi. Istnieją dwa sposoby na wykonanie operacji łączenia, scalanie (ang. \textit{merge}) oraz zmiana bazy (ang. \textit{rebase}). Ostateczny rezultat jest identyczny, różnica między tymi sposobami polega przede wszystkim na innej historii projektu. 
+	Zmiany wprowadzone na osobnych gałęziach w systemie Git można połączyć, aby otrzymać wersję projektu zawierającą modyfikacje z kilku gałęzi. Istnieją dwa sposoby na wykonanie operacji łączenia, scalanie (ang. \textit{merge}) oraz zmiana bazy (ang.~\textit{rebase}). Ostateczny rezultat jest identyczny, różnica między tymi sposobami polega przede wszystkim na innej historii projektu.
 
 	\paragraph{Scalanie}
 
-	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z których jedna jest zawarta w drugiej. Przez zawieranie się gałęzi określa się sytuację, w której jedna gałąź zawiera ciąg rewizji, a druga składa się z identycznego ciągu do którego dodane zostały nowe rewizje. Innymi słowy, z pierwszej gałęzi można w prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
+	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z~których jedna jest zawarta w~drugiej. Przez zawieranie się gałęzi określa się sytuację, w~której jedna gałąź zawiera ciąg rewizji, a~druga składa się z identycznego ciągu do~którego dodane zostały nowe rewizje. Innymi słowy, z~pierwszej gałęzi można w~prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
 
 	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli przesunięcie wskaźnika zawartej gałęzi do najnowszej rewizji wskazywanej przez gałąź dołączaną.
 
-	W przypadku łączenia gałęzi rozłącznych, czyli takich, w których żadna nie jest zawarta w drugiej, nie jest możliwe scalenie poprzez przewinięcie do przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od której historie gałęzi się różnią, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang. \textit{three-way merge}), w wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
+	W przypadku łączenia gałęzi rozłącznych, czyli takich, że~żadna nie jest zawarta w~drugiej, nie jest możliwe scalenie poprzez przewinięcie do~przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od~której historie gałęzi się różnią, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang.~\textit{three-way merge}), w~wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
 
 	\begin{figure}[h]
 		\centering
@@ -202,7 +207,7 @@
 
 	\paragraph{Zmiana bazy}
 
-	Innym sposobem integracji zmian z różnych gałęzi niż scalanie jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do przodu. Ostatecznie stan plików projektu jest identyczny z tym, jaki powstałby w wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w historii projektu --- po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia.
+	Innym sposobem integracji zmian z różnych gałęzi jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i~sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a~gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do~przodu. Ostatecznie stan plików projektu jest identyczny z~tym, jaki powstałby w~wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w~historii projektu~---~po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia.
 
 	\begin{figure}[h]
 		\centering
@@ -214,43 +219,39 @@
 	Operacja zmiany bazy została zaprezentowana na rysunku \ref{fig:git_rebase-result}. Rewizje z gałęzi, której bazę zmieniono, nadal są w repozytorium. Zostaną usunięte dopiero w wyniku optymalizacji rozmiaru bazy danych repozytorium, wraz ze wszystkimi rewizjami nie zawartymi w żadnej gałęzi.
 
 	\FloatBarrier
-	\subscetion{Wycofywanie zmian}
-	o git reset
-	
-	trzy tryby
-	
+	\subsection{Wycofywanie zmian}
+	Jeżeli zajdzie potrzeba wycofania zaindeksowanych zmian lub usunięcia utworzonych rewizji, należy użyć komendy \textit{git reset} systemu Git, wywoływanej w~jednym z~trzech trybów:
 	\begin{itemize}
-		\item 
+		\item \textbf{\textit{soft}}~---~ aktywna gałąź (wskazywana przez HEAD) przesuwana jest do podanej jako parametr rewizji, a indeks i obszar roboczy pozostają bez zmian,
+		\item \textbf{\textit{mixed}}~---~tryb domyślny, w którym aktywna gałąź przesuwana jest do podanej rewizji i dodatkowo zmieniany jest indeks (przywracany do stanu takiego jak w danej rewizji), a obszar roboczy pozostaje bez zmian,
+		\item \textbf{\textit{hard}}~---~przesuwana jest aktywna gałąź, a zarówno indeks jak i~obszar roboczy są przywracane do stanu zapamiętanego w podanej rewizji (ten tryb może spowodować nieodwracalną utratę zmian, nawet tych zatwierdzonych).
 	\end{itemize}
+	Reasumując, polecenie \textit{git reset} z opcją \textit{hard} wykonuje trzy kroki~---~cofa wskaźnik aktywnej gałęzi, zmienia indeks, a następnie  przywraca stan obszaru roboczego do~stanu zapisanego we wskazanej rewizji. W trybie \textit{mixed} pomijany jest ostatni krok, modyfikujący pliki w~katalogu roboczym. Z~kolei tryb \textit{soft} wykonuje tylko krok pierwszy. 
+	
+	Komendę \textit{git reset} w trybie \textit{mixed} można wykorzystać do~wykluczenia zaindeksowanego pliku z~indeksu, a z~opcją \textit{hard} do~usunięcia najnowszych rewizji. Za~pomocą tego polecenia wycofuje się także operację scalania, która utworzyła nową rewizję (nie dotyczy to scalania poprzez przewinięcie do~przodu).
 
 	\subsection{Repozytoria zdalne}
-	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w sieci. Służą one do synchronizacji zmian w projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na pobieraniu i~przesyłaniu do niego danych, dotyczących wersji projektu i~stanu plików.
+	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w~sieci. Służą one do~synchronizacji zmian w~projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na~pobieraniu i~przesyłaniu do~niego danych, dotyczących wersji projektu i~stanu plików.
 
-	Jeżeli repozytorium lokalne powstało w wyniku wywołania komendy \textit{git clone}, to jest kopią repozytorium zdalnego, podanego jako parametr polecenia i istnieje między nimi powiązanie.
-	Z jednym repozytorium lokalnym może być związanych kilka różnych repozytoriów zdalnych, które są najczęściej repozytoriami surowymi, czyli nie posiadającym obszaru roboczego. Powiązanie dodaje się komendą \textit{git remote add}, w której określa się adres repozytorium zdalnego i~nadaje się mu dowolną nazwę. Domyślnie repozytorium zdalne, które zostało sklonowane, nosi nazwę \textit{origin}.
+	Jeżeli repozytorium lokalne powstało w wyniku wywołania komendy \textit{git clone}, to~jest kopią repozytorium zdalnego, podanego jako parametr polecenia i istnieje między nimi powiązanie.
+	Z~jednym repozytorium lokalnym może być związanych kilka różnych repozytoriów zdalnych, które są najczęściej repozytoriami surowymi, czyli nie posiadającymi obszaru roboczego. Powiązanie dodaje się komendą {\textit{git~remote~add}, w~której określa się adres repozytorium zdalnego i~nadaje się mu dowolną nazwę. Domyślnie repozytorium zdalne, które zostało sklonowane, nosi nazwę \mbox{\textit{origin}}.
 
 	\paragraph{Pobieranie zmian}
-	Synchronizacja repozytorium lokalnego z repozytorium zdalnym wymaga pobrania danych z serwera. Służy do tego polecenie \textit{git pull}, które pobiera rewizje znajdujące się w repozytorium zdalnym, niewystępujące w~lokalnej historii projektu. Wywołanie tej komendy nie modyfikuje aktualnych plików w obszarze roboczym, ponieważ zmiany z serwera zostały pobrane, ale nie zintegrowane z bieżącą wersją.
+	Synchronizacja repozytorium lokalnego z repozytorium zdalnym wymaga pobrania danych z serwera. Służy do tego polecenie \textit{git pull}, które pobiera rewizje znajdujące się w repozytorium zdalnym, niewystępujące w~lokalnej historii projektu. Wywołanie tej komendy nie modyfikuje aktualnych plików w~obszarze roboczym, ponieważ zmiany z serwera zostają pobrane, ale nie zintegrowane z~bieżącą wersją.
 
-	Repozytoria zdalne, tak jak zwykłe repozytoria lokalne, posiadają gałęzie (co najmniej jedną, domyślnie nazwaną \textit{master}). Pobieranie zmian polega na pobraniu rewizji z konkretnej, zdalnej gałęzi. W celu dołączenia ich do własnej wersji projektu należy połączyć gałęzie~---~zdalną oraz lokalną. Operacja integrowania zmian przebiega w identyczny sposób, jak w~przypadku łączenia dwóch gałęzi lokalnych i może być przeprowadzona poprzez scalanie lub zmianę bazy.
+	Repozytoria zdalne, tak jak zwykłe repozytoria lokalne, posiadają gałęzie (co~najmniej jedną, domyślnie nazwaną \textit{master}). Pobieranie zmian polega na pobraniu rewizji z konkretnej, zdalnej gałęzi. W celu dołączenia ich do własnej wersji projektu należy połączyć gałęzie~---~zdalną oraz lokalną. Operacja integrowania zmian przebiega w identyczny sposób, jak w~przypadku łączenia dwóch gałęzi lokalnych i~może być przeprowadzona poprzez scalanie lub zmianę bazy.
 
-	Do pobrania zmian z repozytorium zdalnego można zamiast polecenia \textit{git fetch} użyć komendy \textit{git pull}, która najpierw pobiera brakujące rewizje, a następnie dołącza je do aktywnej gałęzi. Domyślnie operacja łączenia wykonywana jest poprzez scalanie, ale za pomocą odpowiedniego przełącznika można poinformować system Git, aby zamiast tego przeprowadził zmianę bazy. 
+	Do pobrania zmian z repozytorium zdalnego można zamiast polecenia \textit{git fetch} użyć komendy \textit{git pull}, która najpierw pobiera brakujące rewizje, a następnie dołącza je do aktywnej gałęzi. Domyślnie operacja łączenia wykonywana jest poprzez scalanie, ale za pomocą odpowiedniego przełącznika można poinformować system Git, aby zamiast tego przeprowadził zmianę bazy.
 
 	\paragraph{Wypychanie zmian}
-	Przesyłanie rewizji utworzonych w lokalnym repozytorium na serwer realizowane jest poleceniem \textit{git push}, przyjmującym jako parametry nazwę zdalnego repozytorium oraz zdalną gałąź. Komenda zadziała tylko jeżeli na serwerze nie ma żadnych nowych, nie pobranych wcześniej zmian. W~przypadku, w~którym w~repozytorium zdalnym znajdują się rewizje nie dołączone do repozytorium lokalnego, próba wypchnięcia własnych zmian zostanie odrzucona. Konieczne będzie pobranie brakujących rewizji i dołączenie ich do posiadanej wersji projektu. Przesłanie zmian do repozytorium zdalnego jest możliwe dopiero gdy gałąź zdalna zawiera się w lokalnej gałęzi.
+	Przesyłanie rewizji utworzonych w lokalnym repozytorium na serwer realizowane jest poleceniem \textit{git push}, przyjmującym jako parametry nazwę zdalnego repozytorium oraz zdalną gałąź. Komenda zadziała tylko jeżeli na serwerze nie ma żadnych nowych, nie pobranych wcześniej zmian. W~przypadku, w~którym w~repozytorium zdalnym znajdują się rewizje nie dołączone do repozytorium lokalnego, próba wypchnięcia własnych zmian zostanie odrzucona. Konieczne będzie pobranie brakujących rewizji i~dołączenie ich do posiadanej wersji projektu. Przesłanie zmian do~repozytorium zdalnego jest możliwe dopiero gdy gałąź zdalna zawiera się w~lokalnej gałęzi.
 
 	\paragraph{Gałęzie śledzące}
-	Podczas wykonywania poleceń służących do pobierania lub wypychania rewizji konieczne jest określenie repozytorium zdalnego i jego gałęzi, z którą należy zsynchronizować zmiany. System Git umożliwia skonfigurowanie gałęzi lokalnej jako gałęzi śledzącej, mającej bezpośrednie powiązanie ze wskazaną gałęzią z repozytorium zdalnego. Dzięki temu podczas wykonywania polecenia \textit{git pull} lub \textit{git push} z gałęzi śledzącej nie trzeba podawać żadnych parametrów, ponieważ synchronizacja domyślnie przeprowadzana jest z gałęzią śledzoną.
+	Podczas wykonywania poleceń służących do pobierania lub wypychania rewizji konieczne jest określenie repozytorium zdalnego i~jego gałęzi, z~którą należy zsynchronizować zmiany. System Git umożliwia skonfigurowanie gałęzi lokalnej jako gałęzi śledzącej, mającej bezpośrednie powiązanie ze wskazaną gałęzią z repozytorium zdalnego. Dzięki temu, podczas wykonywania polecenia \textit{git pull} lub \textit{git push} z~gałęzi śledzącej, nie trzeba podawać żadnych parametrów, ponieważ synchronizacja domyślnie przeprowadzana jest z~gałęzią śledzoną.
 
-	Lokalną gałąź śledzącą nazywa się w języku angielskim \textit{tracking branch}, a powiązaną z nią gałąź \textit{upstream branch}. W systemie Git istnieje też termin \textit{remote-tracking branch}, odnoszący się do referencji do zdalnej gałęzi. Wskazuje ona na rewizję, na jaką wskazywała dana zdalna gałąź podczas ostatniej komunikacji z serwerem. W przeciwieństwie do zwykłych gałęzi tych referencji nie można samodzielnie przesunąć. Uaktualniają się automatycznie, na skutek wymiany danych z repozytorium zdalnym.
+	Lokalną gałąź śledzącą nazywa się w języku angielskim \textit{tracking branch}, a powiązaną z nią gałąź \textit{upstream branch}. W systemie Git istnieje też termin \textit{remote-tracking branch}, odnoszący się do referencji do zdalnej gałęzi. Wskazuje ona na~rewizję, na~jaką wskazywała dana zdalna gałąź podczas ostatniej komunikacji z~serwerem. W~przeciwieństwie do~zwykłych gałęzi tych referencji nie można samodzielnie przesunąć. Uaktualniają się automatycznie, na skutek wymiany danych z~repozytorium zdalnym.
 
 	Operacja klonowania repozytorium automatycznie ustawia lokalną główną gałąź jako śledzącą. W repozytorium utworzonym poleceniem \textit{git init} nie ma domyślnie powiązanych zdalnych repozytoriów, a co za tym idzie żadnych gałęzi śledzących.
-
-	%GDZIES JESZCZE MUSI BYĆ O:
-	% - tagach
-	% - wycofywaniu zmian (reset)
-
-	\textit{Jakaś subsekcja o tym, dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
 
 	\section{Gitflow}
 
@@ -263,47 +264,45 @@
 		\label{fig:gitflow}
 	\end{figure}
 
-
 	\subsection{Podstawowe założenia}
-	
+
 	Zamiast korzystać jedynie z domyślnej gałęzi \textit{master}, Gitflow wykorzystuje dwie główne gałęzie do rejestrowania historii projektu. Jedną z nich jest gałąź produkcyjna \textit{master}, na której przechowywane są tylko oficjalne wydania (ang. \textit{release}). Druga służy jako gałąź deweloperska i jest nazywana \textit{develop}. Przeznaczona jest do integracji bieżących prac programistycznych i nowych funkcji.
-	
-	Obie wspomniane gałęzie w idealnym przypadku powinny składać się jedynie z rewizji powstałych poprzez scalenie gałęzi (ang. \textit{merge commits}). Nie powinno się pracować i zatwierdzać zmian bezpośrednio na nich. Wszystkie modyfikacje kodu należy przeprowadzać na osobnych, dedykowanych gałęziach, tworzonych tymczasowo, w dokładnie określonym celu. Koncepcja Gitflow wyróżnia trzy rodzaje takich gałęzi:
+
+	Obie wspomniane gałęzie w idealnym przypadku powinny składać się jedynie z~rewizji powstałych poprzez scalenie gałęzi (ang. \textit{merge commits}). Nie powinno się pracować i~zatwierdzać zmian bezpośrednio na~nich. Wszystkie modyfikacje kodu należy przeprowadzać na osobnych, dedykowanych gałęziach, tworzonych tymczasowo, w~dokładnie określonym celu. Koncepcja Gitflow wyróżnia trzy rodzaje takich gałęzi:
 	\begin{itemize}
 		\item wprowadzające nowe funkcje (ang. \textit{feature branch}),
 		\item przygotowujące do opublikowania nowego wydania (ang. \textit{release branch}),
 		\item zawierające niezbędne i szybkie poprawki (ang. \textit{hotfix branch}).
 	\end{itemize}
 	Z racji braku polskich odpowiedników nazw wymienionych powyżej gałęzi, w przypadku odniesienia do nich, w dalszej części pracy wykorzystywane będzie oryginalne nazewnictwo angielskie.
-	
-	Z technicznego punktu widzenia typy gałęzi wykorzystywanych w Gitflow niczym się nie różnią, są to zwykłe gałęzie systemu Git. Są one szczególne jedynie pod względem konkretnych celów w jakich są używane i pewnych ograniczeń dotyczących procesu tworzenia ich i łączenia. Każdy rodzaj może powstać jedynie przez rozgałęzienie z określonej gałęzi (produkcyjnej lub deweloperskiej), a na koniec musi zostać połączony ze ściśle ustaloną gałęzią lub gałęziami.
-	
+
+	Z technicznego punktu widzenia typy gałęzi wykorzystywanych w Gitflow niczym się nie różnią, są to zwykłe gałęzie systemu Git. Są one szczególne jedynie pod względem konkretnych celów, w~jakich są używane i~pewnych ograniczeń dotyczących procesu tworzenia i~łączenia ich. Każdy rodzaj może powstać jedynie przez rozgałęzienie z~określonej gałęzi (produkcyjnej lub deweloperskiej), a~na~koniec musi zostać połączony ze~ściśle ustaloną gałęzią lub gałęziami.
+
 	\subsection{Rozszerzanie funkcjonalności}
-	
-	Jednym z podstawowych założeń Gitflow jest implementowanie każdej nowej funkcji oprogramowania na osobnej, dedykowanej gałęzi typu \textit{feature branch}, której nazwa powinna zaczynać się od ,,feature/''. Taka gałąź może powstać jedynie poprzez rozgałęzienie z głównej gałęzi \textit{develop}. Z założenia ma składać się wyłącznie z rewizji zawierających zmiany dotyczące danej nowej funkcji i istnieć tak długo, jak długo trwać będzie proces implementacji.
-	
-	Kiedy cel zostanie zrealizowany, gałąź typu \textit{feature branch} powinna być połączona z gałęzią \textit{develop}. Istotne jest aby operacja scalania nie została wykonana poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli zwykłe przesunięcie wskaźnika HEAD. Chodzi o to by główna gałąź deweloperska nie zawierała wszystkich rewizji pochodzących z gałęzi dołączanej, a jedynie jedną powstałą jako łącznik dwóch gałęzi (ang. \textit{merge commit}). W przeciwnym wypadku określenie, które rewizje dotyczą wprowadzenia konkretnej funkcji, wymagałoby dokładnego przejrzenia zawieranych przez nie zmian. A w rezultacie znacznie trudniej byłoby usunąć pojedynczą funkcję z głównej gałęzi. 
-	
-	Po włączeniu zmian z gałęzi przeznaczonej do implementacji nowej funkcji do głównej gałęzi \textit{develop}, 
-	należy usunąć tymczasową gałąź.
-	
+
+	Jednym z podstawowych założeń Gitflow jest implementowanie każdej nowej funkcji oprogramowania na osobnej, dedykowanej gałęzi typu \textit{feature branch}, której nazwa powinna zaczynać się od ,,feature/''. Taka gałąź może powstać jedynie poprzez rozgałęzienie z~głównej gałęzi \textit{develop}. Z założenia ma składać się wyłącznie z rewizji zawierających zmiany dotyczące danej nowej funkcji i~istnieć tak długo, jak długo trwać będzie proces implementacji.
+
+	Kiedy cel zostanie zrealizowany, gałąź typu \textit{feature branch} powinna być połączona z gałęzią \textit{develop}. Istotne jest aby operacja scalania nie została wykonana poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli zwykłe przesunięcie wskaźnika HEAD. Chodzi o to, by główna gałąź deweloperska nie zawierała wszystkich rewizji pochodzących z gałęzi dołączanej, lecz tylko jedną, powstałą jako łącznik dwóch gałęzi (ang. \textit{merge commit}). W przeciwnym wypadku określenie, które rewizje dotyczą wprowadzenia konkretnej funkcji, wymagałoby dokładnego przejrzenia zawieranych przez nie zmian. A w rezultacie znacznie trudniej byłoby usunąć pojedynczą funkcję z głównej gałęzi.
+
+	Po włączeniu zmian z gałęzi przeznaczonej do implementacji nowej funkcji do głównej gałęzi \textit{develop}, należy usunąć tymczasową gałąź.
+
 	\subsection{Przygotowywanie nowego wydania}
-	
+
 	Kiedy stan kodu aplikacji jest stabilny i działa zgodnie z oczekiwaniami, a wszystkie funkcje które powinny się znaleźć w nowym wydaniu oprogramowania są już zaimplementowane i włączone do głównej gałęzi deweloperskiej, należy rozpocząć proces publikacji nowej wersji. Zgodnie z koncepcją Gitflow, wszystkie niezbędne ostatnie poprawki i drobne zmiany dotyczące przygotowania nowego wydania, powinny zostać przeprowadzone na osobnej, specjalnie utworzonej w tym celu gałęzi, nazywanej \textit{release branch}.
-	
-	Tworzenie takiej gałęzi odbywa się poprzez rozgałęzienie z gałęzi \textit{develop}. W tym momencie ustala się też numer wydania, czyli numer wersji publikowanego oprogramowania. Nazwa gałęzi powinna być formatu ,,release/numer-wydania''.
-	Od tego momentu wszystkie zmiany zachodzące na głównej gałęzi \textit{develop} będą dotyczyć następnej publikacji, nie zostaną uwzględnione w aktualnym wydaniu. Dzięki utworzeniu gałęzi typu \textit{release}, prace mogą iść dwutorowo,  poprzez przygotowywanie publikacji nowej wersji, oraz równolegle rozwijanie i rozszerzanie funkcjonalności oprogramowania. Jako przygotowanie do wydania rozumie się poprawę drobnych błędów takich jak literówki i inne niewielkie niedociągnięcia.
-	
-	W momencie w którym oprogramowanie będzie już przygotowane do opublikowania, należy scalić gąłąź \textit{release} z główną gałęzią produkcyjną \textit{master}. Analogicznie jak w przypadku scalania gałęzi typu \textit{feature branch}, należy  zwrócić uwagę, aby operacja połączenia nie polegała na przewinięciu do przodu. Konieczne jest aby w wyniku jej wykonania utworzona została nowa rewizja. Należy jej nadać etykietę (ang. \textit{tag}) z numerem wydania, aby ułatwić wyszukiwanie konkretnych wersji oprogramowania na gałęzi produkcyjnej. Następnie należy również scalić gałąź dotyczącą najnowszego opublikowanego właśnie wydania z gałęzią \textit{develop}. Gałęzie typu \textit{relese} są tymczasowe, więc po włączeniu jej do obu głównych gałęzi należy ją usunąć.
-	
+
+	Tworzenie takiej gałęzi odbywa się poprzez rozgałęzienie z gałęzi \textit{develop}. W~tym momencie ustala się też numer wydania, czyli numer wersji publikowanego oprogramowania. Nazwa gałęzi powinna być formatu ,,release/numer-wydania''.
+	Od tego momentu wszystkie zmiany zachodzące n~głównej gałęzi \textit{develop} będą dotyczyć następnej publikacji i~nie zostaną uwzględnione w aktualnym wydaniu. Dzięki utworzeniu gałęzi typu \textit{release}, prace mogą iść dwutorowo,  poprzez przygotowywanie publikacji nowej wersji, oraz równolegle rozwijanie i~rozszerzanie funkcjonalności oprogramowania. Jako przygotowanie do wydania rozumie się poprawę drobnych błędów, takich jak literówki i~inne niewielkie niedociągnięcia.
+
+	W momencie, w którym oprogramowanie będzie już przygotowane do opublikowania, należy scalić gąłąź \textit{release} z~główną gałęzią produkcyjną \textit{master}. Analogicznie jak w~przypadku scalania gałęzi typu \textit{feature branch}, należy  zwrócić uwagę, aby operacja połączenia nie polegała na przewinięciu do przodu. Konieczne jest aby~w~wyniku jej wykonania utworzona została nowa rewizja. Należy jej nadać etykietę (ang. \textit{tag}) z~numerem wydania, aby ułatwić wyszukiwanie konkretnych wersji oprogramowania na gałęzi produkcyjnej. Następnie należy również scalić gałąź dotyczącą najnowszego, opublikowanego właśnie wydania, z~gałęzią \textit{develop}. Gałęzie typu \textit{relese} są tymczasowe, więc po włączeniu jej do obu głównych gałęzi należy ją usunąć.
+
 	\subsection{Naprawa błędów wymagających szybkiego rozwiązania}
-	
-	Kolejnym typem gałęzi wykorzystywanych w koncepcji Gitflow są gałęzie nazywane \textit{hotfix branches}, przeznaczone do naprawy niecierpiących zwłoki błędów, odkrytych w opublikowanym oprogramowaniu, najczęściej zgłoszonych przez użytkowników końcowych. Dotyczy to takich wad i problemów, które są zbyt poważne, aby mogły zostać naprawione dopiero w następnym wydaniu. W przypadku mniej istotnych niedociągnięć wystarczy poprawić dane aspekty w normalnym trybie pracy i włączyć je do gałęzi \textit{develop}, żeby zostały uwzględnione przy kolejnej publikacji przez gałąź typu \textit{release}. 
-	
-	Gałąź typu \textit{hotfix} jest jedynym rodzajem gałęzi, który powstaje poprzez rozgałęzienie z głównej gałęzi produkcyjnej \textit{master}. Jej nazwa powinna zaczynać się od wyrażenia ,,hotfix/''. Taka gałąź zawiera tylko zmiany dotyczące naprawy wykrytego błędu, które powinny być wykonane w możliwie najkrótszym czasie. Kiedy problem zostanie rozwiązany, przeznaczoną mu gałąź należy połączyć z powrotem z gałęzią \textit{master}. W tym przypadku również należy dokonać łączenia nie poprzez przewijanie do przodu. W rezultacie na głównej gałęzi produkcyjnej powstaje nowa rewizja, której należy nadać etykietę z nowym numerem wersji. Skutkiem jest publikacja nowego wydania oprogramowania, która, w przeciwieństwie do procesu z wykorzystaniem gałęzi typu \textit{release} nie była planowana. 
-	
-	Kolejnym krokiem jest scalenie gałezi \textit{hotfix} z główną gałęzią \textit{develop}. Jeżeli istnieje w danym momencie gałąź typu \textit{release}, to do niej również należy włączyć zmiany dotyczące naprawy błędu. Na koniec należy usunąć tymczasową gałąź.
-	
+
+	Kolejnym typem gałęzi wykorzystywanych w~koncepcji Gitflow są gałęzie nazywane \textit{hotfix branches}, przeznaczone do~naprawy niecierpiących zwłoki błędów, odkrytych w~opublikowanym oprogramowaniu, najczęściej zgłoszonych przez użytkowników końcowych. Dotyczy to takich wad i~problemów, które są zbyt poważne, aby mogły zostać naprawione dopiero w~następnym wydaniu. W~przypadku mniej istotnych niedociągnięć wystarczy poprawić dane aspekty w~normalnym trybie pracy i~włączyć je do gałęzi \textit{develop}. Zostaną uwzględnione przy kolejnej publikacji przez gałąź typu \textit{release}.
+
+	Gałąź typu \textit{hotfix} jest jedynym rodzajem gałęzi, który powstaje poprzez rozgałęzienie z~głównej gałęzi produkcyjnej \textit{master}. Jej nazwa powinna zaczynać się od~wyrażenia ,,hotfix/''. Taka gałąź zawiera tylko zmiany dotyczące naprawy wykrytego błędu, które powinny być wykonane w~możliwie najkrótszym czasie. Kiedy problem zostanie rozwiązany, przeznaczoną mu gałąź należy połączyć z~powrotem z~gałęzią \textit{master}. W~tym przypadku również należy dokonać łączenia nie poprzez przewijanie do przodu. W rezultacie na głównej gałęzi produkcyjnej powstaje nowa rewizja, której należy nadać etykietę z~kolejnym numerem wersji. Skutkiem jest publikacja nowego wydania oprogramowania, która, w~przeciwieństwie do~procesu z~wykorzystaniem gałęzi typu \textit{release}, nie była planowana.
+
+	Kolejnym krokiem jest scalenie gałezi \textit{hotfix} z~główną gałęzią \textit{develop}. Jeżeli istnieje w~danym momencie gałąź typu \textit{release}, to do niej również należy włączyć zmiany dotyczące naprawy błędu. Na koniec należy usunąć tymczasową gałąź.
+
 	\chapter{Projekt}
 	
 	\section{Założenia}
