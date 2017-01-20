@@ -127,6 +127,15 @@
 		\label{fig:git_file-types}
 	\end{figure}
 	\FloatBarrier
+	
+	\paragraph{Etykiety}
+	System Git umożliwia oznaczanie wybranych rewizji etykietami za pomocą polecenia \textit{git tag}. Wykorzystywane jest to najczęściej do oznaczania ważnych wersji projektu, przede wszystkim na gałęzi produkcyjnej, przy publikacji nowego wydania. Do wyszukania konkretnej rewizji w historii projektu konieczne jest podanie skrótu SHA-1, identyfikującego daną rewizję, ale można w tym celu posłużyć się znacznikiem. Dzięki temu odnalezienie istotnych wersji oprogramowania jest łatwiejsze. 
+	
+	Etykiety nadawane rewizjom można podzielić na dwa typy:
+	\begin{itemize}
+		\item etykiety lekkie (ang. \textit{lightweight tags}) - przechowujące jedynie skrót SHA-1 wskazywanej rewizji,
+		\item etykiety opisane (ang. \textit{annotated tags}) - zawierające poza skrótem SHA-1 rewizji także datę utworzenia, autora i opcjonalnie dodatkowy komentarz.
+	\end{itemize}
 
 	\subsection{Gałęzie} \label{Galezie}
 	W systemie Git istotną rolę pełnią gałęzie, będące w rzeczywistości wskaźnikami na rewizje.
@@ -148,7 +157,7 @@
 
 	System Git umożliwia przełączanie się pomiędzy gałęziami za pomocą polecenia \textit{git checkout}. Przełączenie się na gałąź jest równoznaczne z~przywróceniem obszaru roboczego do stanu, jaki został zapisany we~wskazywanej przez nią rewizji. Możliwe jest również przełączenie się bezpośrednio na konkretną rewizję, nie wskazywaną przez żadną gałąź, poprzez podanie jej skrótu SHA-1. Spowoduje to przejście do stanu nazywanego w języku angielskim \textit{detached HEAD}, w~którym żadna gałąź nie jest gałęzią aktywną. Jeżeli w tym stanie wykonana zostanie operacja zatwierdzania, to utworzona rewizja nie będzie zawarta w~żadnej gałęzi, a~co za tym idzie może zostać łatwo utracona. W~związku z~tym nie należy pracować w stanie \textit{detached HEAD}. W~przypadku, w~którym konieczna jest kontynuacja projektu od konkretnej rewizji, należy najpierw utworzyć nową gałąź wskazującą na daną rewizję, a~następnie się na nią przełączyć.
 
-	\subsubsection{Łączenie gałęzi}
+	\subsubsection*{Łączenie gałęzi}
 	Zmiany wprowadzone na osobnych gałęziach w systemie Git można połączyć, aby otrzymać wersję projektu zawierającą modyfikacje z kilku gałęzi. Istnieją dwa sposoby na wykonanie operacji łączenia, scalanie (ang. \textit{merge}) oraz zmiana bazy (ang. \textit{rebase}). Ostateczny rezultat jest identyczny, różnica między tymi sposobami polega przede wszystkim na innej historii projektu. 
 
 	\paragraph{Scalanie}
@@ -205,6 +214,14 @@
 	Operacja zmiany bazy została zaprezentowana na rysunku \ref{fig:git_rebase-result}. Rewizje z gałęzi, której bazę zmieniono, nadal są w repozytorium. Zostaną usunięte dopiero w wyniku optymalizacji rozmiaru bazy danych repozytorium, wraz ze wszystkimi rewizjami nie zawartymi w żadnej gałęzi.
 
 	\FloatBarrier
+	\subscetion{Wycofywanie zmian}
+	o git reset
+	
+	trzy tryby
+	
+	\begin{itemize}
+		\item 
+	\end{itemize}
 
 	\subsection{Repozytoria zdalne}
 	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w sieci. Służą one do synchronizacji zmian w projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na pobieraniu i~przesyłaniu do niego danych, dotyczących wersji projektu i~stanu plików.
