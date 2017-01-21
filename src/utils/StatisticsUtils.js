@@ -15,8 +15,8 @@ function countTaskTagWeight (ratio) {
 }
 
 function calculateTaskReward (task, elapsedTime) {
-  var timeLeft = task.time - elapsedTime;
-  return timeLeft > 0 ? timeLeft * task.reward : 0;
+  let timeLeftPercentage = (task.time - elapsedTime) / task.time;
+  return timeLeftPercentage > 0 ? timeLeftPercentage * task.reward : 0;
 }
 
 export default {
