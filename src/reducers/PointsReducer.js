@@ -2,7 +2,7 @@ import * as taskActions from '../actions/TaskActions';
 import * as commandActions from '../actions/CommandActions';
 import { cloneDeep } from 'lodash';
 
-const penalty = 10;
+const penalty = 50;
 
 export default function pointsReducer (state = {}, action) {
   switch (action.type) {

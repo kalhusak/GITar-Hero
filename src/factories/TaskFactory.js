@@ -1,13 +1,11 @@
 import taskSequence from '../utils/TaskSequence';
-import statisticsUtils from '../utils/StatisticsUtils';
 import taskProvider from '../providers/TaskProvider';
 
-const pointsMultiplier = 2;
+const pointsPerStep = 100;
 
 class TaskFactory {
-
   constructor () {
-    this.next = this.next.bind(this);
+    this.next = ::this.next;
   }
 
   next (tags) {
@@ -15,8 +13,7 @@ class TaskFactory {
     if (taskProvider.hasNext()) {
       newTask = taskProvider.next(tags);
       newTask.currentStepIndex = 0;
-      newTask.time = statisticsUtils.calculateTaskTime(newTask.time, taskProvider.getTasksCount());
-      newTask.reward = pointsMultiplier * newTask.steps.length;
+      newTask.reward = pointsPerStep * newTask.steps.length;
       newTask.id = taskSequence.nextTask();
     }
     return newTask;
