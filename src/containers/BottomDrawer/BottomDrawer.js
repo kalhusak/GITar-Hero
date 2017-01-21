@@ -118,7 +118,7 @@ class BottomDrawer extends Component {
           </span>
         </div>
         <Console
-          enabled={!this.props.tutorial}
+          enabled={!this.props.tutorial.current}
           files={this.props.tree}
           branches={['develop', 'master']}
           onCommandEnter={this.onConsoleCommandEnter} />
