@@ -27,7 +27,7 @@
 %	\do\Y\do\Z}
 
 \begin{document}
-	
+
 	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magalena Łątkowska}
 	\title{Internetowa gra edukacyjna ucząca podstaw pracy~z~programem~git}
 	\subtitle{Praca inżynierska}
@@ -37,33 +37,33 @@
 	\frontmatter
 	\tableofcontents{}
 	\mainmatter
-	
+
 	\chapter{Wstęp}
-	
+
 	\section{Zasady odnośnie pisania pracy}
-	
-	\begin{itemize}	
+
+	\begin{itemize}
 		\item Piszemy w formie bezosobowej. Można też niby w 1.os liczby mnogiej czyli "Zrobiliśmy...", ale niektórzy akceptują tylko bezosobową, czyli "Zrobiono...".
-		
+
 		\item słów niepolskich - ,,Nie można więc bezpośrednio
 		w tekście używać słów angielskich. Jeżeli już — powinny być wyróżnione kursywą'' - niektórzy podobno bardzo hejcą za angielskie słowa niestety.
-			
+
 		\item Jak chodzi o bibliografię, to w wolnej chwili dołączcie linki do stron z jakich korzystaliście, ja to potem ogarnę i zapiszę w takiej formie jak trzeba. Ale spokojnie, bo robienie bibliografii raczej zostawię na koniec.
-		
+
 		\item Ogólnie nie przejmujcie się strukturą, formatowaniem czy innymi formalnymi bzdetami, ja potem będę to ogarniać żeby było wg zasad więc nie traćcie czasu na ogarnianie takich rzeczy.
 	\end{itemize}
-	
-	Między innymi: 
+
+	Między innymi:
 	skąd wgl pomysł - bo Git jest super i konieczny a ciężko się go samemu nauczyć, nauka z wielu źródeł jest chujowa, większość ma tylko blade pojęcie a potem idzie do pracy i dupa - co z tego że nauczyli się na studiach programować jak nie potrafią korzystać z Gita i współpracować z zespołem
-		
+
 	\section*{Cel i zakres pracy}
-	
+
 	cel - nauka fajna łatwa i przyjemna, oraz praktyczna, obycie z typowymi scenariuszami jakie mogą być potrzebne w pracy
-	
+
 	Coś o tym dlaczego akurat przeglądarkowa gra, czemu z grafiką 3D itp.
-	
+
 	Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.
-	
+
 	\chapter{Podstawy teoretyczne}
 
 	Systemy kontroli wersji służą do przechowywania historii plików, czyli jak sama nazwa wskazuje do kontrolowania ich różnych wersji. Dzięki temu można sprawdzić, jak zmodyfikowany został plik, a w razie potrzeby przywrócić jego poprzedni stan. Jest to szczególnie przydatne w sytuacji, w której zajdzie konieczność wycofania wprowadzonych zmian, na przykład z powodu zmiany koncepcji lub błędów.
@@ -78,7 +78,7 @@
 	\end{itemize}
 
 	Porządek, w~jakim zostały wymienione rodzaje systemów, jest nieprzypadkowy, odzwierciedla bowiem w~jakiej kolejności powstawały. Przed rozwinięciem się systemów rozproszonych przeważały systemy scentralizowane. Obecnie do wytwarzania oprogramowania najczęściej wykorzystywane są rozproszone systemy kontroli wersji, zapewniające największy stopień bezpieczeństwa danych. W~przypadku awarii serwera w~scentralizowanym systemie utracone zostaje całe repozytorium. Może zostać odzyskane jedynie z~kopii zapasowych, pod warunkiem, że zostały one wcześniej wykonane. Korzystając z~rozproszonej kontroli wersji odzyskanie repozytorium po awarii jednej jednostki nie stanowi poważnego problemu, ponieważ na każdym komputerze znajduje się jego kopia.
-	
+
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=16cm]{vcs_interest}
@@ -87,9 +87,9 @@
 	\end{figure}
 
 	Na rysunku~\ref{fig:vcs_interest} przedstawiony jest wykres ilustrujący relatywną popularność czterech znanych systemów kontroli wersji w~wyszukiwarce Google, na przestrzeni ostatnich 13~lat. Uwzględnione zostały dwa scentralizowane (CVS i~Subversion) oraz dwa rozproszone systemy kontroli wersji (Git i~Mercurial). Wyraźnie widać, że popularność tych pierwszych znacząco spadła względem rozproszonego modelu, który wciąż zyskuje na popularności. Przewaga systemu Git nad pozostałymi nie ulega wątpliwości, jest on aktualnie ponad czterokrotnie częściej wyszukiwany w~Google niż Mercurial czy Subversion, co przekłada się na stale rosnącą liczbę użytkowników.
-	
+
 	Obecnie systemy kontroli wersji są tak popularne, że zdecydowana większość programistów korzysta z~nich na~co~dzień. Praca polegająca na wytwarzaniu oprogramowania wykonywana jest najczęściej zespołowo, a~do efektywnej współpracy system kontroli wersji jest bezwzględnie potrzebny. Znajomość i~umiejętność sprawnego korzystania z takich systemów jest więc niezbędna programistom, którzy zamierzają pracować w~większych przedsiębiorstwach i~korporacjach.
-	
+
 	\section{System kontroli wersji Git}
 
 	System kontroli wersji Git stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W~związku z~tym postanowili napisać własny, doskonalszy od~poprzedniego. Z~założenia miał to~być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
@@ -226,8 +226,8 @@
 		\item \textbf{\textit{mixed}}~---~tryb domyślny, w którym aktywna gałąź przesuwana jest do podanej rewizji i dodatkowo zmieniany jest indeks (przywracany do stanu takiego jak w danej rewizji), a obszar roboczy pozostaje bez zmian,
 		\item \textbf{\textit{hard}}~---~przesuwana jest aktywna gałąź, a zarówno indeks jak i~obszar roboczy są przywracane do stanu zapamiętanego w podanej rewizji (ten tryb może spowodować nieodwracalną utratę zmian, nawet tych zatwierdzonych).
 	\end{itemize}
-	Reasumując, polecenie \textit{git reset} z opcją \textit{hard} wykonuje trzy kroki~---~cofa wskaźnik aktywnej gałęzi, zmienia indeks, a następnie  przywraca stan obszaru roboczego do~stanu zapisanego we wskazanej rewizji. W trybie \textit{mixed} pomijany jest ostatni krok, modyfikujący pliki w~katalogu roboczym. Z~kolei tryb \textit{soft} wykonuje tylko krok pierwszy. 
-	
+	Reasumując, polecenie \textit{git reset} z opcją \textit{hard} wykonuje trzy kroki~---~cofa wskaźnik aktywnej gałęzi, zmienia indeks, a następnie  przywraca stan obszaru roboczego do~stanu zapisanego we wskazanej rewizji. W trybie \textit{mixed} pomijany jest ostatni krok, modyfikujący pliki w~katalogu roboczym. Z~kolei tryb \textit{soft} wykonuje tylko krok pierwszy.
+
 	Komendę \textit{git reset} w trybie \textit{mixed} można wykorzystać do~wykluczenia zaindeksowanego pliku z~indeksu, a z~opcją \textit{hard} do~usunięcia najnowszych rewizji. Za~pomocą tego polecenia wycofuje się także operację scalania, która utworzyła nową rewizję (nie dotyczy to scalania poprzez przewinięcie do~przodu).
 
 	\subsection{Repozytoria zdalne}
@@ -251,7 +251,14 @@
 
 	Lokalną gałąź śledzącą nazywa się w języku angielskim \textit{tracking branch}, a powiązaną z nią gałąź \textit{upstream branch}. W systemie Git istnieje też termin \textit{remote-tracking branch}, odnoszący się do referencji do zdalnej gałęzi. Wskazuje ona na~rewizję, na~jaką wskazywała dana zdalna gałąź podczas ostatniej komunikacji z~serwerem. W~przeciwieństwie do~zwykłych gałęzi tych referencji nie można samodzielnie przesunąć. Uaktualniają się automatycznie, na skutek wymiany danych z~repozytorium zdalnym.
 
-	Operacja klonowania repozytorium automatycznie ustawia lokalną główną gałąź jako śledzącą. W repozytorium utworzonym poleceniem \textit{git init} nie ma domyślnie powiązanych zdalnych repozytoriów, a co za tym idzie żadnych gałęzi śledzących.
+	\subsubsection{Gałęzie śledzące}
+	co to, jak sie ustawia, korzysci
+
+	%GDZIES JESZCZE MUSI BYĆ O:
+	% - tagach
+	% - wycofywaniu zmian (reset)
+
+	\textit{Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
 
 	\section{Gitflow}
 
@@ -304,111 +311,111 @@
 	Kolejnym krokiem jest scalenie gałezi \textit{hotfix} z~główną gałęzią \textit{develop}. Jeżeli istnieje w~danym momencie gałąź typu \textit{release}, to do niej również należy włączyć zmiany dotyczące naprawy błędu. Na koniec należy usunąć tymczasową gałąź.
 
 	\chapter{Projekt}
-	
-	\section{Założenia}
-		
-	Głównym celem samouczka GITar-Hero jest zapoznanie użytkownika z~podstawowymi poleceniami systemu kontroli wersji Git, w~sposób przyjemny i~zrozumiały. Gra, przez połączenie nauki i rozrywki, ma za zadanie zachęcić i ułatwić proces uczenia się. Kolorowa i ruchoma grafika 3D uatrakcyjnia tę naukę, a możliwość zdobywania punktów i naturalna chęć osiągnięcia jak najlepszego wyniku dodatkowo mobilizuje użytkownika. 
-	
-	Z założenia, ważniejsze od dogłębnego zrozumienia strony teoretycznej systemu Git, było nauczenie właściwego korzystania z poleceń. Gra ma służyć jako samouczek, uczący praktycznego wykorzystania systemu wersji i~pokazujący typowy scenariusz, jaki najczęściej występuje podczas wytwarzania oprogramowania. Po zagraniu w grę użytkownik powinien już swobodnie wykonywać komendy systemu Git, zarówno pracując indywidualnie, jak i potrafić właściwie współpracować z zespołem. 
-	
-	Celem było pokazanie, że wbrew panującej powszechnie opinii, korzystanie z systemu kontroli wersji Git nie musi przysparzać problemów ani trudności. Ponadto gra ma przyzwyczaić użytkownika do korzystania z wiersza poleceń. Jeżeli ma się opanowane komendy, jakie należy wprowadzać w konsoli, z reguły będzie się potrafiło skorzystać z dowolnego programu z graficznym interfejsem do obsługi systemu Git. W drugą stronę taka zależność nie występuje. W związku z tym, tylko umiejętność korzystania z systemu Git w wierszu poleceń pozwala swobodnie korzystać z tego systemu kontroli wersji, niezależnie od środowiska i zainstalowanych programów.
-	 
-	\section{Przebieg gry}
-	
-	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z krótką instrukcją rozpoczyna się gra. U góry, po prawej stronie, wyświetla się aktualne zadanie i pierwszy krok, który należy wykonać. Z założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się pomoc z zakładką informującą czym jest repozytorium sytemu kontroli wersji i jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się na tym etapie w folderze z repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie działa na stan repozytorium i pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend. 
-	
-	Po poprawnym wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnych punktów za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas. 
-	
-	Kolejne zadania stopniowo wprowadzają nowe komendy. Ich poziom trudności rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w dowolnej chwili wpisać w konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł poszukać potrzebnych mu informacji. 
-	
-	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, zawierające informację o liczbie popełnionych błędów i komendach, z~którymi miał najwięcej problemów. 
-	
-	\section{Zadania}
-	
-	Scenariusz rozgrywki składa się z zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Użytkownik uczy się najpierw o tym, czym jest repozytorium. Poznaje dwie podstawowe metody pozyskania takiego repozytorium --- poprzez sklonowanie istniejącego lub przez założenie go w wybranym folderze z~projektem. W~kolejnym etapie zapoznaje się z~pojęciami takimi jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Potrafi rozróżnić co oznacza plik aktualny, zmodyfikowany, nieśledzony lub niezaindeksowany. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować. 
-	
-	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian. 
 
-	Kolejnym etapem jest nauka scalania, lub inaczej łączenia gałęzi. Rozróżnione są przy tym odmienne sposoby na wykonanie tej operacji. Następnie pojawia się podstawowy sposób wycofywania zmian i~usuwania wykonanych wcześniej rewizji. 
-	
+	\section{Założenia}
+
+	Głównym celem samouczka GITar-Hero jest zapoznanie użytkownika z~podstawowymi poleceniami systemu kontroli wersji Git, w~sposób przyjemny i~zrozumiały. Gra, przez połączenie nauki i rozrywki, ma za zadanie zachęcić i ułatwić proces uczenia się. Kolorowa i ruchoma grafika 3D uatrakcyjnia tę naukę, a możliwość zdobywania punktów i naturalna chęć osiągnięcia jak najlepszego wyniku dodatkowo mobilizuje użytkownika.
+
+	Z założenia, ważniejsze od dogłębnego zrozumienia strony teoretycznej systemu Git, było nauczenie właściwego korzystania z poleceń. Gra ma służyć jako samouczek, uczący praktycznego wykorzystania systemu wersji i~pokazujący typowy scenariusz, jaki najczęściej występuje podczas wytwarzania oprogramowania. Po zagraniu w grę użytkownik powinien już swobodnie wykonywać komendy systemu Git, zarówno pracując indywidualnie, jak i potrafić właściwie współpracować z zespołem.
+
+	Celem było pokazanie, że wbrew panującej powszechnie opinii, korzystanie z systemu kontroli wersji Git nie musi przysparzać problemów ani trudności. Ponadto gra ma przyzwyczaić użytkownika do korzystania z wiersza poleceń. Jeżeli ma się opanowane komendy, jakie należy wprowadzać w konsoli, z reguły będzie się potrafiło skorzystać z dowolnego programu z graficznym interfejsem do obsługi systemu Git. W drugą stronę taka zależność nie występuje. W związku z tym, tylko umiejętność korzystania z systemu Git w wierszu poleceń pozwala swobodnie korzystać z tego systemu kontroli wersji, niezależnie od środowiska i zainstalowanych programów.
+
+	\section{Przebieg gry}
+
+	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z krótką instrukcją rozpoczyna się gra. U góry, po prawej stronie, wyświetla się aktualne zadanie i pierwszy krok, który należy wykonać. Z założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się pomoc z zakładką informującą czym jest repozytorium sytemu kontroli wersji i jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się na tym etapie w folderze z repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie działa na stan repozytorium i pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend.
+
+	Po poprawnym wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnych punktów za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas.
+
+	Kolejne zadania stopniowo wprowadzają nowe komendy. Ich poziom trudności rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w dowolnej chwili wpisać w konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł poszukać potrzebnych mu informacji.
+
+	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, zawierające informację o liczbie popełnionych błędów i komendach, z~którymi miał najwięcej problemów.
+
+	\section{Zadania}
+
+	Scenariusz rozgrywki składa się z zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Użytkownik uczy się najpierw o tym, czym jest repozytorium. Poznaje dwie podstawowe metody pozyskania takiego repozytorium --- poprzez sklonowanie istniejącego lub przez założenie go w wybranym folderze z~projektem. W~kolejnym etapie zapoznaje się z~pojęciami takimi jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Potrafi rozróżnić co oznacza plik aktualny, zmodyfikowany, nieśledzony lub niezaindeksowany. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować.
+
+	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian.
+
+	Kolejnym etapem jest nauka scalania, lub inaczej łączenia gałęzi. Rozróżnione są przy tym odmienne sposoby na wykonanie tej operacji. Następnie pojawia się podstawowy sposób wycofywania zmian i~usuwania wykonanych wcześniej rewizji.
+
 	Kiedy użytkownik opanuje już komendy i~sposób pracy w lokalnym repozytorium, wprowadzane jest pojęcie zdalnego repozytorium oraz sposoby komunikacji i~synchronizacji z~nim. W~zadaniach pojawiają się komendy dotyczące ściągania i~przesyłania zmian. Poruszany jest także temat zdalnych gałęzi i~sposoby skonfigurowania lokalnej gałęzi śledzącej zdalną.
-	
+
 	Ponadto podczas nauki poleceń systemu Git użytkownik zapoznaje się też z~dobrymi praktykami i~metodyką Gitflow, co uczy go właściwych nawyków i~odpowiedniego porządkowania pracy nad projektem. Zaznajamia się z~koncepcją tworzenia osobnych gałęzi przeznaczonych do implementacji nowych funkcji lub naprawy błędów.
-	
+
 	Zadania są podzielone na kroki, dzięki czemu użytkownik uczy się charakterystycznych sekwencji poleceń, często występujących razem. Ma to również na celu zautomatyzowanie zachowania użytkownika w prawdziwych przypadkach, z którymi może się spotkać w domu lub pracy. W systemie Git czasem możliwe jest użycie kilku różnych poleceń, aby osiągnąć ten sam rezultat. Zadania i kroki dopuszczają wszystkie właściwe komendy.
-	
+
 	\subsection{Pomoc}
-	
+
 	Wszystkie materiały dydaktyczne znajdują się w pomocy. Jest ona podzielona na zakładki, z~których każda dotyczy jednej komendy lub pojęcia. Treść zawarta w niej wystarcza, aby osoba nie znająca poleceń systemu Git była w stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W przypadku niektórych pojęć jest jednak bardziej obszerna i wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i przydatne do właściwego zrozumienia systemu Git.
-	
-	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
-	
+
+	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.
+
 	\subsection{Punkty za rozwiązanie}
 
 	%Tak w ogóle to chyba najpiej wywalić subsekcje o punktach, a ten akapit poniższy dać gdzie indziej
-	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i pewniej będzie korzystał z poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do tego aby zająć jak najwyższe miejsce w rankingu. 
-	
-	Punkty obliczane są na podstawie czasu, w jakim użytkownik rozwiązał zadanie. 
-	
-	
+	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i pewniej będzie korzystał z poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do tego aby zająć jak najwyższe miejsce w rankingu.
+
+	Punkty obliczane są na podstawie czasu, w jakim użytkownik rozwiązał zadanie.
+
+
 	%Ten akapit chyba do wywalenia, a na pewno do zmiany -najpierw trzeba wgl ustalic jak to będzie z tymi punktami
 	\textit{	Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. }
-	
+
 	\chapter{Implementacja}
-	
+
 	\section{Wykorzystane technologie}
-	
+
 	\subsection{Języki}
-	
+
 	\subsubsection{JavaScript}
-	
+
 	\subsubsection{GLSL}
-	
+
 	\subsection{Biblioteki}
-	
+
 	\subsubsection{Redux}
-	
+
 	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym.
-	
+
 	Jedną z bibliotek pomagających w rozwiązaniu tego problemu jest Redux. Jej głównym założeniem jest przejrzysty stan aplikacji, który może się zmieniać tylko w określonych momentach i~zawsze w~przewidywalny sposób.
-	
-	Stan w Reduxie zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan. 
-	
+
+	Stan w Reduxie zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan.
+
 	Kluczowym elementem Reduxa są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i~wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i~deterministyczny. Oznacza to, że określony stan aplikacji i~określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z~których każda wpływa tylko na określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i~modyfikować.
-	
-	Podsumowując, Redux opiera się na trzech fundamentalnych zasadach:	
+
+	Podsumowując, Redux opiera się na trzech fundamentalnych zasadach:
 	\begin{itemize}
 		\item cały stan aplikacji jest opisany przez pojedynczy obiekt o strukturze drzewa,
 		\item jedynym sposobem aby zmienić stan aplikacji jest wyemitowanie akcji,
 		\item wpływ danej akcji na sposób przekształcenia stanu określają funkcje zwane \textit{reducers}.
 	\end{itemize}
 
-	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji. 
-	
+	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji.
+
 	\subsubsection{React.js}
-	 
-	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę React. 
+
+	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę React.
 	 Została ona stworzona w 2013 roku przez zespół programistów Facebook'a, aby rozwiązać problem tworzenia dynamicznych aplikacji internetowcyh, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest rozpowszechniana na zasadzie otwartego oprogramowania (ang. \textit{open-source}).
-	 
+
 	 React opiera się na koncepcji niezależnych komponentów, nadających się do~wielokrotnego wykorzystania, z~których można komponować skomplikowane widoki. Są to obiekty JavaScript, reprezentujące fragmenty interfejsu użytkownika, mające określoną strukturę i~funkcjonalność. Każdy komponent musi implementować metodę \textit{render()}, odpowiedzialną za wyświetlenie komponentu w przeglądarce. W wartości zwracanej przez tę metodę mogą pojawić się zarówno znaczniki HTML jak i instancje zdefinowanych wcześniej komponentów. Aplikacje internetowe korzystające z biblioteki React budowane są zwykle na zasadzie drzewa komponentów. Tworzony jest jeden komponent nadrzędny, w którym zagnieżone są kolejne. Wzorzec ten pozwala zachować modułowość aplikacji.
-	 
+
 	  Komponenty czerpią wiedzę na temat wyświetlanych informacji z dwóch źródeł - właściwości (\textit{props}) oraz stanu (\textit{state}). Właściwości są obiektem reprezentującym parametry wejściowe podane podczas wywołania komponentu w komponencie nadrzędnym, natomiast stan jest obiektem widocznym i modyfikowalnym tylko wewnątrz danego komponentu. Zmiana stanu komponentu powoduje wywołanie jego metody \textit{render()} i, co za tym idzie, rekursywnego wywoływania metod \textit{render()} komponentów zagnieżdżonych. Efektem tej operacji jest modyfikacja odpowiednich węzłów obiektowego modelu dokumentu (ang. \textit{DOM}) przeglądarki i ostatecznie przerysowanie strony przez przeglądarkę. Należy zaznaczyć, że React jest dobrze zoptymalizowany pod kątem renderowania strony. Na szczególną uwagę zasługuje mechanizm wirtualnego obiektowego modelu dokumentu (ang. \textit{virtual DOM}). Polega on na utrzymywaniu kopii DOM reprezentowanej przez zwykłe obiekty JavaScript. Operacje na tych obiektach są znacznie mniej kosztowne, ponieważ nie zmuszają przeglądarki do ponownego renderowania strony. Właściwy DOM jest modyfikowany jedynie w przypadku stwierdzenia różnic między nim a wirtualnym DOM.
-	  
+
 	Zdecydowano się na wykorzystanie biblioteki React.js, ponieważ dzięki abstrakcji operacji na elementach DOM na operacje na komponentach, pozwala ona przy stosunkowo niewielkim nakładzie pracy tworzyć aplikacje działające szybko i niezawodnie.
-		
-		
+
+
 	\subsubsection{Babylon.js}
 
 	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że Babylon.js jest silnikiem 3D, posiada wiele przydatnych narzędzi do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
-	
+
 	Jako alternatywa rozważana była biblioteka Three.js wydana w 2009 roku, również oparta na~webGL. Po zapoznaniu i~przetestowaniu obu silników wybór padł na Babylon.js. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do Three.js. Przy renderowaniu sceny o podobnej zawartości i szczegółowości, Babylon.js okazał się wydajniejszy. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
-	
+
 	\subsubsection{Pozostałe}
-	
+
 	\section{Scenariusz rozgrywki}
-	
+
 	\subsection{Struktura} \label{Struktura}
-	
+
 	Scenariusz rozgrywki to skierowany graf, którego wierzchołkami są zadania, z~których każde składa się z~kilku kroków. Zdecydowano się na taką strukturę ze względu na to, że daje ona możliwość sekwencjonowania zadań, a zarazem pozwala na element losowości. Jeżeli z wierzchołka dotyczącego jakiegoś zadania wychodzi kilka krawędzi, to kolejny węzeł, czyli kolejne zadanie, wybierane jest w sposób losowy spośród sąsiadów aktualnego wierzchołka. Dzięki takiej reprezentacji nigdy nie zdarzy się sytuacja, w której następnym zadaniem będzie zadanie nieadekwatne do aktualnego stanu repozytorium.
 
 	\subsubsection{Konstrukcja zadania}
@@ -420,170 +427,170 @@
 	\item opis,
 	\item minimalny czas,
 	\item domyślny (maksymalny) czas,
-	\item lista kroków.	
+	\item lista kroków.
 	\end{itemize}
-	
+
 	Opis zadania służy ukazaniu użytkownikowi celu oraz problemu, jaki należy rozwiązać w danym zadaniu. Może to być na przykład rozszerzenie funkcjonalności lub naprawa błędu.
-	
+
 	%Tu też do zmiany jak ustalimy co z punktami
 	\textit{Aby nagradzać użytkownika punktami za szybko wykonane zadanie, zdecydowano się na określenie czasu na wykonanie zadania. Jest on obliczany w momencie dodawania nowego zadania na podstawie ilości dotychczas wykonanych zadań, a także wartości minimalnej oraz maksymalnej czasu zdefiniowanych w danym zadaniu.}
-	
-	Zbiór następników zawiera identyfikatory zadań, które mogą wystąpić po aktualnym. Hierarchia zadań ułożona jest w postaci grafu skierowanego, tak więc wszystkie wierzchołki, do których istnieją krawędzie wychodzące z wierzchołka reprezentującego dane zadanie, są jego następnikami. 
-	
+
+	Zbiór następników zawiera identyfikatory zadań, które mogą wystąpić po aktualnym. Hierarchia zadań ułożona jest w postaci grafu skierowanego, tak więc wszystkie wierzchołki, do których istnieją krawędzie wychodzące z wierzchołka reprezentującego dane zadanie, są jego następnikami.
+
 	Kluczowym elementem zadania jest uporządkowana lista kroków, które należy wykonać, aby rozwiązać zadanie i przejść do kolejnego. Wykonanie kroku polega na wpisaniu odpowiedniej komendy systemu Git. Szczegółowy opis jego konstrukcji w kolejnej sekcji.
 
-	
+
 	\subsubsection{Konstrukcja kroku}
-	
+
 	Podobnie jak zadanie, krok jest obiektem składającym się z kilku pól, a mianowicie:
 	\begin{itemize}
 		\item typ,
 		\item opis,
 		\item lista dozwolonych poleceń,
 		\item etykiety,
-		\item dodatkowe dane, charakterystyczne dla danego typu kroku.	
+		\item dodatkowe dane, charakterystyczne dla danego typu kroku.
 	\end{itemize}
 
-	Typ określa jakiej komendy systemu Git dany krok dotyczy. Obsługiwane typy to m.in. ''COMMIT'' czy ''MERGE''. Na podstawie typu poprawnie wykonanego kroku określana jest akcja, jaką należy wykonać po stronie grafiki 3D, by odwzorować aktualny stan repozytorium. 
-	 
+	Typ określa jakiej komendy systemu Git dany krok dotyczy. Obsługiwane typy to m.in. ''COMMIT'' czy ''MERGE''. Na podstawie typu poprawnie wykonanego kroku określana jest akcja, jaką należy wykonać po stronie grafiki 3D, by odwzorować aktualny stan repozytorium.
+
 	W opisie znajduje się krótka informacja, co należy zrobić, aby wykonać krok i przejść do kolejnego. Krok jest uznawany za wykonany, gdy użytkownik wpisze w konsoli jedno z~poleceń z~listy dozwolonych komend i~zatwierdzi je.
-	
-	Do każdego kroku przypisana jest lista etykiet, określających jakiego zagadnienia dotyczy dany krok. Krok posiada zawsze co najmniej jedną etykietę, wskazującą komendę, której wymaga on do poprawnego wykonania. Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do niego etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także ilość poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i nad czym powinien jeszcze popracować. Brane jest to pod uwagę przy losowaniu kolejnych zadań. Dla możliwych następników wyliczana jest waga na podstawie etykiet, jakie mają w swoich krokach. 
-	
+
+	Do każdego kroku przypisana jest lista etykiet, określających jakiego zagadnienia dotyczy dany krok. Krok posiada zawsze co najmniej jedną etykietę, wskazującą komendę, której wymaga on do poprawnego wykonania. Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do niego etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także ilość poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i nad czym powinien jeszcze popracować. Brane jest to pod uwagę przy losowaniu kolejnych zadań. Dla możliwych następników wyliczana jest waga na podstawie etykiet, jakie mają w swoich krokach.
+
 	\textit{Obliczenie wagi dla zadania polega na zsumowaniu kwadratów ilorazu wartości 1 oraz wyznaczonego wskaźnika dla kolejnych etykiet w krokach zadania, będącego ilorazem poprawnie wykonanych kroków z całkowitą liczbą prób dla tej etykiety. Dzięki takiemu zabiegowi zwiększane jest prawdopodobieństwo wylosowania kolejnego zadania poruszającego zagadnienia, z~którymi użytkownik nie radził sobie zbyt dobrze.}
-	
+
 	Dodatkowe dane, w zależności od typu kroku, mogą składać się z różnych elementów. Dostarczają informację np. o nazwie wykonanej rewizji czy utworzonej gałęzi. Służą też do określenia jakie pliki powinny zostać dodane lub usunięte z repozytorium. W przypadku kroku dotyczącego polecenia \textit{git checkout} przechowują informację, czy przełączenie powinno być zrealizowane na konkretną gałąź czy rewizję.
-	
+
 	\subsubsection{Format danych}
-	
+
 	Jak opisano wcześniej, scenariusz rozgrywki to w istocie struktura drzewiasta złożona z zadań, przy czym każde z nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i wygodnego formatu do przechowywania danych. Zdecydowano się na format JSON, który doskonale nadaje się do tego celu. Pliki zapisane w tym formacie można bezproblemowo odczytywać oraz modyfikować za pomocą języka JavaScript.
-	
+
 	\subsection{Graficzne narzędzie do definiowania scenariuszy}
-	
+
 	\subsubsection{Motywacja}
-	
+
 	Aplikacja GITar Hero umożliwia przetwarzanie rozbudowanych scenariuszy, których ręczne tworzenie byłoby uciążliwe i  czasochłonne, a ponadto podatne na błędy. Dodawanie lub modyfikacja zadań wymagałaby znaczących nakładów pracy.
-	Z tego względu zdecydowano się na korzystanie z narzędzia z graficznym interfejsem użytkownika, za pomocą którego można by było w prosty i wygodny sposób tworzyć grafy zadań oraz zapisywać je w formacie JSON. 
-	
+	Z tego względu zdecydowano się na korzystanie z narzędzia z graficznym interfejsem użytkownika, za pomocą którego można by było w prosty i wygodny sposób tworzyć grafy zadań oraz zapisywać je w formacie JSON.
+
 	\subsubsection{Poszukiwanie gotowego rozwiązania}
-	
+
 	Początkowo zamierzano skorzystać z gotowego rozwiązania. Do tego zadania wytypowano aplikację \textit{directed-graph-creator} użytkownika cjrd [tu odnosnik do bibliografii i tam link] udostępnianą jako oprogramowanie o~otwartym źródle (ang. \textit{open source}) \footnote{Oprogramowanie udostępnione jest na licencji MIT/X, dzięki czemu istnieje nieograniczone prawo do używania, kopiowania, modyfikowania i~rozpowszechniania go. Jedynym wymogiem jest, by we wszystkich wersjach zachowano warunki licencyjne oraz informacje o autorze.}. Umożliwia ona tworzenie grafów skierowanych oraz~ich zapis do formatu JSON. Narzędzie to jest zaimplementowane w języku JavaScript i~korzysta z popularnej biblioteki~D3.js, która pozwala tworzyć dynamiczne i~interaktywne wizualizacje danych w~przeglądarkach internetowych.
-	
+
 	Jednakże aplikacja, w~formie w jakiej została udostępniona, nie wystarczała do zdefiniowania scenariusza rozgrywki. Każdy węzeł grafu mógł przechowywać tylko pojedynczy ciąg znaków. Potrzebne były zatem znaczne modyfikacje, umożliwiające zapisanie w pojedynczym węźle wszystkich niezbędnych informacji, które powinny się znaleźć w zadaniu. Zdecydowano się zatem stworzyć własne narzędzie do~tworzenia scenariusza zadań, bazujące na ogólnodostępnym \textit{direct-graph-creator}.
-	
+
 	\subsubsection{TaskCreator}
-	
+
 	Postanowiono przerobić wspomnianą wyżej aplikację. Została ona napisana tylko i wyłącznie w języku JavaScript, bez wykorzystania jakichkolwiek platform programistycznych (ang. \textit{frameworks}). Modyfikację utrudniał także fakt, że cały kod zawarty był w~jednym pliku. Postanowiono nie modyfikować struktury aplikacji i~dalszą część napisać również w czystym języku JavaScript. Dodano jedynie bibliotekę jQuery, która umożliwia łatwiejsze zarządzanie elementami drzewa DOM, czyli obiektowego modelu dokumentu. W~związku z~tym, że jest to aplikacja internetowa, potrzebny był serwer HTTP. W~tym celu użyto środowiska Node.js, wykorzystywanego do tworzenia wysoce skalowalnych aplikacji sieciowych.
-		
+
 	\begin{figure}
 		\centering
 		\includegraphics[width=12cm]{graphCreator01}
 		\caption{Interfejs graficzny narzędzia TaskCreator}
 		\label{fig:taskCreator}
 	\end{figure}
-	
-	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny służący do wypełniania pól zadania i definiowania listy kroków. Jest on widoczny na rysunku~\ref{fig:taskCreator} po prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz czasy wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności jak również dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków. 
-	
-	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w wybrane miejsce. Żeby edytować wierzchołek należy go wybrać poprzez kliknięcie. Z kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki a następnie przeciągniecie kursora znad jednego węzła na drugi utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete. 
-	
+
+	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny służący do wypełniania pól zadania i definiowania listy kroków. Jest on widoczny na rysunku~\ref{fig:taskCreator} po prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz czasy wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności jak również dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków.
+
+	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w wybrane miejsce. Żeby edytować wierzchołek należy go wybrać poprzez kliknięcie. Z kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki a następnie przeciągniecie kursora znad jednego węzła na drugi utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete.
+
 	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W tym celu wystarczy kliknąć drugi przycisk w lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i zapisze dane do pliku taskGraph.json. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w lewym dolnym rogu ekranu i wybierając plik do wczytania.
-	
-	\section{Komponenty/elementy(?) aplikacji}
-	
+
+	\section{Drzewo komponentów interfejsu graficznego}
+
 	\subsection{Lista zadań}
-	
+
 	Screen jakiś, jak działa, o implementacji
-	
+
 	\subsection{Konsola}
-	
+
 	Screen jakiś, jak działa, o implementacji
-	
+
 	\subsection{Pomoc (HelpDrawer)}
-	
+
 	Screen jakiś, jak działa, o implementacji
-	
+
 	\subsection{Drzewko repo}
-	
+
 	Screen jakiś, jak działa, o implementacji
-	
+
 	\subsection{Canvas}
-	
-	W projekcie skorzystano z komponentu 'canvas' z html w wersji 5. Pozwala on na wyświetlanie grafiki w przeglądarce. Służy jako kontener dla graficznego silnika 3D, pochodzącego z biblioteki babylon. 
-	
+
+	W projekcie skorzystano z komponentu 'canvas' z html w wersji 5. Pozwala on na wyświetlanie grafiki w przeglądarce. Służy jako kontener dla graficznego silnika 3D, pochodzącego z biblioteki babylon.
+
 	\section{Grafika 3D}
 	Tu będzie sporo, do tego stopnie sporo, że nie wiem jeszcze jak to zaplanować i porozdzielać, względem czego.
-	
+
 	Czy np podsekcje takie jak:
 	repo3d - gałęzie, commity, co to są i jak powstają na akcje, o ich teksturze, obramowaniu, w tym o solidExplode
 	ground - co to, jak działa itp
 	particle w tle
 	(wg elementów aplikacji)
-	
+
 	Czy może raczej podsekcje wg 'elementów' Babylona:
 	Meshe, SolidParticle, Particle, Materiały, Tekstury, Shadery
-	
-	
+
+
 
 	\subsection{Repozytorium 3D}
 		Aby odwzorowywać stan repozytorium na ekranie został stworzony odpowiedni kontroler. Ma on za zadanie reagować na realizowane przez użytkownika komendy i zarządzać elementami grafiki 3D. Nasłuchuje na wykonywane akcje i w zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. Kontroler ten zawiera informacje na temat utworzonych gałęzi repozytorium oraz wskaźnik HEAD, o którym więcej w sekcji 4.4.5.
 
 	\subsection{Branch}
 	Obiekt 3D reprezentujący gałąź systemu git jest tworzony przy pomocy funkcji CreateTube z biblioteki Babylon.js. Funkcja ta generuje siatkę wierzchołków, na podstawie podanej listy punktów określających ścieżkę, w kształcie tuby. Pozwala również na określenie średnicy oraz szczegółowości siatki. Parametry te zostały dobrane w taki sposób, aby wygenerować tubę, której przekrój przypomina koło przy jednoczesnym zachowaniu jak najmniejszej liczby użytych wierzchołków. Jedna gałąź może składać się z dwóch rodzajów siatki. Pierwsza z nich reprezentuje główny człon. Ścieżka użyta do jej wygenerowania zawiera tylko dwa punkty wyznaczające początek i koniec tuby. Dzięki temu można osiągnąć dowolnie długi odcinek nie zwiększając przy tym liczby wierzchołków. Drugi rodzaj siatki wykorzystywany jest do wygenerowania tuby będącej łącznikiem między gałęziami. Łącznik branchy zostaje stworzony w momencie tworzenia nowej gałęzi lub łączenia dwóch gałęzi w akcji merge. Do wyznaczenia ścieżki skorzystano z funkcji pomocniczej generującą krzywą Beziera. Funkcja ta przyjmuje cztery punkty na podstawie których wyznaczy tablicę punktów tworzących linie. Jako pierwszy punkt podane jest miejsce początku nowej gałęzi, dwa kolejne punkty służą do określenia kształtu linii. Jako ostatni punkt podawany jest początkowy punkt głównego członu nowej gałęzi. Dodatkowym parametrem jest ilość wygenerowanych punktów określającym szczegółowość linii. Dzięki tej funkcji otrzymano tablicę punktów, która została użyta do określenia kształtu łącznika. Następnie sprawdzane jest, czy na wygenerowanej ścieżce nie znajduje się inna gałąź. Jeśli tak, to zwiększana jest jej wysokość, a następnie zmniejszana do początkowej wartości tak, aby przejść nad nią.
-	
+
 	Dla gałęzi zaimplementowano animacje wydłużania oraz skracania. Dla głównego członu polega ona na przesunięciu ostatniego punktu ścieżki, a następnie zaktualizowaniu bufora wierzchołków. Służy do tego ta samo funkcja, co do tworzenia początkowej siatki wierzchołków, lecz z dodatkowym parametrem, będącym instancją obiektu, którego bufor należy zmienić. W przypadku łącznika gałęzi animacja jest bardziej skomplikowana. Aby osiągnąć efekt rozwijania oraz w związku z tym, że nie można zmieniać rozmiaru bufora wierzchołków, należy wszystkie punkty ścieżki przesuwać na jej początek, a następnie rozwijać w kierunku końca ścieżki. Podobnie jak w pierwszej animacji przy każdym nowym stanie ścieżki należy zaktualizować bufor wierzchołków.
 
 	Na gałąź nałożono standardowy materiał. Jest to klasa z biblioteki Babylon.js reprezentująca uniwersalny shader.  Można w nim określić takie właściwości jak kolor, przezroczystość oraz tekstury.
-	
-	Na końcu każdej gałęzi wyświetlany jest tekst z nazwą gałęzi o kolorze białym. Jego pozycję ustawiono na referencję do ostatniego punktu gałęzi dzięki czemu tekst zawsze podąża za wydłużającą lub skracającą się gałęzią. 
-	
-	
-	%standardowy material 
+
+	Na końcu każdej gałęzi wyświetlany jest tekst z nazwą gałęzi o kolorze białym. Jego pozycję ustawiono na referencję do ostatniego punktu gałęzi dzięki czemu tekst zawsze podąża za wydłużającą lub skracającą się gałęzią.
+
+
+	%standardowy material
 	% tuba
 	% connectory
 	% tekst
 	% husaku i imosiaku
 
 	\subsection{Commit}
-	Zatwierdzenie zmian w repozytorium git w grafice trójwymiarowej jest przedstawione w postaci kuli umieszczonej na gałęzi, której dotyczy. Funkcja CreateSphere pochodząca z babylon'a buduje siatkę wierzchołków w kształcie sfery o określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną. W momencie utworzenia kuli  pojawia się nad nią napis z wiadomością przekazywaną przy zatwierdzaniu zmian, którego kolor jest niewiele jaśniejszy niż kolor samego obiektu. Ponadto może również zostać dodany tekst z numerem wersji tzw. tag, znajdujący się nieco powyżej tekstu z wiadomością. Sam tekst jest wyświetlany tylko dla 'commitów' na gałęzi, na której aktualnie znajduje się użytkownik, a jego pojawienie się , czy ukrycie jest animowane. 
+	Zatwierdzenie zmian w repozytorium git w grafice trójwymiarowej jest przedstawione w postaci kuli umieszczonej na gałęzi, której dotyczy. Funkcja CreateSphere pochodząca z babylon'a buduje siatkę wierzchołków w kształcie sfery o określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną. W momencie utworzenia kuli  pojawia się nad nią napis z wiadomością przekazywaną przy zatwierdzaniu zmian, którego kolor jest niewiele jaśniejszy niż kolor samego obiektu. Ponadto może również zostać dodany tekst z numerem wersji tzw. tag, znajdujący się nieco powyżej tekstu z wiadomością. Sam tekst jest wyświetlany tylko dla 'commitów' na gałęzi, na której aktualnie znajduje się użytkownik, a jego pojawienie się , czy ukrycie jest animowane.
 
-	 W kwestii wyglądu wobec kuli zastosowane te same zabiegi co do gałęzi, na której jest umieszczona. Posiada ten sam kolor, materiał oraz obramowanie. 
- 
-	Z obiektem ukazującym zatwierdzenie zmian związane są animacje takie, jak pojawienie się czy zniknięcie z wybuchem cząsteczek. Pierwsza z nich trwa 0.4 sekundy i polega na modyfikowaniu skali z wykorzystaniem funkcji generującej krzywą Beziera, tak by przypominało to sprężanie i rozprężanie, co tworzy ciekawy efekt wizualny. Obiekt potwierdzający zmiany może zostać usunięty, jeżeli użytkownik wykonana akcja zresetowania repozytorium do jakiejś wcześniejszej zmiany. W tym celu napisano efektowną animację z wybuchem cząsteczek stałych, będących niewielkimi kulami. Cząsteczki są w tym samym kolorze co 'commit'. W przypadku tworzenia stałych cząsteczek w formie wybuchu skorzystano z mechanizmów babylona, który ułatwia pracę z cząsteczkami. Na początku tworzona jest figura z 500 cząsteczek, będących sferami. Następnie definiowana jest funkcja wykonywana dla każdej cząsteczki, w której określa się prędkość oraz kierunek jej rozchodzenia. Cząsteczki rozchodzą się dynamicznie w kształcie kuli, a w każdej klatce zmniejszana jest ich skala, by zanikały w czasie, wszystko to daje efekt eksplozji ciała, co urozmaica doznania wizualne. 
- 
+	 W kwestii wyglądu wobec kuli zastosowane te same zabiegi co do gałęzi, na której jest umieszczona. Posiada ten sam kolor, materiał oraz obramowanie.
+
+	Z obiektem ukazującym zatwierdzenie zmian związane są animacje takie, jak pojawienie się czy zniknięcie z wybuchem cząsteczek. Pierwsza z nich trwa 0.4 sekundy i polega na modyfikowaniu skali z wykorzystaniem funkcji generującej krzywą Beziera, tak by przypominało to sprężanie i rozprężanie, co tworzy ciekawy efekt wizualny. Obiekt potwierdzający zmiany może zostać usunięty, jeżeli użytkownik wykonana akcja zresetowania repozytorium do jakiejś wcześniejszej zmiany. W tym celu napisano efektowną animację z wybuchem cząsteczek stałych, będących niewielkimi kulami. Cząsteczki są w tym samym kolorze co 'commit'. W przypadku tworzenia stałych cząsteczek w formie wybuchu skorzystano z mechanizmów babylona, który ułatwia pracę z cząsteczkami. Na początku tworzona jest figura z 500 cząsteczek, będących sferami. Następnie definiowana jest funkcja wykonywana dla każdej cząsteczki, w której określa się prędkość oraz kierunek jej rozchodzenia. Cząsteczki rozchodzą się dynamicznie w kształcie kuli, a w każdej klatce zmniejszana jest ich skala, by zanikały w czasie, wszystko to daje efekt eksplozji ciała, co urozmaica doznania wizualne.
+
 	\subsection{Tekst}
-	Tekst w grafice 3D jest ukazany w postaci dwuwymiarowej z opcją billboard w trybie  wszystkich osi. Oznacza to, że niezależnie jak ustawiona będzie kamera tekst będzie się odpowiednio obracał w kierunku kamery. 
+	Tekst w grafice 3D jest ukazany w postaci dwuwymiarowej z opcją billboard w trybie  wszystkich osi. Oznacza to, że niezależnie jak ustawiona będzie kamera tekst będzie się odpowiednio obracał w kierunku kamery.
 
 	Aby utworzyć tekst w babylon należy zastosować kilka operacji, które w projekcie zebrano w jedną klasę. Na początku tworzona jest płaszczyzna o rozmiarach, wyliczonych na podstawie rozmiaru pojedynczego znaku, pomnożonego przez ilość liter w tekście. Do wygenerowania tekstury z tekstem użyto klasy DynamicTexture z biblioteki Babylon.js. Po utworzeniu instancji tej klasy wywoływana była jej funkcja rysująca tekst na teksturze. Umożliwia ona określenie miejsca, czcionki, koloru tekstu oraz przezroczystości tła. Kolor tekstu ustawiany jest w zależności od obiektu nad którym się znajduje, a tło jest w pełni przezroczyste. W kolejnym kroku powstaje materiał z biblioteki Babylon.js , w którym jako tekstura, określająca kolor oraz nieprzezroczystości, jest wcześniej utworzona tekstura.
 
 	Dla tekstu zdefiniowano dwie animacje pojawienia się i zniknięcia. Przy ich tworzeniu zastosowano gotowe mechanizmy z biblioteki babylon. Aby uzyskać efekt pojawiania się modyfikowana jest wartość przezroczystości materiału płaszczyzny od zera do jeden w ciągu jednej sekundy, natomiast przy znikaniu, następuje mechanizm odwrotny, polegający na zmianie tej samej wartości od jeden do zera. W ten sposób uzyskano efekt 'gaśnięcia'.
-	
+
 	Obiekt ten jest wykorzystywany przy ukazywaniu wiadomości i tagów z wersją dotyczących zatwierdzenia zmian, a także przy wyświetlaniu nazw gałęzi.
 
-	
+
  	% repo 3d jak kontroler akcji husaku i imosiaku
  	% branch i animacje, akcje husaku i imosiaku
- 	% colors i shaders husaku ? 
+ 	% colors i shaders husaku ?
  	% ground husaku ?
  	% background i particles magda?
 
 	\subsection{Kamera}
-	
+
 	Nieodzownym elementem w projekcie z grafiką 3D jest kamera. W przypadku GitHero kamera jest kamerą śledzącą obiekt i rozszerza standardowe możliwości 'FollowCamera' z babylon'a. Określa się dla niej rotację, odległość oraz wysokość z której ma spoglądać na śledzony obiekt, a także prędkość podążania, czy przyspieszenie. Kamera powinna podążać zawsze za aktywną gałęzią. W systemie git aktywna gałąź przetrzymywana jest we wskaźniku HEAD, dlatego postanowiono odwzorować jego działanie. Stworzono obiekt HEAD posiadający informację na jaki obiekt wskazuję. Najczęściej jest to gałąź repozytorium, ale może też wskazywać na komita. Aby ułatwić podążanie kamery za HEADem stworzono klasę abstrakcyjną FollowObject i rozszerzono o nią obiekt HEAD. Po wskazaniu obiektu za którym powinna podążać kamera na obiekt jaki wskazuje HEAD można było w łatwy sposób zmieniać aktywne gałęzie i dzięki implementacji gotowej kamery z biblioteki babylon.js kamera podążała samoistnie do wskazanego obiektu. Niestety gdy zmieniano aktywną gałąź znajdującą się daleko od aktualnej gałęzi kamera zmieniała gwałtownie swoją pozycję i nie poruszała się płynnie. Postanowiono dodać dodatkowy, obiekt do klasy FollowObject nazwany CameraTarget, na który to była skierowana kamera i podążała za nim. W każdej klatce sprawdzana jest pozycja CameraTarget i obiektu na który wskazuje HEAD. Gdy obie pozycje się różnią następuje płynne przesunięcie CameraTarget na pozycję obiektu wskazanego przez HEAD. W wypadku gdy wskazywanym obiektem jest gałąź pobierana zostaje pozycja najdalej wysuniętego punktu gałęzi wzdłuż osi Z. Dzięki temu kamera podąża za aktywnym obiektem w sposób płynny. Aby obiekt CameraTarget nie był widoczny po utworzeniu zostaje usunięty ze sceny dzięki czemu nie jest wywoływana funkcja rysująca go. Aby móc sprawdzić jak wygląda wizualizacja całego repozytorium zaimplementowano możliwość oddalenia kamery przy użyciu przewijania myszką. W momencie przewijania w tył kamera zwiększa swoją wysokość, prędkość oraz przyspieszenie aż do momentu osiągnięcia z góry ustalonej maksymalnej wysokości. Następnie zaczyna zmniejszać swoją pozycję wzdłuż osi Z aż do momentu dotarcia do początku repozytorium. W momencie przewijania w przód następuje odwrotny proces aż do dotarcia do końca aktywnej gałęzi. W czasie zmiany pozycji kamery wzdłuż osi Z następuję zmiana pozycji wzdłuż tej samej osi obiektu na który kamera spogląda o taką samą wartość dzięki czemu kamera skierowana jest ciągle pod takim samym kątem wzdłuż osi X. Dzięki temu, że kamera nie spogląda na konkretny obiekt repozytorium tylko na CameraTarget nie zmienia się pozycja obiektu na który wskazuje HEAD.
-	
+
 	\subsection{Lecący kod ?}
-	
-	Aby odwzorować ciągłe przybywanie nowego kodu w projekcie postanowiono stworzyć komponent imitujący lecący tekst. Do tego celu stworzono płaszczyznę z wykorzystaniem funkcji CreateGround z biblioteki Babylon.js. Jako parametry podaje się w niej rozmiar płaszczyzny oraz ilość wierzchołków użytych do jej wygenerowania. Następnie nałożono na nią materiał w którym to zaimplementowano własny shader wierzchołków oraz shader pikseli. Aby kod był zawsze widoczny i nie znikał gdy kamera porusza się do przodu w każdej klatce wartość Z wektora pozycji płaszczyzny ustawiana jest na wartość Z wektora pozycji kamery. Głównymi parametrami przekazywanymi do shadera wierzchołków jest pozycja i koordynaty tekstury. Dodatkowo dostarczane są macierze świata, widoku i projekcji. Aby sprawić wrażenie falowania kodu postanowiono nadać płaszczyźnie wypukłości. Z tego powodu przekazywana jest do shadera wierzchołków monochromatyczna tekstura zawierająca informację o wysokości wierzchołków zwaną mapą wysokości. Aby obliczyć końcową pozycję wierzchołka pobierana jest wartość kanału czerwonego z mapy wysokości z miejsca określonego koordynatami tekstury. Wartość ta przyjmuje wartości od 0 do 1. Jest to za mała wartość aby można było zauważyć różnicę w wysokości płaszczyzny dlatego jest ona przemnażana przez z góry ustaloną wartość określającą maksymalną wysokość. Następnie obliczona wysokość dodawana jest do wartości y wektora pozycji wierzchołka. Otrzymana pozycja jest pozycją wierzchołka w modelu płaszczyzny. Aby ustawić wierzchołki w świecie oraz uwzględnić ustawienie i właściwości kamery pozycja wierzchołka mnożona jest przez macierz świata, widoku i projekcji. Z shadera wierzchołków do shadera pikseli przekazywana jest pozycja wierzchołka w modelu płaszczyzny (nie przemnożona przez macierz świata, widoku i projekcji) oraz koordynaty tekstury. Dodatkowo przekazywana jest pozycja kamery oraz tekstura z kodem. Aby stworzyć wrażenie poruszającego się tekstu w shaderze wierzchołków do koordynatów tekstury dodawane jest przesunięcie obliczane w każdej klatce w klasie materiału. Na samym początku pobierany jest kolor z tekstury kodu z użyciem przesuniętych koordynatów tekstury. Następnie sprawdzane jest czy pobrany kolor jest kolorem czarnym (wartości R,G i B wynoszą zero). Gdy jest to prawdą piksel zostaje pominięty. Dzięki temu na ekranie wyświetlany jest tylko kod z tekstury (brak czarnego tła). Gdy kolor pobrany z tekstury nie jest czarny oznacza to że jest to piksel kodu i należy ko narysować. Aby sprawić wrażenie delikatnego pojawiania się kodu zaimplementowano efekt mgły. Kod znajdujący się daleko od kamery delikatnie zaczyna przybierać kolor tła. Na początku obliczana jest głębokość piksela na podstawie koordynatów piksela. Wartość 'Z' koordynatów piksela określająca głębokość piksela dzielona jest przez wartość W określającą projekcje. Dzięki temu wiemy jak daleko od kamery jest część kodu reprezentowana przez ten piksel. Dzięki temu, że płaszczyzna jest w stałem odległości od kamery, możemy określić wartość współczynnika mgły. Dla pikseli reprezentujących koniec kodu współczynnik ten wynosi 1. Czym mniejsza głębokość tym współczynnik zmniejsza się osiągając wartość zero w momencie gdy głębokość jest mniejsza od z góry ustalonej wartości. Dzięki temu można powoli ukrywać tylko końcówkę kodu. Ostateczna wartość koloru piksela obliczana jest na podstawie współczynnika mgły. Gdy jego wartość jest bliższa 1 wtedy piksel posiada kolor tła. Gdy wartość wynosi 0 wtedy jako kolor używany jest kolor tekstury. W wartościach pośrednich kolor jest liniowo interpolowany. Do tego celu skorzystano z wbudowanej funkcji w WebGl o nazwie 'mix'. Jako pierwszy parametr został podany kolor tekstury, drugim parametrem jest kolor tła, a jako trzeci parametr podany został współczynnik mgły. Aby móc w łatwy sposób wyłączyć efekty takie jak falowanie i przesuwanie kodu do shedera przekazywane są również dodatkowe parametry określające czy wykonać dany efekt.  
-	
+
+	Aby odwzorować ciągłe przybywanie nowego kodu w projekcie postanowiono stworzyć komponent imitujący lecący tekst. Do tego celu stworzono płaszczyznę z wykorzystaniem funkcji CreateGround z biblioteki Babylon.js. Jako parametry podaje się w niej rozmiar płaszczyzny oraz ilość wierzchołków użytych do jej wygenerowania. Następnie nałożono na nią materiał w którym to zaimplementowano własny shader wierzchołków oraz shader pikseli. Aby kod był zawsze widoczny i nie znikał gdy kamera porusza się do przodu w każdej klatce wartość Z wektora pozycji płaszczyzny ustawiana jest na wartość Z wektora pozycji kamery. Głównymi parametrami przekazywanymi do shadera wierzchołków jest pozycja i koordynaty tekstury. Dodatkowo dostarczane są macierze świata, widoku i projekcji. Aby sprawić wrażenie falowania kodu postanowiono nadać płaszczyźnie wypukłości. Z tego powodu przekazywana jest do shadera wierzchołków monochromatyczna tekstura zawierająca informację o wysokości wierzchołków zwaną mapą wysokości. Aby obliczyć końcową pozycję wierzchołka pobierana jest wartość kanału czerwonego z mapy wysokości z miejsca określonego koordynatami tekstury. Wartość ta przyjmuje wartości od 0 do 1. Jest to za mała wartość aby można było zauważyć różnicę w wysokości płaszczyzny dlatego jest ona przemnażana przez z góry ustaloną wartość określającą maksymalną wysokość. Następnie obliczona wysokość dodawana jest do wartości y wektora pozycji wierzchołka. Otrzymana pozycja jest pozycją wierzchołka w modelu płaszczyzny. Aby ustawić wierzchołki w świecie oraz uwzględnić ustawienie i właściwości kamery pozycja wierzchołka mnożona jest przez macierz świata, widoku i projekcji. Z shadera wierzchołków do shadera pikseli przekazywana jest pozycja wierzchołka w modelu płaszczyzny (nie przemnożona przez macierz świata, widoku i projekcji) oraz koordynaty tekstury. Dodatkowo przekazywana jest pozycja kamery oraz tekstura z kodem. Aby stworzyć wrażenie poruszającego się tekstu w shaderze wierzchołków do koordynatów tekstury dodawane jest przesunięcie obliczane w każdej klatce w klasie materiału. Na samym początku pobierany jest kolor z tekstury kodu z użyciem przesuniętych koordynatów tekstury. Następnie sprawdzane jest czy pobrany kolor jest kolorem czarnym (wartości R,G i B wynoszą zero). Gdy jest to prawdą piksel zostaje pominięty. Dzięki temu na ekranie wyświetlany jest tylko kod z tekstury (brak czarnego tła). Gdy kolor pobrany z tekstury nie jest czarny oznacza to że jest to piksel kodu i należy ko narysować. Aby sprawić wrażenie delikatnego pojawiania się kodu zaimplementowano efekt mgły. Kod znajdujący się daleko od kamery delikatnie zaczyna przybierać kolor tła. Na początku obliczana jest głębokość piksela na podstawie koordynatów piksela. Wartość 'Z' koordynatów piksela określająca głębokość piksela dzielona jest przez wartość W określającą projekcje. Dzięki temu wiemy jak daleko od kamery jest część kodu reprezentowana przez ten piksel. Dzięki temu, że płaszczyzna jest w stałem odległości od kamery, możemy określić wartość współczynnika mgły. Dla pikseli reprezentujących koniec kodu współczynnik ten wynosi 1. Czym mniejsza głębokość tym współczynnik zmniejsza się osiągając wartość zero w momencie gdy głębokość jest mniejsza od z góry ustalonej wartości. Dzięki temu można powoli ukrywać tylko końcówkę kodu. Ostateczna wartość koloru piksela obliczana jest na podstawie współczynnika mgły. Gdy jego wartość jest bliższa 1 wtedy piksel posiada kolor tła. Gdy wartość wynosi 0 wtedy jako kolor używany jest kolor tekstury. W wartościach pośrednich kolor jest liniowo interpolowany. Do tego celu skorzystano z wbudowanej funkcji w WebGl o nazwie 'mix'. Jako pierwszy parametr został podany kolor tekstury, drugim parametrem jest kolor tła, a jako trzeci parametr podany został współczynnik mgły. Aby móc w łatwy sposób wyłączyć efekty takie jak falowanie i przesuwanie kodu do shedera przekazywane są również dodatkowe parametry określające czy wykonać dany efekt.
+
 	\subsection{Tło}
 
 	\chapter{Podsumowanie}
-	
+
 	\appendix
-	
+
 	\chapter{Przewodnik użytkownika}
-	
+
 	Praktyczne info dla opornego użytkownika, jak ma korzystać, między innymi że jest opcja scrolla aby oddalić, jakie przyciski do obsługi helpa itp. itd., krótki opis fragmentu rozgrywki co się dzieje po czym i dlaczego i jak ma na to reagować użytkownik i takie tam.
-	
+
 	\backmatter
-	
+
 \end{document}
