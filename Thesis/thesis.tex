@@ -101,7 +101,7 @@
 
 	Git przypisuje do zapisanych stanów projektu czterdziestoznakowe skróty SHA-1. Dzięki tym sumom kontrolnym zauważy każdą, nawet najmniejszą zmianę wprowadzoną na kontrolowanym pliku, niezależnie od sposobu przeprowadzenia modyfikacji.
 
-	Jako najważniejszą zaletę systemu Git powszechnie uznaje się efektywny system rozgałęziania i~łączenia gałęzi. W~przeciwieństwie do starszych systemów kontroli wersji, Git umożliwia natychmiastowe utworzenie nowej gałęzi, oraz bardzo szybkie przełączanie się pomiędzy gałęziami. Ta cecha sprawia, że równoległa praca jest o~wiele mniej problematyczna. Znacząco ułatwia to rozwój oprogramowania jednocześnie w~kilku różnych i~niezależnych kierunkach. Tak optymalne operacje na gałęziach są możliwe dzięki potraktowaniu gałęzi jako wskaźnika na rewizję, o~czym więcej w~sekcji \ref{Galezie}.
+	Jako najważniejszą zaletę systemu Git powszechnie uznaje się efektywny system rozgałęziania i~łączenia gałęzi. W~przeciwieństwie do starszych systemów kontroli wersji, Git umożliwia natychmiastowe utworzenie nowej gałęzi, oraz bardzo szybkie przełączanie się pomiędzy gałęziami. Ta cecha sprawia, że równoległa praca jest o~wiele mniej problematyczna. Znacząco ułatwia to rozwój oprogramowania jednocześnie w~kilku różnych i~niezależnych kierunkach. Tak optymalne operacje na gałęziach są możliwe dzięki potraktowaniu gałęzi jako wskaźnika na rewizję.
 
 	\subsection{Repozytorium}
 
@@ -112,7 +112,7 @@
 	\subsection{Tworzenie rewizji}
 	Za każdym razem, kiedy uznamy, że aktualny stan naszego projektu wart jest zapisania, trzeba samodzielnie zatwierdzić wprowadzone zmiany. Odbywa się to dwuetapowo.
 
-	Najpierw należy określić, które pliki powinny zostać zapisane w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}) komendą \textit{git add}. W tym miejscu należy wytłumaczyć, czym jest indeks. Jak wspomniano wcześniej, w~folderze każdego projektu kontrolowanego przez Git znajduje się podkatalog .git, zawierający całą dostępną historię i wszystkie dane dotyczące repozytorium. Mieści się w nim plik index, przechowujący listę plików, których zmiany zostaną uwzględnione w najbliższej rewizji.
+	Najpierw należy określić, które pliki powinny zostać zapisane w repozytorium, poprzez zaindeksowanie ich, czyli dodanie do indeksu (ang. \textit{index}, \textit{staging area}) komendą \textit{git add}. Plik index przechowuje listę plików, których zmiany zostaną uwzględnione w~najbliższej rewizji. Mieści się w~podkatalogu .git, stanowiącym integralną część każdego projektu kontrolowanego przez system Git i zawierającym całą dostępną historię, wraz ze~wszystkimi danymi dotyczącymi repozytorium.
 
 	Następnie zatwierdza się zmiany poleceniem \textit{git commit}, w~rezultacie czego powstaje nowa rewizja (ang. \textit{commit}), zawierająca zapisany obraz całego projektu, nazywany czasem migawką (ang. \textit{snapshot}). Wszystkie rewizje przechowywane są w repozytorium i~oznaczone są jednoznacznie je identyfikującą sumą kontrolną. Wyliczona jest przez funkcję skrótu \mbox{SHA-1}, generującą 40-znakowy ciąg na~podstawie zawartości rewizji. Poza zapisanym stanem plików zapamiętywana jest także dokładna godzina zatwierdzenia zmian, autor oraz przodek rewizji (ang \textit{parent commit}). Przodkiem określa się rewizję bezpośrednio poprzedzającą daną rewizję. Warto w tym miejscu zaznaczyć, że rewizje powstałe w~wyniku scalenia gałęzi mają więcej niż jednego rodzica. Więcej na temat gałęzi w~sekcji~\ref{Galezie}.
 
@@ -127,8 +127,8 @@
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=11.3cm]{git_file-types}
-		\captionsource{Możliwe stany pliku w projekcie kontrolowanym przez system Git}{\mbox{\url{https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository}}}
+		\includegraphics[height=6.5cm]{git_file-types}
+		\captionsource{Możliwe stany pliku w systemie Git}{Oryginalna ilustracja angielska : \mbox{\url{https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository}}}
 		\label{fig:git_file-types}
 	\end{figure}
 	\FloatBarrier
@@ -169,56 +169,40 @@
 
 	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z~których jedna jest zawarta w~drugiej. Przez zawieranie się gałęzi określa się sytuację, w~której jedna gałąź zawiera ciąg rewizji, a~druga składa się z identycznego ciągu do~którego dodane zostały nowe rewizje. Innymi słowy, z~pierwszej gałęzi można w~prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
 
-	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}), czyli przesunięcie wskaźnika zawartej gałęzi do najnowszej rewizji wskazywanej przez gałąź dołączaną.
+	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}). Wskaźnik zawartej gałęzi jest przesuwany do najnowszej rewizji, wskazywanej przez gałąź dołączaną. Ilustracja~\ref{fig:git-merge_ff} przedstawia scalenie gałęzi \textit{master} z zawierającą ją gałęzią \textit{iss53}, które przewinęło wskaźnik gałęzi \textit{master} do przodu, nie tworząc przy tym nowej rewizji.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=14cm]{git-merge_ff}
+		\caption{Działanie operacji scalania poprzez przewinięcie do przodu}
+		\label{fig:git-merge_ff}
+	\end{figure}
 
 	W przypadku łączenia gałęzi rozłącznych, czyli takich, że~żadna nie jest zawarta w~drugiej, nie jest możliwe scalenie poprzez przewinięcie do~przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od~której historie gałęzi się różnią, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang.~\textit{three-way merge}), w~wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=12cm]{git_merge-no-ff-result}
-		\captionsource{Repozytorium po wykonaniu operacji scalania rozłącznych gałęzi}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
-		\label{fig:git_merge-no-ff-result}
+		\includegraphics[width=15cm]{git-merge_no_ff}
+		\caption{Działanie operacji scalania rozłącznych gałęzi}
+		\label{fig:git-merge_no_ff}
 	\end{figure}
 
-	Przykład przeprowadzenia operacji scalania rozłącznych gałęzi jest przedstawiony na rysunku \ref{fig:git_merge-no-ff-result}. Do gałęzi \textit{master}, która wcześniej wskazywała na rewizję C4, dołączone zostały zmiany z gałęzi \textit{iss53}. W wyniku tego powstała nowa rewizja C5.
-
-	%\begin{figure}
-	%	\centering
-	%	\includegraphics[width=12cm]{git_merge-ff}
-	%	\captionsource{Repozytorium przed wykonaniem operacji scalania przez przewinięcie do przodu}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
-	%	\label{fig:git_merge-ff}
-	%\end{figure}
-
-	%\begin{figure}
-	%	\centering
-	%	\includegraphics[width=12cm]{git_merge-ff-result}
-	%	\captionsource{Repozytorium po wykonaniu operacji scalania przez przewinięcie do przodu}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
-	%	\label{fig:git_merge-ff-result}
-	%\end{figure}
-
-	%\begin{figure}
-	%	\centering
-	%	\includegraphics[width=12cm]{git_merge-no-ff}
-	%	\captionsource{Repozytorium przed wykonaniem operacji scalania rozłącznych gałęzi}{\url{https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging}}
-	%	\label{fig:git_merge-no-ff}
-	%\end{figure}
+	Przykład przeprowadzenia operacji scalania rozłącznych gałęzi jest przedstawiony na rysunku~\ref{fig:git-merge_no_ff}. Do gałęzi \textit{master}, która wcześniej wskazywała na rewizję C4, dołączone zostały zmiany z gałęzi \textit{iss53}. W wyniku tego powstała nowa rewizja C5.
 
 	\FloatBarrier
 
 	\paragraph{Zmiana bazy}
 
-	Innym sposobem integracji zmian z różnych gałęzi jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i~sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a~gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do~przodu. Ostatecznie stan plików projektu jest identyczny z~tym, jaki powstałby w~wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w~historii projektu~---~po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia.
+	Innym sposobem integracji zmian z różnych gałęzi jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i~sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a~gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do~przodu. Ostatecznie stan plików projektu jest identyczny z~tym, jaki powstałby w~wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w~historii projektu~---~po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia. Przykład działania operacji zmiany bazy przedstawiony jest na rysunku~\ref{fig:git-rebase}.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=12cm]{git_rebase-result}
-		\captionsource{Repozytorium po wykonaniu operacji zmiany bazy gałęzi \textit{experiment} }{\url{https://git-scm.com/book/en/v2/Git-Branching-Rebasing}}
-		\label{fig:git_rebase-result}
+		\includegraphics[width=13cm]{git-rebase}
+		\caption{Działanie operacji zmiany bazy gałęzi \textit{iss53} }
+		\label{fig:git-rebase}
 	\end{figure}
-
-	Operacja zmiany bazy została zaprezentowana na rysunku \ref{fig:git_rebase-result}. Rewizje z gałęzi, której bazę zmieniono, nadal są w repozytorium. Zostaną usunięte dopiero w wyniku optymalizacji rozmiaru bazy danych repozytorium, wraz ze wszystkimi rewizjami nie zawartymi w żadnej gałęzi.
-
 	\FloatBarrier
+
 	\subsection{Wycofywanie zmian}
 	Jeżeli zajdzie potrzeba wycofania zaindeksowanych zmian lub usunięcia utworzonych rewizji, należy użyć komendy \textit{git reset} systemu Git, wywoływanej w~jednym z~trzech trybów:
 	\begin{itemize}
@@ -226,9 +210,9 @@
 		\item \textbf{\textit{mixed}}~---~tryb domyślny, w którym aktywna gałąź przesuwana jest do podanej rewizji i dodatkowo zmieniany jest indeks (przywracany do stanu takiego jak w danej rewizji), a obszar roboczy pozostaje bez zmian,
 		\item \textbf{\textit{hard}}~---~przesuwana jest aktywna gałąź, a zarówno indeks jak i~obszar roboczy są przywracane do stanu zapamiętanego w podanej rewizji (ten tryb może spowodować nieodwracalną utratę zmian, nawet tych zatwierdzonych).
 	\end{itemize}
-	Reasumując, polecenie \textit{git reset} z opcją \textit{hard} wykonuje trzy kroki~---~cofa wskaźnik aktywnej gałęzi, zmienia indeks, a następnie  przywraca stan obszaru roboczego do~stanu zapisanego we wskazanej rewizji. W trybie \textit{mixed} pomijany jest ostatni krok, modyfikujący pliki w~katalogu roboczym. Z~kolei tryb \textit{soft} wykonuje tylko krok pierwszy.
+	Reasumując, polecenie \textit{git reset} z~opcją \textit{hard} wykonuje trzy kroki~---~cofa wskaźnik aktywnej gałęzi, zmienia indeks, a~następnie przywraca stan obszaru roboczego do~stanu zapisanego we wskazanej rewizji. W trybie \textit{mixed} pomijany jest ostatni krok, modyfikujący pliki w~katalogu roboczym. Z~kolei tryb \textit{soft} wykonuje tylko krok pierwszy.
 
-	Komendę \textit{git reset} w trybie \textit{mixed} można wykorzystać do~wykluczenia zaindeksowanego pliku z~indeksu, a z~opcją \textit{hard} do~usunięcia najnowszych rewizji. Za~pomocą tego polecenia wycofuje się także operację scalania, która utworzyła nową rewizję (nie dotyczy to scalania poprzez przewinięcie do~przodu).
+	Komendę \textit{git reset} w trybie \textit{mixed} można wykorzystać do~wykluczenia zaindeksowanego pliku z~indeksu, a~z~opcją \textit{hard} do~usunięcia najnowszych rewizji. Za~pomocą tego polecenia wycofuje się także operację scalania, która utworzyła nową rewizję (nie dotyczy to scalania poprzez przewinięcie do~przodu).
 
 	\subsection{Repozytoria zdalne}
 	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w~sieci. Służą one do~synchronizacji zmian w~projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na~pobieraniu i~przesyłaniu do~niego danych, dotyczących wersji projektu i~stanu plików.
@@ -298,7 +282,7 @@
 	Kiedy stan kodu aplikacji jest stabilny i działa zgodnie z oczekiwaniami, a wszystkie funkcje które powinny się znaleźć w nowym wydaniu oprogramowania są już zaimplementowane i włączone do głównej gałęzi deweloperskiej, należy rozpocząć proces publikacji nowej wersji. Zgodnie z koncepcją Gitflow, wszystkie niezbędne ostatnie poprawki i drobne zmiany dotyczące przygotowania nowego wydania, powinny zostać przeprowadzone na osobnej, specjalnie utworzonej w tym celu gałęzi, nazywanej \textit{release branch}.
 
 	Tworzenie takiej gałęzi odbywa się poprzez rozgałęzienie z gałęzi \textit{develop}. W~tym momencie ustala się też numer wydania, czyli numer wersji publikowanego oprogramowania. Nazwa gałęzi powinna być formatu ,,release/numer-wydania''.
-	Od tego momentu wszystkie zmiany zachodzące n~głównej gałęzi \textit{develop} będą dotyczyć następnej publikacji i~nie zostaną uwzględnione w aktualnym wydaniu. Dzięki utworzeniu gałęzi typu \textit{release}, prace mogą iść dwutorowo,  poprzez przygotowywanie publikacji nowej wersji, oraz równolegle rozwijanie i~rozszerzanie funkcjonalności oprogramowania. Jako przygotowanie do wydania rozumie się poprawę drobnych błędów, takich jak literówki i~inne niewielkie niedociągnięcia.
+	Od tego momentu wszystkie zmiany zachodzące na~głównej gałęzi \textit{develop} będą dotyczyć następnej publikacji i~nie zostaną uwzględnione w aktualnym wydaniu. Dzięki utworzeniu gałęzi typu \textit{release} prace mogą iść dwutorowo,  poprzez przygotowywanie publikacji nowej wersji, oraz równolegle rozwijanie i~rozszerzanie funkcjonalności oprogramowania. Przygotowanie do wydania obejmuje korektę drobnych mankamentów, jak literówki i~inne niewielkie niedociągnięcia, a~także naprawę odkrytych podczas testowania błędów.
 
 	W momencie, w którym oprogramowanie będzie już przygotowane do opublikowania, należy scalić gąłąź \textit{release} z~główną gałęzią produkcyjną \textit{master}. Analogicznie jak w~przypadku scalania gałęzi typu \textit{feature branch}, należy  zwrócić uwagę, aby operacja połączenia nie polegała na przewinięciu do przodu. Konieczne jest aby~w~wyniku jej wykonania utworzona została nowa rewizja. Należy jej nadać etykietę (ang. \textit{tag}) z~numerem wydania, aby ułatwić wyszukiwanie konkretnych wersji oprogramowania na gałęzi produkcyjnej. Następnie należy również scalić gałąź dotyczącą najnowszego, opublikowanego właśnie wydania, z~gałęzią \textit{develop}. Gałęzie typu \textit{relese} są tymczasowe, więc po włączeniu jej do obu głównych gałęzi należy ją usunąć.
 
@@ -310,57 +294,61 @@
 
 	Kolejnym krokiem jest scalenie gałezi \textit{hotfix} z~główną gałęzią \textit{develop}. Jeżeli istnieje w~danym momencie gałąź typu \textit{release}, to do niej również należy włączyć zmiany dotyczące naprawy błędu. Na koniec należy usunąć tymczasową gałąź.
 
+	\begin{figure}
+		\centering
+		\includegraphics[height=5cm]{gitflow_hotfix}
+		\captionsource{Wykorzystanie gałęzi typu \textit{hotfix}}{Oryginalna ilustracja angielska : \url{http://nvie.com/img/hotfix-branches@2x.png}}
+		\label{fig:gitflow_hotfix}
+	\end{figure}
+
 	\chapter{Projekt}
 
 	\section{Założenia}
+		
+	Głównym celem samouczka GITar-Hero jest zapoznanie użytkownika z~podstawowymi poleceniami systemu kontroli wersji Git, w~sposób przyjemny i~zrozumiały. Gra, przez połączenie nauki i~rozrywki, ma za zadanie zachęcić i~ułatwić proces uczenia się. Kolorowa i~ruchoma grafika 3D uatrakcyjnia tę naukę, a~możliwość zdobywania punktów i~naturalna chęć osiągnięcia jak najlepszego wyniku dodatkowo mobilizuje użytkownika.
 
-	Głównym celem samouczka GITar-Hero jest zapoznanie użytkownika z~podstawowymi poleceniami systemu kontroli wersji Git, w~sposób przyjemny i~zrozumiały. Gra, przez połączenie nauki i rozrywki, ma za zadanie zachęcić i ułatwić proces uczenia się. Kolorowa i ruchoma grafika 3D uatrakcyjnia tę naukę, a możliwość zdobywania punktów i naturalna chęć osiągnięcia jak najlepszego wyniku dodatkowo mobilizuje użytkownika.
-
-	Z założenia, ważniejsze od dogłębnego zrozumienia strony teoretycznej systemu Git, było nauczenie właściwego korzystania z poleceń. Gra ma służyć jako samouczek, uczący praktycznego wykorzystania systemu wersji i~pokazujący typowy scenariusz, jaki najczęściej występuje podczas wytwarzania oprogramowania. Po zagraniu w grę użytkownik powinien już swobodnie wykonywać komendy systemu Git, zarówno pracując indywidualnie, jak i potrafić właściwie współpracować z zespołem.
-
-	Celem było pokazanie, że wbrew panującej powszechnie opinii, korzystanie z systemu kontroli wersji Git nie musi przysparzać problemów ani trudności. Ponadto gra ma przyzwyczaić użytkownika do korzystania z wiersza poleceń. Jeżeli ma się opanowane komendy, jakie należy wprowadzać w konsoli, z reguły będzie się potrafiło skorzystać z dowolnego programu z graficznym interfejsem do obsługi systemu Git. W drugą stronę taka zależność nie występuje. W związku z tym, tylko umiejętność korzystania z systemu Git w wierszu poleceń pozwala swobodnie korzystać z tego systemu kontroli wersji, niezależnie od środowiska i zainstalowanych programów.
-
+	Z~założenia, ważniejsze od dogłębnego zrozumienia strony teoretycznej systemu Git, było nauczenie właściwego korzystania z~poleceń. Gra ma służyć jako samouczek, uczący praktycznego wykorzystania systemu wersji i~pokazujący typowy scenariusz, jaki najczęściej występuje podczas wytwarzania oprogramowania. Po~zagraniu w~grę użytkownik powinien już swobodnie wykonywać komendy systemu Git, zarówno pracując indywidualnie, jak i~podczas współpracy z~zespołem. 
+	
+	Celem było pokazanie, że~wbrew panującej powszechnie opinii, korzystanie z systemu kontroli wersji Git nie musi przysparzać problemów ani trudności. Ponadto gra ma przyzwyczaić użytkownika do korzystania z~wiersza poleceń. Opanowanie komend, jakie należy wprowadzać w~konsoli, z~reguły daje możliwość używania dowolnego programu z~graficznym interfejsem do obsługi systemu Git. W~drugą stronę taka zależność nie występuje. W~związku z~tym, tylko umiejętność korzystania z~systemu Git w~wierszu poleceń pozwala swobodnie korzystać z~tego systemu kontroli wersji, niezależnie od środowiska i~zainstalowanych programów.
+	 
 	\section{Przebieg gry}
+	
+	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i~do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z~krótką instrukcją rozpoczyna się gra. U~góry, po prawej stronie, wyświetla się aktualne zadanie i~pierwszy krok, który należy wykonać. Z~założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się zakładka pomocy, informująca czym jest repozytorium sytemu kontroli wersji i~jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i~zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i~następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się w~folderze z~repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie wpływa na~stan repozytorium i~pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend.
 
-	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z krótką instrukcją rozpoczyna się gra. U góry, po prawej stronie, wyświetla się aktualne zadanie i pierwszy krok, który należy wykonać. Z założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się pomoc z zakładką informującą czym jest repozytorium sytemu kontroli wersji i jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się na tym etapie w folderze z repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie działa na stan repozytorium i pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend.
+	Po wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnej nagrody za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas. Dodatkowo każda błędnie wprowadzona komenda skutkuje zmniejszeniem liczby posiadanych przez użytkownika punktów.
+	
+	Kolejne zadania, jakie musi wykonywać gracz, są zależne od jego umiejętności. Przechowywane są statystyki dotyczące wprowadzonych komend i~liczby popełnionych błędów. Jeżeli w krokach dotyczących określonego polecenia użytkownik często się mylił, to promowane będą zadania zawierające tę komendę. Nowe zagadnienia będą wdrażane dopiero, gdy wskaźnik znajomości polecenia będzie odpowiednio wysoki. Jest on wyliczany na podstawie liczby prób i~błędów, przy czym ostatnie próby mają większą wagę.
+	
+	Poziom trudności zadań stopniowo rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w~dowolnej chwili wpisać w~konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł odnaleźć potrzebne mu informacji.
 
-	Po poprawnym wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnych punktów za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas.
-
-	Kolejne zadania stopniowo wprowadzają nowe komendy. Ich poziom trudności rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w dowolnej chwili wpisać w konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł poszukać potrzebnych mu informacji.
-
-	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, zawierające informację o liczbie popełnionych błędów i komendach, z~którymi miał najwięcej problemów.
-
+	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, takie jak informacja o~popełnionych błędach i~komendach, z~którymi miał najwięcej problemów. Ukończenie rozgrywki w krótkim czasie skutkuje przyznaniem użytkowniki dodatkowej nagrody, w~postaci bonusowych punktów.
+	
 	\section{Zadania}
+	
+	Scenariusz rozgrywki składa się z~zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Pierwszym terminem, z~jakim zapoznaje się użytkownik, jest repozytorium. Przedstawiane są dwie podstawowe metody pozyskania go~---~poprzez sklonowanie istniejącego lub przez założenie nowego w~wybranym folderze z~projektem. W~kolejnym etapie wprowadzane są pojęcia takie jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Gracz uczy się rozróżniać pliki aktualne, zmodyfikowane, nieśledzone lub niezaindeksowane. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować. 
+	
+	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian. 
 
-	Scenariusz rozgrywki składa się z zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Użytkownik uczy się najpierw o tym, czym jest repozytorium. Poznaje dwie podstawowe metody pozyskania takiego repozytorium --- poprzez sklonowanie istniejącego lub przez założenie go w wybranym folderze z~projektem. W~kolejnym etapie zapoznaje się z~pojęciami takimi jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Potrafi rozróżnić co oznacza plik aktualny, zmodyfikowany, nieśledzony lub niezaindeksowany. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować.
+	Kolejnym etapem jest nauka łączenia gałęzi. Rozróżnione są przy tym odmienne sposoby na wykonanie tej operacji, takie jak scalanie i zmiana bazy. Następnie pojawia się podstawowy sposób wycofywania zmian i~usuwania wykonanych wcześniej rewizji.
 
-	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian.
-
-	Kolejnym etapem jest nauka scalania, lub inaczej łączenia gałęzi. Rozróżnione są przy tym odmienne sposoby na wykonanie tej operacji. Następnie pojawia się podstawowy sposób wycofywania zmian i~usuwania wykonanych wcześniej rewizji.
-
-	Kiedy użytkownik opanuje już komendy i~sposób pracy w lokalnym repozytorium, wprowadzane jest pojęcie zdalnego repozytorium oraz sposoby komunikacji i~synchronizacji z~nim. W~zadaniach pojawiają się komendy dotyczące ściągania i~przesyłania zmian. Poruszany jest także temat zdalnych gałęzi i~sposoby skonfigurowania lokalnej gałęzi śledzącej zdalną.
-
-	Ponadto podczas nauki poleceń systemu Git użytkownik zapoznaje się też z~dobrymi praktykami i~metodyką Gitflow, co uczy go właściwych nawyków i~odpowiedniego porządkowania pracy nad projektem. Zaznajamia się z~koncepcją tworzenia osobnych gałęzi przeznaczonych do implementacji nowych funkcji lub naprawy błędów.
-
-	Zadania są podzielone na kroki, dzięki czemu użytkownik uczy się charakterystycznych sekwencji poleceń, często występujących razem. Ma to również na celu zautomatyzowanie zachowania użytkownika w prawdziwych przypadkach, z którymi może się spotkać w domu lub pracy. W systemie Git czasem możliwe jest użycie kilku różnych poleceń, aby osiągnąć ten sam rezultat. Zadania i kroki dopuszczają wszystkie właściwe komendy.
-
+	Kiedy użytkownik opanuje już komendy i~sposób pracy w~lokalnym repozytorium, zapoznaje się z~pojęciem zdalnego repozytorium oraz sposobami komunikacji i~synchronizacji z~nim. W~zadaniach pojawiają się komendy dotyczące ściągania i~przesyłania zmian. Poruszany jest także temat zdalnych gałęzi i~sposoby skonfigurowania lokalnej gałęzi śledzącej zdalną.
+	
+	Podczas nauki poleceń systemu Git użytkownik zapoznaje się też z~dobrymi praktykami i~metodyką Gitflow, co uczy go właściwych nawyków i~odpowiedniego porządkowania pracy nad projektem. Zaznajamia się z~koncepcją tworzenia osobnych gałęzi, przeznaczonych do implementacji nowych funkcji lub naprawy błędów.
+	
+	Zadania są podzielone na kroki, dzięki czemu gracz uczy się charakterystycznych sekwencji poleceń, które często występują w rzeczywistych sytuacjach. Ma to również na celu zautomatyzowanie zachowania użytkownika w~prawdziwych przypadkach, z~którymi może się spotkać w~domu lub pracy. W~systemie Git możliwe jest czasem użycie kilku różnych poleceń, aby osiągnąć ten sam rezultat. Zadania i~kroki dopuszczają wszystkie właściwe komendy.
+	
 	\subsection{Pomoc}
-
-	Wszystkie materiały dydaktyczne znajdują się w pomocy. Jest ona podzielona na zakładki, z~których każda dotyczy jednej komendy lub pojęcia. Treść zawarta w niej wystarcza, aby osoba nie znająca poleceń systemu Git była w stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W przypadku niektórych pojęć jest jednak bardziej obszerna i wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i przydatne do właściwego zrozumienia systemu Git.
-
-	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.
-
+	
+	Wszystkie materiały dydaktyczne znajdują się w~pomocy, podzielonej na zakładki, z~których każda dotyczy jednej komendy lub terminu. Jej treść wystarcza, aby osoba nie znająca poleceń systemu Git była w~stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W~przypadku niektórych pojęć jest jednak bardziej obszerna i~wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i~przydatne do właściwego zrozumienia systemu Git.
+	
+	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
+	
 	\subsection{Punkty za rozwiązanie}
 
-	%Tak w ogóle to chyba najpiej wywalić subsekcje o punktach, a ten akapit poniższy dać gdzie indziej
-	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i pewniej będzie korzystał z poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do tego aby zająć jak najwyższe miejsce w rankingu.
+	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z~każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i~pewniej będzie korzystał z~poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do osiągnięcia jak najlepszego wyniku.
 
-	Punkty obliczane są na podstawie czasu, w jakim użytkownik rozwiązał zadanie.
-
-
-	%Ten akapit chyba do wywalenia, a na pewno do zmiany -najpierw trzeba wgl ustalic jak to będzie z tymi punktami
-	\textit{	Został dla nich stworzony komponent, który reaguje na zakończenie zadania. Przy wybieraniu zadania jako kolejne ustawiana jest wartość nagrody za poprawne wykonanie całego zadania. Wartość ta obliczana jest na podstawie minimalnego czasu przeznaczonego na dane zadanie pomnożonego przez ilość wykonanych zadań oraz liczbę 10. Co daje nam możliwość premiowania zadań, które są są wykonywane głębiej naszego drzewa zadań oraz mają być wykonane szybciej niż inne zdania. Gdy zadanie zostaje wykonane pobierany jest czas wykonania zadania. Jeżeli zadanie zostaje wykonane po przekroczeniu określonego na zadanie czasu użytkownik nie otrzymuje punktów. Natomiast jeżeli użytkownik zmieścił się w czasie, obliczona wcześniej nagroda zostaje pomnożona przez stosunek czasu, który został do czasu przeznaczonego na zadanie. Całość jest zaokrąglana w górę do liczby całkowitej. Obliczona wartość jest dodawana do całkowitej ilości punktów jaką dotychczas zdobył gracz. }
-
+	Punkty możliwe do otrzymania za zadanie obliczane są na podstawie liczby kroków~---~im bardziej złożone zadanie, tym wyżej punktowane. Ostateczna nagroda, jaka przyznawana jest graczowi za~wykonanie zadania, wyliczana jest jako procent maksymalnej liczby punktów, zależny od~czasu rozwiązywania. Dzięki temu użytkownik, który potrafi szybko wykonywać kolejne kroki, osiągnie lepszy wynik. Żeby zapobiec sytuacji, w~której prędkość stałaby się bardziej istotna niż dokładność, za~błędnie wprowadzone komendy gracz karany jest odjęciem określonej liczby punktów.
+	
 	\chapter{Implementacja}
 
 	\section{Wykorzystane technologie}
