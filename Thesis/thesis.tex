@@ -509,7 +509,7 @@
 	Akcja tego typu zostanie wyemitowana, gdy dane zadanie zostało ukończone (ostatni podpunkt został prawidłowo rozwiązany). \textit{Reducer} zareaguje wtedy wygenerowaniem nowego aktywnego zadania.
 	\end{description}
 		
-	\subsection{Pomoc}
+	\subsection{Pomoc} \label{PomocStan}
 	
 	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otawrta, czy zamknięta (\textit{isOpen}). Druga właściwość to również zmienna boolowska, stanowiąca o tym, czy pomoc ma otwierać się automatycznie po pojawieniu się zadania nowego typu (\textit{autoShowHelp}). Ostatnia wartość informuje o aktywnej sekcji pomocy, widocznej o ile zakładka jest otwarta (\textit{selectedTab}).
 	
@@ -552,7 +552,7 @@
 	
 	\textit{Reducer} odpowiedzialny za stan punktów reaguje wygenerowaniem nowego stanu tylko w przypadku jednego typu akcji - akcji emitowanej, gdy ostatni podpunkt zadania został poprawnie wykonany. W takim przypadku liczony jest najpierw ułamek informujący o tym, jaka część czasu przeznaczonego na zadanie (czas ten jest parametrem zależnym od liczby podpunktów zadania) została wykorzystana. Następnie, na podstawie tego wskaźnika wyliczana jest nagroda punktowa. Ostatnim krokiem jest dodanie nagrody do aktualnej liczby punktów i zwrócenie nowego stanu.
 	
-	\subsection{Tutorial}
+	\subsection{Tutorial} \label{TutorialStan}
 	
 	Podczas pierwszego uruchomienia aplikacji gracz zostanie wprowadzony w zasady gry przez wiadomości pojawiające się w odpowiednich miejscach ekranu i wyjaśniające konkretne zagadnienia dotyczące rozgrywki. Każda z takich wiadomości ma swój identyfikator. Stan przechowuje identyfikator aktualnie wyświetlanej wiadomości (lub wartość \textit{undefined}, gdy nie jest wyświetlana żadna wiadomość).
 	
@@ -566,33 +566,38 @@
 	
 	\subsection{Tutorial}
 	
-	W celu wyświetlenia tutoriala zaimplementowane zostały dwa komponenty - \textit{Tutorial} oraz \textit{TutorialItem}. Pierwszy z nich, z założenia obejmuje całą treść strony, a jako parametry wejściowe otrzymuje identyfikator aktualnie wyświetlanej wiadomości tutoriala oraz funkcję, która ma się wykonać po zamknięciu każdej wiadomości. Metoda renderująca tego komponentu przyjmuje dwa główne stany. Kiedy aktywna wiadomość tutoriala przyjmuje wartość \textit{undefined} (czyli nie powinna być wyświetlana żadna wiadomość), komponent renderuje swoją zawartość, nie wpływając w żaden sposób na jej wygląd. Kiedy aktywna wiadomość jest ustawiona, zawartość komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten został osiągnięty przez dodanie klasy \textit{CSS} modyfikującej atrybut \textit{filter} na wszystkie elementy \textit{DOM} poza tymi, które chcemy wyróżnić (czyli elementem wiadomości oraz elementem, którego wiadomość dotyczy).
+	W celu wyświetlenia tutoriala zaimplementowane zostały dwa komponenty - \textit{Tutorial} oraz \textit{TutorialItem}. Pierwszy z nich, z założenia obejmuje całą treść strony, a jako parametry wejściowe otrzymuje identyfikator aktualnie wyświetlanej wiadomości tutoriala oraz funkcję, która ma się wykonać po zamknięciu każdej wiadomości. Metoda renderująca tego komponentu obsługuje dwa stany. Kiedy aktywna wiadomość tutoriala przyjmuje wartość \textit{undefined} (czyli nie powinna być wyświetlana żadna wiadomość), komponent renderuje swoją zawartość, nie wpływając w żaden sposób na jej wygląd. Kiedy aktywna wiadomość jest ustawiona, zawartość komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten osiągnięto przez dodanie klasy \textit{CSS} modyfikującej atrybut \textit{filter} na wszystkie elementy \textit{DOM} poza tymi, które chcemy wyróżnić (czyli elementem wiadomości oraz elementem, którego wiadomość dotyczy).
 	
 	Komponent \textit{TutorialItem} służy temu, by nie dodawać klasy \textit{CSS} powodującej rozmycie na element którego dotyczy wiadomość. Przyjmuje on jeden parametr wejściowy, określający czy jego zawartość powinna zostać wyłączona z procesu rozmywania.
 	
-	\subsection{Kontener \textit{App}}
+	\subsection{Kontener aplikacji (App)}
 	
-	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za wyrenderowanie całego widoku aplikacji, wywołuje również wszystkie pozostałe komponenty. Kontener ten korzysta z jednej właściwości stanu, mianowicie aktywnej wiadomości tutoriala. Właściwość ta jest przekazywana do komponentu \textit{Tutorial}, aby ten mógł wyświetlić odpowiednią wiadomość pomocniczą. Dodatkowo 
+	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za wyrenderowanie całego widoku aplikacji, wywołuje również wszystkie pozostałe komponenty. Kontener ten korzysta z jednej właściwości stanu, mianowicie aktywnej wiadomości tutoriala. Właściwość ta jest przekazywana do komponentu \textit{Tutorial}, aby ten mógł wyświetlić odpowiednią wiadomość pomocniczą. Dodatkowo kontener aplikacji może emitować akcję wyłączenia wiadomości tutoriala (patrz: \ref{TutorialStan}). Metoda emitująca tę akcję jest przekazana do komponentu \textit{Tutorial}, aby umożliwić wyświetlanie kolejnych wiadomości. Jako zawartość komponentu \textit{Tutorial} przekazane są instancje wszystkich głównych komponentów gry, które zostały opisane w kolejnych podrodziałach.
 	
 	\subsection{Lista zadań}
 	
-	Lista zadań jest kontenerem korzystającym z dwóch właściwości stanu - listy zadań oraz samouczka.
+	Lista zadań jest kontenerem korzystającym z dwóch właściwości stanu - listy zadań oraz tutoriala. Zadaniem tego kontenera jest wyświetlenie aktualnego zadania, wraz ze wszystkimi jego podpunktami. W tym celu zdefiniowany został komponent pomocniczy \textit{Task} umożliwiający wyświetlenie jednego zadania. Kontener listy zadań wyświetla zatem kolekcję zadań dosępną w stanie, mapując każde zadanie na wywołanie komponentu \textit{Task}. Dodatkowo, wykorzystany jest tutaj komponent pomocniczy napisany przez twórców biblioteki \textit{React}, mianowicie \textit{ReactCSSTransitionGroup}. Umieszczając kolekcję elementów (w naszym przypadku komponentów \textit{Task}) w komponencie \textit{ReactCSSTransitionGroup} możemy w intuicyjny sposób zdefiniować animacje wejścia i wyjścia elementu przy pomocy arkuszy stylów \textit{CSS}.
 
 	\subsection{Konsola}
 
-	Screen jakiś, jak działa, o implementacji
+	Konsola jest komponentem przyjmującym na wejściu cztery parametry. Pierwszy z nich (\textit{enabled}) daje możliwość zablokowania konsoli, np. w przypadku gdy tutorial nie został jeszcze ukończony. Kolejne dwa (\textit{files}, \textit{branches}), to tablice wartości tekstowych z nazwami istniejących w repozytorium plików oraz gałęzi. Nazwy te są potrzebne do częściowej implementacji funkcji autouzupełniania znanego z konsolowej wersji programu git. Ostatni argument (\textit{onCommandEnter}) jest funkcją, która zostanie wywołana, kiedy w konsoli zostanie zatwierdzona komenda. Naturalnie posłuży ona później do wyemitowania odpowiedniej akcji.
+	Od strony \textit{DOM} konsola wykorzystuje element \textit{input}, czyli pole tekstowe formularza \textit{HTML}. Niestety, element ten jest ograniczony pod kątem możliwości stylowania za pomocą arkuszy styli \textit{CSS}. Wykorzystano zatem możliwość śledzenia zmian w tym polu przy pomocy zdarzenia \textit{onChange}, a sam element jest renderowany jako przezroczysty. Przy każdej zmianie na elemencie, jego wartość jest więc przepisywana do innego, odpowiednio ostylowanego elementu \textit{HTML}.
+	Dodatkowo, aby upodobnić komponent do konsoli znanej z systemów operacyjnych, możliwe jest korzystanie z historii wpisywanych komend. Efekt ten osiągnięty został dzięki zapisywaniu każdej wpisanej komendy w stanie komponentu (co oczywiście implikuje czyszczenie historii po przeładowaniu strony). Aby podnieść walory wizualne komponentu, historia jest czasowo wyświetlona nad obszarem wpisywania podczas używania klawiszy strzałek górnej i dolnej.
+	Aby jeszcze wyraźniej upodobnić komponent do systemowej konsoli oraz dla ułatwienia szybkiej rozgrywki, zaimplementowano mechanizm autouzupełniania dla nazw plików oraz gałęzi repozytorium. Wymagało to w pierwszej kolejności zaprojektowania struktury drzewa autouzupełniania. Struktura ta opiera się na obiektach, z których każdy posiada obowiązkowo właściwość \textit{pattern} oraz opcjonalnie właściwość \textit{children}. Pierwsza z nich określa ciąg znaków, do których dopasowuje się dany węzeł drzewa oraz wszystkie jego następniki. Druga natomiast, o ile zdefiniowana, jest tablicą następników węzła.
+	Zostały zaimplementowane funkcje pomocnicze służące do generowania i przeszukiwania drzewa autouzupełniania. Pierwsza z nich to funkcja umożliwiająca budowanie drzew autouzupełniania na podstawie wzoru zawierającego określone słowo kluczowe. Przykładowo, dla wartości \textit{"git checkout :branch:"} oraz tablicy wartości tekstowych zawierającej nazwy istniejących gałęzi, wygenerowane zostanie drzewo autouzupełniania biorące pod uwagę polecenie tekstowe "\textit{git checkout}" oraz listę gałęzi (z uwzględnieniem możliwości nakładania się na siebie nazw gałęzi). Mając do dyspozycji listę dostępnych komend (w odpowiedniej składni), listę istniejących gałęzi oraz plików, dzięki tej funkcji możemy zbudować drzewo pozwalające w dużym stopniu zasymulować autouzupełnianie systemowe. Funkcja przeszukująca dostaje na wejściu ciąg znaków (aktualną zawartość konsoli) i rozpoczynając od korzenia przechodzi po węzłach, których wzór zawiera się tym ciągu znaków. Gdy nie ma już następnika spełniającego ten warunek, sprawdza ona, czy istnieje następnik, którego wzór zawiera wejściowy ciąg znaków. Jeżeli istnieje taki następnik i jest to jedyny następnik spełniający ten warunek, jego wzór jest zwracany jako podpowiedź.
+	Generowanie drzewa podpowiedzi jest dosyć kosztowną operacją, dlatego wykonywana jest tylko jeżeli zmieniła się lista plików lub gałęzi. Przeszukiwanie odbywa się za każdym razem, gdy podczas używania konsoli, wciśnięty zostanie klawisz tabulacji.
 
 	\subsection{Pomoc (HelpDrawer)}
 
-	Screen jakiś, jak działa, o implementacji
+	Zakładka pomocy jest kontenerem zawierającym komponent konsoli oraz treść materiałów dostarczających graczowi wskazówek przydatnych podczas rozwiązywania zadań. Kontener korzysta z trzech właściwości stanu aplikacji: drzewa plików, aktywnej wiadomości tutoriala oraz stanu zakładki pomocy. Drzewo plików potrzebne jest, aby przekazać listę istniejących w repozytorium plików do komponentu konsoli. Podobnie informacja o aktywnej wiadomości tutoriala, potrzebna jest aby uniemożliwić interakcje z konsolą do czasu zakończenia tutoriala. Część stanu dotycząca zakładki pomocy potrzebna jest, aby odpowiednio ostylować zakładkę w zależności od tego, czy jest otwarta, czy zamknięta. Gdy zakładka jest otwarta, wysuwa się z dolnej części strony. Efekt został osiągnięty przez animowanie właściwości \textit{translateY} elementu. Animowanie tej właściwości jest wysoce wydajne, ponieważ jest wykonywane na karcie graficznej (w odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt). Kontener pomocy emituje akcje związane ze zmianami stanu zakładki pomocy (patrz: \ref{PomocStan}) oraz akcję zatwierdzenia nowej komendy (poprzez przekazanie komponentowi konsoli funkcji emitującej tę akcję).
 
 	\subsection{Drzewko repo}
 
-	Screen jakiś, jak działa, o implementacji
+	
 
 	\subsection{Canvas}
 
-	W projekcie skorzystano z komponentu 'canvas' z html w wersji 5. Pozwala on na wyświetlanie grafiki w przeglądarce. Służy jako kontener dla graficznego silnika 3D, pochodzącego z biblioteki babylon.
+	
 
 	\section{Grafika 3D}
 	Tu będzie sporo, do tego stopnie sporo, że nie wiem jeszcze jak to zaplanować i porozdzielać, względem czego.
