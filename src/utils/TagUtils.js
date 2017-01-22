@@ -4,6 +4,7 @@ import helpTabs from '../containers/BottomDrawer/helpTabs';
 
 export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {
+    addRecentTagProbe(tags, tag, 1);
     incrementTagProbes(tags, tag);
     incrementTagValid(tags, tag);
     calculateTagKnowledgeRatio(tags, tag);
@@ -12,6 +13,7 @@ export function onValidCommand (state) {
 
 export function onInvalidCommand (state) {
   onCommand(state, (tags, tag) => {
+    addRecentTagProbe(tags, tag, 0);
     incrementTagProbes(tags, tag);
     calculateTagKnowledgeRatio(tags, tag);
   });
@@ -49,6 +51,10 @@ function onCommand (state, execute) {
   });
 }
 
+function addRecentTagProbe (tags, tag, probe) {
+  tags[tag].recent = (((tags[tag].recent || 0) << 1) | probe);
+}
+
 function incrementTagProbes (tags, tag) {
   tags[tag].probes = (tags[tag].probes || 0) + 1;
 }
@@ -58,7 +64,7 @@ function incrementTagValid (tags, tag) {
 }
 
 function calculateTagKnowledgeRatio (tags, tag) {
-  tags[tag].ratio = StatisticsUtils.calculateTagRatio(tags[tag].probes, tags[tag].valid);
+  tags[tag].ratio = StatisticsUtils.calculateTagRatio(tags[tag]);
 }
 
 export default {

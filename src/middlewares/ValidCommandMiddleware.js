@@ -9,13 +9,20 @@ import StatisticsUtils from '../utils/StatisticsUtils';
 export default ({ getState }) => (next) => (action) => {
   if (action.type === commandActions.NEW_VALID_COMMAND) {
     const doneStep = TaskUtils.getCurrentStep(getState().tasks);
-    next(action);
-    const nextStep = TaskUtils.getCurrentStep(getState().tasks);
-
     if (doneStep.data && doneStep.data.after) {
       next(treeActions.modifyTree(doneStep.data.after));
     }
 
+    next(action);
+
+    const currentTask = TaskUtils.getCurrentTask(getState().tasks);
+    if (currentTask.currentStepIndex === currentTask.steps.length) {
+      const timeElapsed = (Date.now() - getState().tasks.startTime) / 1000;
+      const reward = StatisticsUtils.calculateTaskReward(currentTask, timeElapsed);
+      next(taskActions.lastStepExecuted(reward));
+    }
+
+    const nextStep = TaskUtils.getCurrentStep(getState().tasks);
     if (nextStep.data && nextStep.data.before) {
       if (nextStep.type === 'ADD' && nextStep.data.before.removeFiles) {
         nextStep.data.before.unstagedRemoveFiles = nextStep.data.before.removeFiles;
@@ -24,13 +31,6 @@ export default ({ getState }) => (next) => (action) => {
       setTimeout(() => {
         next(treeActions.modifyTree(nextStep.data.before));
       }, 1000);
-    }
-
-    const currentTask = TaskUtils.getCurrentTask(getState().tasks);
-    if (currentTask.currentStepIndex === currentTask.steps.length) {
-      const timeElapsed = (Date.now() - getState().tasks.startTime) / 1000;
-      const reward = StatisticsUtils.calculateTaskReward(currentTask, timeElapsed);
-      next(taskActions.lastStepExecuted(reward));
     }
 
     const newTag = TagUtils.getNewTag(getState().tasks);

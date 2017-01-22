@@ -5,36 +5,43 @@ import _ from 'lodash';
 
 class TaskProvider {
   constructor () {
-    this.next = this.next.bind(this);
-    this.hasNext = this.hasNext.bind(this);
-    this.getTasksCount = this.getTasksCount.bind(this);
+    this.next = ::this.next;
+    this.hasNext = ::this.hasNext;
+    this.getTasksCount = ::this.getTasksCount;
+    this.chooseNextId = ::this.chooseNextId;
 
     this.tasksCount = 0;
-    this.nextId = tasksGraph.root;
+    this.nextPossibleIds = [tasksGraph.root];
   }
 
   next (tags) {
-    if (this.nextId === undefined || this.nextId === null) {
+    if (this.nextPossibleIds === undefined || this.nextPossibleIds === null || this.nextPossibleIds.length === 0) {
       return null;
     }
 
-    var taskNode = this.getTaskNodeById(this.nextId);
-    this.nextId = this._getNextId(tags, taskNode.children);
+    let nextId = this.chooseNextId(tags);
+    let taskNode = this.getTaskNodeById(nextId);
+    this.nextPossibleIds = taskNode.children;
 
     this.tasksCount++;
     return _.cloneDeep(taskNode.task);
   }
 
   hasNext () {
-    return tasksGraph.byId.hasOwnProperty(this.nextId);
+    for (const id of this.nextPossibleIds) {
+      if (tasksGraph.byId.hasOwnProperty(id)) {
+        return true;
+      }
+    }
+    return false;
   }
 
-  _getNextId (tags, childrenIds) {
-    var weightedList = [];
-    childrenIds.forEach((id) => {
-      var taskNode = this.getTaskNodeById(id);
-      var taskTags = this.getTaskTags(taskNode.task);
-      var weight = statisticsUtils.calculateWeight(tags, taskTags);
+  chooseNextId (tags) {
+    let weightedList = [];
+    this.nextPossibleIds.forEach((id) => {
+      let taskNode = this.getTaskNodeById(id);
+      let taskTags = this.getTaskTags(taskNode.task);
+      let weight = statisticsUtils.calculateWeight(tags, taskTags);
       weightedList.push({ weight: weight, id: id });
     });
     return rwc(weightedList);
