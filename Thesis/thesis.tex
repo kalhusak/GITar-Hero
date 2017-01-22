@@ -532,7 +532,7 @@
 	Akcja ta emitowana jest podczas przełączania opcji automatycznego włączania pomocy. \textit{Reducer} zmienia w efekcie wartość pola \textit{autoShowHelp} na przeciwną w stosunku do aktualnej.
 	\end{description}
 	
-	\subsection{Drzewo plików}
+	\subsection{Drzewo plików} \label{DrzewoStan}
 	
 	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako części stanu aplikacji. Struktura ta musi być rekursywna, aby umożliwiała dowolne zagnieżdżanie plików w katalogach. Każdy katalog jest reprezentowany przez obiekt posiadający nazwę oraz zawartość w formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, posiadają obowiązkowo nazwę, ale również pola statusu oraz typu zmiany (nie posiadają naturalnie pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
 	
@@ -591,30 +591,17 @@
 
 	Zakładka pomocy jest kontenerem zawierającym komponent konsoli oraz treść materiałów dostarczających graczowi wskazówek przydatnych podczas rozwiązywania zadań. Kontener korzysta z trzech właściwości stanu aplikacji: drzewa plików, aktywnej wiadomości tutoriala oraz stanu zakładki pomocy. Drzewo plików potrzebne jest, aby przekazać listę istniejących w repozytorium plików do komponentu konsoli. Podobnie informacja o aktywnej wiadomości tutoriala, potrzebna jest aby uniemożliwić interakcje z konsolą do czasu zakończenia tutoriala. Część stanu dotycząca zakładki pomocy potrzebna jest, aby odpowiednio ostylować zakładkę w zależności od tego, czy jest otwarta, czy zamknięta. Gdy zakładka jest otwarta, wysuwa się z dolnej części strony. Efekt został osiągnięty przez animowanie właściwości \textit{translateY} elementu. Animowanie tej właściwości jest wysoce wydajne, ponieważ jest wykonywane na karcie graficznej (w odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt). Kontener pomocy emituje akcje związane ze zmianami stanu zakładki pomocy (patrz: \ref{PomocStan}) oraz akcję zatwierdzenia nowej komendy (poprzez przekazanie komponentowi konsoli funkcji emitującej tę akcję).
 
-	\subsection{Drzewko repo}
+	\subsection{Drzewo plików}
 
-	
+	Kontener drzewa plików jest odpowiedzialny za wyświetlenie informacji o strukturze katalogu roboczego, w którym znajduje się repozytorium. Korzysta on z części stanu dotyczącej drzewa plików. Zaimplementowana została pomocnicza, rekursywna funkcja renderująca \textit{renderRecursively}, która umożliwia wyświetlenie plików na dowolnym poziomie zagnieżdżenia. W jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze stanu. Ma ono strukturę tablicy elementów katalogu (patrz: \ref{DrzewoStan}). Dla każdego z tych elementów sprawdzane jest, czy jest on plikiem, czy katalogiem. Jeżeli jest to plik, to zwracany jest pomocniczy komponent pliku (odpowiedzialny za dodanie odpowiedniej ikony oraz koloru, w zależności od statusu pliku). W przypadku katalogu, zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, natomiast zawartość wyświetlana jest poprzez kolejne wywołanie funkcji \textit{renderRecursively}, tym razem dla zawartości katalogu. Poziom zagnieżdżenia plików został przedstawiony za pomocą łączących je linii oraz odpowiednich wcięć z lewej strony.
 
 	\subsection{Canvas}
 
-	
-
-	\section{Grafika 3D}
-	Tu będzie sporo, do tego stopnie sporo, że nie wiem jeszcze jak to zaplanować i porozdzielać, względem czego.
-
-	Czy np podsekcje takie jak:
-	repo3d - gałęzie, commity, co to są i jak powstają na akcje, o ich teksturze, obramowaniu, w tym o solidExplode
-	ground - co to, jak działa itp
-	particle w tle
-	(wg elementów aplikacji)
-
-	Czy może raczej podsekcje wg 'elementów' Babylona:
-	Meshe, SolidParticle, Particle, Materiały, Tekstury, Shadery
-
-
+	Komponent \textit{Canvas} stanowi połączenie między architekturą opartą o komponenty \textit{React} i stan aplikacji, a moduł 3D, zaimplementowny przy użyciu biblioteki \textit{Babylon.js}. Pierwszym zadaniem komponentu jest wstawienie do obiektowego modelu dokumentu przeglądarki elementu \textit{canvas}, który umożliwia rysowanie przy pomocy technologii \textit{WebGL}. Założono dodatkowo, że po utworzeniu tego elementu, powinien on być modyfikowalny tylko z poziomu modułu 3D (metoda \textit{render()} komponentu powinna wykonać się tylko raz). Efekt ten osiągnięto implementując metodę \textit{shouldComponentUpdate()} i zwracając w niej zawsze wartość \textit{false}. \textit{React} pozwala na zaimplementowanie tej metody w przypadku, w którym użytkownik chce zablokować przerysowanie komponentu po zmianie jego stanu lub parametrów wejściowych. Po utworzeniu elementu \textit{canvas}, inicjowany jest moduł 3D, do którego element ten przekazywany jest jako argument.
+	Parametrem wejściowym komponentu \textit{Canvas} jest obiekt \textit{store}, zawierający stan aplikacji i umożliwiający reagowanie na akcje wywoływane w aplikacji. Jest on wykorzystywany, aby przekazać modułowi 3D informacje o ewentualnych zmianach, które pojawiły się w repozytorium.
 
 	\subsection{Repozytorium 3D}
-		Aby odwzorowywać stan repozytorium na ekranie został stworzony odpowiedni kontroler. Ma on za zadanie reagować na realizowane przez użytkownika komendy i zarządzać elementami grafiki 3D. Nasłuchuje na wykonywane akcje i w zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. Kontroler ten zawiera informacje na temat utworzonych gałęzi repozytorium oraz wskaźnik HEAD, o którym więcej w sekcji 4.4.5.
+	Aby odwzorowywać stan repozytorium na ekranie został stworzony odpowiedni kontroler. Ma on za zadanie reagować na realizowane przez użytkownika komendy i zarządzać elementami grafiki 3D. Nasłuchuje na wykonywane akcje i w zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. Kontroler ten zawiera informacje na temat utworzonych gałęzi repozytorium oraz wskaźnik HEAD, o którym więcej w sekcji 4.4.5.
 
 	\subsection{Branch}
 	Obiekt 3D reprezentujący gałąź systemu git jest tworzony przy pomocy funkcji CreateTube z biblioteki Babylon.js. Funkcja ta generuje siatkę wierzchołków, na podstawie podanej listy punktów określających ścieżkę, w kształcie tuby. Pozwala również na określenie średnicy oraz szczegółowości siatki. Parametry te zostały dobrane w taki sposób, aby wygenerować tubę, której przekrój przypomina koło przy jednoczesnym zachowaniu jak najmniejszej liczby użytych wierzchołków. Jedna gałąź może składać się z dwóch rodzajów siatki. Pierwsza z nich reprezentuje główny człon. Ścieżka użyta do jej wygenerowania zawiera tylko dwa punkty wyznaczające początek i koniec tuby. Dzięki temu można osiągnąć dowolnie długi odcinek nie zwiększając przy tym liczby wierzchołków. Drugi rodzaj siatki wykorzystywany jest do wygenerowania tuby będącej łącznikiem między gałęziami. Łącznik branchy zostaje stworzony w momencie tworzenia nowej gałęzi lub łączenia dwóch gałęzi w akcji merge. Do wyznaczenia ścieżki skorzystano z funkcji pomocniczej generującą krzywą Beziera. Funkcja ta przyjmuje cztery punkty na podstawie których wyznaczy tablicę punktów tworzących linie. Jako pierwszy punkt podane jest miejsce początku nowej gałęzi, dwa kolejne punkty służą do określenia kształtu linii. Jako ostatni punkt podawany jest początkowy punkt głównego członu nowej gałęzi. Dodatkowym parametrem jest ilość wygenerowanych punktów określającym szczegółowość linii. Dzięki tej funkcji otrzymano tablicę punktów, która została użyta do określenia kształtu łącznika. Następnie sprawdzane jest, czy na wygenerowanej ścieżce nie znajduje się inna gałąź. Jeśli tak, to zwiększana jest jej wysokość, a następnie zmniejszana do początkowej wartości tak, aby przejść nad nią.
