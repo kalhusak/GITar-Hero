@@ -530,7 +530,9 @@
 	
 	\subsection{Tutorial}
 	
+	W celu wyświetlenia tutoriala zaimplementowane zostały dwa komponenty - \textit{Tutorial} oraz \textit{TutorialItem}. Pierwszy z nich, z założenia obejmuje całą treść strony, a jako parametry wejściowe otrzymuje identyfikator aktualnie wyświetlanej wiadomości tutoriala oraz funkcję, która ma się wykonać po zamknięciu każdej wiadomości. Metoda renderująca tego komponentu przyjmuje dwa główne stany. Kiedy aktywna wiadomość tutoriala przyjmuje wartość \textit{undefined} (czyli nie powinna być wyświetlana żadna wiadomość), komponent renderuje swoją zawartość, nie wpływając w żaden sposób na jej wygląd. Kiedy aktywna wiadomość jest ustawiona, zawartość komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten został osiągnięty przez dodanie klasy \textit{CSS} modyfikującej atrybut \textit{filter} na wszystkie elementy \textit{DOM} poza tymi, które chcemy wyróżnić (czyli elementem wiadomości oraz elementem, którego wiadomość dotyczy).
 	
+	Komponent \textit{TutorialItem} służy temu, by nie dodawać klasy \textit{CSS} powodującej rozmycie na element którego dotyczy wiadomość. Przyjmuje on jeden parametr wejściowy, określający czy jego zawartość powinna zostać wyłączona z procesu rozmywania.
 	
 	\subsection{Kontener \textit{App}}
 	
