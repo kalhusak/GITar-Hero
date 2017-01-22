@@ -15,8 +15,23 @@ function calculateWeight (tagsMap, taskTags) {
   return Math.max(weight, 1);
 }
 
-function calculateTagRatio (probes, valid) {
-  return (valid || 0) / probes;
+function calculateTagRatio (tag) {
+  const { probes, valid, recent } = tag;
+  let sum = 0;
+  let weightSum = 0;
+  let recentProbes = Math.min(8, probes);
+
+  for (let i = recentProbes; i > 0; i--) {
+    let weight = i + (recentProbes > 8 ? 1 : 0);
+    sum += ((recent >> (recentProbes - i)) & 0x01) * weight;
+    weightSum += weight;
+  }
+  if (recentProbes > 8) {
+    sum += (valid || 0) / probes;
+    weightSum += 1;
+  }
+
+  return sum / weightSum;
 }
 
 /**
