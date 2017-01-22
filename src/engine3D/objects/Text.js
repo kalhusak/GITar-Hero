@@ -52,7 +52,6 @@ export default class Text {
 
     this.textPlane.position.y += config.yPositionOffset + (options.offset || 0);
 
-    this._draw('white');
     this._draw(options.color || 'red');
     this.show();
     this.scene.registerBeforeRender(() => this._updatePosition(initPosition));
