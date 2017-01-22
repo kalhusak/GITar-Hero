@@ -373,7 +373,7 @@
 
 	\subsection{Biblioteki}
 
-	\subsubsection{Redux}
+	\subsubsection{Redux} \label{Redux}
 
 	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym.
 
@@ -495,14 +495,50 @@
 	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w wybrane miejsce. Żeby edytować wierzchołek należy go wybrać poprzez kliknięcie. Z kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki a następnie przeciągniecie kursora znad jednego węzła na drugi utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete.
 
 	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W tym celu wystarczy kliknąć drugi przycisk w lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i zapisze dane do pliku taskGraph.json. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w lewym dolnym rogu ekranu i wybierając plik do wczytania.
-
-	\section{Drzewo komponentów interfejsu graficznego}
-
+	
+	\section{Stan i jego tranzycje}
+	
 	\subsection{Wstęp}
-
+	
+	Stan naszej aplikacji został podzielony na pięć głównych części. Do każdej z nich zdefiniowany został \textit{reducer} (patrz: \ref{Redux}) odpowiedzialny za tranzycje stanu w zależności od typu akcji. Stan jest zatem obiektem posiadającym pięć kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
+	
+	\subsection{Zadania}
+	
+	Część stanu dostycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z jego właściwościami. Dodatkowo przetrzymuje ona czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu zadania. Dostępna jest również informacja o powodzeniach i niepowodzeniach w rozwiązywaniu zadań określonego typu.
+	
+	\subsection{Pomoc}
+	
+	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otawrta, czy zamknięta. Druga właściwość to również zmienna boolowska, stanowiąca o tym, czy pomoc ma otwierać się automatycznie po pojawieniu się zadania nowego typu. Ostatnia wartość informuje o aktywnej sekcji pomocy, widocznej o ile zakładka jest otwarta.
+	
+	\subsection{Drzewo plików}
+	
+	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako część stanu aplikacji. Struktura ta musi być rekursywna, aby umożliwiała dowolne zagnieżdżanie plików w katalogach. Każdy katalog jest reprezentowany przez obiekt posiadający nazwę oraz zawartość w formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, posiadają obowiązkowo nazwę, ale również pola statusu oraz typu zmiany (nie posiadają naturalnie pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
+	
+	\subsection{Punkty}
+	
+	Część stanu dotycząca punktów zawiera informację o aktualnej liczbie punktów zdobytych przez gracza.
+	
+	\subsection{Tutorial}
+	
+	Podczas pierwszego uruchomienia aplikacji gracz zostanie wprowadzony w zasady gry przez wiadomości pojawiające się w odpowiednich miejscach ekranu i wyjaśniające konkretne zagadnienia dotyczące rozgrywki. Każda z takich wiadomości ma swój identyfikator. Stan przechowuje identyfikator aktualnie wyświetlanej wiadomości (lub wartość \textit{undefined}, gdy nie jest wyświetlana żadna wiadomość).
+	
+	\section{Komponenty graficzne}
+	
+	\subsection{Wstęp}
+	
 	Aby połaczyć komponenty interfejsu ze stanem aplikacji wykorzystaliśmy specjalny komponent \textit{Connect}. Jest to gotowy komponent przygotowany przez twórców biblioteki \textit{Redux}, pozwalający na przekazanie konktrenych właściwości stanu do komponentu użytkownika. Aby ustrukturyzować nasz projekt, zdecydowaliśmy się na popularny wśród twórców aplikacji opartych o \textit{React} i\textit{Redux} wzorzec, polegający na podziale komponentów na dwa typy: komponenty i kontenery. Kontenery są niczym innym jak komponentami połączonymi ze stanem aplikacji poprzez \textit{Connect}.
-
+	
+	\subsection{Tutorial}
+	
+	
+	
+	\subsection{Kontener \textit{App}}
+	
+	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za wyrenderowanie całego widoku aplikacji, wywołuje również wszystkie pozostałe komponenty. Kontener ten korzysta z jednej właściwości stanu, mianowicie aktywnej wiadomości tutoriala. Właściwość ta jest przekazywana do komponentu \textit{Tutorial}, aby ten mógł wyświetlić odpowiednią wiadomość pomocniczą. Dodatkowo 
+	
 	\subsection{Lista zadań}
+	
+	Lista zadań jest kontenerem korzystającym z dwóch właściwości stanu - listy zadań oraz samouczka.
 
 	\subsection{Konsola}
 
