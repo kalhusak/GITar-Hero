@@ -643,18 +643,27 @@
 	Na końcu każdej gałęzi wyświetlany jest tekst, z nazwą gałęzi o~kolorze białym. Jego pozycję ustawiono na~referencję do~ostatniego punktu gałęzi, dzięki czemu tekst zawsze podąża za wydłużającą lub skracającą się gałęzią.
 
 
-	%standardowy material
-	% tuba
-	% connectory
-	% tekst
-	% husaku i imosiaku
-
 	\subsection{Commit}
-	Zatwierdzenie zmian w repozytorium git w grafice trójwymiarowej jest przedstawione w postaci kuli umieszczonej na gałęzi, której dotyczy. Funkcja CreateSphere pochodząca z babylon'a buduje siatkę wierzchołków w kształcie sfery o określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną. W momencie utworzenia kuli  pojawia się nad nią napis z wiadomością przekazywaną przy zatwierdzaniu zmian, którego kolor jest niewiele jaśniejszy niż kolor samego obiektu. Ponadto może również zostać dodany tekst z numerem wersji tzw. tag, znajdujący się nieco powyżej tekstu z wiadomością. Sam tekst jest wyświetlany tylko dla 'commitów' na gałęzi, na której aktualnie znajduje się użytkownik, a jego pojawienie się , czy ukrycie jest animowane.
+	Rewizja, powstająca w~wyniku operacji zatwierdzania zmian, w~grafice~3D przedstawiana jest jako obiekt \textit{Commit} o~kształcie kuli. Umieszczona jest na gałęzi, która zawiera daną rewizję.
 
-	 W kwestii wyglądu wobec kuli zastosowane te same zabiegi co do gałęzi, na której jest umieszczona. Posiada ten sam kolor, materiał oraz obramowanie.
+	Funkcja \textit{CreateSphere} pochodząca z biblioteki \textit{Babylon.js} buduje siatkę wierzchołków w kształcie sfery o~określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną.
 
-	Z obiektem ukazującym zatwierdzenie zmian związane są animacje takie, jak pojawienie się czy zniknięcie z wybuchem cząsteczek. Pierwsza z nich trwa 0.4 sekundy i polega na modyfikowaniu skali z wykorzystaniem funkcji generującej krzywą Beziera, tak by przypominało to sprężanie i rozprężanie, co tworzy ciekawy efekt wizualny. Obiekt potwierdzający zmiany może zostać usunięty, jeżeli użytkownik wykonana akcja zresetowania repozytorium do jakiejś wcześniejszej zmiany. W tym celu napisano efektowną animację z wybuchem cząsteczek stałych, będących niewielkimi kulami. Cząsteczki są w tym samym kolorze co 'commit'. W przypadku tworzenia stałych cząsteczek w formie wybuchu skorzystano z mechanizmów babylona, który ułatwia pracę z cząsteczkami. Na początku tworzona jest figura z 500 cząsteczek, będących sferami. Następnie definiowana jest funkcja wykonywana dla każdej cząsteczki, w której określa się prędkość oraz kierunek jej rozchodzenia. Cząsteczki rozchodzą się dynamicznie w kształcie kuli, a w każdej klatce zmniejszana jest ich skala, by zanikały w czasie, wszystko to daje efekt eksplozji ciała, co urozmaica doznania wizualne.
+	Z obiektem \textit{Commit} związany jest napis, zawierający wiadomość podaną przy zatwierdzaniu zmian, który widnieje nad kulą.
+	Jego kolor jest nieznacznie jaśniejszy od koloru samego obiektu. \textit{Commit} może poza wiadomością posiadać również etykietę, nadaną poleceniem \textit{git tag}. Etykiety znajdują się nieco powyżej tekstu z~wiadomością. Aby nie wprowadzać zbyt wielu elementów, tekst jest wyświetlany tylko dla tych obiektów \textit{Commit}, które znajdują się na aktywnej aktualnie gałęzi. Podczas przełączania się między gałęziami występuje animacja ukrywająca tekst wszystkich rewizji bieżącej gałęzi oraz ukazująca tekst dotyczący nowej gałęzi.
+
+	 W~kwestii wyglądu kuli zastosowane te same zabiegi co w przypadku gałęzi, na której jest umieszczona~---~posiada ten sam kolor, materiał oraz obramowanie.
+
+	Z obiektem ukazującym zatwierdzenie zmian związane są dwie animacje, opisane poniżej.
+	\begin{description}
+		\item[Powstanie] \hfill \\
+		Trwająca niecałe pół sekundy animacja pojawiania się rewizji, polegająca na~modyfikowaniu skali z wykorzystaniem funkcji generującej krzywą Beziera, tak by~przypominało to~sprężanie i~rozprężanie, co tworzy ciekawy efekt wizualny. Animacja występuje gdy tworzona jest nowa rewizja.
+
+		\item[Eksplozja] \hfill \\
+		Efektowna animacja z~wybuchem cząsteczek stałych. Do ich utworzenia skorzystano z~wbudowanych mechanizmów biblioteki \textit{Babylon.js}. Na początku tworzona jest figura z kilkuset cząsteczek, będących sferami o tym samym kolorze co obiekt \textit{Commit}. Następnie definiowana jest funkcja wykonywana dla każdej cząsteczki, określająca prędkość oraz kierunek rozchodzenia. W~rezultacie cząsteczki rozchodzą się dynamicznie w~kształcie kuli, a~w~każdej klatce zmniejszana jest ich skala, dzięki czemu maleją i~zanikają. Całość daje efekt eksplozji ciała, co urozmaica doznania wizualne.
+
+		Animacja jest wykonywana kiedy ma zostać usunięta rewizja, czyli gdy użytkownik wykona polecenie resetujące wskaźnik HEAD do wcześniejszej rewizji w repozytorium.
+
+	\end{description}
 
 	\subsection{Tekst}
 	Tekst w grafice 3D jest ukazany w postaci dwuwymiarowej z opcją billboard w trybie  wszystkich osi. Oznacza to, że niezależnie jak ustawiona będzie kamera tekst będzie się odpowiednio obracał w kierunku kamery.
