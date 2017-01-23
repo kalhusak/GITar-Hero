@@ -703,20 +703,25 @@
 	\end{description}
 
 	\subsection{Tekst}
-	Tekst w grafice 3D jest ukazany w postaci dwuwymiarowej z opcją billboard w trybie  wszystkich osi. Oznacza to, że niezależnie jak ustawiona będzie kamera tekst będzie się odpowiednio obracał w kierunku kamery.
+	W grafice 3D niektóre obiekty, takie jak \textit{Commit} i \textit{Branch}, wymagają wyświetlania tekstu. W~przypadku obiektu rewizji jest to wiadomość i~opcjonalnie etykieta, a~dla~gałęzi nazwa.
 
-	Aby utworzyć tekst w babylon należy zastosować kilka operacji, które w projekcie zebrano w jedną klasę. Na początku tworzona jest płaszczyzna o rozmiarach, wyliczonych na podstawie rozmiaru pojedynczego znaku, pomnożonego przez ilość liter w tekście. Do wygenerowania tekstury z tekstem użyto klasy DynamicTexture z biblioteki Babylon.js. Po utworzeniu instancji tej klasy wywoływana była jej funkcja rysująca tekst na teksturze. Umożliwia ona określenie miejsca, czcionki, koloru tekstu oraz przezroczystości tła. Kolor tekstu ustawiany jest w zależności od obiektu nad którym się znajduje, a tło jest w pełni przezroczyste. W kolejnym kroku powstaje materiał z biblioteki Babylon.js , w którym jako tekstura, określająca kolor oraz nieprzezroczystości, jest wcześniej utworzona tekstura.
+	Tekst ukazano na płaszczyźnie dwuwymiarowej, obracającej się odpowiednio w~kierunku kamery, tak, aby niezależnie od jej położenia zawsze być do niej przodem. Ten efekt uzyskano korzystając z właściwości \textit{billboardMode} obiektu płaszczyzny dostarczanego przez bibliotekę \textit{Babylon.js}, którą ustawiono na~tryb wszystkich trzech osi układu współrzędnych.
 
-	Dla tekstu zdefiniowano dwie animacje pojawienia się i zniknięcia. Przy ich tworzeniu zastosowano gotowe mechanizmy z biblioteki babylon. Aby uzyskać efekt pojawiania się modyfikowana jest wartość przezroczystości materiału płaszczyzny od zera do jeden w ciągu jednej sekundy, natomiast przy znikaniu, następuje mechanizm odwrotny, polegający na zmianie tej samej wartości od jeden do zera. W ten sposób uzyskano efekt 'gaśnięcia'.
+	Dodanie tekstu do sceny wymaga wykonania kilku operacji, które zebrano w~dedykowanej do~tego celu klasie \textit{Text}. Poniżej opisano je w~odpowiedniej kolejności.
 
-	Obiekt ten jest wykorzystywany przy ukazywaniu wiadomości i tagów z wersją dotyczących zatwierdzenia zmian, a także przy wyświetlaniu nazw gałęzi.
+	\begin{enumerate}
+		\item Utworzenie płaszczyzny o~rozmiarach wyliczonych na podstawie wielkości pojedynczego znaku. Szerokość płaszczyzny wynosi tyle, ile szerokość jednego znaku pomnożona przez ilość liter tekstu. Ustawienie właściwości \textit{billboardMode}.
 
+		\item Wygenerowanie tekstury z~użyciem klasy \textit{DynamicTexture} z~biblioteki \textit{Babylon.js}.
 
- 	% repo 3d jak kontroler akcji husaku i imosiaku
- 	% branch i animacje, akcje husaku i imosiaku
- 	% colors i shaders husaku ?
- 	% ground husaku ?
- 	% background i particles magda?
+		\item Wywołanie funkcji rysującej podany tekst na teksturze, określając przy tym jego miejsce, czcionkę, kolor oraz przezroczystość tła. Kolor tekstu ustawiany jest w~zależności od obiektu nad którym ma się znaleźć, a tło jest w~pełni przezroczyste.
+
+		\item Utworzenie materiału zawierającego zdefiniowaną wcześniej teksturę.
+
+		\item Nadanie płaszczyźnie utworzonego materiału.
+	\end{enumerate}
+
+	Dla tekstu zdefiniowano dwie animacje~---~pojawienia się i~zniknięcia. Przy ich tworzeniu zastosowano gotowe mechanizmy z~biblioteki \textit{Babylon.js}. Aby uzyskać efekt pojawiania się stopniowo zwiększana jest wartość przezroczystości materiału płaszczyzny (od zera do jeden w ciągu jednej sekundy). Przy zanikaniu następuje mechanizm odwrotny, polegający na zmniejszaniu tej wartości od jeden do zera. Dzięki temu uzyskano efekt wygaszania.
 
 	\subsection{Kamera} \label{camera}
 
