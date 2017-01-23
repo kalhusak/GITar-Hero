@@ -396,54 +396,56 @@
 
 	\subsection{Struktura} \label{Struktura}
 
-	Scenariusz rozgrywki to skierowany graf, którego wierzchołkami są zadania, z~których każde składa się z~kilku kroków. Zdecydowano się na taką strukturę ze względu na to, że daje ona możliwość sekwencjonowania zadań, a zarazem pozwala na element losowości. Jeżeli z wierzchołka dotyczącego jakiegoś zadania wychodzi kilka krawędzi, to kolejny węzeł, czyli kolejne zadanie, wybierane jest w sposób losowy spośród sąsiadów aktualnego wierzchołka. Dzięki takiej reprezentacji nigdy nie zdarzy się sytuacja, w której następnym zadaniem będzie zadanie nieadekwatne do aktualnego stanu repozytorium.
+	Scenariusz rozgrywki to skierowany graf ważony, którego wierzchołki są~zadaniami, składającymi się~z~kilku kroków. Zdecydowano się na strukturę grafu ze~względu na~to, że~daje ona możliwość sekwencjonowania zadań, a~zarazem pozwala wprowadzić element losowości. Jeżeli z~wierzchołka dotyczącego jakiegoś zadania wychodzi kilka krawędzi, to kolejny węzeł, czyli kolejne zadanie, wybierane jest w~sposób losowy spośród sąsiadów aktualnego wierzchołka. Uwzględniane są przy~tym wagi krawędzi, generowane dynamicznie na podstawie statystyk gracza dotyczących znajomości poszczególnych zagadnień. Im~zadanie zawiera więcej kroków wymagających użycia problematycznych dla użytkownika poleceń, tym większą wagę ma~krawędź prowadząca do~tego węzła. A w rezultacie większe jest prawdopodobieństwo, że~wylosowane zostanie to zadanie.
+	
+	Dzięki takiej reprezentacji nigdy nie zdarzy się sytuacja, w~której następnym zadaniem będzie zadanie nieadekwatne do aktualnego stanu repozytorium, ale możliwe jest dynamiczne wybieranie zadań, uwzględniające umiejętności gracza.
 
 	\subsubsection{Konstrukcja zadania}
-	Pojedyncze zadanie reprezentowane jest w postaci obiektu, który składa się z następujących pól:
-	\begin{itemize}
-	\item identyfikator,
-	\item zbiór identyfikatorów możliwych następników,
-	\item tytuł,
-	\item opis,
-	\item minimalny czas,
-	\item domyślny (maksymalny) czas,
-	\item lista kroków.
-	\end{itemize}
-
-	Opis zadania służy ukazaniu użytkownikowi celu oraz problemu, jaki należy rozwiązać w danym zadaniu. Może to być na przykład rozszerzenie funkcjonalności lub naprawa błędu.
-
-	%Tu też do zmiany jak ustalimy co z punktami
-	\textit{Aby nagradzać użytkownika punktami za szybko wykonane zadanie, zdecydowano się na określenie czasu na wykonanie zadania. Jest on obliczany w momencie dodawania nowego zadania na podstawie ilości dotychczas wykonanych zadań, a także wartości minimalnej oraz maksymalnej czasu zdefiniowanych w danym zadaniu.}
-
-	Zbiór następników zawiera identyfikatory zadań, które mogą wystąpić po aktualnym. Hierarchia zadań ułożona jest w postaci grafu skierowanego, tak więc wszystkie wierzchołki, do których istnieją krawędzie wychodzące z wierzchołka reprezentującego dane zadanie, są jego następnikami.
-
-	Kluczowym elementem zadania jest uporządkowana lista kroków, które należy wykonać, aby rozwiązać zadanie i przejść do kolejnego. Wykonanie kroku polega na wpisaniu odpowiedniej komendy systemu Git. Szczegółowy opis jego konstrukcji w kolejnej sekcji.
-
+	Pojedyncze zadanie reprezentowane jest w postaci obiektu, który składa się z pól opisanych poniżej.
+	\begin{description}
+	\item[Identyfikator] \hfill \\
+		Unikalny numer zadania, na podstawie którego można dowiedzieć się, ile zadań zostało już wcześniej wykonanych.
+		
+	\item[Tytuł] \hfill \\
+		Krótki tytuł zadania naprowadzający na poruszaną przez nie tematykę.
+	
+	\item[Opis] \hfill \\
+		Opis zadania służy ukazaniu użytkownikowi celu oraz problemu, jaki należy rozwiązać w danym zadaniu. Może to być na przykład rozszerzenie funkcjonalności lub naprawa błędu.
+		
+	\item[Czas] \hfill \\
+		Każde zadanie ma przydzielony czas, przeznaczony na jego wykonanie. Jeżeli gracz ukończy wszystkie kroki danego zadania w czasie krótszym niż ustalony, to otrzyma nagrodę w postaci punktów. Ich liczba zależna jest od liczby kroków zadania oraz wykorzystanego czasu.	
+	
+	\item[Lista kroków] \hfill \\
+		Kluczowym elementem zadania jest uporządkowana lista kroków, które należy wykonać, aby rozwiązać zadanie i~przejść do kolejnego. Wykonanie kroku polega na wpisaniu odpowiedniej komendy systemu Git. Szczegółowy opis konstrukcji kroku w~kolejnej sekcji.
+		
+	\item[Zbiór identyfikatorów możliwych następników] \hfill \\
+		Zbiór następników zawiera identyfikatory zadań, które mogą wystąpić po aktualnym. Hierarchia zadań ułożona jest w~postaci grafu skierowanego, tak więc~wszystkie wierzchołki, do~których istnieją krawędzie wychodzące z~wierzchołka reprezentującego dane zadanie, są~jego następnikami.	
+	\end{description}
 
 	\subsubsection{Konstrukcja kroku}
-
-	Podobnie jak zadanie, krok jest obiektem składającym się z kilku pól, a mianowicie:
-	\begin{itemize}
-		\item typ,
-		\item opis,
-		\item lista dozwolonych poleceń,
-		\item etykiety,
-		\item dodatkowe dane, charakterystyczne dla danego typu kroku.
-	\end{itemize}
-
-	Typ określa jakiej komendy systemu Git dany krok dotyczy. Obsługiwane typy to m.in. ''COMMIT'' czy ''MERGE''. Na podstawie typu poprawnie wykonanego kroku określana jest akcja, jaką należy wykonać po stronie grafiki 3D, by odwzorować aktualny stan repozytorium.
-
-	W opisie znajduje się krótka informacja, co należy zrobić, aby wykonać krok i przejść do kolejnego. Krok jest uznawany za wykonany, gdy użytkownik wpisze w konsoli jedno z~poleceń z~listy dozwolonych komend i~zatwierdzi je.
-
-	Do każdego kroku przypisana jest lista etykiet, określających jakiego zagadnienia dotyczy dany krok. Krok posiada zawsze co najmniej jedną etykietę, wskazującą komendę, której wymaga on do poprawnego wykonania. Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do niego etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także ilość poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i nad czym powinien jeszcze popracować. Brane jest to pod uwagę przy losowaniu kolejnych zadań. Dla możliwych następników wyliczana jest waga na podstawie etykiet, jakie mają w swoich krokach.
-
-	\textit{Obliczenie wagi dla zadania polega na zsumowaniu kwadratów ilorazu wartości 1 oraz wyznaczonego wskaźnika dla kolejnych etykiet w krokach zadania, będącego ilorazem poprawnie wykonanych kroków z całkowitą liczbą prób dla tej etykiety. Dzięki takiemu zabiegowi zwiększane jest prawdopodobieństwo wylosowania kolejnego zadania poruszającego zagadnienia, z~którymi użytkownik nie radził sobie zbyt dobrze.}
-
-	Dodatkowe dane, w zależności od typu kroku, mogą składać się z różnych elementów. Dostarczają informację np. o nazwie wykonanej rewizji czy utworzonej gałęzi. Służą też do określenia jakie pliki powinny zostać dodane lub usunięte z repozytorium. W przypadku kroku dotyczącego polecenia \textit{git checkout} przechowują informację, czy przełączenie powinno być zrealizowane na konkretną gałąź czy rewizję.
+	
+	\begin{description}
+		\item[Typ] \hfill \\
+		Określa, jakiej komendy systemu Git dany krok dotyczy. Obsługiwane typy to~m.in.~''COMMIT'' czy ''MERGE''. Na~podstawie typu poprawnie wykonanego kroku określana jest akcja, jaką należy wykonać po stronie grafiki 3D, by~odwzorować aktualny stan repozytorium.
+		
+		\item[Opis] \hfill \\
+		Zawiera krótką informację, co należy zrobić, aby wykonać krok i~przejść do~kolejnego. 
+		
+		\item[Lista dozwolonych poleceń] \hfill \\
+		Krok jest uznawany za~wykonany, gdy użytkownik wpisze w konsoli jedno z~poleceń z~listy dozwolonych komend i~zatwierdzi je. Lista musi zawierać co~najmniej jedno polecenie. Jeżeli jest ich więcej, to~są~to~komendy równoważne, mające identyczne działanie.
+		
+		\item[Etykiety] \hfill \\
+		Do każdego kroku przypisana jest lista etykiet, określających jakich zagadnień on dotyczy. Krok posiada zawsze co~najmniej jedną etykietę, wskazującą komendę, której wymaga on do poprawnego wykonania. 
+		
+		Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do tego kroku etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także ilość poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i~pozwalają ocenić, nad czym powinien jeszcze popracować. Statystyki te są brane pod uwagę przy losowaniu kolejnych zadań, ponieważ na ich podstawie wyliczana jest waga krawędzi.
+		
+		\item[Dodatkowe dane] \hfill \\
+		Dodatkowe dane są charakterystyczne dla~każdego typu kroku i~mogą składać się z~różnych elementów. Dostarczają informację np.~o~nazwie wykonanej rewizji czy utworzonej gałęzi. Służą też do określenia jakie pliki powinny zostać dodane lub usunięte z~repozytorium. W~przypadku kroku dotyczącego polecenia \textit{git checkout} przechowują informację, czy~przełączenie powinno być zrealizowane na~konkretną gałąź czy~rewizję.
+	\end{description}
 
 	\subsubsection{Format danych}
 
-	Jak opisano wcześniej, scenariusz rozgrywki to w istocie struktura drzewiasta złożona z zadań, przy czym każde z nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i wygodnego formatu do przechowywania danych. Zdecydowano się na format JSON, który doskonale nadaje się do tego celu. Pliki zapisane w tym formacie można bezproblemowo odczytywać oraz modyfikować za pomocą języka JavaScript.
+	Jak opisano wcześniej, scenariusz rozgrywki to w istocie struktura drzewiasta, złożona z~zadań, przy~czym każde z~nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i~wygodnego formatu do~przechowywania danych. Zdecydowano się~skorzystać z~formatu JSON, który doskonale nadaje się do tego celu. Pliki zapisane w~tym formacie można bezproblemowo odczytywać oraz modyfikować za~pomocą języka JavaScript.
 
 	\subsection{Graficzne narzędzie do definiowania scenariuszy}
 
