@@ -566,6 +566,14 @@
 	\end{itemize}
 	Komponent \textit{TutorialItem} służy temu, by nie dodawać klasy \textit{CSS} powodującej rozmycie na element którego dotyczy wiadomość. Przyjmuje on jeden parametr wejściowy, określający, czy jego zawartość powinna zostać wyłączona z procesu rozmywania.
 
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{component-tutorial}
+		\caption{Wiadomość tutoriala prezentująca drzewo plików}
+		\label{fig:tutorial}
+	\end{figure}
+	\FloatBarrier
+
 	\subsection{Kontener aplikacji (App)}
 
 	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za~wyrenderowanie całego widoku aplikacji, wywołuje zatem wszystkie pozostałe komponenty. Cała zawartość kontenera zamknięta jest w~komponencie \textit{Provider}. Jest on dostarczony wraz z biblioteką \textit{Redux}, a~jego użycie jest wymagane dla poprawnego jej działania.
@@ -576,11 +584,25 @@
 
 	Lista zadań jest kontenerem korzystającym z dwóch właściwości stanu~---~zadań oraz tutoriala. Rolą tego kontenera jest wyświetlanie aktualnego zadania, wraz ze~wszystkimi jego krokami. W~tym celu zdefiniowano komponent pomocniczy \textit{Task}, umożliwiający wyświetlenie konkretnego zadania. Kontener listy zadań wyświetla zatem kolekcję zadań dostępną w~stanie, mapując każde z~nich na~wywołanie komponentu \textit{Task}. Dodatkowo wykorzystany został tutaj komponent pomocniczy, napisany przez twórców biblioteki \textit{React}, a~mianowicie \textit{ReactCSSTransitionGroup}. Dzięki umieszczeniu kolekcji elementów (w~tym przypadku komponentów \textit{Task}) w~komponencie \textit{ReactCSSTransitionGroup} możliwe jest zdefiniowanie animacji wejścia i~wyjścia elementu z~kolekcji przy pomocy arkuszy stylów \textit{CSS}.
 
+	\begin{figure}[h]
+		\centering
+		\includegraphics[height=8cm]{component-task-list}
+		\caption{Komponent listy zadań}
+		\label{fig:task-list}
+	\end{figure}
+
 	\subsection{Konsola}
 
 	Konsola jest komponentem przyjmującym na wejściu cztery parametry. Pierwszy z~nich (\textit{enabled}) daje możliwość zablokowania konsoli, np.~w~przypadku, gdy tutorial nie został jeszcze ukończony. Kolejne dwa parametry (\textit{files}, \textit{branches}) to tablice wartości tekstowych, z~nazwami istniejących w~repozytorium plików oraz gałęzi. Nazwy te są potrzebne do działania funkcji autouzupełniania, znanej z~konsolowej wersji programu Git. Ostatni argument (\textit{onCommandEnter}) jest funkcją, która będzie wywołana, kiedy w~konsoli zostanie zatwierdzona komenda.
 
 	Komponent konsoli wykorzystuje element \textit{input}, czyli pole tekstowe formularza \textit{HTML}. Niestety, element ten jest ograniczony pod kątem możliwości stylizowania za pomocą \textit{CSS}. W~związku z~tym zmiany w~tym polu śledzone są przy pomocy zdarzenia \textit{onChange}, a~sam element jest renderowany jako przezroczysty. Przy każdej zmianie wartości elementu \textit{input} jego wartość zostaje przepisana do innego, odpowiednio wystylizowanego elementu \textit{HTML}.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{component-console}
+		\caption{Konsola do wpisywania poleceń}
+		\label{fig:console}
+	\end{figure}
 
 	Dodatkowo, aby upodobnić komponent do konsoli znanej z systemów operacyjnych, możliwe jest korzystanie z historii wpisywanych komend. Efekt ten osiągnięty został dzięki zapisywaniu każdego wprowadzanego polecenia w~stanie komponentu. Aby podnieść walory wizualne komponentu, historia jest czasowo wyświetlona nad obszarem wpisywania podczas używania klawiszy strzałek górnej i~dolnej.
 
@@ -600,6 +622,13 @@
 	\end{itemize}
 	  Gdy zakładka jest otwarta, wysuwa się z dolnej części ekranu. Efekt ten został osiągnięty przez animowanie właściwości \textit{translateY} elementu, które jest wysoce wydajne, ponieważ jest wykonywane na~karcie graficznej (w~odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt). 
 
+	  \begin{figure}[h]
+	  	\centering
+	  	\includegraphics[width=15cm]{component-help-drawer}
+	  	\caption{Zakładka pomocy z otwartą sekcją ,,\textit{commit}''}
+	  	\label{fig:help-drawer}
+	  \end{figure}
+
 	  Kontener pomocy emituje akcje związane ze zmianami stanu zakładki pomocy (patrz:~\ref{PomocStan}) oraz akcję zatwierdzenia nowej komendy (poprzez przekazanie komponentowi konsoli funkcji emitującej tę akcję).
 
 	\subsection{Drzewo plików}
@@ -608,7 +637,15 @@
 
 	Zaimplementowana została pomocnicza funkcja renderująca \textit{renderRecursively}, umożliwiająca wyświetlenie plików na~dowolnym poziomie zagnieżdżenia. W~jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze~stanu. Ma~ono strukturę tablicy (patrz:~\ref{DrzewoStan}). Dla każdego z~elementów funkcja sprawdza czy jest on plikiem, czy katalogiem. Jeżeli jest to~plik, to~zwrócony zostaje pomocniczy komponent pliku (odpowiedzialny za dodanie odpowiedniej ikony oraz koloru, w~zależności od~statusu pliku). W~przypadku katalogu zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, a~zawartość folderu wyświetlana jest poprzez rekursywne wywołanie funkcji \textit{renderRecursively}.
 
+	\begin{figure}[h]
+		\centering
+		\includegraphics[height=6.2cm]{component-tree}
+		\caption{Drzewo plików, wyświetlające aktualny stan obszaru roboczego}
+		\label{fig:tree}
+	\end{figure}
+
 	Poziom zagnieżdżenia plików został przedstawiony za pomocą łączących je linii oraz odpowiednich wcięć z~lewej strony.
+	\FloatBarrier
 
 	\subsection{Canvas}
 
