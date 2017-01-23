@@ -3,3 +3,5 @@
 !README.md
 !.Gitignore
 !images
+!images/*.png
+!images/*.jpg
