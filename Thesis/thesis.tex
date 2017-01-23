@@ -447,35 +447,35 @@
 
 	Jak opisano wcześniej, scenariusz rozgrywki to w istocie struktura drzewiasta, złożona z~zadań, przy~czym każde z~nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i~wygodnego formatu do~przechowywania danych. Zdecydowano się~skorzystać z~formatu JSON, który doskonale nadaje się do tego celu. Pliki zapisane w~tym formacie można bezproblemowo odczytywać oraz modyfikować za~pomocą języka JavaScript.
 
-	\subsection{Graficzne narzędzie do definiowania scenariuszy}
+	\subsection{Graficzne narzędzie do definiowania zadań}
 
 	\subsubsection{Motywacja}
 
-	Aplikacja GITar Hero umożliwia przetwarzanie rozbudowanych scenariuszy, których ręczne tworzenie byłoby uciążliwe i  czasochłonne, a ponadto podatne na błędy. Dodawanie lub modyfikacja zadań wymagałaby znaczących nakładów pracy.
-	Z tego względu zdecydowano się na korzystanie z narzędzia z graficznym interfejsem użytkownika, za pomocą którego można by było w prosty i wygodny sposób tworzyć grafy zadań oraz zapisywać je w formacie JSON.
+	Aplikacja GITar Hero umożliwia przetwarzanie rozbudowanych scenariuszy, których ręczne tworzenie byłoby uciążliwe i ~czasochłonne, a~ponadto podatne na~błędy. Dodawanie lub modyfikacja zadań wymagałaby znaczących nakładów pracy.
+	Z~tego względu zdecydowano się na korzystanie z~narzędzia z~graficznym interfejsem użytkownika, za~pomocą którego można~by było w~prosty i~wygodny sposób tworzyć grafy zadań oraz zapisywać je w~formacie JSON.
 
-	\subsubsection{Poszukiwanie gotowego rozwiązania}
+	\subsubsection{Poszukiwanie gotowego rozwiązania} \label{solution}
 
-	Początkowo zamierzano skorzystać z gotowego rozwiązania. Do tego zadania wytypowano aplikację \textit{directed-graph-creator} użytkownika cjrd [tu odnosnik do bibliografii i tam link] udostępnianą jako oprogramowanie o~otwartym źródle (ang. \textit{open source}) \footnote{Oprogramowanie udostępnione jest na licencji MIT/X, dzięki czemu istnieje nieograniczone prawo do używania, kopiowania, modyfikowania i~rozpowszechniania go. Jedynym wymogiem jest, by we wszystkich wersjach zachowano warunki licencyjne oraz informacje o autorze.}. Umożliwia ona tworzenie grafów skierowanych oraz~ich zapis do formatu JSON. Narzędzie to jest zaimplementowane w języku JavaScript i~korzysta z popularnej biblioteki~D3.js, która pozwala tworzyć dynamiczne i~interaktywne wizualizacje danych w~przeglądarkach internetowych.
+	Początkowo zamierzano skorzystać z~gotowego rozwiązania. Do~tego zadania wytypowano aplikację \textit{directed-graph-creator} użytkownika \textit{cjrd} [tu odnosnik do bibliografii i tam link] udostępnianą jako oprogramowanie o~otwartym źródle (ang. \textit{open source}) \footnote{Oprogramowanie udostępnione jest na licencji MIT/X, dzięki czemu istnieje nieograniczone prawo do używania, kopiowania, modyfikowania i~rozpowszechniania go. Jedynym wymogiem jest, by we wszystkich wersjach zachowano warunki licencyjne oraz informacje o autorze.}. Umożliwia ona tworzenie grafów skierowanych oraz~ich zapis do formatu JSON. Narzędzie to jest zaimplementowane w języku JavaScript i~korzysta z popularnej biblioteki~D3.js, która pozwala tworzyć dynamiczne i~interaktywne wizualizacje danych w~przeglądarkach internetowych.
 
-	Jednakże aplikacja, w~formie w jakiej została udostępniona, nie wystarczała do zdefiniowania scenariusza rozgrywki. Każdy węzeł grafu mógł przechowywać tylko pojedynczy ciąg znaków. Potrzebne były zatem znaczne modyfikacje, umożliwiające zapisanie w pojedynczym węźle wszystkich niezbędnych informacji, które powinny się znaleźć w zadaniu. Zdecydowano się zatem stworzyć własne narzędzie do~tworzenia scenariusza zadań, bazujące na ogólnodostępnym \textit{direct-graph-creator}.
+	Jednakże aplikacja, w~formie w jakiej została udostępniona, nie wystarczała do~zdefiniowania scenariusza rozgrywki. Każdy węzeł grafu mógł przechowywać tylko pojedynczy ciąg znaków. Potrzebne były zatem znaczne modyfikacje, umożliwiające zapisanie w pojedynczym węźle wszystkich niezbędnych informacji, które powinny się znaleźć w zadaniu. Zdecydowano się zatem stworzyć własne narzędzie do~tworzenia scenariusza zadań, bazujące na ogólnodostępnym \textit{direct-graph-creator}.
 
 	\subsubsection{TaskCreator}
 
-	Postanowiono przerobić wspomnianą wyżej aplikację. Została ona napisana tylko i wyłącznie w języku JavaScript, bez wykorzystania jakichkolwiek platform programistycznych (ang. \textit{frameworks}). Modyfikację utrudniał także fakt, że cały kod zawarty był w~jednym pliku. Postanowiono nie modyfikować struktury aplikacji i~dalszą część napisać również w czystym języku JavaScript. Dodano jedynie bibliotekę jQuery, która umożliwia łatwiejsze zarządzanie elementami drzewa DOM, czyli obiektowego modelu dokumentu. W~związku z~tym, że jest to aplikacja internetowa, potrzebny był serwer HTTP. W~tym celu użyto środowiska Node.js, wykorzystywanego do tworzenia wysoce skalowalnych aplikacji sieciowych.
+	Postanowiono przerobić wspomnianą w podrozdziale~\ref{solution} aplikację. Została ona napisana tylko i~wyłącznie w~języku JavaScript, bez wykorzystania jakichkolwiek platform programistycznych (ang. \textit{frameworks}). Modyfikację utrudniał także fakt, że cały kod zawarty był w~jednym pliku. Postanowiono nie zmieniać struktury aplikacji i~dalszą część napisać również w~czystym języku JavaScript. Dodano jedynie bibliotekę jQuery, która umożliwia łatwiejsze zarządzanie elementami drzewa DOM, czyli obiektowego modelu dokumentu. W~związku z~tym, że jest to aplikacja internetowa, potrzebny był serwer HTTP. W~tym celu użyto środowiska Node.js, wykorzystywanego do tworzenia wysoce skalowalnych aplikacji sieciowych.
 
-	\begin{figure}
+	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny, służący do wypełniania pól zadania i~definiowania listy kroków. Jest on widoczny na~rysunku~\ref{fig:taskCreator} po~prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz~czas wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a~następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności oraz dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków.
+	
+	\begin{figure}[h]
 		\centering
-		\includegraphics[width=12cm]{graphCreator01}
+		\includegraphics[height=7.5cm]{taskCreator01}
 		\caption{Interfejs graficzny narzędzia TaskCreator}
 		\label{fig:taskCreator}
 	\end{figure}
 
-	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny służący do wypełniania pól zadania i definiowania listy kroków. Jest on widoczny na rysunku~\ref{fig:taskCreator} po prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz czasy wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności jak również dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków.
+	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w~wybrane miejsce. Żeby edytować wierzchołek należy go~wybrać poprzez kliknięcie. Z~kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki, a~następnie przeciągniecie kursora znad jednego węzła na drugi, utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete.
 
-	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w wybrane miejsce. Żeby edytować wierzchołek należy go wybrać poprzez kliknięcie. Z kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki a następnie przeciągniecie kursora znad jednego węzła na drugi utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete.
-
-	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W tym celu wystarczy kliknąć drugi przycisk w lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i zapisze dane do pliku taskGraph.json. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w lewym dolnym rogu ekranu i wybierając plik do wczytania.
+	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W~tym~celu wystarczy kliknąć drugi przycisk w~lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i~zapisze dane do pliku \textit{taskGraph.json}. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w~lewym dolnym rogu ekranu i~wybierając plik do wczytania.
 	
 	\section{Stan i jego tranzycje}
 	
