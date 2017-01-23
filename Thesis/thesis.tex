@@ -235,15 +235,6 @@
 
 	Lokalną gałąź śledzącą nazywa się w języku angielskim \textit{tracking branch}, a powiązaną z nią gałąź \textit{upstream branch}. W systemie Git istnieje też termin \textit{remote-tracking branch}, odnoszący się do referencji do zdalnej gałęzi. Wskazuje ona na~rewizję, na~jaką wskazywała dana zdalna gałąź podczas ostatniej komunikacji z~serwerem. W~przeciwieństwie do~zwykłych gałęzi tych referencji nie można samodzielnie przesunąć. Uaktualniają się automatycznie, na skutek wymiany danych z~repozytorium zdalnym.
 
-	\subsubsection{Gałęzie śledzące}
-	co to, jak sie ustawia, korzysci
-
-	%GDZIES JESZCZE MUSI BYĆ O:
-	% - tagach
-	% - wycofywaniu zmian (reset)
-
-	\textit{Jakaś subsekcja o tym dlaczego programiści powinny go znać i potrafić używać jako narzędzia w pracy, do czego im się przyda i że Git często nie jest możliwością, lecz koniecznością.}
-
 	\section{Gitflow}
 
 	Praca z~wykorzystaniem systemu Git może przebiegać w~zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i~pomóc w~sprawnym zarządzaniu i~wydawaniu nowych wersji oprogramowania. Jedną z~bardziej popularnych metodyk jest Gitflow, opracowana przez Vincenta Driessena. Określa ona cykl pracy, oparty na korzystaniu z~różnych gałęzi, z~których każda ma dokładnie zdefiniowaną rolę.
@@ -488,30 +479,30 @@
 	
 	\subsection{Wstęp}
 	
-	Stan naszej aplikacji został podzielony na pięć głównych części. Do każdej z nich zdefiniowany został tzw. \textit{reducer} (patrz: \ref{Redux}) odpowiedzialny za tranzycje stanu w zależności od typu akcji. Stan jest zatem obiektem posiadającym pięć kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
+	Stan naszej aplikacji został podzielony na pięć głównych części. Do każdej z~nich zdefiniowany został tzw. \textit{reducer} (więcej w sekcji \ref{Redux}) odpowiedzialny za tranzycje stanu w~zależności od typu akcji. Stan jest zatem obiektem posiadającym pięć kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
 	
-	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
+	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w~których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
 	
-	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być niemutowalny). Aby uzyskać taki efekt, posłużyliśmy się funkcją pomocniczą \textit{cloneDeep} z pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, generowana jest najpierw jego głęboka kopia, która następnie jest modyfikowana i zwracana jako nowy stan.
+	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużyliśmy się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
 	
 	\subsection{Zadania}
 	
-	Część stanu dostycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z jego właściwościami. Dodatkowo zapamiętuje ona czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu zadania. Dostępna jest również informacja o powodzeniach i niepowodzeniach w rozwiązywaniu zadań określonego typu.
+	Część stanu dotycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z~jego właściwościami. Dodatkowo zapamiętuje czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu go. Dostępna jest również informacja o powodzeniach i~niepowodzeniach w rozwiązywaniu zadań dotyczących określonych poleceń systemu Git.
 	
-	Nowy stan generowany jest dla akcji następujących typów:
+	Poniżej opisane zostały akcje, które powodują wygenerowanie nowego stanu.
 		
 	\begin{description}
 	\item[Nowa poprawna komenda z konsoli] \hfill \\
-	Akcja tego typu zostanie wyemitowana, gdy podpunkt zadania został poprawnie wykonany. Powoduje ona ustawienie w stanie kolejnego podpunktu na aktywny oraz dodanie informacji o poprawnie wykonanej komendzie danego typu do statystyk.
+	Wyemitowanie akcji tego typu następuje na skutek poprawnego wykonania kroku zadania. W~rezultacie kolejny krok ustawiany jest w stanie jako aktywny oraz dodawana jest do statystyk informacja o poprawnie wykonanej komendzie danego rodzaju.
 	\item[Nowa niepoprawna komenda z konsoli] \hfill \\
-	Akcja tego typu zostanie wyemitowana, kiedy zostało zatwierdzone polecenie w konsoli, ale nie jest to poprawne polecenie dla aktywnego podpunktu aktualnego zadania. W efekcie w stanie pojawi się informacja o niepoprawnej próbie rozwiązania podpunktu danego typu.
+	Akcja tego typu zostanie wyemitowana, kiedy zostało zatwierdzone polecenie w konsoli, które nie należy do dozwolonych komend dla aktywnego kroku. W~efekcie w~stanie pojawi się informacja o~niepoprawnej próbie użycia polecenia danego typu.
 	\item[Ostatni podpunkt zadania został wykonany] \hfill \\
-	Akcja tego typu zostanie wyemitowana, gdy dane zadanie zostało ukończone (ostatni podpunkt został prawidłowo rozwiązany). \textit{Reducer} zareaguje wtedy wygenerowaniem nowego aktywnego zadania.
+	Wywoływana gdy dane zadanie zostało ukończone, czyli gdy ostatni krok został prawidłowo rozwiązany. \textit{Reducer} zareaguje wtedy wygenerowaniem nowego aktywnego zadania na podstawie przechowywanych statystyk dotyczących znajomości poleceń.
 	\end{description}
 		
 	\subsection{Pomoc} \label{PomocStan}
 	
-	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otawrta, czy zamknięta (\textit{isOpen}). Druga właściwość to również zmienna boolowska, stanowiąca o tym, czy pomoc ma otwierać się automatycznie po pojawieniu się zadania nowego typu (\textit{autoShowHelp}). Ostatnia wartość informuje o aktywnej sekcji pomocy, widocznej o ile zakładka jest otwarta (\textit{selectedTab}).
+	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w~dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otwarta, czy zamknięta (\textit{isOpen}). Druga właściwość to również zmienna boolowska, stanowiąca o~tym, czy pomoc ma otwierać się automatycznie, po pojawieniu się zadania zawierającego nowe polecenie (\textit{autoShowHelp}). Ostatnia wartość informuje o~aktywnej sekcji pomocy, widocznej o~ile zakładka jest otwarta (\textit{selectedTab}).
 	
 	Akcje, które powodują tranzycję stanu zakładki pomocy to:
 	
@@ -520,43 +511,43 @@
 	Akcja tego typu wywołuje zmianę stanu, jeżeli treścią komendy jest słowo kluczowe "\textit{help}". \textit{Reducer} zmienia w efekcie wartość pola \textit{isOpen} na przeciwną w stosunku do aktualnej.
 	
 	\item[Akcja wyboru sekcji pomocy] \hfill \\
-	Akcja tego typu informuje o wyborze aktywnej sekcji, a w niektórych przypadkach otwiera zakładkę pomocy. Jest ona emitowana podczas klikania w tytuły sekcji w nawigacji zakładki pomocy, ale również w przypadku pojawienia się zadania o nowym typie (aby wprowadzić gracza w nowe zagadnienia). W drugim przypadku w parametrach akcji przekazywana jest flaga \textit{auto} ustawiona na \textit{true}. W każdym przypadku przekazywany jest identyfikator sekcji. \textit{Reducer} reaguje na akcję ustawiając identyfikator aktywnej sekcji pomocy oraz otwierając zakładkę pomocy, o ile jest zamknięta i albo automatyczne otwieranie pomocy jest włączone, albo źródłem akcji \textbf{nie jest} pojawienie się zadania nowego typu (flaga \textit{auto} jest ustawiona na \textit{false}).
+	Akcja tego typu informuje o wyborze aktywnej sekcji, a~w~niektórych przypadkach otwiera zakładkę pomocy. Jest ona emitowana podczas klikania w~tytuły sekcji w nawigacji zakładki pomocy, ale również gdy pojawi się krok dotyczący nowej komendy (aby wprowadzić gracza w~nowe zagadnienie). W~tym drugim przypadku w parametrach akcji przekazywana jest flaga \textit{auto}, ustawiona na~\textit{true}. Niezależnie od przyczyny wyemitowania akcji przekazywany jest identyfikator wybranej sekcji pomocy. \textit{Reducer} reaguje na akcję ustawiając wskazaną sekcję jako aktywną oraz otwierając zakładkę pomocy, o ile jest zamknięta i~spełniony jest następujący warunek~---~jeżeli automatyczne otwieranie pomocy jest wyłączone (flaga \textit{auto} jest ustawiona na \textit{false}), to źródłem akcji nie może być pojawienie się nowego polecenia.
 	
 	\item[Akcja zamknięcia zakładki pomocy] \hfill \\
-	Wywoływana przez kliknięcie poza zakładką pomocy lub wciśnięcie przycisku \textit{ESC}, gdy zakładka jest otwarta. \textit{Reducer} otrzymując akcję tego typu ustawia pole \textit{isOpen} na wartość \textit{false}.
+	Wywoływana przez kliknięcie poza zakładką pomocy, wpisanie słowa kluczowego "\textit{help}" lub wciśnięcie przycisku \textit{ESC}, gdy zakładka jest otwarta. \textit{Reducer} otrzymując akcję tego typu ustawia pole \textit{isOpen} na wartość \textit{false}, co skutkuje zamknięciem pomocy.
 	
 	\item[Akcje nawigacji po sekcjach pomocy] \hfill \\
 	Są to akcje przełączenia sekcji pomocy na poprzednią bądź następną. Naturalnie \textit{reducer} reaguje zmianem stanu pola dotyczącego aktywnej sekcji, ustawiając je na wartość poprzednią lub następną względem aktywnej.
 	
 	\item[Akcja zmiany opcji automatycznego włączania pomocy] \hfill \\
-	Akcja ta emitowana jest podczas przełączania opcji automatycznego włączania pomocy. \textit{Reducer} zmienia w efekcie wartość pola \textit{autoShowHelp} na przeciwną w stosunku do aktualnej.
+	Akcja ta emitowana jest kiedy gracz włącza lub wyłącza opcję automatycznego otwierania pomocy. \textit{Reducer} zmienia w efekcie wartość pola \textit{autoShowHelp} na~przeciwną w~stosunku do~aktualnej.
 	\end{description}
 	
 	\subsection{Drzewo plików} \label{DrzewoStan}
 	
-	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako części stanu aplikacji. Struktura ta musi być rekursywna, aby umożliwiała dowolne zagnieżdżanie plików w katalogach. Każdy katalog jest reprezentowany przez obiekt posiadający nazwę oraz zawartość w formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, posiadają obowiązkowo nazwę, ale również pola statusu oraz typu zmiany (nie posiadają naturalnie pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
+	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako części stanu aplikacji. Struktura ta jest rekursywna i~umożliwia dowolne zagnieżdżanie plików w~katalogach. Każdy katalog jest reprezentowany przez obiekt, posiadający nazwę oraz zawartość w~formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, zawierają obowiązkowo nazwę, ale także pola statusu oraz typu zmiany (nie posiadają pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
 	
-	Akcje, które powodują tranzycję stanu drzewa plików to:
+	Akcje, powodujące tranzycję stanu drzewa plików zostały opisane poniżej.
 	
 	\begin{description}
 	\item[Akcja modyfikacji drzewa plików] \hfill \\
-	Akcja ta została przygotowana, aby móc swobodnie operować na drzewie plików. We właściwościach akcji określane są pliki, które zostaną usunięte, zmodyfikowane lub dodane. \textit{Reducer} reaguje operacjami na strukturze reprezentującej drzewo plików dodając, usuwając i modyfikując odpowiednie węzły.
+	Akcja ta została przygotowana, aby móc swobodnie operować na drzewie plików. We właściwościach akcji określane są pliki, które zostaną usunięte, zmodyfikowane lub dodane. \textit{Reducer} reaguje operacjami na strukturze reprezentującej drzewo plików dodając, usuwając i~modyfikując odpowiednie węzły.
 	
 	\item[Akcja zatwierdzenia poprawnej komendy w konsoli] \hfill \\
-	Pliki w repozytorium zmieniają swoje statusy w wyniku utworzenia nowej rewizji lub dodania plików do indeksu. W związku z faktem, że każdy \textit{reducer} informowany jest o każdej wyemitowanej akcji, możemy w łatwy sposób stwierdzić rządanie utworzenia rewizji lub dodania plików do indeksu z poziomu \textit{reducera}. Wystarczy, że po otrzymaniu akcji zatwierdzenia poprawnej komendy w konsoli, sprawdzona zostanie składnia tej komendy. Jeżeli odpowiada ona składni dodawania rewizji lub dodawania plików do indeksu, \textit{reducer} wygeneruje nowy stan odpowiadający drzewu plików z nowymi statusami. W przeciwnym wypadku zwrócony zostanie niezmieniony stan.
+	Pliki w repozytorium zmieniają swoje statusy w~wyniku utworzenia nowej rewizji lub dodania plików do indeksu. W~związku z~faktem, że każdy \textit{reducer} informowany jest o~każdej wyemitowanej akcji, można w łatwy sposób stwierdzić żądanie utworzenia rewizji lub zaindeksowania plików z~poziomu \textit{reducera}. Wystarczy, że~po~otrzymaniu akcji zatwierdzenia w~konsoli poprawnej komendy sprawdzona zostanie składnia tego polecenia. Jeżeli odpowiada ona składni dodawania rewizji lub indeksowania zmian, \textit{reducer} wygeneruje nowy stan, odpowiadający drzewu plików z nowymi statusami. W przeciwnym wypadku zwrócony zostanie niezmieniony stan.
 	\end{description}
 	
 	\subsection{Punkty}
 	
 	Część stanu dotycząca punktów zawiera informację o aktualnej liczbie punktów zdobytych przez gracza.
 	
-	\textit{Reducer} odpowiedzialny za stan punktów reaguje wygenerowaniem nowego stanu tylko w przypadku jednego typu akcji - akcji emitowanej, gdy ostatni podpunkt zadania został poprawnie wykonany. W takim przypadku liczony jest najpierw ułamek informujący o tym, jaka część czasu przeznaczonego na zadanie (czas ten jest parametrem zależnym od liczby podpunktów zadania) została wykorzystana. Następnie, na podstawie tego wskaźnika wyliczana jest nagroda punktowa. Ostatnim krokiem jest dodanie nagrody do aktualnej liczby punktów i zwrócenie nowego stanu.
+	\textit{Reducer} odpowiedzialny za stan punktów reaguje wygenerowaniem nowego stanu tylko w przypadku jednego typu akcji - akcji emitowanej, gdy ostatni krok zadania został poprawnie wykonany. W~takim przypadku liczony jest najpierw ułamek informujący o~tym, jaka część czasu przeznaczonego na zadanie została wykorzystana. Czas przydzielony do zadania jest liniowo zależny od liczby jego kroków. Następnie na podstawie tego stosunku i~maksymalnej liczby punktów, możliwych do uzyskania za to zadanie, wyliczana jest nagroda punktowa. Ostatnim krokiem jest dodanie otrzymanej nagrody do aktualnego wyniku i~zwrócenie nowego stanu.
 	
 	\subsection{Tutorial} \label{TutorialStan}
 	
-	Podczas pierwszego uruchomienia aplikacji gracz zostanie wprowadzony w zasady gry przez wiadomości pojawiające się w odpowiednich miejscach ekranu i wyjaśniające konkretne zagadnienia dotyczące rozgrywki. Każda z takich wiadomości ma swój identyfikator. Stan przechowuje identyfikator aktualnie wyświetlanej wiadomości (lub wartość \textit{undefined}, gdy nie jest wyświetlana żadna wiadomość).
+	Podczas pierwszego uruchomienia aplikacji gracz zostanie zapoznany z~zasadami gry przez wiadomości pojawiające się w~odpowiednich miejscach ekranu. Wyjaśniają one do czego służą poszczególne elementy interfejsu i~tłumaczą jak prawidłowo z~nich korzystać. Każda z takich wiadomości ma swój identyfikator. Stan przechowuje identyfikator aktualnie wyświetlanej wiadomości (lub wartość \textit{undefined}, gdy nie jest wyświetlana żadna wiadomość).
 	
-	Zostały przygotowane cztery wiadomości wprowadzające. \textit{Reducer} ma dostęp do tablicy \textit{tutorialsQueue} w której zapisane są identyfikatory wiadomości zgodnie z kolejnością ich wyświetlania. \textit{Reducer} generuje nowy stan w przypadku jednego typu wyemitowanej akcji - akcji informującej o zamknięciu wiadomości. Zmienna \textit{current} określająca aktualnie wyświetlaną wiadomość zmienia się wtedy na wartość następną w stosunku do aktualnej w tablicy \textit{tutorialsQueue}. W efekcie akcja zamknięcia wiadomości w przypadku pierwszych trzech powoduje przełączenie aktualnej wiadomości na kolejną. W przypadku ostatniej wiadomości, po jej zamknięciu ustawiana jest wartość \textit{undefined}. Oznacza to, że tutorial został ukończony.
+	Zostały przygotowane cztery wiadomości wprowadzające. \textit{Reducer} ma dostęp do tablicy \textit{tutorialsQueue}, w której zapisane są identyfikatory wiadomości zgodnie z~kolejnością ich wyświetlania. \textit{Reducer} generuje nowy stan w przypadku wyemitowania akcji informującej o~zamknięciu wiadomości. Zmienna \textit{current}, określająca aktualnie wyświetlaną wiadomość, zmienia się wtedy na wartość następną w~stosunku do~aktualnej w~tablicy \textit{tutorialsQueue}. W~efekcie akcja zamknięcia wiadomości w~przypadku pierwszych trzech powoduje przełączenie aktualnej wiadomości na~kolejną. Zamknięcie ostatniej wiadomości ustawia wartość zmiennej \textit{current} na~\textit{undefined}, co~oznacza, że~\textit{tutorial} został ukończony.
 	
 	\section{Komponenty graficzne}
 	
