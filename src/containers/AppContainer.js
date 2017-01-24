@@ -28,23 +28,24 @@ class AppContainer extends Component {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-          <Tutorial show={this.props.tutorial} onClose={this.onTutorialClose}>
-            <Canvas store={this.props.store} />
-            <Points />
-            <TutorialItem enabled={this.props.tutorial === 'taskList'}>
-              <TaskList />
-            </TutorialItem>
-            <TutorialItem enabled={this.props.tutorial === 'console'}>
-              <BottomDrawer />
-            </TutorialItem>
-            <TutorialItem enabled={this.props.tutorial === 'tree'}>
-              <Tree />
-            </TutorialItem>
-          </Tutorial>
+          <Points />
         </div>
       </Provider>
     );
   }
+
+  // <Tutorial show={this.props.tutorial} onClose={this.onTutorialClose}>
+  // <Canvas store={this.props.store} />
+  // <TutorialItem enabled={this.props.tutorial === 'taskList'}>
+  //   <TaskList />
+  // </TutorialItem>
+  // <TutorialItem enabled={this.props.tutorial === 'console'}>
+  //   <BottomDrawer />
+  // </TutorialItem>
+  // <TutorialItem enabled={this.props.tutorial === 'tree'}>
+  //   <Tree />
+  // </TutorialItem>
+  // </Tutorial>
 }
 
 export default connect(state => ({ tutorial: state.tutorial.current }))(AppContainer);

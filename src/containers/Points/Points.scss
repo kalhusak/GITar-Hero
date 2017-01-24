@@ -1,20 +1,28 @@
 .points-container {
   position: fixed;
-  top: 20px;
-  left: 20px;
-  color: #fff;
-  font-size: 60px;
-  line-height: 60px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  width: 250px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 140px;
 }
 
 .points-container__score-label {
-  font-size: 18px;
-  margin-right: 10px;
-  font-weight: normal;
+
+}
+
+.points-container__lines {
+  position: absolute;
+  top: 100px;
+}
+
+.points-container__line-bg, .points-container__line-fg {
+  stroke: white;
+  stroke-width: 1px;
+  fill: transparent;
+}
+
+.points-container__line-bg {
+  opacity: 0.2;
 }
 
 .points-container__animate-increase {

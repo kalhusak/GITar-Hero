@@ -56,7 +56,30 @@ class Points extends Component {
 
   render () {
     return <div className='points-container'>
-      <div className='points-container__score-label'>score: </div>
+      <svg xmlns='http://www.w3.org/2000/svg' height='50px' width='100%' className='points-container__lines'>
+        <defs>
+          <clipPath id='line-left-bg'>
+            <rect x='0' y='0' width='37.5%' height='100%' />
+          </clipPath>
+          <clipPath id='line-right-bg'>
+            <rect x='62.5%' y='0' width='37.5%' height='100%' />
+          </clipPath>
+          <clipPath id='line-left-fg'>
+            <rect x='0' y='0' width='18.75%' height='100%' />
+          </clipPath>
+          <clipPath id='line-right-fg'>
+            <rect x='81.25%' y='0' width='18.75%' height='100%' />
+          </clipPath>
+        </defs>
+        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+          clipPath='url(#line-left-bg)' className='points-container__line-bg' />
+        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+          clipPath='url(#line-right-bg)' className='points-container__line-bg' />
+        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+          clipPath='url(#line-left-fg)' className='points-container__line-fg' />
+        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+          clipPath='url(#line-right-fg)' className='points-container__line-fg' />
+      </svg>
       <div className={this.state.animate ? 'points-container__animate-increase' : ''}>
         {this.state.value}
       </div>
