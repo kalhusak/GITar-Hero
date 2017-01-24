@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { range } from 'lodash';
 import './Points.scss';
 
-const transitionTime = 3000;
+const TRANSITION_TIME = 3000;
+const INDICATOR_SIZE = 8;
+const INDICATOR_BIGGER_EVERY = 9;
+const BIGGER_INDICATOR_SIZE = 14;
+const NUMBER_OF_INDICATORS = 81;
+const SPEEDMETER_RADIUS = 110;
 
 class Points extends Component {
   constructor (props) {
@@ -15,6 +21,20 @@ class Points extends Component {
       animate: false
     };
     this.animateCounter = ::this.animateCounter;
+    this.indicatorsCoords = range(0, 2 * Math.PI, 2 * Math.PI / NUMBER_OF_INDICATORS)
+      .map((value, index) => {
+        const x = -Math.sin(value);
+        const y = -Math.cos(value);
+        const indicatorSize = index % INDICATOR_BIGGER_EVERY === 0 ? BIGGER_INDICATOR_SIZE : INDICATOR_SIZE;
+
+        return {
+          x1: x * SPEEDMETER_RADIUS + SPEEDMETER_RADIUS,
+          x2: x * (SPEEDMETER_RADIUS - indicatorSize) + SPEEDMETER_RADIUS,
+          y1: y * SPEEDMETER_RADIUS + SPEEDMETER_RADIUS - 70,
+          y2: y * (SPEEDMETER_RADIUS - indicatorSize) + SPEEDMETER_RADIUS - 70
+        };
+      })
+      .slice(16, 66);
   }
 
   ease (t) {
@@ -24,7 +44,7 @@ class Points extends Component {
   animateCounter () {
     const { from, to, start, value } = this.state;
     const elapsedTime = Date.now() - start;
-    const elapsedFract = this.ease(Math.min(elapsedTime, transitionTime) / transitionTime);
+    const elapsedFract = this.ease(Math.min(elapsedTime, TRANSITION_TIME) / TRANSITION_TIME);
     const currentValue = from + Math.round(elapsedFract * (to - from));
 
     if (currentValue !== value) {
@@ -54,35 +74,59 @@ class Points extends Component {
     }
   }
 
+  renderIndicators () {
+    return this.indicatorsCoords.map((coords, index) => {
+      return <line key={index} className='points-container__speed-meter-indicator' {...coords} />;
+    });
+  }
+
+  renderSpeedMeter () {
+    return <svg height='220px' width='220px' className='points-container__speed-meter'>
+      {this.renderIndicators()}
+    </svg>;
+  }
+
+  renderLines () {
+    return <svg height='50px' width='100%' className='points-container__lines'>
+      <defs>
+        <clipPath id='line-left-bg'>
+          <rect x='0' y='0' width='37.5%' height='100%' />
+        </clipPath>
+        <clipPath id='line-right-bg'>
+          <rect x='62.5%' y='0' width='37.5%' height='100%' />
+        </clipPath>
+        <clipPath id='line-left-fg'>
+          <rect x='0' y='0' width='18.75%' height='100%' />
+        </clipPath>
+        <clipPath id='line-right-fg'>
+          <rect x='81.25%' y='0' width='18.75%' height='100%' />
+        </clipPath>
+      </defs>
+      <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+        clipPath='url(#line-left-bg)' className='points-container__line-bg' />
+      <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+        clipPath='url(#line-right-bg)' className='points-container__line-bg' />
+      <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+        clipPath='url(#line-left-fg)' className='points-container__line-fg' />
+      <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
+        clipPath='url(#line-right-fg)' className='points-container__line-fg' />
+    </svg>;
+  }
+
+  renderPoints () {
+    return <div className='points-container__points'>
+      {this.state.value}
+      <div className='points-container__points-label'>
+        Score
+      </div>
+    </div>;
+  }
+
   render () {
     return <div className='points-container'>
-      <svg xmlns='http://www.w3.org/2000/svg' height='50px' width='100%' className='points-container__lines'>
-        <defs>
-          <clipPath id='line-left-bg'>
-            <rect x='0' y='0' width='37.5%' height='100%' />
-          </clipPath>
-          <clipPath id='line-right-bg'>
-            <rect x='62.5%' y='0' width='37.5%' height='100%' />
-          </clipPath>
-          <clipPath id='line-left-fg'>
-            <rect x='0' y='0' width='18.75%' height='100%' />
-          </clipPath>
-          <clipPath id='line-right-fg'>
-            <rect x='81.25%' y='0' width='18.75%' height='100%' />
-          </clipPath>
-        </defs>
-        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
-          clipPath='url(#line-left-bg)' className='points-container__line-bg' />
-        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
-          clipPath='url(#line-right-bg)' className='points-container__line-bg' />
-        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
-          clipPath='url(#line-left-fg)' className='points-container__line-fg' />
-        <ellipse cx='50%' cy='50px' rx='55%' ry='50px'
-          clipPath='url(#line-right-fg)' className='points-container__line-fg' />
-      </svg>
-      <div className={this.state.animate ? 'points-container__animate-increase' : ''}>
-        {this.state.value}
-      </div>
+      {this.renderLines()}
+      {this.renderSpeedMeter()}
+      {this.renderPoints()}
     </div>;
   }
 };
