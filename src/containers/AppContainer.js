@@ -29,6 +29,8 @@ class AppContainer extends Component {
       <Provider store={this.props.store}>
         <div className='app'>
           <Points />
+          <Tree />
+          <BottomDrawer />
         </div>
       </Provider>
     );

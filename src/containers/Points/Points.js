@@ -74,15 +74,22 @@ class Points extends Component {
     }
   }
 
-  renderIndicators () {
+  renderIndicators (value) {
+    const filledNum = this.indicatorsCoords.length * value;
     return this.indicatorsCoords.map((coords, index) => {
-      return <line key={index} className='points-container__speed-meter-indicator' {...coords} />;
+      let classNames = 'points-container__speed-meter-indicator';
+
+      if (index < filledNum) {
+        classNames += ' points-container__speed-meter-indicator--fill';
+      }
+
+      return <line key={index} className={classNames} {...coords} />;
     });
   }
 
   renderSpeedMeter () {
-    return <svg height='220px' width='220px' className='points-container__speed-meter'>
-      {this.renderIndicators()}
+    return <svg height='155px' width='220px' className='points-container__speed-meter'>
+      {this.renderIndicators(0.7)}
     </svg>;
   }
 

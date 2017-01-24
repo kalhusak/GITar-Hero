@@ -67,7 +67,6 @@ class Tree extends Component {
             { this.renderItems() }
           </div>
         </div>
-        <div className='tree__shadow-bottom' />
         { this.renderEmptyState() }
       </div>
     );

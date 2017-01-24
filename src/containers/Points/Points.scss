@@ -35,6 +35,11 @@
   stroke: white;
   stroke-width: 1px;
   opacity: 0.2;
+  transition: opacity 0.2s ease-out;
+}
+
+.points-container__speed-meter-indicator--fill {
+  opacity: 1;
 }
 
 .points-container__lines {
