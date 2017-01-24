@@ -18,14 +18,6 @@
 
 \linespread{1.3}
 
-%\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
-%	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
-%	\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
-%	\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
-%	\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
-%	\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
-%	\do\Y\do\Z}
-
 \begin{document}
 
 	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magalena Łątkowska}
@@ -40,31 +32,22 @@
 
 	\chapter{Wstęp}
 
-	\section{Zasady odnośnie pisania pracy}
-
-	\begin{itemize}
-		\item Piszemy w formie bezosobowej. Można też niby w 1.os liczby mnogiej czyli "Zrobiliśmy...", ale niektórzy akceptują tylko bezosobową, czyli "Zrobiono...".
-
-		\item słów niepolskich - ,,Nie można więc bezpośrednio
-		w tekście używać słów angielskich. Jeżeli już — powinny być wyróżnione kursywą'' - niektórzy podobno bardzo hejcą za angielskie słowa niestety.
-
-		\item Jak chodzi o bibliografię, to w wolnej chwili dołączcie linki do stron z jakich korzystaliście, ja to potem ogarnę i zapiszę w takiej formie jak trzeba. Ale spokojnie, bo robienie bibliografii raczej zostawię na koniec.
-
-		\item Ogólnie nie przejmujcie się strukturą, formatowaniem czy innymi formalnymi bzdetami, ja potem będę to ogarniać żeby było wg zasad więc nie traćcie czasu na ogarnianie takich rzeczy.
-	\end{itemize}
-
-	Między innymi:
-	skąd wgl pomysł - bo Git jest super i konieczny a ciężko się go samemu nauczyć, nauka z wielu źródeł jest chujowa, większość ma tylko blade pojęcie a potem idzie do pracy i dupa - co z tego że nauczyli się na studiach programować jak nie potrafią korzystać z Gita i współpracować z zespołem
+	\textit{Między innymi:
+	skąd wgl pomysł - bo Git jest super i konieczny a ciężko się go samemu nauczyć, nauka z wielu źródeł jest chujowa, większość ma tylko blade pojęcie a potem idzie do pracy i dupa - co z tego że nauczyli się na studiach programować jak nie potrafią korzystać z Gita i współpracować z zespołem}
 
 	\section*{Cel i zakres pracy}
 
-	cel - nauka fajna łatwa i przyjemna, oraz praktyczna, obycie z typowymi scenariuszami jakie mogą być potrzebne w pracy
+	\textit{cel - nauka fajna łatwa i przyjemna, oraz praktyczna, obycie z typowymi scenariuszami jakie mogą być potrzebne w pracy}
 
-	Coś o tym dlaczego akurat przeglądarkowa gra, czemu z grafiką 3D itp.
+	\textit{Coś o tym dlaczego akurat przeglądarkowa gra, czemu z grafiką 3D itp.}
 
-	Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.
+	\textit{Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.}
 
-	\chapter{Podstawy teoretyczne}
+	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśnione zostały podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale rozdziału~\ref{Implementacja} wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
+
+	\textit{Tutaj musi być akapit dotyczący podziału pracy, co kto robił.}
+
+	\chapter{Podstawy teoretyczne} \label{Teoria}
 
 	Systemy kontroli wersji służą do przechowywania historii plików, czyli jak sama nazwa wskazuje do kontrolowania ich różnych wersji. Dzięki temu można sprawdzić, jak zmodyfikowany został plik, a w razie potrzeby przywrócić jego poprzedni stan. Jest to szczególnie przydatne w sytuacji, w której zajdzie konieczność wycofania wprowadzonych zmian, na przykład z powodu zmiany koncepcji lub błędów.
 
@@ -292,7 +275,7 @@
 		\label{fig:gitflow_hotfix}
 	\end{figure}
 
-	\chapter{Projekt}
+	\chapter{Projekt} \label{Projekt}
 
 	\section{Założenia}
 		
@@ -340,7 +323,7 @@
 
 	Punkty możliwe do otrzymania za zadanie obliczane są na podstawie liczby kroków~---~im bardziej złożone zadanie, tym wyżej punktowane. Ostateczna nagroda, jaka przyznawana jest graczowi za~wykonanie zadania, wyliczana jest jako procent maksymalnej liczby punktów, zależny od~czasu rozwiązywania. Dzięki temu użytkownik, który potrafi szybko wykonywać kolejne kroki, osiągnie lepszy wynik. Żeby zapobiec sytuacji, w~której prędkość stałaby się bardziej istotna niż dokładność, za~błędnie wprowadzone komendy gracz karany jest odjęciem określonej liczby punktów.
 	
-	\chapter{Implementacja}
+	\chapter{Implementacja} \label{Implementacja}
 
 	\section{Wykorzystane technologie}
 
@@ -759,7 +742,9 @@
 
 	Zastosowanie kilku systemów cząsteczek pozwoliło~osiągnąć efekt wizualny przypominający drobinki pyłu spokojnie dryfujące w~powietrzu. Dzięki temu przestrzeń nie sprawia wrażenia pustej.
 
-	\chapter{Podsumowanie}
+	\chapter{Podsumowanie} \label{Podsumowanie}
+
+	\textit{,,Zakończenie pracy   zwane  również Uwagami  końcowymi  lub  Podsumowaniem  powinno zawierać ustosunkowanie się autora do zadań wskazanych we wstępie do pracy, a w szczególności do celu  i  zakresu  pracy  oraz  porównanie  ich  z  faktycznymi  wynikami  pracy.  Podejście  takie  umożliwia jasne określenie stopnia realizacji założonych celów oraz zwrócenie uwagi na wyniki osiągnięte przez autora  w  ramach  jego  samodzielnej  pracy.  Rozdział  ten  powinien  zawierać również omówienie trudności  przy  realizacji  pracy,  zalet  i  wad  przyjętego  rozwiązania,  potencjalnych  zastosowań pracy, planów   rozwojowych   w   zakresie   tematu   pracy,   dalszych   prac,   które   należałoby   wykonać w przyszłości, itd.''}
 
 	\appendix
 
