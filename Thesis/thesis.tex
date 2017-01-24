@@ -31,21 +31,22 @@
 	\mainmatter
 
 	\chapter{Wstęp}
+	
+	Współcześnie wytwarzanie oprogramowania jest stosunkowo długim procesem, wymagającym najczęściej współpracy wielu osób. Ich~współbieżna praca powoduje konieczność synchronizacji wprowadzanych zmian. Nieocenioną pomocą są systemy kontroli wersji, ułatwiające łączenie modyfikacji przeprowadzonych na plikach źródłowych. Wyjątkowo popularnym narzędziem jest program Git. Służy do~integrowania zmian dokonanych na śledzonych plikach oraz przechowywania historii projektu, rozumianej jako odmienne jego wersje powstałe w~różnych momentach czasu.
 
-	\textit{Między innymi:
-	Skąd w ogóle pomysł - bo Git jest super i konieczny a ciężko się go samemu nauczyć, nauka z wielu źródeł jest trudna, większość ma tylko blade pojęcie a potem idzie do pracy i lipa - co z tego że nauczyli się na studiach programować jak nie potrafią korzystać z Gita i współpracować z zespołem}
+	Niestety podstawową wadą systemu Git są trudności podczas nauki korzystania z niego. Właściwe używanie tego programu jest możliwe dopiero po opanowaniu stosunkowo dużej ilości materiału. Niektóre zagadnienia nie są intuicyjne i~mogą być problematyczne dla nowych użytkowników. Dodatkowym utrudnieniem jest brak darmowych, przejrzystych i~łatwych do opanowania materiałów dla początkujących. Większość programistów ma jedynie ograniczone wyobrażenie i~wiedzę dotyczącą właściwego korzystania z systemu Git, co~w~praktyce może prowadzić do wielu problemów. Umiejętność programowania nie wystarczy do zdobycia zatrudnienia, jeżeli programista nie będzie potrafił współpracować z~zespołem~---~a~do~tego konieczne jest synchronizowanie własnych zmian z~tymi wprowadzanymi przez innych pracowników. 
 
 	\section*{Cel i zakres pracy}
 
-	\textit{cel - nauka fajna łatwa i przyjemna, oraz praktyczna, obycie z typowymi scenariuszami jakie mogą być potrzebne w pracy}
+	Celem pracy było stworzenie interaktywnego samouczka do nauki podstaw programu Git, nazwanego GITar-Hero. Przede wszystkim miał on uczyć najważniejszych poleceń systemu Git oraz zapoznać użytkownika z typowymi scenariuszami, jakie mogą wystąpić podczas pracy nad projektem. Podstawowym założeniem było nauczenie praktycznego wykorzystania programu Git, w~stopniu wystarczającym do swobodnego używania go w~pracy zawodowej.
+	
+	Istotnym aspektem było połączenie nauki z zabawą, aby możliwie jak najbardziej zachęcić i~zaciekawić użytkownika. Zdecydowano się zastosować elementy gamifikacji, takie jak punkty za~realizowane zadania, zwiększające zaangażowanie gracza. Dodatkowo, aby~uatrakcyjnić grę, postanowiono wykorzystać grafikę 3D. Celem było stworzenie samouczka działającego w~przeglądarce, nie wymagającego podczas rozgrywki komunikacji z~serwerem.
 
-	\textit{Coś o tym dlaczego akurat przeglądarkowa gra, czemu z grafiką 3D itp.}
-
-	\textit{Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.}
-
-	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśnione zostały podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale rozdziału~\ref{Implementacja} wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
+	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśnione zostały podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
 
 	\textit{Tutaj musi być akapit dotyczący podziału pracy, co kto robił.}
+	
+	\textit{Cytat z karty pracy : Zapoznanie się z systemem Git. Opracowanie koncepcji interaktywnego samouczka do nauki podstaw korzystania z systemu Git.  Opracowanie architektury systemu. Implementacja i testowanie systemu. Przygotowanie dokumentacji technicznej i użytkowej.}
 
 	\chapter{Podstawy teoretyczne} \label{Teoria}
 
