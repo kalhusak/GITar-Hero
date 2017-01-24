@@ -328,21 +328,15 @@
 
 	\section{Wykorzystane technologie}
 
-	\subsection{Języki}
+	\subsection{JavaScript}
 
-	\subsubsection{JavaScript}
-	
 	\textit{JavaScript} jest wysokopoziomowym, skryptowym, wieloparadygmatowym, słabo typowanym językiem programowania. Swoją popularność zawdzięcza szerokiemu zastosowaniu w implementacji aplikacji internetowych. Jest wpierany głównie przez przeglądarki internetowe, może być jednak wykonywany również po stronie serwera, np. w środowisku uruchomieniowym \textit{node.js}.
-	
-	\textit{JavaScript} jest językiem zorientowanym prorotypowo. Nie istnieje w nim pojęcie klasy, choć w najnowszym standardzie języka udostępniona została ona dodana do składni (jest to jednak tzw. lukier składniowy). Ponowne wykorzystanie zdefiniowanych zachowań, znane z klas w obiektowych językach programowania, realizowane jest przez dekorację istniejących obiektów, które stanowią później prototypy.
-	
+
+	\textit{JavaScript} jest językiem zorientowanym prototypowo. Nie istnieje w nim pojęcie klasy, choć w najnowszym standardzie języka została ona dodana do składni (jest to jednak tzw. lukier składniowy). Ponowne wykorzystanie zdefiniowanych zachowań, znane z klas w obiektowych językach programowania, realizowane jest przez dekorację istniejących obiektów, które stanowią później prototypy.
+
 	Funkcje w języku \textit{JavaScript} są typem pierwszoklasowym. Oznacza to, że mogą one być przypisywane do zmiennych, czy dodawane do tablic. Można również konstruować funkcje wyższego rzędu, czyli takie, które przyjmują jako argument funkcję, lub zwracają funkcję.
 
-	\subsubsection{GLSL}
-
-	\subsection{Biblioteki}
-
-	\subsubsection{Redux} \label{Redux}
+	\subsection{Redux} \label{Redux}
 
 	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym.
 
@@ -361,7 +355,7 @@
 
 	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji.
 
-	\subsubsection{React.js}
+	\subsection{React.js}
 
 	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę React.
 	 Została ona stworzona w 2013 roku przez zespół programistów Facebook'a, aby rozwiązać problem tworzenia dynamicznych aplikacji internetowcyh, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest rozpowszechniana na zasadzie otwartego oprogramowania (ang. \textit{open-source}).
@@ -374,13 +368,11 @@
 
    Zdecydowano się na wykorzystanie biblioteki React.js, ponieważ dzięki abstrakcji operacji na elementach DOM na operacje na komponentach, pozwala ona przy stosunkowo niewielkim nakładzie pracy tworzyć aplikacje działające szybko i niezawodnie.
 
-	\subsubsection{Babylon.js}
+	\subsection{Babylon.js}
 
 	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że Babylon.js jest silnikiem 3D, posiada wiele przydatnych narzędzi do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
 
 	Jako alternatywa rozważana była biblioteka Three.js wydana w 2009 roku, również oparta na~webGL. Po zapoznaniu i~przetestowaniu obu silników wybór padł na Babylon.js. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do Three.js. Przy renderowaniu sceny o podobnej zawartości i szczegółowości, Babylon.js okazał się wydajniejszy. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
-
-	\subsubsection{Pozostałe}
 
 	\section{Scenariusz rozgrywki}
 
