@@ -7,7 +7,7 @@ $timing-fn: cubic-bezier(0,.78,.78,.94);
   width: 18.75%;
 }
 
-.task-list__label {
+.task-list__heading {
   font-size: 12px;
   text-transform: uppercase;
   color: white;
@@ -15,30 +15,6 @@ $timing-fn: cubic-bezier(0,.78,.78,.94);
   letter-spacing: 0.2em;
 }
 
-.task-list__task-enter {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.task-list__task-enter.task-list__task-enter-active {
-  opacity: 1;
-  transition: all 0.4s $timing-fn;
-  transform: scale(1);
-}
-
-.task-list__task-leave {
-  opacity: 1;
-  transform: scale(1);
-  position: absolute;
-  top: 100px;
-
-  // Hack for single-step task's check
-  .check__path {
-    stroke-dashoffset: 0;
-  }
-}
-
-.task-list__task-leave.task-list__task-leave-active {
-  opacity: 0;
-  transform: scale(0);
+.task-list__loader {
+  text-align: center;
 }

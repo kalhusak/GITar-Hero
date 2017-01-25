@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { take } from 'lodash';
 import Checkbox from '../Checkbox';
 import './Task.scss';
 
@@ -12,11 +13,15 @@ export default class Task extends Component {
   renderSubtasks () {
     const { task, active } = this.props;
 
-    return task.steps.map((step, index) => {
+    return take(task.steps, task.currentStepIndex + 1).map((step, index) => {
       const done = index < task.currentStepIndex;
       const active = index === task.currentStepIndex;
 
-      return <div className={'task__step' + (active || done ? ' task__step--active' : '')} key={index}>
+      const reduceOpacity = {
+        opacity: 1 - Math.pow((task.currentStepIndex - index) / task.steps.length, 2) * 0.8
+      };
+
+      return <div key={index} style={reduceOpacity} className='task__step'>
         <div className='task__step-check'>
           <Checkbox value={done} active={active} />
         </div>

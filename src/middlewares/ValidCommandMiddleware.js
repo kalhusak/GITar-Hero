@@ -28,9 +28,7 @@ export default ({ getState }) => (next) => (action) => {
         nextStep.data.before.unstagedRemoveFiles = nextStep.data.before.removeFiles;
         nextStep.data.before.removeFiles = [];
       }
-      setTimeout(() => {
-        next(treeActions.modifyTree(nextStep.data.before));
-      }, 1000);
+      next(treeActions.modifyTree(nextStep.data.before));
     }
 
     const newTag = TagUtils.getNewTag(getState().tasks);

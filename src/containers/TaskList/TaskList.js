@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { values, take } from 'lodash';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './TaskList.scss';
 import Task from '../../components/Task';
 import Loader from '../../components/Loader';
@@ -16,16 +15,13 @@ class TaskList extends Component {
   render () {
     return (
       <div className='task-list'>
-        <div className='task-list__label'>
+        <div className='task-list__heading'>
           Upcoming tasks
         </div>
-        <ReactCSSTransitionGroup
-          transitionName='task-list__task'
-          transitionEnterTimeout={800}
-          transitionLeaveTimeout={400}>
-          { this.renderTasks() }
-        </ReactCSSTransitionGroup>
-        <Loader />
+        {this.renderTasks()}
+        <div className='task-list__loader'>
+          <Loader />
+        </div>
       </div>
     );
   }
