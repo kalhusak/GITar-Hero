@@ -9,7 +9,7 @@ const defaultState = {
     current: 0,
     byId: {},
     tags: {},
-    startTime: 0
+    startTime: Date.now()
   },
   points: {
     value: 0

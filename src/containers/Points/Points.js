@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { range } from 'lodash';
+import Counter from '../../components/Counter';
 import './Points.scss';
 
-const TRANSITION_TIME = 3000;
 const INDICATOR_SIZE = 8;
 const INDICATOR_BIGGER_EVERY = 9;
 const BIGGER_INDICATOR_SIZE = 14;
@@ -13,14 +13,6 @@ const SPEEDMETER_RADIUS = 110;
 class Points extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      value: 0,
-      from: 0,
-      to: 0,
-      start: 0,
-      animate: false
-    };
-    this.animateCounter = ::this.animateCounter;
     this.indicatorsCoords = range(0, 2 * Math.PI, 2 * Math.PI / NUMBER_OF_INDICATORS)
       .map((value, index) => {
         const x = -Math.sin(value);
@@ -35,43 +27,6 @@ class Points extends Component {
         };
       })
       .slice(16, 66);
-  }
-
-  ease (t) {
-    return (--t) * t * t + 1;
-  }
-
-  animateCounter () {
-    const { from, to, start, value } = this.state;
-    const elapsedTime = Date.now() - start;
-    const elapsedFract = this.ease(Math.min(elapsedTime, TRANSITION_TIME) / TRANSITION_TIME);
-    const currentValue = from + Math.round(elapsedFract * (to - from));
-
-    if (currentValue !== value) {
-      this.setState({
-        value: currentValue,
-        animate: currentValue !== to
-      });
-    }
-
-    if (currentValue !== to) {
-      requestAnimationFrame(this.animateCounter);
-    }
-  }
-
-  componentWillReceiveProps (newProps) {
-    const { value: from } = this.state;
-    const { value: to } = newProps;
-
-    if (to !== this.props.value) {
-      this.setState({
-        from,
-        to,
-        start: Date.now()
-      });
-
-      requestAnimationFrame(this.animateCounter);
-    }
   }
 
   renderIndicators (value) {
@@ -122,7 +77,7 @@ class Points extends Component {
 
   renderPoints () {
     return <div className='points-container__points'>
-      {this.state.value}
+      <Counter value={this.props.points} />
       <div className='points-container__points-label'>
         Score
       </div>
@@ -138,4 +93,9 @@ class Points extends Component {
   }
 };
 
-export default connect(state => ({ value: state.points.value }))(Points);
+export default connect(({ points, tasks }) => {
+  return {
+    points: points.value,
+    task: tasks.byId[tasks.current]
+  };
+})(Points);
