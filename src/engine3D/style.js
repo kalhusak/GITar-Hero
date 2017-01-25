@@ -2,7 +2,7 @@ import BABYLON from 'babylonjs';
 import palettes from './colorPalettes';
 
 export const scene = {
-  color: '#212128',
+  color: '#212f3e',
   fog: false,
   fogDensity: 0.002
 };

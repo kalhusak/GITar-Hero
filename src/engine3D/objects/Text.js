@@ -59,7 +59,7 @@ export default class Text {
 
   _draw (color) {
     this.texture.drawText(this.text, null, config.textTextureHeightPx / 2 + config.textSizePx / 2,
-       'bold ' + config.textSizePx + 'px Roboto Mono', color, 'transparent');
+       'bold ' + config.textSizePx + 'px Source Code Pro', color, 'transparent');
   }
 
   _updatePosition (initPosition) {

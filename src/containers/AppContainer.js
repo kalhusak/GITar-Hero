@@ -28,6 +28,7 @@ class AppContainer extends Component {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
+          <Canvas store={this.props.store} />
           <Points />
           <Tree />
           <BottomDrawer />

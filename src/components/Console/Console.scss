@@ -1,12 +1,15 @@
-$console-background: #000;
-$console-color: #eee;
+@import '../variables';
+
 $console-height: 100px;
 $console-font-size: 36px;
+$console-background: rgba(white, 0.05);
 
 .console__wrapper {
   height: $console-height;
-  background: rgba($console-background, 0.9);
-  padding-left: 10px;
+  background: $console-background;
+  padding-left: 6.25%;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 300;
 }
 
 .console__input {
@@ -24,16 +27,16 @@ $console-font-size: 36px;
 .console__cursor {
   margin: -1px;
   background-color: transparent;
-  border: 1px solid $console-color;
-  color: $console-color;
+  border: 1px solid $color-active;
+  color: $color-active;
 }
 
 .console__cursor--active {
   border: none;
   margin: 0px;
   animation: blink 1s infinite steps(1, start);
-  background-color: $console-color;
-  color: $console-background;
+  background-color: $color-active;
+  color: $color-inactive;
 }
 
 .console__cursor--moving {
@@ -42,7 +45,7 @@ $console-font-size: 36px;
 
 .console__text, .console__history-text, .console__prompt-character {
   display: inline-block;
-  color: $console-color;
+  color: $color-active;
   font-size: $console-font-size;
   line-height: $console-height;
   white-space: pre;
@@ -66,10 +69,10 @@ $console-font-size: 36px;
 @keyframes blink {
   0%, 100% {
       background-color: transparent;
-      color: $console-color;
+      color: $color-active;
   }
   50% {
-      background-color: $console-color;
-      color: $console-background;
+      background-color: $color-active;
+      color: $color-inactive;
   }
 }
