@@ -30,13 +30,13 @@ function onTutorialFinished (state) {
 }
 
 function onNewValidCommand (state) {
+  const task = TaskUtils.getCurrentTask(state);
   TagUtils.onValidCommand(state);
+  task.currentStepIndex++;
   return state;
 }
 
 function onActivateNextStep (state) {
-  const task = TaskUtils.getCurrentTask(state);
-  task.currentStepIndex++;
   return state;
 }
 
