@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Counter from '../../components/Counter';
 import SpeedMeter from '../../components/SpeedMeter';
 import ProgressLines from '../../components/ProgressLines';
-import './Points.scss';
+import './Top.scss';
 
 class Points extends Component {
   constructor (props) {
@@ -28,9 +28,9 @@ class Points extends Component {
   }
 
   renderPoints () {
-    return <div className='points-container__points'>
+    return <div className='top__points'>
       <Counter value={this.props.points} />
-      <div className='points-container__points-label'>
+      <div className='top__points-label'>
         Score
       </div>
     </div>;
@@ -64,7 +64,7 @@ class Points extends Component {
   }
 
   render () {
-    return <div className='points-container'>
+    return <div className='top'>
       {this.renderLines()}
       {this.renderSpeedMeter()}
       {this.renderPoints()}
