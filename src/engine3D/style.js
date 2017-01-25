@@ -8,7 +8,7 @@ export const scene = {
 };
 
 export const outline = {
-  enable: true,
+  enable: false,
   color: new BABYLON.Color3(0, 0, 0),
   width: 0.3
 };
