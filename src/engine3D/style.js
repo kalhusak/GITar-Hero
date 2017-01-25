@@ -1,4 +1,5 @@
 import BABYLON from 'babylonjs';
+import palettes from './colorPalettes';
 
 export const scene = {
   color: new BABYLON.Color3(0.1, 0.1, 0.1),
@@ -13,6 +14,7 @@ export const outline = {
 };
 
 export const branch = {
+  colors:  palettes.pastel,
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
   textStyle: {

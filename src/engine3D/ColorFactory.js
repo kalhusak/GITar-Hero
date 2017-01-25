@@ -1,29 +1,28 @@
-import BABYLON from 'babylonjs';
-
-var colors = [
-  new BABYLON.Color3(0.545, 0.764, 0.290),
-  new BABYLON.Color3(1.000, 0.756, 0.027),
-  new BABYLON.Color3(0.956, 0.262, 0.211),
-  new BABYLON.Color3(0.611, 0.152, 0.690),
-  new BABYLON.Color3(0.129, 0.588, 0.952),
-  new BABYLON.Color3(0.913, 0.117, 0.388),
-  new BABYLON.Color3(0.803, 0.862, 0.223),
-  new BABYLON.Color3(1.000, 0.341, 0.133),
-  new BABYLON.Color3(0.474, 0.333, 0.282)
-];
+import { branch as branchStyle } from './style';
+import { flatMap } from 'lodash';
+import { hexToBabylonColor } from './utils/ColorUtils';
 
 class ColorFactory {
   constructor () {
-    this.next = this.next.bind(this);
+    this.next = ::this.next;
+    this.initColors = ::this.initColors;
     this.index = 0;
+
+    this.initColors();
   }
 
   next (tags) {
-    if (this.index === colors.length) {
-      this.index = 0;
+    if (this.index === this.colors.length) {
+      // index set to 2 (not 0), to avoid reusing colors of branches 'master' and 'develop'
+      this.index = 2;
     }
     this.index++;
-    return colors[this.index - 1];
+    return this.colors[this.index - 1];
+  }
+
+  initColors () {
+    const { colors } = branchStyle;
+    this.colors = flatMap(colors, hexToBabylonColor);
   }
 
 }
