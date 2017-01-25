@@ -1,6 +1,8 @@
 import BABYLON from 'babylonjs';
 import { ground as groundStyle } from '../style.js';
 import { scene as sceneStyle }from '../style.js';
+import { hexToBabylonColor } from '../utils/ColorUtils';
+
 var vertextShader = require('raw-loader!../shaders/ground.vert');
 var fragmentShader = require('raw-loader!../shaders/ground.frag');
 
@@ -25,7 +27,7 @@ class GroundMaterial extends BABYLON.ShaderMaterial {
   constructor (meshLength, scene) {
     super(config.name + '_material', scene, config.name, options);
     const { maxHeight, flat, wavy, fogDensity, hideWhenScroll, heightMap, texture } = groundStyle;
-    const { color } = sceneStyle;
+    const color = hexToBabylonColor(sceneStyle.color);
     this.update = ::this.update;
 
     this.scene = scene;
