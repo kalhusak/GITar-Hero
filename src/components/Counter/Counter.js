@@ -34,8 +34,7 @@ export default class Counter extends Component {
 
     if (currentValue !== value) {
       this.setState({
-        value: currentValue,
-        animate: currentValue !== to
+        value: currentValue
       });
     }
 

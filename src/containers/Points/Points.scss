@@ -26,33 +26,13 @@
   line-height: 18px;
 }
 
-.points-container__speed-meter {
-  margin: 0 auto;
-  display: block;
+.top__speed-meter {
+  display: flex;
+  justify-content: center;
 }
 
-.points-container__speed-meter-indicator {
-  stroke: white;
-  stroke-width: 1px;
-  opacity: 0.2;
-  transition: opacity 0.2s ease-out;
-}
-
-.points-container__speed-meter-indicator--fill {
-  opacity: 1;
-}
-
-.points-container__lines {
+.top__progress-lines {
   position: absolute;
   top: 90px;
-}
-
-.points-container__line-bg, .points-container__line-fg {
-  stroke: white;
-  stroke-width: 1px;
-  fill: none;
-}
-
-.points-container__line-bg {
-  opacity: 0.2;
+  width: 100%;
 }
