@@ -4,6 +4,7 @@
   border: 1px solid $color-inactive;
   position: relative;
   border-radius: 30%;
+  transition: border-color 0.2s $ease-out-timing-fn;
 }
 
 .checkbox svg {
@@ -19,7 +20,7 @@
   stroke-dasharray: 60 1000;
   stroke-linecap: round;
   stroke-dashoffset: 60;
-  stroke: white;
+  stroke: $color-active;
   transition: stroke-dashoffset 0.2s $ease-out-timing-fn;
   fill: none;
 }

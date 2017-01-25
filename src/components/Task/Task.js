@@ -14,12 +14,11 @@ export default class Task extends Component {
 
     return task.steps.map((step, index) => {
       const done = index < task.currentStepIndex;
+      const active = index === task.currentStepIndex;
 
-      return <div
-        className={'task__step' + (active && index === task.currentStepIndex ? ' task__step--current' : '')}
-        key={index}>
+      return <div className={'task__step' + (active || done ? ' task__step--active' : '')} key={index}>
         <div className='task__step-check'>
-          <Checkbox value={done} />
+          <Checkbox value={done} active={active} />
         </div>
         <div className={'task__step-description' + (done ? ' task__step-description--done' : '')}>
           {step.description}
@@ -29,17 +28,18 @@ export default class Task extends Component {
   }
 
   render () {
-    const { task: { title, time, description }, active } = this.props;
+    const { task: { title, time, description } } = this.props;
 
     return (
       <div className='task'>
-        <div className='task__description'>
-          {description}
-        </div>
         <div className='task__subtasks'>
           {this.renderSubtasks()}
         </div>
       </div>
     );
+
+    // <div className='task__description'>
+    //   {description}
+    // </div>
   }
 };

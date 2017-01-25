@@ -4,6 +4,7 @@ import { values, take } from 'lodash';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './TaskList.scss';
 import Task from '../../components/Task';
+import Loader from '../../components/Loader';
 
 class TaskList extends Component {
 
@@ -24,6 +25,7 @@ class TaskList extends Component {
           transitionLeaveTimeout={400}>
           { this.renderTasks() }
         </ReactCSSTransitionGroup>
+        <Loader />
       </div>
     );
   }
