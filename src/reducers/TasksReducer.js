@@ -11,8 +11,8 @@ export default function tasksReducers (state = {}, action) {
       return onTutorialFinished(cloneDeep(state));
     case commandActions.NEW_VALID_COMMAND:
       return onNewValidCommand(cloneDeep(state));
-    case commandActions.ACTIVATE_NEXT_STEP:
-      return onActivateNextStep(cloneDeep(state));
+    case commandActions.ACTIVATE_STEP:
+      return onActivateStep(cloneDeep(state));
     case taskActions.LAST_STEP_EXECUTED:
       return onLastStepExecuted(cloneDeep(state));
     case taskActions.TOO_FEW_TASKS:
@@ -33,10 +33,13 @@ function onNewValidCommand (state) {
   const task = TaskUtils.getCurrentTask(state);
   TagUtils.onValidCommand(state);
   task.currentStepIndex++;
+  task.pending = true;
   return state;
 }
 
-function onActivateNextStep (state) {
+function onActivateStep (state) {
+  const task = TaskUtils.getCurrentTask(state);
+  task.pending = false;
   return state;
 }
 

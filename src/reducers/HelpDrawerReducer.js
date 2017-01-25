@@ -26,6 +26,10 @@ export default function helpDrawerReducer (state = initialState, { type, payload
       newState.isOpen = false;
       return newState;
 
+    case helpDrawerActions.TOGGLE_HELP_DRAWER:
+      newState.isOpen = !newState.isOpen;
+      return newState;
+
     case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
       newState.autoShowHelp = !newState.autoShowHelp;
       localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);

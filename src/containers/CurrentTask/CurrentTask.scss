@@ -1,7 +1,23 @@
 @import '../variables';
 
 .task {
+  position: fixed;
+  top: 170px;
+  left: 81.25%;
+  width: 18.75%;
+}
 
+.task__heading {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+}
+
+.task__loader {
+  text-align: center;
+  margin-top: 10px;
 }
 
 .task__step {
@@ -12,21 +28,16 @@
   animation: subtask-enter 0.3s $ease-out-timing-fn;
 }
 
-.task__subtasks {
-  margin-top: 40px;
+.task__steps {
+  margin-top: 30px;
 }
 
-.task__description {
-  padding: 10px;
-  margin: 10px;
-  font-size: 11px;
-  font-weight: light;
-}
-
-.task__step-check {
-  display: flex;
-  padding-right: 10px;
-}
+// .task__description {
+//   padding: 10px;
+//   margin: 10px;
+//   font-size: 11px;
+//   font-weight: light;
+// }
 
 .task__step-description {
   display: flex;
@@ -36,6 +47,11 @@
 
 .task__step-description--done {
   text-decoration: line-through;
+}
+
+.task__step-check {
+  display: flex;
+  padding-right: 10px;
 }
 
 @keyframes subtask-enter {

@@ -6,17 +6,17 @@
 }
 
 @keyframes loading {
-  60% {
+  0% {
     transform: translateY(0%);
     fill: $color-inactive;
   }
 
-  80% {
+  20% {
     transform: translateY(-100%);
     fill: $color-active;
   }
 
-  100% {
+  40% {
     transform: translateY(0%);
     fill: $color-inactive;
   }

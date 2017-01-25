@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Provider, connect } from 'react-redux';
 import Canvas from './Canvas';
 import BottomDrawer from './BottomDrawer';
-import TaskList from './TaskList';
+import CurrentTask from './CurrentTask';
 import Points from './Points';
 import Tree from './Tree';
 import TutorialItem from '../components/TutorialItem';
@@ -31,7 +31,7 @@ class AppContainer extends Component {
           <Points />
           <Tree />
           <BottomDrawer />
-          <TaskList />
+          <CurrentTask />
         </div>
       </Provider>
     );
