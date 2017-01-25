@@ -36,7 +36,7 @@ $console-background: rgba(white, 0.05);
   margin: 0px;
   animation: blink 1s infinite steps(1, start);
   background-color: $color-active;
-  color: $color-inactive;
+  color: $color-bg;
 }
 
 .console__cursor--moving {
@@ -73,6 +73,6 @@ $console-background: rgba(white, 0.05);
   }
   50% {
       background-color: $color-active;
-      color: $color-inactive;
+      color: $color-bg;
   }
 }
