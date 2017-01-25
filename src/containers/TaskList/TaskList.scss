@@ -2,17 +2,17 @@ $timing-fn: cubic-bezier(0,.78,.78,.94);
 
 .task-list {
   position: fixed;
-  right: 20px;
-  top: 0px;
-  height: calc(100% - 120px);
+  top: 170px;
+  left: 81.25%;
+  width: 18.75%;
 }
 
 .task-list__label {
-  font-size: 18px;
-  height: 100px;
-  line-height: 100px;
+  font-size: 12px;
+  text-transform: uppercase;
   color: white;
-  text-align: center;
+  font-weight: 100;
+  letter-spacing: 0.2em;
 }
 
 .task-list__task-enter {

@@ -31,6 +31,7 @@ class AppContainer extends Component {
           <Points />
           <Tree />
           <BottomDrawer />
+          <TaskList />
         </div>
       </Provider>
     );

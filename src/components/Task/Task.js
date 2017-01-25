@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Time from '../Time';
-import Check from '../Check';
+import Checkbox from '../Checkbox';
 import './Task.scss';
 
 export default class Task extends Component {
@@ -20,7 +19,7 @@ export default class Task extends Component {
         className={'task__step' + (active && index === task.currentStepIndex ? ' task__step--current' : '')}
         key={index}>
         <div className='task__step-check'>
-          <Check checked={done} size={24} />
+          <Checkbox value={done} />
         </div>
         <div className={'task__step-description' + (done ? ' task__step-description--done' : '')}>
           {step.description}
@@ -34,7 +33,6 @@ export default class Task extends Component {
 
     return (
       <div className='task'>
-        <Time label={title} time={time * 1000} active={active} />
         <div className='task__description'>
           {description}
         </div>

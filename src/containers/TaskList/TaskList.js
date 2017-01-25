@@ -16,7 +16,7 @@ class TaskList extends Component {
     return (
       <div className='task-list'>
         <div className='task-list__label'>
-          upcoming tasks:
+          Upcoming tasks
         </div>
         <ReactCSSTransitionGroup
           transitionName='task-list__task'
