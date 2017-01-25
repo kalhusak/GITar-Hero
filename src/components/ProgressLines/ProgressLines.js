@@ -31,7 +31,7 @@ export default class ProgressLines extends Component {
     const { from, to, start, value } = this.state;
     const elapsedTime = Date.now() - start;
     const elapsedFract = easeOut(Math.min(elapsedTime, this.getTransitionTime()) / this.getTransitionTime());
-    const currentValue = from + Math.round(elapsedFract * (to - from));
+    const currentValue = from + elapsedFract * (to - from);
 
     if (currentValue !== value) {
       this.setState({
@@ -51,7 +51,7 @@ export default class ProgressLines extends Component {
     if (to !== this.props.value) {
       this.setState({
         from,
-        to,
+        to: Math.min(to, 1),
         start: Date.now()
       });
 

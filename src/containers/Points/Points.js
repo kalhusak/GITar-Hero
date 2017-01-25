@@ -14,7 +14,7 @@ class Points extends Component {
 
   renderLines () {
     return <div className='top__progress-lines'>
-      <ProgressLines value={0.8} />
+      <ProgressLines value={this.props.progress} />
     </div>;
   }
 
@@ -37,8 +37,12 @@ class Points extends Component {
 };
 
 export default connect(({ points, tasks }) => {
+  const task = tasks.byId[tasks.current];
+  const progress = task ? task.currentStepIndex / task.steps.length : 0;
+
   return {
     points: points.value,
-    task: tasks.byId[tasks.current]
+    progress,
+    time: task.time
   };
 })(Points);
