@@ -3,8 +3,10 @@
 .task {
   position: fixed;
   top: 170px;
-  left: 81.25%;
+  left: calc(81.25% - 20px);
   width: 18.75%;
+  height: calc(100% - 270px);
+  overflow-y: hidden;
 }
 
 .task__heading {
@@ -13,6 +15,7 @@
   color: white;
   font-weight: 100;
   letter-spacing: 0.2em;
+  margin: 0px;
 }
 
 .task__loader {
@@ -29,15 +32,8 @@
 }
 
 .task__steps {
-  margin-top: 30px;
+  margin-top: 10px;
 }
-
-// .task__description {
-//   padding: 10px;
-//   margin: 10px;
-//   font-size: 11px;
-//   font-weight: light;
-// }
 
 .task__step-description {
   display: flex;
@@ -64,4 +60,28 @@
     transform: translateX(0px);
     opacity: 1;
   }
+}
+
+.task__animate {
+  position: absolute;
+  top: 46px;
+}
+
+.task__animate-enter {
+  transform: translateX(300px);
+  transition: transform 0.4s $ease-out-timing-fn;
+}
+
+.task__animate-enter.task__animate-enter-active {
+  transform: translateX(0px);
+}
+
+.task__animate-leave {
+  transform: translateX(0px);
+  transition: all 0.4s $ease-out-timing-fn;
+}
+
+.task__animate-leave.task__animate-leave-active {
+  transform: translateX(-300px);
+  opacity: 0;
 }
