@@ -1,4 +1,4 @@
-$line-color: rgba(white, 0.2);
+@import '../variables';
 
 .tree {
   width: 300px;
@@ -56,18 +56,32 @@ $line-color: rgba(white, 0.2);
   letter-spacing: 0.1em;
 }
 
-.tree__item-name--directory {
-  top: -5px;
-}
-
 .tree__file-branch, .tree__directory-branch {
   width: 15px;
-  border-top: 1px solid $line-color;
+  border-top: 1px solid $color-inactive;
   height: 100%;
 }
 
 .tree__directory-branch:not(:last-child) {
-  border-right: 1px solid $line-color;
+  border-right: 1px solid $color-inactive;
+}
+
+.tree__directory-branch--hidden {
+  transition: border-right-color 0s linear 1.5s;
+  border-right-color: transparent !important;
+}
+
+.tree__directory-content-wrapper {
+  padding-top: 10px;
+  margin-top: -10px;
+  overflow: hidden;
+  transition: all 0.3s $ease-out-timing-fn;
+}
+
+.tree__directory-content-wrapper--wrapped {
+  max-height: 0px !important;
+  transition-delay: 1.5s;
+  opacity: 0;
 }
 
 .tree__item {
@@ -75,10 +89,23 @@ $line-color: rgba(white, 0.2);
 }
 
 .tree__item:not(:last-child) {
-  border-left: 1px solid $line-color;
+  border-left: 1px solid $color-inactive;
 }
 
 .tree__item-inner {
   height: 23px;
   display: flex;
+}
+
+.tree__dropdown-icon {
+  opacity: 0.5;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  transition: transform 0.3s $ease-out-timing-fn;
+}
+
+.tree__dropdown-icon--closed {
+  transform: rotate(180deg);
+  transition-delay: 1.5s;
 }

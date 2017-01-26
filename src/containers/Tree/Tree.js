@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pick } from 'lodash';
 import File from '../../components/File';
+import { hasFilesToShow, itemsCount } from '../../utils/TreeUtils';
+import dropdownIcon from '../../static/dropdown.svg';
 import './Tree.scss';
 
 class Tree extends Component {
@@ -14,22 +16,33 @@ class Tree extends Component {
     </div>;
   }
 
-  renderDirectory ({ name, children }, nestLevel) {
+  renderDirectory ({ name, children }) {
+    const showDirectoryContent = hasFilesToShow(children);
+    const wrapperStyle = {
+      maxHeight: `${itemsCount(children) * 23}px`
+    };
+    const wrapperClass = 'tree__directory-content-wrapper' +
+      (showDirectoryContent ? '' : ' tree__directory-content-wrapper--wrapped');
+
     return <div>
       <div className='tree__item-inner'>
-        <div className='tree__directory-branch' />
-        <div className='tree__item-name tree__item-name--directory'>
+        <div className={'tree__directory-branch' + (showDirectoryContent ? '' : ' tree__directory-branch--hidden')} />
+        <div className='tree__item-name'>
+          <img src={dropdownIcon}
+            className={'tree__dropdown-icon' + (showDirectoryContent ? '' : ' tree__dropdown-icon--closed')} />
           {name}
         </div>
       </div>
-      {this.renderRecursively(children, nestLevel + 1)}
+      <div className={wrapperClass} style={wrapperStyle}>
+        {this.renderRecursively(children)}
+      </div>
     </div>;
   }
 
-  renderRecursively (items = [], nestLevel = 0) {
+  renderRecursively (items = []) {
     return items.map((item, index) => {
       return <div key={index} className='tree__item'>
-        {item.children ? this.renderDirectory(item, nestLevel) : this.renderFile(item)}
+        {item.children ? this.renderDirectory(item) : this.renderFile(item)}
       </div>;
     });
   }
