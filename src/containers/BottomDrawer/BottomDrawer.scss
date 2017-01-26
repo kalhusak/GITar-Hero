@@ -48,6 +48,7 @@
   background: rgba($color-active, 0.1);
   align-items: center;
   height: 0px;
+  opacity: 0;
   transition: background 0.2s $ease-out-timing-fn, height 0.5s $ease-out-timing-fn;
   cursor: pointer;
   display: flex;
@@ -60,6 +61,7 @@
 
 .bottom-drawer__info--active {
   height: 50px;
+  opacity: 1;
 
   .bottom-drawer__info-icon {
     animation: bulb-pulse 0.6s linear;
@@ -139,6 +141,7 @@
   padding-right: 30px;
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .help-container__git-command {
@@ -150,6 +153,7 @@
 
 .help-container__tab-wrapper {
   display: flex;
+  overflow: hidden;
 }
 
 .help-container__tab-wrapper>div {
