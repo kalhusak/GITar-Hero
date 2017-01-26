@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import ReactCCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { take } from 'lodash';
+import { take, reverse } from 'lodash';
 import Checkbox from '../../components/Checkbox';
 import Loader from '../../components/Loader';
+import Panel from '../../components/Panel';
 import './CurrentTask.scss';
 
 class CurrentTask extends Component {
@@ -12,7 +14,7 @@ class CurrentTask extends Component {
 
     const stepsNum = task.currentStepIndex + (task.pending ? 0 : 1);
 
-    return take(task.steps, stepsNum).map((step, index) => {
+    return reverse(take(task.steps, stepsNum).map((step, index) => {
       const done = index < task.currentStepIndex;
       const active = index === task.currentStepIndex;
 
@@ -28,7 +30,7 @@ class CurrentTask extends Component {
           {step.description}
         </div>
       </div>;
-    });
+    }));
   }
 
   renderTask () {
@@ -49,8 +51,18 @@ class CurrentTask extends Component {
     return (
       <div className='task'>
         <h2 className='task__heading'>Current task</h2>
-        {this.renderTask()}
-        {this.renderLoader()}
+        <ReactCCSSTransitionGroup
+          transitionName='task__animate'
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
+          <div key={this.props.task.id} className='task__animate'>
+            <Panel className='task__description' title={this.props.task.title}>
+              {this.props.task.description}
+            </Panel>
+            {this.renderLoader()}
+            {this.renderTask()}
+          </div>
+        </ReactCCSSTransitionGroup>
       </div>
     );
   }
