@@ -28,13 +28,16 @@ class AppContainer extends Component {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-          <Canvas store={this.props.store} />
-          <Top />
-          <Tree />
-          <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen}>
-            <BottomDrawer />
-          </TutorialItem>
-          <CurrentTask />
+          <Tutorial blur={this.props.helpDrawer.isOpen}
+            message={null} onClose={this.onTutorialClose}>
+            <Canvas store={this.props.store} />
+            <Top />
+            <Tree />
+            <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen}>
+              <BottomDrawer />
+            </TutorialItem>
+            <CurrentTask />
+          </Tutorial>
         </div>
       </Provider>
     );

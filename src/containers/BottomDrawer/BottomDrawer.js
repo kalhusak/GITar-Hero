@@ -11,6 +11,7 @@ import { closeHelpDrawer,
   toggleAutoShowHelp } from '../../actions/HelpDrawerActions';
 import helpTabs from './helpTabs';
 import './BottomDrawer.scss';
+import bulbIcon from '../../static/bulb.svg';
 
 class BottomDrawer extends Component {
   constructor (props) {
@@ -153,6 +154,13 @@ class BottomDrawer extends Component {
           files={this.props.tree}
           branches={['develop', 'master']}
           onCommandEnter={this.onConsoleCommandEnter} />
+        <div className={'bottom-drawer__info' + (this.props.helpDrawer.info ? ' bottom-drawer__info--active' : '')}>
+          <div className='bottom-drawer__info-icon-container'>
+            <img src={bulbIcon} className='bottom-drawer__info-icon' />
+          </div>
+          Need help with <span className='bottom-drawer__info-command'>{this.props.helpDrawer.selectedTab}</span>?
+          Click here or type <span className='bottom-drawer__info-command'>help</span> in console!
+        </div>
         <div className='bottom-drawer__help-container'>
           <nav className='help-container__nav'>
             {this.renderTabNavigation()}

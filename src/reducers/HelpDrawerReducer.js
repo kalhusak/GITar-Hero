@@ -6,7 +6,7 @@ import { getFromStorage } from '../utils/LocalStorageHelper';
 
 const initialState = {
   isOpen: false,
-  autoShowHelp: getFromStorage('autoShowHelp'),
+  info: false,
   selectedTab: 'repo'
 };
 
@@ -35,12 +35,14 @@ export default function helpDrawerReducer (state = initialState, { type, payload
       localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);
       return newState;
 
-    case commandActions.NEW_INVALID_COMMAND:
-      if (payload.command === 'help') {
-        newState.isOpen = !newState.isOpen;
-        return newState;
-      }
-      return state;
+    case helpDrawerActions.SHOW_HELP_DRAWER_INFO:
+      newState.info = true;
+      newState.selectedTab = payload.tab;
+      return newState;
+
+    case commandActions.NEW_VALID_COMMAND:
+      newState.info = false;
+      return newState;
 
     case helpDrawerActions.NEXT_HELP_DRAWER_TAB:
       const nextTabIndex = findIndex(helpTabs, { name: state.selectedTab }) + 1;
