@@ -47,9 +47,21 @@ class CurrentTask extends Component {
     }
   }
 
+  onWheel (event) {
+    event.stopPropagation();
+  }
+
+  componentDidMount () {
+    this.refs.task.addEventListener('wheel', this.onWheel);
+  }
+
+  componentWillUnmount () {
+    this.refs.task.removeEventListener('wheel', this.onWheel);
+  }
+
   render () {
     return (
-      <div className='task'>
+      <div ref='task' className='task'>
         <h2 className='task__heading'>Current task</h2>
         <ReactCCSSTransitionGroup
           transitionName='task__animate'
