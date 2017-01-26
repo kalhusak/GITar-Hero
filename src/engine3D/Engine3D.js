@@ -32,7 +32,10 @@ class Engine3D extends BABYLON.Engine {
 
 
      var pipeline2 = new BABYLON.StandardRenderingPipeline("standard", this.scene, 1.0 / devicePixelRatio, null, [this.camera]);
-     pipeline2.lensFlareDirtTexture = new BABYLON.Texture("http://i.imgur.com/VPxsJ2G.png", this.scene);
+     pipeline2.lensStarTexture = new BABYLON.Texture("http://i.imgur.com/VPxsJ2G.png", this.scene);
+     //pipeline2.lensStarTexture = new BABYLON.Texture("http://i.imgur.com/JFmRDHI.png", this.scene);
+
+
      pipeline2.lensColorTexture = new BABYLON.Texture("http://i.imgur.com/JPeKWEB.png", this.scene);
      pipeline2.lensFlareDistortionStrength = 10;
      pipeline2.depthOfFieldDistance = 6;
@@ -41,6 +44,12 @@ class Engine3D extends BABYLON.Engine {
      pipeline2.gaussianCoefficient = 0.08;
      pipeline2.blurWidth = 10;
 
+
+     var lensEffect = new BABYLON.LensRenderingPipeline('lens', {
+       edge_blur: 1.0,
+       dof_focus_distance: 50,
+       dof_darken: 0.7
+     }, this.scene, 1.0, this.camera);
 
 
     this.renderLoop();
