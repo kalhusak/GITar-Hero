@@ -42,7 +42,32 @@ class BottomDrawer extends Component {
   }
 
   renderCurrentTab () {
-    return find(helpTabs, { name: this.props.helpDrawer.selectedTab }).content;
+    const current = find(helpTabs, { name: this.props.helpDrawer.selectedTab });
+
+    if (this.prevTab && this.prevTab !== this.props.helpDrawer.selectedTab) {
+      const prev = find(helpTabs, { name: this.prevTab });
+
+      setTimeout(() => {
+        this.prevTab = null;
+        requestAnimationFrame(() => this.forceUpdate());
+      }, 350);
+
+      if (helpTabs.indexOf(prev) < helpTabs.indexOf(current)) {
+        return <div className='help-container__tab-wrapper help-container__tab-wrapper--swipe-left'>
+          {prev.content}
+          {current.content}
+        </div>;
+      } else {
+        return <div className='help-container__tab-wrapper help-container__tab-wrapper--swipe-right'>
+          {current.content}
+          {prev.content}
+        </div>;
+      }
+    }
+
+    return <div className='help-container__tab-wrapper'>
+      {current.content}
+    </div>;
   }
 
   handleKeyDown ({ target, keyCode }) {
@@ -91,6 +116,12 @@ class BottomDrawer extends Component {
 
   onConsoleCommandEnter (command) {
     this.props.dispatch(enterCommand(command));
+  }
+
+  componentWillReceiveProps ({ helpDrawer }) {
+    if (this.props.helpDrawer.isOpen && this.props.helpDrawer.selectedTab !== helpDrawer.selectedTab) {
+      this.prevTab = this.props.helpDrawer.selectedTab;
+    }
   }
 
   render () {

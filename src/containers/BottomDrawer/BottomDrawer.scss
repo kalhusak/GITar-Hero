@@ -1,3 +1,5 @@
+@import '../variables';
+
 .bottom-drawer__container {
   position: fixed;
   bottom: 0px;
@@ -14,7 +16,7 @@
   bottom: 100%;
   height: 40px;
   width: 230px;
-  background: rgba(black, 0.9);
+  background: rgba(white, 0.05);
   display: flex;
   align-items: center;
   border-radius: 4px 0px 0px 0px;
@@ -86,7 +88,6 @@
   height: 100%;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease-out;
   background: white;
   top: 0;
   left: 0;
@@ -95,48 +96,54 @@
 
 .bottom-drawer__overlay--visible {
   pointer-events: all;
-  opacity: 0.7;
 }
 
 .bottom-drawer__help-container {
   width: 100%;
   height: 300px;
   padding-bottom: 30px;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba($color-bg, 0.3);
   display: flex;
   flex-direction: column;
+  font-size: 12px;
 }
 
 .help-container__nav {
-  width: 100%;
+  width: 70%;
+  padding: 0 15%;
   text-align: center;
 }
 
 .help-container__nav-item {
-  font-family: monospace;
-  color: white;
-  font-size: 18px;
-  line-height: 26px;
+  background: rgba(white, 0.9);
+  font-family: 'Source Code Pro';
   font-weight: bold;
-  margin: 0 15px;
+  color: rgba(black, 0.9);
+  border-radius: 5px;
+  padding: 2px 4px;
+  margin: 8px 4px 0;
   cursor: pointer;
+  display: inline-block;
+  opacity: 0.4;
+  transition: opacity 0.2s $ease-out-timing-fn;
 }
 
 .help-container__nav-item--active {
-  border-bottom: 2px solid white;
+  opacity: 1;
 }
 
 .help-container__current-tab {
-  font-size: 16px;
-  font-family: monospace;
   color: white;
   margin: 15px auto;
   width: 70%;
   overflow: hidden;
   height: 100%;
+  letter-spacing: 0.1em;
+  line-height: 16px;
+  color: rgba(white, 0.7);
 
   p {
-    margin: 20px 0;
+    margin: 10px 0;
   }
 }
 
@@ -153,8 +160,47 @@
 
 .help-container__git-command {
   display: inline-block;
-  background: white;
-  color: black;
-  padding: 3px;
-  margin: 5px 0;
+  font-weight: bold;
+  color: white;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.help-container__tab-wrapper {
+  display: flex;
+}
+
+.help-container__tab-wrapper>div {
+  width: 100%;
+}
+
+.help-container__tab-wrapper--swipe-left, .help-container__tab-wrapper--swipe-right {
+  width: 200%;
+}
+
+.help-container__tab-wrapper--swipe-left {
+  animation: tab-swipe-left 0.4s $ease-out-timing-fn;
+}
+
+.help-container__tab-wrapper--swipe-right {
+  animation: tab-swipe-right 0.4s $ease-out-timing-fn;
+}
+
+@keyframes tab-swipe-left {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes tab-swipe-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
 }

@@ -1,31 +1,22 @@
-.tutorial__overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  transition: background 0.8s ease-out;
-  background: white;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
+@import '../variables';
 
-.tutorial.tutorial--active {
+.tutorial.tutorial--blur {
   &>* {
     filter: blur(0px);
-    transition: filter 0.5s ease-out;
+    transition: filter 0.3s $ease-out-timing-fn;
   }
 
   &>*:not(.tutorial__active-item) {
     filter: blur(10px);
   }
 
-  &>*.tutorial__active-item:not(.tutorial__overlay):not(.tutorial__box) {
-    pointer-events: none;
-  }
-
   .tutorial__active-item {
     z-index: 3;
   }
+}
+
+.tutorial.tutorial--active>*.tutorial__active-item:not(.tutorial__box) {
+  pointer-events: none;
 }
 
 .tutorial__active-item {

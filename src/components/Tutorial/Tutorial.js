@@ -4,7 +4,8 @@ import './Tutorial.scss';
 
 export default class Tutorial extends Component {
   static propTypes = {
-    show: PropTypes.string,
+    blur: PropTypes.bool,
+    message: PropTypes.string,
     onClose: PropTypes.func.isRequired
   };
 
@@ -28,15 +29,9 @@ export default class Tutorial extends Component {
     document.body.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  renderOverlay () {
-    if (this.props.show) {
-      return <div className='tutorial__overlay tutorial__active-item' />;
-    }
-  }
-
   renderTutorialBox () {
-    if (this.props.show) {
-      const tutorial = tutorials[this.props.show];
+    if (this.props.message) {
+      const tutorial = tutorials[this.props.message];
 
       if (tutorial) {
         return <div className='tutorial__box tutorial__active-item' style={tutorial.style}>
@@ -52,8 +47,17 @@ export default class Tutorial extends Component {
   }
 
   render () {
-    return <div className={'tutorial' + (this.props.show ? ' tutorial--active' : '')}>
-      {this.renderOverlay()}
+    const tutorialClasses = ['tutorial'];
+
+    if (this.props.blur) {
+      tutorialClasses.push('tutorial--blur');
+    }
+
+    if (this.props.message) {
+      tutorialClasses.push('tutorial--active');
+    }
+
+    return <div className={tutorialClasses.join(' ')}>
       {this.renderTutorialBox()}
       {this.props.children}
     </div>;

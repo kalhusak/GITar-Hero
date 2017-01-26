@@ -31,12 +31,17 @@ class AppContainer extends Component {
           <Canvas store={this.props.store} />
           <Top />
           <Tree />
-          <BottomDrawer />
+          <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen}>
+            <BottomDrawer />
+          </TutorialItem>
           <CurrentTask />
         </div>
       </Provider>
     );
   }
+
+  // <Tutorial blur={this.props.helpDrawer.isOpen}
+  //   message={null} onClose={this.onTutorialClose}>
 
   // <Tutorial show={this.props.tutorial} onClose={this.onTutorialClose}>
   // <Canvas store={this.props.store} />
@@ -52,4 +57,9 @@ class AppContainer extends Component {
   // </Tutorial>
 }
 
-export default connect(state => ({ tutorial: state.tutorial.current }))(AppContainer);
+export default connect(({ tutorial, helpDrawer }) => {
+  return {
+    tutorial: tutorial.current,
+    helpDrawer
+  };
+})(AppContainer);
