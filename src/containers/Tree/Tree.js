@@ -54,9 +54,15 @@ class Tree extends Component {
   }
 
   renderEmptyState () {
-    if (this.props.tree.length === 0) {
-      return <div className='tree__empty-state'>directory is empty :-(</div>;
-    }
+    return <div className='tree__empty-state'>directory is empty :-(</div>;
+  }
+
+  renderTree () {
+    return <div className='tree__scroller'>
+      <div className='tree__inner'>
+        { this.renderItems() }
+      </div>
+    </div>;
   }
 
   onWheel (event) {
@@ -64,23 +70,18 @@ class Tree extends Component {
   }
 
   componentDidMount () {
-    this.refs.scroller.addEventListener('wheel', this.onWheel);
+    this.refs.tree.addEventListener('wheel', this.onWheel);
   }
 
   componentWillUnmount () {
-    this.refs.scroller.removeEventListener('wheel', this.onWheel);
+    this.refs.tree.removeEventListener('wheel', this.onWheel);
   }
 
   render () {
     return (
-      <div className='tree'>
+      <div ref='tree' className='tree'>
         <h2 className='tree__heading'>working tree</h2>
-        <div ref='scroller' className='tree__scroller'>
-          <div className='tree__inner'>
-            { this.renderItems() }
-          </div>
-        </div>
-        { this.renderEmptyState() }
+        { this.props.tree.length === 0 ? this.renderEmptyState() : this.renderTree() }
       </div>
     );
   }
