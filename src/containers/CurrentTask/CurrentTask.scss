@@ -29,7 +29,7 @@
   padding: 8px 0px;
   align-items: center;
   color: $color-active;
-  animation: subtask-enter 0.3s $ease-out-timing-fn;
+  animation: subtask-enter 0.2s $ease-out-timing-fn;
 }
 
 .task__steps {
@@ -56,12 +56,12 @@
 
 @keyframes subtask-enter {
   from {
-    transform: translateX(200px);
+    transform: translateY(-100px);
     opacity: 0;
   }
 
   to {
-    transform: translateX(0px);
+    transform: translateY(0px);
     opacity: 1;
   }
 }
@@ -76,20 +76,23 @@
 }
 
 .task__animate-enter {
-  transform: translateX(300px);
+  transform: translateY(-300px);
+  opacity: 0;
   transition: transform 0.4s $ease-out-timing-fn;
 }
 
 .task__animate-enter.task__animate-enter-active {
-  transform: translateX(0px);
+  transform: translateY(0px);
+  opacity: 1;
 }
 
 .task__animate-leave {
-  transform: translateX(0px);
+  transform: translateY(0px);
+  opacity: 1;
   transition: all 0.4s $ease-out-timing-fn;
 }
 
 .task__animate-leave.task__animate-leave-active {
-  transform: translateX(-300px);
+  transform: translateY(300px);
   opacity: 0;
 }
