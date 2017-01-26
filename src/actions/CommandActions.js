@@ -46,7 +46,7 @@ export const newValidCommand = (command, step) => (dispatch, getState) => {
 
   const newTag = TagUtils.getNewTag(getState().tasks);
   if (newTag && TagUtils.isHelpTabForTag(newTag)) {
-    dispatch(helpDrawerActions.autoOpenHelpDrawerTab(newTag));
+    dispatch(helpDrawerActions.showHelpDrawerInfo(newTag));
   }
 };
 

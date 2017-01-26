@@ -2,7 +2,6 @@ import { cloneDeep, findIndex } from 'lodash';
 import * as commandActions from '../actions/CommandActions';
 import * as helpDrawerActions from '../actions/HelpDrawerActions';
 import helpTabs from '../containers/BottomDrawer/helpTabs';
-import { getFromStorage } from '../utils/LocalStorageHelper';
 
 const initialState = {
   isOpen: false,
@@ -15,12 +14,13 @@ export default function helpDrawerReducer (state = initialState, { type, payload
 
   switch (type) {
     case helpDrawerActions.SELECT_HELP_DRAWER_TAB:
-      if (state.autoShowHelp || !payload.auto || state.isOpen) {
-        newState.isOpen = true;
-        newState.selectedTab = payload.tab;
-        return newState;
-      }
-      return state;
+      newState.selectedTab = payload.tab;
+      return newState;
+
+    case helpDrawerActions.OPEN_HELP_DRAWER:
+      newState.isOpen = true;
+      newState.info = false;
+      return newState;
 
     case helpDrawerActions.CLOSE_HELP_DRAWER:
       newState.isOpen = false;
@@ -28,11 +28,6 @@ export default function helpDrawerReducer (state = initialState, { type, payload
 
     case helpDrawerActions.TOGGLE_HELP_DRAWER:
       newState.isOpen = !newState.isOpen;
-      return newState;
-
-    case helpDrawerActions.TOGGLE_AUTO_SHOW_OPTION:
-      newState.autoShowHelp = !newState.autoShowHelp;
-      localStorage.autoShowHelp = JSON.stringify(newState.autoShowHelp);
       return newState;
 
     case helpDrawerActions.SHOW_HELP_DRAWER_INFO:

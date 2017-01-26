@@ -5,8 +5,8 @@ import * as TaskUtils from '../utils/TaskUtils';
 import Config from '../config';
 
 export const enterCommand = command => (dispatch, getState) => {
-  if (command === 'help') {
-    dispatch(helpDrawerActions.toggleHelpDrawer());
+  if (command === 'help' && !getState().helpDrawer.isOpen) {
+    dispatch(helpDrawerActions.openHelpDrawer());
   } else {
     const currentStep = TaskUtils.getCurrentStep(getState().tasks);
     const isValid = CommandResolver.checkIsCommandAllowed(command, currentStep.commands);
