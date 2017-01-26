@@ -18,6 +18,31 @@ class Engine3D extends BABYLON.Engine {
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
     this.ground = new Ground(this.camera, this.scene);
+
+        /* var pipeline = new BABYLON.StandardRenderingPipeline("standard", scene, 1.0 / devicePixelRatio, null, [camera]);
+     pipeline.lensStarTexture = new BABYLON.Texture("http://i.imgur.com/TjGJJKM.png", scene);
+     pipeline.lensColorTexture = new BABYLON.Texture("http://i.imgur.com/fkaUumP.png", scene);
+     //pipeline.lensFlareDistortionStrength = 1;
+    //  pipeline.depthOfFieldDistance =1;
+     pipeline.LensFlareEnabled = true;
+     pipeline.lensFlareStength = 1;
+     pipeline.gaussianCoefficient = 0.2;*/
+
+
+
+
+     var pipeline2 = new BABYLON.StandardRenderingPipeline("standard", this.scene, 1.0 / devicePixelRatio, null, [this.camera]);
+     pipeline2.lensFlareDirtTexture = new BABYLON.Texture("http://i.imgur.com/VPxsJ2G.png", this.scene);
+     pipeline2.lensColorTexture = new BABYLON.Texture("http://i.imgur.com/JPeKWEB.png", this.scene);
+     pipeline2.lensFlareDistortionStrength = 10;
+     pipeline2.depthOfFieldDistance = 6;
+     pipeline2.LensFlareEnabled = true;
+     pipeline2.lensFlareStength = 1;
+     pipeline2.gaussianCoefficient = 0.08;
+     pipeline2.blurWidth = 10;
+
+
+
     this.renderLoop();
   }
 
