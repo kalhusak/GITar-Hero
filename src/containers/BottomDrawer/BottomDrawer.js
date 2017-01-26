@@ -145,23 +145,24 @@ class BottomDrawer extends Component {
       <div className={getClasses('bottom-drawer__overlay')} onClick={this.closeDrawer}
         style={preventInitialAnimation} />
 
-      <div className={getClasses('bottom-drawer__container') +
-        (this.props.helpDrawer.info ? ' bottom-drawer__container--info' : '')}
+      <div className={getClasses('bottom-drawer__container')}
         style={preventInitialAnimation}>
+
+        <div className={'bottom-drawer__info' + (this.props.helpDrawer.info ? ' bottom-drawer__info--active' : '')}
+          onClick={this.openDrawer}>
+          <div className='bottom-drawer__info-icon-container'>
+            <img src={bulbIcon} className='bottom-drawer__info-icon' />
+          </div>
+          Need help with <span className='bottom-drawer__info-command'>{this.props.helpDrawer.selectedTab}</span>?
+          Click here or type <span className='bottom-drawer__info-command'>help</span> in console!
+        </div>
+
         <div onClick={this.closeDrawer}>
           <Console
             enabled={!this.props.tutorial.current}
             files={this.props.tree}
             branches={['develop', 'master']}
             onCommandEnter={this.onConsoleCommandEnter} />
-        </div>
-
-        <div className='bottom-drawer__info' onClick={this.openDrawer}>
-          <div className='bottom-drawer__info-icon-container'>
-            <img src={bulbIcon} className='bottom-drawer__info-icon' />
-          </div>
-          Need help with <span className='bottom-drawer__info-command'>{this.props.helpDrawer.selectedTab}</span>?
-          Click here or type <span className='bottom-drawer__info-command'>help</span> in console!
         </div>
 
         <div className='bottom-drawer__help-container'>
