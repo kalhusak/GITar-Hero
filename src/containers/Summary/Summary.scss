@@ -1,0 +1,61 @@
+@import '../../variables';
+
+.summary {
+  position: fixed;
+  top: 200px;
+  left: 30%;
+  width: 40%;
+  animation: summary-show 2s $ease-out-timing-fn;
+  background: rgba($color-bg/1.5, 0.9);
+  border-radius: 25px;
+  padding: 4px 0px 10px;
+}
+
+.summary__heading {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 200;
+  letter-spacing: 0.4em;
+  text-align: center;
+}
+
+.summary__content {
+  font-size: 15px;
+  color: white;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  padding: 4px 20px;
+  text-align: center;
+
+  .summary__tasks-completed{
+    font-weight: bold;
+  }
+  .summary__points{
+    font-weight: bold;
+  }
+}
+
+.summary__stats{
+  font-size: 12px;
+  padding-top: 4px;
+  text-align: justify;
+  .summary__tag{
+    font-size: 12px;
+    .summary__tag-name{
+      text-transform: uppercase;
+    }
+  }
+}
+
+@keyframes summary-show {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

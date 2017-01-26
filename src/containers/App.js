@@ -5,6 +5,7 @@ import BottomDrawer from './BottomDrawer';
 import CurrentTask from './CurrentTask';
 import Top from './Top';
 import Tree from './Tree';
+import Summary from './Summary';
 import Tutorial from './Tutorial';
 import BlurItem from '../components/BlurItem';
 import './App.scss';
@@ -43,6 +44,7 @@ class App extends Component {
             <BottomDrawer />
           </BlurItem>
           <Tutorial />
+          <Summary />
         </div>
       </Provider>
     );

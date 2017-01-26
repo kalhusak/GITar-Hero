@@ -6,6 +6,7 @@ import helpDrawerReducer from './HelpDrawerReducer';
 import pointsReducer from './PointsReducer';
 import treeReducer from './TreeReducer';
 import tutorialReducer from './TutorialReducer';
+import summaryReducer from './SummaryReducer';
 
 const rootReducer = combineReducers({
   console: consoleReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   helpDrawer: helpDrawerReducer,
   tree: treeReducer,
   points: pointsReducer,
-  tutorial: tutorialReducer
+  tutorial: tutorialReducer,
+  summary: summaryReducer
 });
 
 export default rootReducer;
