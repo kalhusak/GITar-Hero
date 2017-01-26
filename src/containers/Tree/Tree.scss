@@ -7,6 +7,9 @@
   left: 6.25%;
   box-sizing: border-box;
   overflow: hidden;
+  height: calc(100% - 270px);
+  display: flex;
+  flex-direction: column;
 }
 
 .tree__inner {
@@ -36,10 +39,10 @@
 }
 
 .tree__empty-state {
-  margin-top: -20px;
   font-size: 12px;
   color: rgba(white, 0.2);
   letter-spacing: 0.1em;
+  margin-top: 30px;
 }
 
 .tree__item-name {
