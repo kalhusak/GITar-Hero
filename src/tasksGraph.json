@@ -5,7 +5,7 @@
       "children": [],
       "task": {
         "title": "Merge release into develop",
-        "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are some changes on the remote that you don't have.",
+        "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are changes on the remote that you don't have.",
         "steps": [
           {
             "description": "Return to develop",
@@ -894,7 +894,7 @@
       ],
       "task": {
         "title": "Development branch",
-        "description": "I's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
+        "description": "It's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
         "steps": [
           {
             "description": "Create a new branch called \"develop\"",
@@ -1472,7 +1472,7 @@
             }
           },
           {
-            "description": "Remote repository doesn't have any commits you don't have. Push your changes to it.",
+            "description": "There weren't any commits in the remote that you wouldn't already have. Push your changes to remote.",
             "commands": [
               "git push origin develop",
               "git push 'origin' 'develop'",
