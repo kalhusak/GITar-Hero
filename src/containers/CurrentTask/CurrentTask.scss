@@ -1,0 +1,105 @@
+@import '../variables';
+
+.task {
+  position: fixed;
+  top: 170px;
+  left: calc(81.25% - 20px);
+  width: 18.75%;
+  height: calc(100% - 270px);
+  display: flex;
+  flex-direction: column;
+}
+
+.task__heading {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  margin: 0px;
+}
+
+.task__empty-state {
+  font-size: 12px;
+  color: rgba(white, 0.2);
+  letter-spacing: 0.1em;
+  margin-top: 30px;
+}
+
+.task__loader {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.task__step {
+  display: flex;
+  padding: 8px 0px;
+  align-items: center;
+  color: $color-active;
+  animation: subtask-enter 0.2s $ease-out-timing-fn;
+}
+
+.task__steps {
+  margin-top: 10px;
+  overflow-y: auto;
+  width: 100%;
+  padding-right: 30px;
+}
+
+.task__step-description {
+  display: flex;
+  font-size: 12px;
+  padding-right: 10px;
+}
+
+.task__step-description--done {
+  text-decoration: line-through;
+}
+
+.task__step-check {
+  display: flex;
+  padding-right: 10px;
+}
+
+@keyframes subtask-enter {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.task__animate {
+  top: 46px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 46px);
+  overflow-x: hidden;
+}
+
+.task__animate-enter {
+  transform: translateY(-300px);
+  opacity: 0;
+  transition: transform 0.4s $ease-out-timing-fn;
+}
+
+.task__animate-enter.task__animate-enter-active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.task__animate-leave {
+  transform: translateY(0px);
+  opacity: 1;
+  transition: all 0.4s $ease-out-timing-fn;
+}
+
+.task__animate-leave.task__animate-leave-active {
+  transform: translateY(300px);
+  opacity: 0;
+}

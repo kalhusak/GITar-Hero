@@ -1,0 +1,15 @@
+@import '../variables';
+
+.speed-meter {
+  display: block;
+}
+
+.speed-meter__indicator {
+  stroke: $color-inactive;
+  stroke-width: 1px;
+  transition: stroke 0.3s $ease-out-timing-fn;
+}
+
+.speed-meter__indicator--fill {
+  stroke: $color-active;
+}

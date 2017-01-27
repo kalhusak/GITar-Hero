@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './store/createStore';
-import AppContainer from './containers/AppContainer';
+import App from './containers/App';
 import './main.scss';
 
 // ========================================================
@@ -16,7 +16,7 @@ const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
   ReactDOM.render(
-    <AppContainer store={store} />, MOUNT_NODE);
+    <App store={store} />, MOUNT_NODE);
 };
 
 // ========================================================

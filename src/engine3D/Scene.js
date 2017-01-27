@@ -2,6 +2,7 @@ import BABYLON from 'babylonjs';
 import Particles from './Particles';
 import flare from '../static/textures/flare.png';
 import { scene as sceneStyle } from './style.js';
+import { hexToBabylonColor } from './utils/ColorUtils';
 
 const backgroundConfig = {
   targetOffset: [new BABYLON.Vector3(0, -40, 100),
@@ -34,7 +35,7 @@ class Scene extends BABYLON.Scene {
     this.initFog = ::this.initFog;
 
     this.light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(3, 1, -3), this);
-    this.clearColor = sceneStyle.color;
+    this.clearColor = hexToBabylonColor(sceneStyle.color);
 
     this.initBackgroundParticles();
     if (sceneStyle.fog === true) {
@@ -45,17 +46,16 @@ class Scene extends BABYLON.Scene {
   initFog () {
     this.fogMode = BABYLON.Scene.FOGMODE_EXP;
     this.fogDensity = sceneStyle.fogDensity;
-    this.fogColor = sceneStyle.color;
+    this.fogColor = this.clearColor;
   }
 
   initBackgroundParticles () {
-    const sceneColor = sceneStyle.color;
     const { targetOffset, direction1, direction2, minTime, maxTime } = backgroundConfig;
     const { emitRate, minEmitPower, maxEmitPower, speed, minEmitBox, maxEmitBox } = backgroundConfig;
     const { minSize, maxSize } = backgroundConfig;
 
     const emitterMaterial = new BABYLON.StandardMaterial('emitterMaterial', this);
-    emitterMaterial.emissiveColor = sceneColor;
+    emitterMaterial.emissiveColor = this.clearColor;
 
     let emittersArray = [];
     let particlesArray = [];

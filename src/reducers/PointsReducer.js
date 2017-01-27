@@ -4,7 +4,11 @@ import { cloneDeep } from 'lodash';
 
 const penalty = 50;
 
-export default function pointsReducer (state = {}, action) {
+const initialState = {
+  points: 0
+};
+
+export default function pointsReducer (state = initialState, action) {
   switch (action.type) {
     case taskActions.LAST_STEP_EXECUTED:
       return onAddPoints(cloneDeep(state), action.payload.reward);

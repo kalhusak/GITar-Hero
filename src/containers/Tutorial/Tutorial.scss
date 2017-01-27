@@ -1,0 +1,63 @@
+@import '../variables';
+
+.tutorial {
+  max-width: 25%;
+  position: absolute;
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  table th {
+    text-align: right;
+  }
+
+  table tr:first-child th {
+    text-align: center
+  }
+
+  .file {
+    margin: 0px 5px;
+    display: inline-flex;
+    vertical-align: middle;
+  }
+}
+
+.tutorial--animate {
+  animation: tutorial-enter 0.3s $ease-out-timing-fn;
+}
+
+.tutorial__inner .file {
+  display: inline-block !important;
+}
+
+.tutorial__button-container {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.tutorial__button {
+  border-radius: 4px;
+  background: rgba($color-active, 0.8);
+  transition: background 0.2s $ease-out-timing-fn;
+  color: rgba(black, 0.7);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+}
+
+.tutorial__button:hover {
+  background: $color-active;
+}
+
+@keyframes tutorial-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,18 +1,20 @@
 import BABYLON from 'babylonjs';
+import palettes from './colorPalettes';
 
 export const scene = {
-  color: new BABYLON.Color3(0.1, 0.1, 0.1),
+  color: '#212f3e',
   fog: false,
   fogDensity: 0.002
 };
 
 export const outline = {
-  enable: true,
+  enable: false,
   color: new BABYLON.Color3(0, 0, 0),
   width: 0.3
 };
 
 export const branch = {
+  colors:  palettes.cold05,
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
   textStyle: {
@@ -39,7 +41,7 @@ export const ground = {
   speed: 0.0006,
   fogDensity: 0.7, // from 0.0 to 1.0
   heightMap: 'heightMap.png',
-  texture: 'codeTexture3.png'
+  texture: 'codeTexture.png'
 };
 
 export default {

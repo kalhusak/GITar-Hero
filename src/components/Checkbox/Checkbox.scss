@@ -1,18 +1,30 @@
+@import '../variables';
+
 .checkbox {
-  width: 10px;
-  height: 10px;
-  border: 1px solid #aaa;
+  border: 1px solid $color-inactive;
   position: relative;
-  margin: 3px;
-  border-radius: 1px;
+  border-radius: 30%;
+  transition: border-color 0.2s $ease-out-timing-fn;
+}
+
+.checkbox svg {
+  display: block;
 }
 
 .checkbox--active {
-  border-color: #ddd;
+  border-color: $color-active;
 }
 
-.checkbox__check {
-  position: absolute;
-  top: -7px;
-  left: -5px;
+.checkbox__path {
+  stroke-width: 7%;
+  stroke-dasharray: 60 1000;
+  stroke-linecap: round;
+  stroke-dashoffset: 60;
+  stroke: $color-active;
+  transition: stroke-dashoffset 0.2s $ease-out-timing-fn;
+  fill: none;
+}
+
+.checkbox__path--checked {
+  stroke-dashoffset: 0;
 }

@@ -1,4 +1,4 @@
-import { first, find, remove } from 'lodash';
+import { first, find, remove, some } from 'lodash';
 
 function pushNode (subtree, path, status, changeType) {
   const name = first(path);
@@ -102,4 +102,17 @@ export function commit (subtree) {
   });
 
   nodesToRemove.forEach(path => removeNode(subtree, path));
+}
+
+export function hasFilesToShow (subtree) {
+  return some(subtree, item => {
+    if (item.children) {
+      return hasFilesToShow(item.children);
+    }
+    return item.status !== 'unmodified';
+  });
+};
+
+export function itemsCount (subtree) {
+  return subtree.reduce((sum, item) => sum + (item.children ? itemsCount(item.children) : 0) + 1, 0);
 }
