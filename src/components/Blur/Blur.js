@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import * as tutorials from './tutorials';
-import './Tutorial.scss';
+import './Blur.scss';
 
-export default class Tutorial extends Component {
+export default class Blur extends Component {
   static propTypes = {
     blur: PropTypes.bool,
     message: PropTypes.string,
@@ -47,14 +47,14 @@ export default class Tutorial extends Component {
   }
 
   render () {
-    const tutorialClasses = ['tutorial'];
+    const tutorialClasses = ['blur'];
 
     if (this.props.blur) {
-      tutorialClasses.push('tutorial--blur');
+      tutorialClasses.push('blur--blur');
     }
 
     if (this.props.message) {
-      tutorialClasses.push('tutorial--active');
+      tutorialClasses.push('blur--active');
     }
 
     return <div className={tutorialClasses.join(' ')}>
