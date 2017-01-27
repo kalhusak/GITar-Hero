@@ -140,10 +140,10 @@ export const palettes = {
   ],
   candy: [
     '#01c5c4',
-    '#c64bd7',
-    '#fe547b',
     '#f1e189',
+    '#c64bd7',
     '#b8de6f',
+    '#fe547b',
     '#f39233',
     '#d94ea1',
     '#4793c5'
