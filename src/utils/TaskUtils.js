@@ -11,8 +11,12 @@ export function getNextTask (tasksState) {
 }
 
 export function getCurrentStep (tasksState) {
+  let step;
+
   let task = getCurrentTask(tasksState);
-  let step = task.steps[task.currentStepIndex];
+  if (task) {
+    step = task.steps[task.currentStepIndex];
+  }
 
   if (!step) {
     task = getNextTask(tasksState);
