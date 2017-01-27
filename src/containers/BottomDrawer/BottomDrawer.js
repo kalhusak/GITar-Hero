@@ -141,7 +141,7 @@ class BottomDrawer extends Component {
     const preventInitialAnimation = this.initialRender ? { transition: 'none' } : null;
     this.initialRender = false;
 
-    return <div ref='drawer'>
+    return <div ref='drawer' className='bottom-drawer'>
       <div className={getClasses('bottom-drawer__overlay')} onClick={this.closeDrawer}
         style={preventInitialAnimation} />
 

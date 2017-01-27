@@ -1,13 +1,20 @@
 @import '../variables';
 
-.tutorial.tutorial--blur {
+.tutorial {
+  height: 100%;
+  
   &>* {
     filter: blur(0px);
-    transition: filter 0.3s $ease-out-timing-fn;
+    transition: filter 0.3s $ease-out-timing-fn 0.5s;
+    transform: translateZ(0);
+    will-change: transform;
   }
+}
 
+.tutorial.tutorial--blur {
   &>*:not(.tutorial__active-item) {
     filter: blur(10px);
+    transition-delay: 0s;
   }
 
   .tutorial__active-item {

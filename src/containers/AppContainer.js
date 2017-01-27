@@ -33,7 +33,7 @@ class AppContainer extends Component {
             <Canvas store={this.props.store} />
             <Top />
             <Tree />
-            <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen}>
+            <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen} style={{ height: '100%' }}>
               <BottomDrawer />
             </TutorialItem>
             <CurrentTask />
