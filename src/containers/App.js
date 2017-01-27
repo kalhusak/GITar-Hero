@@ -23,15 +23,13 @@ class App extends Component {
     return Boolean(this.props.tutorial);
   }
 
-  // <BlurItem blur={this.blurComponent()} active={!this.disableComponent()}>
-  //   <Canvas store={this.props.store} />
-  // </BlurItem>
-
   render () {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-
+          <BlurItem blur={this.blurComponent()} active={!this.disableComponent()}>
+            <Canvas store={this.props.store} />
+          </BlurItem>
           <BlurItem blur={this.blurComponent()} active={!this.disableComponent()}>
             <Top />
           </BlurItem>
