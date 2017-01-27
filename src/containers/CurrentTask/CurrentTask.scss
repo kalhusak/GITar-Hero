@@ -74,8 +74,8 @@
 }
 
 .task__animate {
+  top: 46px;
   position: absolute;
-  padding-top: 46px;
   display: flex;
   flex-direction: column;
   height: calc(100% - 46px);
