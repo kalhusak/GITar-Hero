@@ -18,6 +18,8 @@
 
 \linespread{1.3}
 
+\hyphenation{Babylon Beziera Redux React JavaScript}
+
 \begin{document}
 
 	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magalena Łątkowska}
@@ -40,7 +42,7 @@
 
 	Celem pracy było stworzenie interaktywnego samouczka do nauki podstaw programu Git, nazwanego GITar-Hero. Przede wszystkim miał on uczyć najważniejszych poleceń systemu Git oraz zapoznać użytkownika z typowymi scenariuszami, jakie mogą wystąpić podczas pracy nad projektem. Podstawowym założeniem było nauczenie praktycznego wykorzystania programu Git, w~stopniu wystarczającym do swobodnego używania go w~pracy zawodowej.
 	
-	Istotnym aspektem było połączenie nauki z zabawą, aby możliwie jak najbardziej zachęcić i~zaciekawić użytkownika. Zdecydowano się zastosować elementy gamifikacji, takie jak punkty za~realizowane zadania, zwiększające zaangażowanie gracza. Dodatkowo, aby~uatrakcyjnić grę, postanowiono wykorzystać grafikę 3D. Celem było stworzenie samouczka działającego w~przeglądarce, nie wymagającego podczas rozgrywki komunikacji z~serwerem.
+	Istotnym aspektem było połączenie nauki z zabawą, aby możliwie jak najbardziej zachęcić i~zaciekawić użytkownika. Zdecydowano się zastosować elementy gamifikacji, takie jak punkty za~realizowane zadania, zwiększające zaangażowanie gracza. Dodatkowo, aby~uatrakcyjnić grę, postanowiono wykorzystać grafikę 3D. Celem było stworzenie samouczka działającego w~przeglądarce, niewymagającego podczas rozgrywki komunikacji z~serwerem.
 
 	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśnione zostały podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
 
@@ -56,7 +58,7 @@
 
 	Wyróżnia się trzy podstawowe rodzaje systemów kontroli wersji.
 	\begin{itemize}
-		\item \textbf{Lokalne} --- umożliwiające pracę na jednym komputerze, nie pozwalające na synchronizację ze zdalnym repozytorium. Wykorzystywane są rzadko, głównie w~przypadku samodzielnej pracy nad indywidualnym projektem.
+		\item \textbf{Lokalne} --- umożliwiające pracę na jednym komputerze, niepozwalające na synchronizację ze zdalnym repozytorium. Wykorzystywane są rzadko, głównie w~przypadku samodzielnej pracy nad indywidualnym projektem.
 		\item \textbf{Scentralizowane} --- korzystające z~architektury klient-serwer, w~której repozytorium przechowywane jest na jednym zdalnym serwerze, z~którym synchronizują się wszyscy użytkownicy.
 		\item \textbf{Rozproszone} --- wykorzystujące model P2P, w~którym wszystkie komputery są sobie równoważne (nie ma jednego określonego serwera), a~kopie repozytorium znajdują się na każdej z~jednostek.
 	\end{itemize}
@@ -103,9 +105,9 @@
 	Pliki znajdujące się w projekcie kontrolowanym przez system Git można podzielić na następujące kategorie:
 	\begin{itemize}
 		\item aktualne --- w obszarze roboczym znajduje się identyczna wersja pliku jak w~ostatnio wykonanej rewizji,
-		\item zmodyfikowane --- od czasu zatwierdzenia zmian w pliku zostały wprowadzone pewne modyfikacje, nie dodane do indeksu (a~więc gdyby w~tym momencie utworzona została rewizja, to nie zawierałaby tych zmian),
+		\item zmodyfikowane --- od czasu zatwierdzenia zmian w pliku zostały wprowadzone pewne modyfikacje, niedodane do indeksu (a~więc gdyby w~tym momencie utworzona została rewizja, to nie zawierałaby tych zmian),
 		\item zaindeksowane --- od czasu zatwierdzenia zmian plik został zmieniony, a następnie dodany do~indeksu (czyli zarówno w obszarze roboczym, jak i~w~indeksie, znajduje się ta sama wersja --- będzie ona zapisana przy kolejnej rewizji).
-		\item nieśledzone - pliki występujące w obszarze roboczym, ale nie znajdujące się ani w~repozytorium, ani w~indeksie --- w~tym stanie jest początkowo każdy nowo dodany do obszaru roboczego plik,
+		\item nieśledzone - pliki występujące w obszarze roboczym, ale nieznajdujące się ani w~repozytorium, ani w~indeksie --- w~tym stanie jest początkowo każdy nowo dodany do obszaru roboczego plik,
 		\item ignorowane --- pliki nieśledzone, wyszczególnione w~specjalnym pliku .gitignore, informującym system Git których plików ma nie uwzględniać i~nigdy nie indeksować.
 	\end{itemize}
 
@@ -144,16 +146,16 @@
 
 	Na rysunku \ref{fig:git_HEAD} przedstawione jest repozytorium, w którym utworzone zostały trzy rewizje. Ich skróty SHA-1 zaczynają się od następujących ciągów znaków: 98ca9, 34ac2 i f30ab. Każda z nich przechowuje zapamiętany stan projektu, czyli migawkę (ang. \textit{snapshot}). W~prezentowanym repozytorium są dwie gałęzie, \textit{v1.0} oraz \textit{master}. Wskaźnik symboliczny HEAD wskazuje na gałąź \textit{master}, co oznacza, że jest ona gałęzią aktywną.
 
-	System Git umożliwia przełączanie się pomiędzy gałęziami za pomocą polecenia \textit{git checkout}. Przełączenie się na gałąź jest równoznaczne z~przywróceniem obszaru roboczego do stanu, jaki został zapisany we~wskazywanej przez nią rewizji. Możliwe jest również przełączenie się bezpośrednio na konkretną rewizję, nie wskazywaną przez żadną gałąź, poprzez podanie jej skrótu SHA-1. Spowoduje to przejście do stanu nazywanego w języku angielskim \textit{detached HEAD}, w~którym żadna gałąź nie jest gałęzią aktywną. Jeżeli w tym stanie wykonana zostanie operacja zatwierdzania, to utworzona rewizja nie będzie zawarta w~żadnej gałęzi, a~co za tym idzie może zostać łatwo utracona. W~związku z~tym nie należy pracować w stanie \textit{detached HEAD}. W~przypadku, w~którym konieczna jest kontynuacja projektu od konkretnej rewizji, należy najpierw utworzyć nową gałąź wskazującą na daną rewizję, a~następnie się na nią przełączyć.
+	System Git umożliwia przełączanie się pomiędzy gałęziami za pomocą polecenia \textit{git checkout}. Przełączenie się na gałąź jest równoznaczne z~przywróceniem obszaru roboczego do stanu, jaki został zapisany we~wskazywanej przez nią rewizji. Możliwe jest również przełączenie się bezpośrednio na konkretną rewizję, niewskazywaną przez żadną gałąź, poprzez podanie jej skrótu SHA-1. Spowoduje to przejście do stanu nazywanego w języku angielskim \textit{detached HEAD}, w~którym żadna gałąź nie jest gałęzią aktywną. Jeżeli w tym stanie wykonana zostanie operacja zatwierdzania, to utworzona rewizja nie będzie zawarta w~żadnej gałęzi, a~co za tym idzie może zostać łatwo utracona. W~związku z~tym nie należy pracować w stanie \textit{detached HEAD}. W~przypadku, w~którym konieczna jest kontynuacja projektu od konkretnej rewizji, należy najpierw utworzyć nową gałąź wskazującą na daną rewizję, a~następnie się na nią przełączyć.
 
 	\subsubsection*{Łączenie gałęzi}
 	Zmiany wprowadzone na osobnych gałęziach w systemie Git można połączyć, aby otrzymać wersję projektu zawierającą modyfikacje z kilku gałęzi. Istnieją dwa sposoby na wykonanie operacji łączenia, scalanie (ang. \textit{merge}) oraz zmiana bazy (ang.~\textit{rebase}). Ostateczny rezultat jest identyczny, różnica między tymi sposobami polega przede wszystkim na innej historii projektu.
 
 	\paragraph{Scalanie}
 
-	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z~których jedna jest zawarta w~drugiej. Przez zawieranie się gałęzi określa się sytuację, w~której jedna gałąź zawiera ciąg rewizji, a~druga składa się z identycznego ciągu do~którego dodane zostały nowe rewizje. Innymi słowy, z~pierwszej gałęzi można w~prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
+	Łączenie gałęzi poprzez scalanie wykonywane jest poleceniem \textit{git merge}. Integrowanie zmian może być realizowane na gałęziach rozłącznych lub takich, z~których jedna jest zawarta w~drugiej. Przez zawieranie się gałęzi określa się sytuację, w~której jedna gałąź zawiera ciąg rewizji, a~druga składa się z~identycznego ciągu do~którego dodane zostały nowe rewizje. Innymi słowy, z~pierwszej gałęzi można w~prostej linii dotrzeć do drugiej, podążając wzdłuż historii projektu.
 
-	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}). Wskaźnik zawartej gałęzi jest przesuwany do najnowszej rewizji, wskazywanej przez gałąź dołączaną. Ilustracja~\ref{fig:git-merge_ff} przedstawia scalenie gałęzi \textit{master} z zawierającą ją gałęzią \textit{iss53}, które przewinęło wskaźnik gałęzi \textit{master} do przodu, nie tworząc przy tym nowej rewizji.
+	Wykonanie operacji scalania na gałęzi zawartej w dołączanej do niej gałęzi odbywa się poprzez przewinięcie do przodu (ang. \textit{fast forward}). Wskaźnik zawartej gałęzi jest przesuwany do najnowszej rewizji, wskazywanej przez gałąź dołączaną. Ilustracja~\ref{fig:git-merge_ff} przedstawia scalenie gałęzi \textit{master} z~zawierającą ją gałęzią \textit{iss53}, które przewinęło wskaźnik gałęzi \textit{master} do przodu, nie tworząc przy tym nowej rewizji.
 
 	\begin{figure}[h]
 		\centering
@@ -162,7 +164,7 @@
 		\label{fig:git-merge_ff}
 	\end{figure}
 
-	W przypadku łączenia gałęzi rozłącznych, czyli takich, że~żadna nie jest zawarta w~drugiej, nie jest możliwe scalenie poprzez przewinięcie do~przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od~której historie gałęzi się różnią, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang.~\textit{three-way merge}), w~wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
+	W przypadku łączenia gałęzi rozłącznych, czyli takich, że~żadna nie jest zawarta w~drugiej, nie jest możliwe scalenie poprzez przewinięcie do~przodu. System Git ustala wówczas wspólnego przodka, czyli rewizję, od~której historie gałęzi różnią się między sobą, oraz rewizje wskazywane przez wskaźniki łączonych gałęzi. Na~podstawie tych trzech migawek wykonywane jest scalenie trójstronne (ang.~\textit{three-way merge}), w~wyniku którego powstaje nowa rewizja. Jest ona szczególna, ponieważ posiada więcej niż jednego przodka.
 
 	\begin{figure}[h]
 		\centering
@@ -177,7 +179,7 @@
 
 	\paragraph{Zmiana bazy}
 
-	Innym sposobem integracji zmian z różnych gałęzi jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i~sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, którą chcemy dołączyć. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a~gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do~przodu. Ostatecznie stan plików projektu jest identyczny z~tym, jaki powstałby w~wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w~historii projektu~---~po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia. Przykład działania operacji zmiany bazy przedstawiony jest na rysunku~\ref{fig:git-rebase}.
+	Innym sposobem integracji zmian z różnych gałęzi jest zmiana bazy, wykonywana poleceniem \textit{git rebase}. System Git wyszukuje wspólnego przodka gałęzi i~sprawdza, jakie zmiany zostały przeprowadzone na gałęzi, która ma zostać dołączona. Następnie zmiany te są nakładane na gałąź bazową. W rezultacie utworzone zostają nowe rewizje, a~gałąź bazowa jest zawarta w gałęzi, której baza została zmieniona. Można je teraz scalić poprzez przewinięcie do~przodu. Ostatecznie stan plików projektu jest identyczny z~tym, jaki powstałby w~wyniku operacji scalenia rozłącznych gałęzi. Jedyna różnica jest widoczna w~historii projektu~---~po zmianie bazy jest ona liniowa, a~w wyniku scalenia zawierałaby rozgałęzienia. Przykład działania operacji zmiany bazy przedstawiony jest na rysunku~\ref{fig:git-rebase}.
 
 	\begin{figure}[h]
 		\centering
@@ -202,17 +204,17 @@
 	Do tej pory omówione pojęcia dotyczyły lokalnego repozytorium. System Git umożliwia pracę zespołową, do której niezbędne są zdalne repozytoria, udostępnione w~sieci. Służą one do~synchronizacji zmian w~projekcie, najczęściej wykonanych przez różne osoby. Korzystanie z~repozytorium zdalnego polega przede wszystkim na~pobieraniu i~przesyłaniu do~niego danych, dotyczących wersji projektu i~stanu plików.
 
 	Jeżeli repozytorium lokalne powstało w wyniku wywołania komendy \textit{git clone}, to~jest kopią repozytorium zdalnego, podanego jako parametr polecenia i istnieje między nimi powiązanie.
-	Z~jednym repozytorium lokalnym może być związanych kilka różnych repozytoriów zdalnych, które są najczęściej repozytoriami surowymi, czyli nie posiadającymi obszaru roboczego. Powiązanie dodaje się komendą {\textit{git~remote~add}, w~której określa się adres repozytorium zdalnego i~nadaje się mu dowolną nazwę. Domyślnie repozytorium zdalne, które zostało sklonowane, nosi nazwę \mbox{\textit{origin}}.
+	Z~jednym repozytorium lokalnym może być związanych kilka różnych repozytoriów zdalnych, które są najczęściej repozytoriami surowymi, czyli nieposiadającymi obszaru roboczego. Powiązanie dodaje się komendą {\textit{git~remote~add}, w~której określa się adres repozytorium zdalnego i~nadaje się mu dowolną nazwę. Domyślnie repozytorium zdalne, które zostało sklonowane, nosi nazwę \mbox{\textit{origin}}.
 
 	\paragraph{Pobieranie zmian}
-	Synchronizacja repozytorium lokalnego z repozytorium zdalnym wymaga pobrania danych z serwera. Służy do tego polecenie \textit{git pull}, które pobiera rewizje znajdujące się w repozytorium zdalnym, niewystępujące w~lokalnej historii projektu. Wywołanie tej komendy nie modyfikuje aktualnych plików w~obszarze roboczym, ponieważ zmiany z serwera zostają pobrane, ale nie zintegrowane z~bieżącą wersją.
+	Synchronizacja repozytorium lokalnego z~repozytorium zdalnym wymaga pobrania danych z~serwera. Służy do tego polecenie \textit{git fetch}, które pobiera rewizje znajdujące się w repozytorium zdalnym, niewystępujące w~lokalnej historii projektu. Wywołanie tej komendy nie modyfikuje aktualnych plików w~obszarze roboczym, ponieważ zmiany z~serwera zostają pobrane, ale nie zintegrowane z~bieżącą wersją.
 
 	Repozytoria zdalne, tak jak zwykłe repozytoria lokalne, posiadają gałęzie (co~najmniej jedną, domyślnie nazwaną \textit{master}). Pobieranie zmian polega na pobraniu rewizji z konkretnej, zdalnej gałęzi. W celu dołączenia ich do własnej wersji projektu należy połączyć gałęzie~---~zdalną oraz lokalną. Operacja integrowania zmian przebiega w identyczny sposób, jak w~przypadku łączenia dwóch gałęzi lokalnych i~może być przeprowadzona poprzez scalanie lub zmianę bazy.
 
-	Do pobrania zmian z repozytorium zdalnego można zamiast polecenia \textit{git fetch} użyć komendy \textit{git pull}, która najpierw pobiera brakujące rewizje, a następnie dołącza je do aktywnej gałęzi. Domyślnie operacja łączenia wykonywana jest poprzez scalanie, ale za pomocą odpowiedniego przełącznika można poinformować system Git, aby zamiast tego przeprowadził zmianę bazy.
+	Do pobrania zmian z repozytorium zdalnego można zamiast polecenia \textit{git fetch} użyć komendy \textit{git pull}, która najpierw pobiera brakujące rewizje, a~następnie dołącza je do aktywnej gałęzi. Domyślnie operacja łączenia wykonywana jest poprzez scalanie, ale za pomocą odpowiedniego przełącznika można poinformować system Git, aby zamiast tego przeprowadził zmianę bazy.
 
 	\paragraph{Wypychanie zmian}
-	Przesyłanie rewizji utworzonych w lokalnym repozytorium na serwer realizowane jest poleceniem \textit{git push}, przyjmującym jako parametry nazwę zdalnego repozytorium oraz zdalną gałąź. Komenda zadziała tylko jeżeli na serwerze nie ma żadnych nowych, nie pobranych wcześniej zmian. W~przypadku, w~którym w~repozytorium zdalnym znajdują się rewizje nie dołączone do repozytorium lokalnego, próba wypchnięcia własnych zmian zostanie odrzucona. Konieczne będzie pobranie brakujących rewizji i~dołączenie ich do posiadanej wersji projektu. Przesłanie zmian do~repozytorium zdalnego jest możliwe dopiero gdy gałąź zdalna zawiera się w~lokalnej gałęzi.
+	Przesyłanie rewizji utworzonych w lokalnym repozytorium na serwer realizowane jest poleceniem \textit{git push}, przyjmującym jako parametry nazwę zdalnego repozytorium oraz zdalną gałąź. Komenda zadziała tylko jeżeli na serwerze nie ma żadnych nowych, niepobranych wcześniej zmian. W~przypadku, w~którym w~repozytorium zdalnym znajdują się rewizje niedołączone do repozytorium lokalnego, próba wypchnięcia własnych zmian zostanie odrzucona. Konieczne będzie pobranie brakujących rewizji i~dołączenie ich do posiadanej wersji projektu. Przesłanie zmian do~repozytorium zdalnego jest możliwe dopiero gdy gałąź zdalna zawiera się w~lokalnej gałęzi.
 
 	\paragraph{Gałęzie śledzące}
 	Podczas wykonywania poleceń służących do pobierania lub wypychania rewizji konieczne jest określenie repozytorium zdalnego i~jego gałęzi, z~którą należy zsynchronizować zmiany. System Git umożliwia skonfigurowanie gałęzi lokalnej jako gałęzi śledzącej, mającej bezpośrednie powiązanie ze wskazaną gałęzią z repozytorium zdalnego. Dzięki temu, podczas wykonywania polecenia \textit{git pull} lub \textit{git push} z~gałęzi śledzącej, nie trzeba podawać żadnych parametrów, ponieważ synchronizacja domyślnie przeprowadzana jest z~gałęzią śledzoną.
@@ -288,19 +290,21 @@
 	 
 	\section{Przebieg gry}
 	
-	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i~do czego służą poszczególne elementy interfejsu. Po zapoznaniu się z~krótką instrukcją rozpoczyna się gra. U~góry, po prawej stronie, wyświetla się aktualne zadanie i~pierwszy krok, który należy wykonać. Z~założenia użytkownik nie zna poleceń systemu Git, dlatego automatycznie otwiera się zakładka pomocy, informująca czym jest repozytorium sytemu kontroli wersji i~jak je zainicjować. Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i~zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i~następuje przejście do kolejnego. Dodatkowo w katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się w~folderze z~repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie wpływa na~stan repozytorium i~pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend.
+	Gra zaczyna się od krótkiego wprowadzenia, informującego użytkownika, na czym będzie polegała rozgrywka i~do czego służą poszczególne elementy interfejsu. Po~zapoznaniu się z~krótką instrukcją rozpoczyna się gra. U~góry, po prawej stronie, wyświetla się aktualne zadanie i~pierwszy krok, który należy wykonać. Głównym odbiorcą aplikacji jest osoba początkująca, nieznająca poleceń systemu Git. Z tego względu pojawia się podpowiedź sygnalizująca,
+	że można otworzyć zakładkę pomocy aby dowiedzieć się czym jest repozytorium sytemu kontroli wersji i~jak je zainicjować. 
+	Pomoc zawiera wszystko, co gracz musi wiedzieć, aby poprawnie wykonać dany krok. Po wprowadzeniu przez niego właściwego polecenia i~zatwierdzeniu go poprzez przycisk Enter, aktualny krok zostaje zaliczony i~następuje przejście do kolejnego. Dodatkowo w~katalogu projektu, po lewej stronie, pojawiają się aktualne pliki, jakie znajdują się w~folderze z~repozytorium. Poza tym akcje wykonywane na repozytorium są odwzorowywane przez grafikę 3D, która reaguje odpowiednio na wpisane komendy. Obrazuje to, jak wywołane polecenie wpływa na~stan repozytorium i~pozwala użytkownikowi lepiej zrozumieć skutki wykonywanych komend.
 
-	Po wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nie otrzymanie żadnej nagrody za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas. Dodatkowo każda błędnie wprowadzona komenda skutkuje zmniejszeniem liczby posiadanych przez użytkownika punktów.
+	Po wykonaniu przez użytkownika wszystkich kroków zadania, otrzymuje on punkty. Ich liczba jest zależna od czasu, jaki pozostał do końca zadania. Im szybciej gracz ukończy, tym więcej punktów dostanie. Możliwe jest także nieotrzymanie żadnej nagrody za wykonanie zadania, jeżeli przekroczony zostanie przydzielony do niego czas. Dodatkowo każda błędnie wprowadzona komenda skutkuje zmniejszeniem liczby posiadanych przez użytkownika punktów.
 	
 	Kolejne zadania, jakie musi wykonywać gracz, są zależne od jego umiejętności. Przechowywane są statystyki dotyczące wprowadzonych komend i~liczby popełnionych błędów. Jeżeli w krokach dotyczących określonego polecenia użytkownik często się mylił, to promowane będą zadania zawierające tę komendę. Nowe zagadnienia będą wdrażane dopiero, gdy wskaźnik znajomości polecenia będzie odpowiednio wysoki. Jest on wyliczany na podstawie liczby prób i~błędów, przy czym ostatnie próby mają większą wagę.
 	
-	Poziom trudności zadań stopniowo rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w~dowolnej chwili wpisać w~konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł odnaleźć potrzebne mu informacji.
+	Poziom trudności zadań stopniowo rośnie, zawierają one coraz więcej kroków. Jeżeli użytkownik nie będzie potrafił wykonać aktualnego kroku, może w~dowolnej chwili wpisać w~konsoli 'help'. Otworzy się wówczas pomoc i~gracz będzie mógł odnaleźć potrzebne mu informacje.
 
-	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, takie jak informacja o~popełnionych błędach i~komendach, z~którymi miał najwięcej problemów. Ukończenie rozgrywki w krótkim czasie skutkuje przyznaniem użytkowniki dodatkowej nagrody, w~postaci bonusowych punktów.
+	Po przejściu całego scenariusza wyświetli się podsumowanie, zawierające liczbę zdobytych przez gracza punktów oraz podstawowe statystyki, takie jak informacja o~popełnionych błędach i~komendach, z~którymi miał najwięcej problemów. Ukończenie rozgrywki w krótkim czasie skutkuje przyznaniem użytkownikowi dodatkowej nagrody, w~postaci bonusowych punktów.
 	
 	\section{Zadania}
 	
-	Scenariusz rozgrywki składa się z~zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Pierwszym terminem, z~jakim zapoznaje się użytkownik, jest repozytorium. Przedstawiane są dwie podstawowe metody pozyskania go~---~poprzez sklonowanie istniejącego lub przez założenie nowego w~wybranym folderze z~projektem. W~kolejnym etapie wprowadzane są pojęcia takie jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Gracz uczy się rozróżniać pliki aktualne, zmodyfikowane, nieśledzone lub niezaindeksowane. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować. 
+	Scenariusz rozgrywki składa się z~zadań zawierających niezbędne komendy do typowego wykorzystania systemu kontroli wersji Git. Pierwszym terminem, z~jakim zapoznaje się użytkownik, jest repozytorium. Przedstawiane są dwie podstawowe metody pozyskania go~---~poprzez sklonowanie istniejącego lub przez założenie nowego w~wybranym folderze z~projektem. W~kolejnym etapie wprowadzane są pojęcia takie jak przestrzeń robocza, indeks, indeksowanie plików, zatwierdzanie zmian i~rewizja. Gracz uczy się rozróżniać pliki aktualne, zmodyfikowane, zaindeksowane lub nieśledzone. Przed wprowadzeniem kolejnych poleceń i~terminów zadania koncentrują się na tej tematyce, aby użytkownik zdążył je dobrze opanować. 
 	
 	Po wykonaniu kilku zadań dotyczących wspomnianych wyżej zagadnień, użytkownik uczy się o~gałęziach, poznaje sposoby tworzenia ich i~przełączania się między nimi. Wprowadzane są też pojęcia takie jak gałąź tematyczna, poświęcona konkretnej dodatkowej funkcji aplikacji (ang. \textit{feature branch}). Przy okazji nadal utrwalane są komendy przedstawione w pierwszych zadaniach, dotyczące indeksowania plików i~zatwierdzania zmian. 
 
@@ -314,7 +318,7 @@
 	
 	\subsection{Pomoc}
 	
-	Wszystkie materiały dydaktyczne znajdują się w~pomocy, podzielonej na zakładki, z~których każda dotyczy jednej komendy lub terminu. Jej treść wystarcza, aby osoba nie znająca poleceń systemu Git była w~stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W~przypadku niektórych pojęć jest jednak bardziej obszerna i~wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i~przydatne do właściwego zrozumienia systemu Git.
+	Wszystkie materiały dydaktyczne znajdują się w~pomocy, podzielonej na zakładki, z~których każda dotyczy jednej komendy lub terminu. Jej treść wystarcza, aby osoba nieznająca poleceń systemu Git była w~stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W~przypadku niektórych pojęć jest jednak bardziej obszerna i~wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i~przydatne do właściwego zrozumienia systemu Git.
 	
 	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
 	
@@ -340,39 +344,39 @@
 
 	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym.
 
-	Jedną z bibliotek pomagających w rozwiązaniu tego problemu jest Redux. Jej głównym założeniem jest przejrzysty stan aplikacji, który może się zmieniać tylko w określonych momentach i~zawsze w~przewidywalny sposób.
+	Jedną z bibliotek pomagających w rozwiązaniu tego problemu jest \textit{Redux}. Jej głównym założeniem jest przejrzysty stan aplikacji, który może się zmieniać tylko w określonych momentach i~zawsze w~przewidywalny sposób.
 
-	Stan w Reduxie zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan.
+	Stan w \textit{Reduxie} zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan.
 
-	Kluczowym elementem Reduxa są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i~wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i~deterministyczny. Oznacza to, że określony stan aplikacji i~określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z~których każda wpływa tylko na określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i~modyfikować.
+	Kluczowym elementem \textit{Reduxa} są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i~wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i~deterministyczny. Oznacza to, że określony stan aplikacji i~określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z~których każda wpływa tylko na określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i~modyfikować.
 
-	Podsumowując, Redux opiera się na trzech fundamentalnych zasadach:
+	Podsumowując, \textit{Redux} opiera się na trzech fundamentalnych zasadach:
 	\begin{itemize}
 		\item cały stan aplikacji jest opisany przez pojedynczy obiekt o strukturze drzewa,
 		\item jedynym sposobem aby zmienić stan aplikacji jest wyemitowanie akcji,
 		\item wpływ danej akcji na sposób przekształcenia stanu określają funkcje zwane \textit{reducers}.
 	\end{itemize}
 
-	Popularność biblioteki Redux zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji.
+	Popularność biblioteki \textit{Redux} zasłużenie rośnie, ze~względu na~prostotę i~korzyści, jakie daje przestrzeganie opisanych wyżej trzech podstawowych reguł. Zdecydowano się skorzystać z~tej biblioteki ponieważ jest łatwa w~użyciu i~pozwala w~wygodny sposób zarządzać stanem aplikacji.
 
 	\subsection{React.js}
 
-	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę React.
-	 Została ona stworzona w 2013 roku przez zespół programistów Facebook'a, aby rozwiązać problem tworzenia dynamicznych aplikacji internetowcyh, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest rozpowszechniana na zasadzie otwartego oprogramowania (ang. \textit{open-source}).
+	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę \textit{React}.
+	 Została ona stworzona w 2013 roku przez zespół programistów Facebooka, aby rozwiązać problem tworzenia dynamicznych aplikacji internetowych, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest rozpowszechniana na zasadzie otwartego oprogramowania (ang. \textit{open-source}).
 
-   React opiera się na koncepcji niezależnych komponentów, nadających się do~wielokrotnego wykorzystania, z~których można komponować skomplikowane widoki. Są to obiekty JavaScript, reprezentujące fragmenty interfejsu użytkownika, mające określoną strukturę i~funkcjonalność. Każdy komponent musi implementować metodę \textit{render()}, odpowiedzialną za wyświetlenie komponentu w przeglądarce. W wartości zwracanej przez tę metodę mogą pojawić się zarówno znaczniki HTML jak i instancje zdefinowanych wcześniej komponentów. Aplikacje internetowe korzystające z biblioteki React budowane są zwykle na zasadzie drzewa komponentów. Tworzony jest jeden komponent nadrzędny, w którym zagnieżone są kolejne. Wzorzec ten pozwala zachować modułowość aplikacji.
+   \textit{React} opiera się na koncepcji niezależnych komponentów, nadających się do~wielokrotnego wykorzystania, z~których można komponować skomplikowane widoki. Są to obiekty JavaScript, reprezentujące fragmenty interfejsu użytkownika, mające określoną strukturę i~funkcjonalność. Każdy komponent musi implementować metodę \textit{render()}, odpowiedzialną za wyświetlenie komponentu w przeglądarce. W wartości zwracanej przez tę metodę mogą pojawić się zarówno znaczniki HTML jak i instancje zdefiniowanych wcześniej komponentów. Aplikacje internetowe korzystające z biblioteki \textit{React} budowane są zwykle na zasadzie drzewa komponentów. Tworzony jest jeden komponent nadrzędny, w którym zagnieżdżone są kolejne. Wzorzec ten pozwala zachować modułowość aplikacji.
 
-   Komponenty czerpią wiedzę na temat wyświetlanych informacji z dwóch źródeł - właściwości (\textit{props}) oraz stanu (\textit{state}). Właściwości są obiektem reprezentującym parametry wejściowe podane podczas wywołania komponentu w komponencie nadrzędnym, natomiast stan jest obiektem widocznym i modyfikowalnym tylko wewnątrz danego komponentu. Zmiana stanu komponentu powoduje wywołanie jego metody \textit{render()} i, co za tym idzie, rekursywnego wywoływania metod \textit{render()} komponentów zagnieżdżonych. Efektem tej operacji jest modyfikacja odpowiednich węzłów obiektowego modelu dokumentu (ang. \textit{DOM}) przeglądarki i ostatecznie przerysowanie strony przez przeglądarkę. Należy zaznaczyć, że React jest dobrze zoptymalizowany pod kątem renderowania strony. Na szczególną uwagę zasługuje mechanizm wirtualnego obiektowego modelu dokumentu (ang. \textit{virtual DOM}). Polega on na utrzymywaniu kopii DOM reprezentowanej przez zwykłe obiekty JavaScript. Operacje na tych obiektach są znacznie mniej kosztowne, ponieważ nie zmuszają przeglądarki do ponownego renderowania strony. Właściwy DOM jest modyfikowany jedynie w przypadku stwierdzenia różnic między nim a wirtualnym DOM.
+   Komponenty czerpią wiedzę na temat wyświetlanych informacji z dwóch źródeł - właściwości (\textit{props}) oraz stanu (\textit{state}). Właściwości są obiektem reprezentującym parametry wejściowe podane podczas wywołania komponentu w komponencie nadrzędnym, natomiast stan jest obiektem widocznym i modyfikowalnym tylko wewnątrz danego komponentu. Zmiana stanu komponentu powoduje wywołanie jego metody \textit{render()} i, co za tym idzie, rekursywnego wywoływania metod \textit{render()} komponentów zagnieżdżonych. Efektem tej operacji jest modyfikacja odpowiednich węzłów obiektowego modelu dokumentu (ang. \textit{DOM}) przeglądarki i ostatecznie przerysowanie strony przez przeglądarkę. Należy zaznaczyć, że \textit{React} jest dobrze zoptymalizowany pod kątem renderowania strony. Na szczególną uwagę zasługuje mechanizm wirtualnego obiektowego modelu dokumentu (ang. \textit{virtual DOM}). Polega on na utrzymywaniu kopii DOM reprezentowanej przez zwykłe obiekty JavaScript. Operacje na tych obiektach są znacznie mniej kosztowne, ponieważ nie zmuszają przeglądarki do ponownego renderowania strony. Właściwy DOM jest modyfikowany jedynie w przypadku stwierdzenia różnic między nim a wirtualnym DOM.
 
-   Istotne ułatwienie dla procesu implementacji komponentów stanowi nakładka JSX. Jest to rozszerzenie składni języka JavaScript pozwalające w wygodny sposób używać tagów HTML oraz wywoływać wcześniej zdefiniowane komponenty w kodzie aplikacji. Używanie JSX jest zalecane przy tworzeniu aplikacji opartych o bibliotekę React przez samych jej twórców, ponieważ nie tylko ułatwia proces implementacji, ale również zwiększa czytelność kodu.
+   Istotne ułatwienie dla procesu implementacji komponentów stanowi nakładka JSX. Jest to rozszerzenie składni języka JavaScript pozwalające w wygodny sposób używać tagów HTML oraz wywoływać wcześniej zdefiniowane komponenty w kodzie aplikacji. Używanie JSX jest zalecane przy tworzeniu aplikacji opartych o bibliotekę \textit{React} przez samych jej twórców, ponieważ nie tylko ułatwia proces implementacji, ale również zwiększa czytelność kodu.
 
-   Zdecydowano się na wykorzystanie biblioteki React.js, ponieważ dzięki abstrakcji operacji na elementach DOM na operacje na komponentach, pozwala ona przy stosunkowo niewielkim nakładzie pracy tworzyć aplikacje działające szybko i niezawodnie.
+   Zdecydowano się na wykorzystanie biblioteki \textit{React.js}, ponieważ dzięki abstrakcji operacji na elementach DOM na operacje na komponentach, pozwala ona przy stosunkowo niewielkim nakładzie pracy tworzyć aplikacje działające szybko i niezawodnie.
 
 	\subsection{Babylon.js}
 
-	Babylon.js jest otwartą biblioteką WebGL napisaną w TypeScript i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że Babylon.js jest silnikiem 3D, posiada wiele przydatnych narzędzi do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
+	\textit{Babylon.js} jest otwartą biblioteką \textit{WebGL} napisaną w \textit{TypeScript} i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że \textit{Babylon.js} jest silnikiem 3D, posiada wiele przydatnych narzędzi do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
 
-	Jako alternatywa rozważana była biblioteka Three.js wydana w 2009 roku, również oparta na~webGL. Po zapoznaniu i~przetestowaniu obu silników wybór padł na Babylon.js. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do Three.js. Przy renderowaniu sceny o podobnej zawartości i szczegółowości, Babylon.js okazał się wydajniejszy. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
+	Jako alternatywa rozważana była biblioteka \textit{Three.js} wydana w 2009 roku, również oparta na~\textit{WebGL}. Po zapoznaniu i~przetestowaniu obu silników wybór padł na \textit{Babylon.js}. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do \textit{Three.js}. Przy renderowaniu sceny o podobnej zawartości i szczegółowości, \textit{Babylon.js} okazał się wydajniejszy. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
 
 	\section{Scenariusz rozgrywki}
 
@@ -419,7 +423,7 @@
 		\item[Etykiety] \hfill \\
 		Do każdego kroku przypisana jest lista etykiet, określających jakich zagadnień on dotyczy. Krok posiada zawsze co~najmniej jedną etykietę, wskazującą komendę, której wymaga on do poprawnego wykonania. 
 		
-		Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do tego kroku etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także ilość poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i~pozwalają ocenić, nad czym powinien jeszcze popracować. Statystyki te są brane pod uwagę przy losowaniu kolejnych zadań, ponieważ na ich podstawie wyliczana jest waga krawędzi.
+		Gdy użytkownik poprawnie zrealizuje dany krok, to zwiększany jest wskaźnik powodzenia dla wszystkich przypisanych do tego kroku etykiet. Poza wspomnianym wskaźnikiem przechowywana jest także liczba poprawnych wywołań komendy. Informacje te umożliwiają określenie stopnia, w jakim użytkownik opanował dane zagadnienie i~pozwalają ocenić, nad czym powinien jeszcze popracować. Statystyki te są brane pod uwagę przy losowaniu kolejnych zadań, ponieważ na ich podstawie wyliczana jest waga krawędzi.
 		
 		\item[Dodatkowe dane] \hfill \\
 		Dodatkowe dane są charakterystyczne dla~każdego typu kroku i~mogą składać się z~różnych elementów. Dostarczają informację np.~o~nazwie wykonanej rewizji czy utworzonej gałęzi. Służą też do określenia jakie pliki powinny zostać dodane lub usunięte z~repozytorium. W~przypadku kroku dotyczącego polecenia \textit{git checkout} przechowują informację, czy~przełączenie powinno być zrealizowane na~konkretną gałąź czy~rewizję.
@@ -427,7 +431,7 @@
 
 	\subsubsection{Format danych}
 
-	Jak opisano wcześniej, scenariusz rozgrywki to w istocie struktura drzewiasta, złożona z~zadań, przy~czym każde z~nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i~wygodnego formatu do~przechowywania danych. Zdecydowano się~skorzystać z~formatu JSON, który doskonale nadaje się do tego celu. Pliki zapisane w~tym formacie można bezproblemowo odczytywać oraz modyfikować za~pomocą języka JavaScript.
+	Jak opisano wcześniej, scenariusz rozgrywki reprezentowany jest przez graf, złożony z~zadań, przy~czym każde z~nich zawiera pewne informacje oraz uporządkowaną listę kroków. Tak złożony obiekt wymagał odpowiedniego i~wygodnego formatu do~przechowywania danych. Zdecydowano się~skorzystać z~formatu JSON, który doskonale nadaje się do tego celu. Pliki zapisane w~tym formacie można bezproblemowo odczytywać oraz modyfikować za~pomocą języka JavaScript.
 
 	\subsection{Graficzne narzędzie do definiowania zadań}
 
@@ -467,7 +471,7 @@
 	
 	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w~których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
 	
-	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużyliśmy się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
+	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużono się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
 	
 	\subsection{Zadania}
 	
@@ -537,13 +541,13 @@
 
 	\subsection{Wstęp}
 
-	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o React i Redux. Komponenty takie będziemy nazywać kontenerami.
+	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o \textit{React} i \textit{Redux}. Komponenty takie będą dalej nazywane kontenerami.
 
 	\subsection{Tutorial}
 
 	W celu wyświetlenia tutoriala pojawiąjącego się po uruchomieniu aplikacji zaimplementowane zostały dwa komponenty~---~\textit{Tutorial} oraz \textit{TutorialItem}. Pierwszy z~nich z~założenia obejmuje całą treść strony, a~jako parametry wejściowe otrzymuje identyfikator aktualnie wyświetlanej wiadomości tutoriala oraz funkcję, która ma się wykonać po zamknięciu każdej wiadomości. Metoda renderująca tego komponentu obsługuje dwa stany, w zależności od wartości aktywnej wiadomości. 
 	\begin{itemize}
-		\item \textbf{Aktywna wiadomość jest ustawiona}~---~część zawartości komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten osiągnięto przez przypisanie klasy \textit{CSS} modyfikującej właściwość  \textit{filter} wszystkim elementom \textit{DOM} poza tymi, które chcemy wyróżnić (czyli elementem wiadomości oraz elementem, którego ta wiadomość dotyczy).
+		\item \textbf{Aktywna wiadomość jest ustawiona}~---~część zawartości komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten osiągnięto przez przypisanie klasy \textit{CSS} modyfikującej właściwość  \textit{filter} wszystkim elementom \textit{DOM} poza tymi, które należy wyróżnić (czyli elementem wiadomości oraz elementem, którego ta wiadomość dotyczy).
 		\item \textbf{Aktywna wiadomość ma wartość \textit{undefined}}~---~żadna wiadomość nie jest wyświetlana, a~komponent renderuje swoją zawartość, nie wpływając w~żaden sposób na jej wygląd (elementy nie są rozmywane).
 	\end{itemize}
 	Komponent \textit{TutorialItem} służy temu, by nie dodawać klasy \textit{CSS} powodującej rozmycie na element którego dotyczy wiadomość. Przyjmuje on jeden parametr wejściowy, określający, czy jego zawartość powinna zostać wyłączona z procesu rozmywania.
@@ -649,7 +653,7 @@
 	\begin{itemize}
 		\item \textbf{Główny człon}~---~reprezentuje podstawową część gałęzi, będącą prostą tubą. Ścieżka użyta do jej wygenerowania zawiera tylko dwa punkty, wyznaczające jej krańce. Dzięki temu można osiągnąć dowolnie długi odcinek, nie zwiększając przy tym liczby wierzchołków.
 		
-		\item \textbf{Łącznik gałęzi}~---~wykorzystywany do łączenia dwóch gałęzi. Zostaje utworzony w~momencie dodania do repozytorium nowej gałęzi lub w wyniku wykonania operacji scalania. Do wyznaczenia ścieżki łącznika skorzystano z funkcji pomocniczej, generującej krzywą Beziera. Na podstawie podanych czterech punktów\footnote{Pierwszy z czterech punktów ustala początek krzywej, dwa kolejne służą do określenia kształtu linii, a ostatni definiuje punkt końcowy, czyli punkt początkowy członu innej gałęzi. Dodatkowym parametrem jest ilość wygenerowanych punktów krzywej, wpływającym na szczegółowość linii.} generuje ona tablicę punktów, które tworzą krzywą, określającą kształt łącznika. Następnie sprawdzane jest, czy wygenerowana ścieżka nie przecina istniejącej gałęzi. Jeżeli tak, to podczas tworzenia łącznika odpowiednio zwiększana a~następnie zmniejszana jest wysokość punktów, tak aby łącznik przechodził nad gałęzią.
+		\item \textbf{Łącznik gałęzi}~---~wykorzystywany do łączenia dwóch gałęzi. Zostaje utworzony w~momencie dodania do repozytorium nowej gałęzi lub w wyniku wykonania operacji scalania. Do wyznaczenia ścieżki łącznika skorzystano z funkcji pomocniczej, generującej krzywą Beziera. Na podstawie podanych czterech punktów\footnote{Pierwszy z czterech punktów ustala początek krzywej, dwa kolejne służą do określenia kształtu linii, a ostatni definiuje punkt końcowy, czyli punkt początkowy członu innej gałęzi. Dodatkowym parametrem jest liczba wygenerowanych punktów krzywej, wpływającym na szczegółowość linii.} generuje ona tablicę punktów, które tworzą krzywą, określającą kształt łącznika. Następnie sprawdzane jest, czy wygenerowana ścieżka nie przecina istniejącej gałęzi. Jeżeli tak, to podczas tworzenia łącznika odpowiednio zwiększana a~następnie zmniejszana jest wysokość punktów, tak aby łącznik przechodził nad gałęzią.
 		
 	\end{itemize}
 
@@ -692,7 +696,7 @@
 	Dodanie tekstu do sceny wymaga wykonania kilku operacji, które zebrano w~dedykowanej do~tego celu klasie \textit{Text}. Poniżej opisano je w~odpowiedniej kolejności.
 
 	\begin{enumerate}
-		\item Utworzenie płaszczyzny o~rozmiarach wyliczonych na podstawie wielkości pojedynczego znaku. Szerokość płaszczyzny wynosi tyle, ile szerokość jednego znaku pomnożona przez ilość liter tekstu. Ustawienie właściwości \textit{billboardMode}.
+		\item Utworzenie płaszczyzny o~rozmiarach wyliczonych na podstawie wielkości pojedynczego znaku. Szerokość płaszczyzny wynosi tyle, ile szerokość jednego znaku pomnożona przez liczbę liter tekstu. Ustawienie właściwości \textit{billboardMode}.
 
 		\item Wygenerowanie tekstury z~użyciem klasy \textit{DynamicTexture} z~biblioteki \textit{Babylon.js}.
 
@@ -707,7 +711,7 @@
 
 	\subsection{Kamera} \label{camera}
 
-	Nieodzownym elementem projektu z~grafiką~3D jest kamera. Zdecydowano się zaimplementować kamerą śledzącą, rozszerzającą standardowe możliwości kamery \textit{FollowCamera} dostarczonej przez \textit{Babylon.js}. Najważniejszą jej zaletą jest możliwość podania obiektu, za~którym kamera będzie automatycznie podążać. Dodatkowo określa się takie parametry jak rotacja, odległość oraz wysokość z której ma spoglądać na~cel, a~także prędkość podążania i~przyspieszenie.
+	Nieodzownym elementem projektu z~grafiką~3D jest kamera. Zaimplementowano kamerę śledzącą, która rozszerza standardowe możliwości kamery \textit{FollowCamera} dostarczonej przez \textit{Babylon.js}. Najważniejszą jej zaletą jest możliwość podania obiektu, za~którym kamera będzie automatycznie podążać. Dodatkowo określa się takie parametry jak rotacja, odległość oraz wysokość z której ma spoglądać na~cel, a~także prędkość podążania i~przyspieszenie.
 
 	\paragraph{Płynne podążanie za celem}
 
