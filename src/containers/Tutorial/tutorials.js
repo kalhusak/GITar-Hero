@@ -16,8 +16,8 @@ export const taskList = {
 };
 
 export const tree = {
-  template: <div><p>And finally - directory tree.
-    You can see the state of your project's files here.
+  title: 'And finally - directory tree on the right',
+  template: <div><p>You can see the state of your project's files here.
     Take a look at the explaination for colors and icons below:</p>
     <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0 20px' }}>
       <b style={{ marginRight: '7px' }}>unmodified file</b>
