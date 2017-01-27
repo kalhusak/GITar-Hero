@@ -2,60 +2,42 @@
 
 .summary {
   position: fixed;
-  top: 200px;
-  left: 30%;
+  top: 50%;
+  left: 50%;
   width: 40%;
+  transform: translate(-50%, -50%);
   animation: summary-show 2s $ease-out-timing-fn;
-  background: rgba($color-bg/1.5, 0.9);
-  border-radius: 25px;
-  padding: 4px 0px 10px;
-}
-
-.summary__heading {
-  font-size: 18px;
-  text-transform: uppercase;
-  color: white;
-  font-weight: 200;
-  letter-spacing: 0.4em;
+  font-size: 16px;
   text-align: center;
 }
 
-.summary__content {
-  font-size: 15px;
-  color: white;
-  font-weight: 100;
-  letter-spacing: 0.2em;
-  padding: 4px 20px;
-  text-align: center;
+.summary__stats {
+  margin-top: 25px;
+  font-size: 14px;
+}
 
-  .summary__tasks-completed{
-    font-weight: bold;
-  }
-  .summary__points{
-    font-weight: bold;
+.summary__table {
+  margin: 25px auto 0;
+
+  td {
+    padding: 5px 15px;
+    text-align: center;
   }
 }
 
-.summary__stats{
-  font-size: 12px;
-  padding-top: 4px;
-  text-align: justify;
-  .summary__tag{
-    font-size: 12px;
-    .summary__tag-name{
-      text-transform: uppercase;
-    }
-  }
+.summary__highlight {
+  font-weight: bold;
+  font-family: 'Source Code Pro';
 }
 
 @keyframes summary-show {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translate(-50%, -60%);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translate(-50%, -50%);
   }
 }

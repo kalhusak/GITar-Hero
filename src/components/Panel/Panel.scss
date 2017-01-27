@@ -1,11 +1,14 @@
 @import '../variables';
 
+.panel {
+  color: $color-active;
+  font-size: 12px;
+}
+
 .panel__inner, .panel__title {
   border-radius: 5px;
   padding: 10px;
   background: $color-inactive;
-  color: $color-active;
-  font-size: 12px;
 }
 
 .panel__inner {

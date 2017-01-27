@@ -14,4 +14,3 @@ function showSummary (state) {
   state.show = true;
   return state;
 }
-

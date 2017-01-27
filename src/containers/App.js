@@ -17,11 +17,12 @@ class App extends Component {
 
   blurComponent (tutorialName) {
     return this.props.tutorial && this.props.tutorial !== tutorialName ||
-      this.props.helpDrawer.isOpen && tutorialName !== 'console';
+      this.props.helpDrawer.isOpen && tutorialName !== 'console' ||
+      this.props.gameFinished;
   }
 
   disableComponent () {
-    return Boolean(this.props.tutorial);
+    return Boolean(this.props.tutorial) || this.props.gameFinished;
   }
 
   render () {
@@ -51,9 +52,10 @@ class App extends Component {
   }
 }
 
-export default connect(({ tutorial, helpDrawer }) => {
+export default connect(({ tutorial, helpDrawer, summary }) => {
   return {
     tutorial: tutorial.current,
+    gameFinished: summary.show,
     helpDrawer
   };
 })(App);
