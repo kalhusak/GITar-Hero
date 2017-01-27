@@ -44,11 +44,11 @@ export const palettes = {
   ],
   pastelDark: [
     '#4793c5',
+    '#edf7df',
     '#fdb295',
     '#d94ea1',
-    '#edf2bc',
     '#71c7ba',
-    '#edf7df'
+    '#edf2bc'
   ],
   pastelBright: [
     '#FFB3DE',
@@ -92,7 +92,6 @@ export const palettes = {
     '#f9f8e6',
     '#e8b2ee',
     '#ace9ca',
-    '#f6e6ce',
     '#1e95cf',
     '#7dd6b8',
     '#e1fdfe',
@@ -108,9 +107,9 @@ export const palettes = {
   ],
   cold03: [
     '#1aeef1',
-    '#08b7ee',
     '#fb6ff6',
     '#531499',
+    '#08b7ee',
     '#940e8b'
 
   ],
@@ -123,16 +122,16 @@ export const palettes = {
     '#8fd3e8'
   ],
   cold05: [
+    '#57c7d3',
     '#fbe9a7',
     '#e756bd',
-    '#eba7e4',
-    '#57c7d3',
-    '#2383c0'
+    '#2383c0',
+    '#eba7e4'
   ],
   bright: [
     '#d8ff20',
-    '#20ff8a',
     '#207cff',
+    '#20ff8a',
     '#FF1493',
     '#ffd320',
     '#20ffea',
