@@ -2,7 +2,7 @@ import React from 'react';
 import File from '../../components/File';
 
 export const taskList = {
-  title: 'On the right, you can see your current task',
+  title: 'On the right, you will see your tasks',
   template: <div>
     <p>Every task consists of some steps you need to complete in specified order.
     Try to finish the task as quick as you can to get higher score!</p>

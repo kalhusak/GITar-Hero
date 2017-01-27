@@ -1,6 +1,10 @@
 import * as actions from '../actions/ConsoleActions';
 
-export default function consoleReducer (state = {}, action) {
+const initialState = {
+  commands: []
+};
+
+export default function consoleReducer (state = initialState, action) {
   switch (action.type) {
     case actions.ENTER_COMMAND:
       return Object.assign({}, state, {

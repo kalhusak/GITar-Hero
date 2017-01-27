@@ -3,7 +3,7 @@ import { easeOut } from '../../utils/EaseUtils';
 
 export default class Counter extends Component {
   static propTypes = {
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number,
     transitionTime: PropTypes.number
   };
 
