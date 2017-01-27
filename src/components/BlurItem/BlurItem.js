@@ -18,7 +18,7 @@ export default function BlurItem (props) {
 }
 
 BlurItem.propTypes = {
-  blur: PropTypes.bool.isRequired,
+  blur: PropTypes.bool,
   active: PropTypes.bool,
   style: PropTypes.object
 };

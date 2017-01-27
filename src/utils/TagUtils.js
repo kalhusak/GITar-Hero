@@ -1,6 +1,7 @@
 import * as TaskUtils from '../utils/TaskUtils';
 import StatisticsUtils from './StatisticsUtils';
 import helpTabs from '../containers/BottomDrawer/helpTabs';
+import { find } from 'lodash';
 
 export function onValidCommand (state) {
   onCommand(state, (tags, tag) => {
@@ -20,12 +21,12 @@ export function onInvalidCommand (state) {
 }
 
 export function getNewTag (state) {
-  var step = TaskUtils.getCurrentStep(state);
-  for (var i=0; i<step.tags.length; i++) {
-    if (!state.tags[step.tags[i]]) {
-      return step.tags[i];
-    }
+  let step = TaskUtils.getCurrentStep(state);
+
+  if (step) {
+    return find(step.tags, tag => !state.tags[tag]);
   }
+
   return null;
 }
 

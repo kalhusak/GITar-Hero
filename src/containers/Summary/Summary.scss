@@ -1,0 +1,43 @@
+@import '../../variables';
+
+.summary {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  transform: translate(-50%, -50%);
+  animation: summary-show 2s $ease-out-timing-fn;
+  font-size: 16px;
+  text-align: center;
+}
+
+.summary__stats {
+  margin-top: 25px;
+  font-size: 14px;
+}
+
+.summary__table {
+  margin: 25px auto 0;
+
+  td {
+    padding: 5px 15px;
+    text-align: center;
+  }
+}
+
+.summary__highlight {
+  font-weight: bold;
+  font-family: 'Source Code Pro';
+}
+
+@keyframes summary-show {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

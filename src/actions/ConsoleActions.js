@@ -9,12 +9,15 @@ export const enterCommand = command => (dispatch, getState) => {
     dispatch(helpDrawerActions.openHelpDrawer());
   } else {
     const currentStep = TaskUtils.getCurrentStep(getState().tasks);
-    const isValid = CommandResolver.checkIsCommandAllowed(command, currentStep.commands);
 
-    if (isValid || Config.noCommandValidation) {
-      dispatch(commandActions.newValidCommand(command, currentStep));
-    } else {
-      dispatch(commandActions.newInvalidCommand(command));
+    if (currentStep) {
+      const isValid = CommandResolver.checkIsCommandAllowed(command, currentStep.commands);
+
+      if (isValid || Config.noCommandValidation) {
+        dispatch(commandActions.newValidCommand(command, currentStep));
+      } else {
+        dispatch(commandActions.newInvalidCommand(command));
+      }
     }
   }
 };

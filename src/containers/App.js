@@ -5,6 +5,7 @@ import BottomDrawer from './BottomDrawer';
 import CurrentTask from './CurrentTask';
 import Top from './Top';
 import Tree from './Tree';
+import Summary from './Summary';
 import Tutorial from './Tutorial';
 import BlurItem from '../components/BlurItem';
 import './App.scss';
@@ -16,20 +17,19 @@ class App extends Component {
 
   blurComponent (tutorialName) {
     return this.props.tutorial && this.props.tutorial !== tutorialName ||
-      this.props.helpDrawer.isOpen && tutorialName !== 'console';
+      this.props.helpDrawer.isOpen && tutorialName !== 'console' ||
+      this.props.gameFinished;
   }
 
   disableComponent () {
-    return Boolean(this.props.tutorial);
+    return Boolean(this.props.tutorial) || this.props.gameFinished;
   }
 
   render () {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-          <BlurItem blur={this.blurComponent()} active={!this.disableComponent()}>
-            <Canvas store={this.props.store} />
-          </BlurItem>
+          
           <BlurItem blur={this.blurComponent()} active={!this.disableComponent()}>
             <Top />
           </BlurItem>
@@ -43,15 +43,17 @@ class App extends Component {
             <BottomDrawer />
           </BlurItem>
           <Tutorial />
+          <Summary />
         </div>
       </Provider>
     );
   }
 }
 
-export default connect(({ tutorial, helpDrawer }) => {
+export default connect(({ tutorial, helpDrawer, summary }) => {
   return {
     tutorial: tutorial.current,
+    gameFinished: summary.show,
     helpDrawer
   };
 })(App);
