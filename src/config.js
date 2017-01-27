@@ -1,5 +1,5 @@
 const config = {
-  noCommandValidation: true, // option to debug whole tasks path just by pressing enter
+  noCommandValidation: false, // option to debug whole tasks path just by pressing enter
   taskListSize: 1,
   allowedCommands: [
     'init ',
@@ -9,7 +9,7 @@ const config = {
     'commit ',
     'branch ',
     'checkout :branch: ',
-    'rebase :branch: :branch: ',
+    // 'rebase :branch: :branch: ',
     'reset ']
 };
 

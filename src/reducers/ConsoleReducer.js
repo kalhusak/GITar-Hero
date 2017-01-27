@@ -1,15 +1,27 @@
-import * as actions from '../actions/ConsoleActions';
+import * as consoleActions from '../actions/ConsoleActions';
+import * as commandActions from '../actions/CommandActions';
+import { assign } from 'lodash';
 
 const initialState = {
-  commands: []
+  commands: [],
+  branches: []
 };
 
-export default function consoleReducer (state = initialState, action) {
-  switch (action.type) {
-    case actions.ENTER_COMMAND:
-      return Object.assign({}, state, {
-        commands: state.commands.concat(action.payload.command)
+export default function consoleReducer (state = initialState, { type, payload }) {
+  switch (type) {
+    case consoleActions.ENTER_COMMAND:
+      return assign({}, state, {
+        commands: state.commands.concat(payload.command)
       });
+
+    case commandActions.NEW_VALID_COMMAND:
+      if (payload.step.type === 'BRANCH' || payload.step.type === 'CHECKOUT') {
+        return assign({}, state, {
+          branches: state.branches.concat(payload.step.data.name)
+        });
+      }
+      return state;
+
     default:
       return state;
   }

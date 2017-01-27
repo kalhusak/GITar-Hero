@@ -161,7 +161,7 @@ class BottomDrawer extends Component {
           <Console
             enabled={!this.props.tutorial.current}
             files={this.props.tree}
-            branches={['develop', 'master']}
+            branches={this.props.console.branches}
             onCommandEnter={this.onConsoleCommandEnter} />
         </div>
 
@@ -180,6 +180,6 @@ class BottomDrawer extends Component {
   }
 };
 
-const mapStateToProps = state => pick(state, ['helpDrawer', 'tree', 'tutorial']);
+const mapStateToProps = state => pick(state, ['helpDrawer', 'tree', 'tutorial', 'console']);
 
 export default connect(mapStateToProps)(BottomDrawer);
