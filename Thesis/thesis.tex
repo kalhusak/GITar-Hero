@@ -78,7 +78,7 @@
 
 	\section{System kontroli wersji Git}
 
-	System kontroli wersji Git stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W~związku z~tym postanowili napisać własny, doskonalszy od~poprzedniego. Z~założenia miał to~być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
+	System kontroli wersji Git\cite{progit}\cite{gajda} stworzony został w 2005 roku, przez zespół programistów pracujących wspólnie nad jądrem Linuksa, w~tym przez Linusa Torvaldsa, twórcę wspomnianego systemu operacyjnego. Wykorzystywali oni wcześniej inny darmowy rozproszony system kontroli wersji, który przestał być ogólnodostępny. W~związku z~tym postanowili napisać własny, doskonalszy od~poprzedniego. Z~założenia miał to~być szybki, rozproszony system, wspierający współbieżną pracę nad różnymi aspektami i~dobrze radzący sobie z~ogromnymi projektami, takimi jak jądro Linuksa.
 
 	\subsection{Cechy charakterystyczne}
 	Stworzony przez Linusa Torvaldsa system kontroli wersji Git różni się znacząco od wcześniejszych systemów, szczególnie tych scentralizowanych. W odmienny sposób przechowuje nowe wersje plików. W przeciwieństwie do poprzedników zapamiętuje cały stan repozytorium, a~nie jedynie różnicę pomiędzy plikami. Dla zwiększenia efektywności, jeśli plik nie został zmodyfikowany, to nie jest kopiowany tylko przechowywana jest referencja do~jego aktualnej wersji.
@@ -223,7 +223,7 @@
 
 	\section{Gitflow}
 
-	Praca z~wykorzystaniem systemu Git może przebiegać w~zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i~pomóc w~sprawnym zarządzaniu i~wydawaniu nowych wersji oprogramowania. Jedną z~bardziej popularnych metodyk jest Gitflow, opracowana przez Vincenta Driessena. Określa ona cykl pracy, oparty na korzystaniu z~różnych gałęzi, z~których każda ma dokładnie zdefiniowaną rolę.
+	Praca z~wykorzystaniem systemu Git może przebiegać w~zgodzie ze ściśle określonym cyklem. Ustalenie reguł, których będą przestrzegać wszyscy programiści pracujący nad danym projektem, może znacząco ułatwić synchronizację pracy i~pomóc w~sprawnym zarządzaniu i~wydawaniu nowych wersji oprogramowania. Jedną z~bardziej popularnych metodyk jest Gitflow\cite{gitflow}, opracowana przez Vincenta Driessena. Określa ona cykl pracy, oparty na korzystaniu z~różnych gałęzi, z~których każda ma dokładnie zdefiniowaną rolę.
 
 	\begin{figure}
 		\centering
@@ -334,7 +334,7 @@
 
 	\subsection{JavaScript}
 
-	\textit{JavaScript} jest wysokopoziomowym, skryptowym, wieloparadygmatowym, słabo typowanym językiem programowania. Swoją popularność zawdzięcza szerokiemu zastosowaniu w implementacji aplikacji internetowych. Jest wpierany głównie przez przeglądarki internetowe, może być jednak wykonywany również po stronie serwera, np. w środowisku uruchomieniowym \textit{node.js}.
+	\textit{JavaScript}\cite{js} jest wysokopoziomowym, skryptowym, wieloparadygmatowym, słabo typowanym językiem programowania. Swoją popularność zawdzięcza szerokiemu zastosowaniu w implementacji aplikacji internetowych. Jest wpierany głównie przez przeglądarki internetowe, może być jednak wykonywany również po stronie serwera, np. w środowisku uruchomieniowym \textit{node.js}.
 
 	\textit{JavaScript} jest językiem zorientowanym prototypowo. Nie istnieje w nim pojęcie klasy, choć w najnowszym standardzie języka została ona dodana do składni (jest to jednak tzw. lukier składniowy). Ponowne wykorzystanie zdefiniowanych zachowań, znane z klas w obiektowych językach programowania, realizowane jest przez dekorację istniejących obiektów, które stanowią później prototypy.
 
@@ -344,9 +344,9 @@
 
 	Wymagania dotyczące aplikacji przeglądarkowych stały się na tyle skomplikowane, że interfejs użytkownika jest bardzo złożony i może składać się z wielu elementów. Zarządzanie stanem takich aplikacji jest trudne, ponieważ występuje wiele zależności między komponentami. Może to doprowadzić do sytuacji, w której nie jest jasne co tak naprawdę się dzieje, a znalezienie błędów czy rozszerzenie funkcjonalności staje się zadaniem bardzo czasochłonnym.
 
-	Jedną z bibliotek pomagających w rozwiązaniu tego problemu jest \textit{Redux}. Jej głównym założeniem jest przejrzysty stan aplikacji, który może się zmieniać tylko w określonych momentach i~zawsze w~przewidywalny sposób.
+	Jedną z bibliotek pomagających w rozwiązaniu tego problemu jest \textit{Redux}\cite{redux}. Jej głównym założeniem jest przejrzysty stan aplikacji, który może się zmieniać tylko w określonych momentach i~zawsze w~przewidywalny sposób.
 
-	Stan w \textit{Reduxie} zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan.
+	Stan w \textit{Reduxie} zdefiniowany jest jako zwykły obiekt o~strukturze drzewa, zawierający wszystkie możliwe informacje, jakie są potrzebne aby jednoznacznie określić i móc odtworzyć identyczną sytuację w aplikacji. Nie może on być modyfikowany, jest tylko do odczytu. Jedynym sposobem na jego zmianę jest wyemitowanie akcji, będącej również obiektem zawierającym obowiązkowo pole typ i dowolne inne potrzebne atrybuty. Zadaniem akcji jest przejrzysty opis tego, co się wydarzyło w~aplikacji, dzięki czemu dokładnie wiadomo czy i jak powinien zmienić się stan.
 
 	Kluczowym elementem \textit{Reduxa} są specyficzne funkcje, nazywane w języku angielskim \textit{reducers}, które definiują jak konkretna akcja wpływa na stan. Każda funkcja \textit{reducer} musi spełniać określone wymagania. Jako parametry przyjmuje zawsze tylko i~wyłącznie obecny stan aplikacji i wyemitowaną akcję, a zwraca nowy obiekt stanu, w jakim znajduje się aplikacja na skutek wykonanej akcji. Ważne jest także aby \textit{reducer} był przewidywalny i~deterministyczny. Oznacza to, że określony stan aplikacji i~określona akcja spowodują powstanie zawsze takiego samego stanu. Dodatkowo taka funkcja nie może mieć żadnych skutków ubocznych. W dużych projektach wskazane jest napisanie kilku takich funkcji, z~których każda wpływa tylko na określoną część stanu. Ułatwia to utrzymanie zrozumiałego kodu, który można łatwo rozwijać i~modyfikować.
 
@@ -361,7 +361,7 @@
 
 	\subsection{React.js}
 
-	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę \textit{React}.
+	 Jako bibliotekę do budowania interfejsu użytkownika wybrano bibliotekę \textit{React}\cite{react}.
 	 Została ona stworzona w 2013 roku przez zespół programistów Facebooka, aby rozwiązać problem tworzenia dynamicznych aplikacji internetowych, w których nieustannie zmienia się to, co należy wyświetlać. Początkowo nie była ona ogólnodostępna, ale aktualnie jest rozpowszechniana na zasadzie otwartego oprogramowania (ang. \textit{open-source}).
 
    \textit{React} opiera się na koncepcji niezależnych komponentów, nadających się do~wielokrotnego wykorzystania, z~których można komponować skomplikowane widoki. Są to obiekty JavaScript, reprezentujące fragmenty interfejsu użytkownika, mające określoną strukturę i~funkcjonalność. Każdy komponent musi implementować metodę \textit{render()}, odpowiedzialną za wyświetlenie komponentu w przeglądarce. W wartości zwracanej przez tę metodę mogą pojawić się zarówno znaczniki HTML jak i instancje zdefiniowanych wcześniej komponentów. Aplikacje internetowe korzystające z biblioteki \textit{React} budowane są zwykle na zasadzie drzewa komponentów. Tworzony jest jeden komponent nadrzędny, w którym zagnieżdżone są kolejne. Wzorzec ten pozwala zachować modułowość aplikacji.
@@ -374,7 +374,7 @@
 
 	\subsection{Babylon.js}
 
-	\textit{Babylon.js} jest otwartą biblioteką \textit{WebGL} napisaną w \textit{TypeScript} i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że \textit{Babylon.js} jest silnikiem 3D, posiada wiele przydatnych narzędzi do tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
+	\textit{Babylon.js}\cite{babylon} jest otwartą biblioteką \textit{WebGL} napisaną w \textit{TypeScript} i~wykorzystywaną przede wszystkim do tworzenia gier wideo w~przeglądarkach. Pierwsza odsłona została wydana w~2013~roku. Głównymi twórcami są David Cotuhe oraz David Rousset. Jako, że \textit{Babylon.js} jest silnikiem 3D, posiada wiele przydatnych narzędzi do~tworzenia, wyświetlania i~teksturowania szkieletów w~przestrzeni. Przez to, że~kierowana jest głównie do twórców gier, posiada również dodatkowe funkcje takie jak generowanie krawędzi czy tworzenie obiektu na podstawie mapy wysokości. Ponadto zapewnia natywną detekcję kolizji, grawitację sceny oraz wbudowane kamery, takie jak kamera śledząca, automatycznie podążająca za obiektem.
 
 	Jako alternatywa rozważana była biblioteka \textit{Three.js} wydana w 2009 roku, również oparta na~\textit{WebGL}. Po zapoznaniu i~przetestowaniu obu silników wybór padł na \textit{Babylon.js}. Przyczyniły się do tego przede wszystkim prostota użycia oraz płynność, którą zapewniał w przeciwieństwie do \textit{Three.js}. Przy renderowaniu sceny o podobnej zawartości i szczegółowości, \textit{Babylon.js} okazał się wydajniejszy. Poza tym biblioteka ta jest dobrze udokumentowana i~posiada bogatą bazę poradników, a~społeczność wykorzystująca tę bibliotekę jest bardzo liczna i~stale rośnie.
 
@@ -437,12 +437,12 @@
 
 	\subsubsection{Motywacja}
 
-	Aplikacja GITar Hero umożliwia przetwarzanie rozbudowanych scenariuszy, których ręczne tworzenie byłoby uciążliwe i ~czasochłonne, a~ponadto podatne na~błędy. Dodawanie lub modyfikacja zadań wymagałaby znaczących nakładów pracy.
+	Aplikacja GITar Hero umożliwia przetwarzanie rozbudowanych scenariuszy, których ręczne tworzenie byłoby uciążliwe i~czasochłonne, a~ponadto podatne na~błędy. Dodawanie lub modyfikacja zadań wymagałaby znaczących nakładów pracy.
 	Z~tego względu zdecydowano się na korzystanie z~narzędzia z~graficznym interfejsem użytkownika, za~pomocą którego można~by było w~prosty i~wygodny sposób tworzyć grafy zadań oraz zapisywać je w~formacie JSON.
 
 	\subsubsection{Poszukiwanie gotowego rozwiązania} \label{solution}
 
-	Początkowo zamierzano skorzystać z~gotowego rozwiązania. Do~tego zadania wytypowano aplikację \textit{directed-graph-creator} użytkownika \textit{cjrd} [tu odnosnik do bibliografii i tam link] udostępnianą jako oprogramowanie o~otwartym źródle (ang. \textit{open source}) \footnote{Oprogramowanie udostępnione jest na licencji MIT/X, dzięki czemu istnieje nieograniczone prawo do używania, kopiowania, modyfikowania i~rozpowszechniania go. Jedynym wymogiem jest, by we wszystkich wersjach zachowano warunki licencyjne oraz informacje o autorze.}. Umożliwia ona tworzenie grafów skierowanych oraz~ich zapis do formatu JSON. Narzędzie to jest zaimplementowane w języku JavaScript i~korzysta z popularnej biblioteki~D3.js, która pozwala tworzyć dynamiczne i~interaktywne wizualizacje danych w~przeglądarkach internetowych.
+	Początkowo zamierzano skorzystać z~gotowego rozwiązania. Do~tego zadania wytypowano aplikację \textit{directed-graph-creator}\cite{graphCreator} użytkownika \textit{cjrd} udostępnianą jako oprogramowanie o~otwartym źródle (ang. \textit{open source}) \footnote{Oprogramowanie udostępnione jest na licencji MIT/X, dzięki czemu istnieje nieograniczone prawo do używania, kopiowania, modyfikowania i~rozpowszechniania go. Jedynym wymogiem jest, by we wszystkich wersjach zachowano warunki licencyjne oraz informacje o autorze.}. Umożliwia ona tworzenie grafów skierowanych oraz~ich zapis do formatu JSON. Narzędzie to jest zaimplementowane w języku JavaScript i~korzysta z~popularnej biblioteki~D3.js, która pozwala tworzyć dynamiczne i~interaktywne wizualizacje danych w~przeglądarkach internetowych.
 
 	Jednakże aplikacja, w~formie w jakiej została udostępniona, nie wystarczała do~zdefiniowania scenariusza rozgrywki. Każdy węzeł grafu mógł przechowywać tylko pojedynczy ciąg znaków. Potrzebne były zatem znaczne modyfikacje, umożliwiające zapisanie w pojedynczym węźle wszystkich niezbędnych informacji, które powinny się znaleźć w zadaniu. Zdecydowano się zatem stworzyć własne narzędzie do~tworzenia scenariusza zadań, bazujące na ogólnodostępnym \textit{direct-graph-creator}.
 
@@ -766,5 +766,17 @@
 	Praktyczne info dla opornego użytkownika, jak ma korzystać, między innymi że jest opcja scrolla aby oddalić, jakie przyciski do obsługi helpa itp. itd., krótki opis fragmentu rozgrywki co się dzieje po czym i dlaczego i jak ma na to reagować użytkownik i takie tam.
 
 	\backmatter
+	
+	\begin{thebibliography}{1}
+		\bibitem{progit}S. Chacon, B. Straub \emph{Pro Git} 2014, \\ https://progit2.s3.amazonaws.com/en/2016-03-22-f3531/progit-en.1084.pdf
+		\bibitem{gitflow}V. Driessen \emph{A successful Git branching model} \\
+		http://nvie.com/posts/a-successful-git-branching-model/
+		\bibitem{gajda}W. Gajda \emph{Git. Rozproszony system kontroli wersji} Helion, 2013
+		\bibitem{graphCreator} https://github.com/cjrd/directed-graph-creator
+		\bibitem{babylon}http://doc.babylonjs.com/
+		\bibitem{react}https://facebook.github.io/react/
+		\bibitem{redux}http://redux.js.org/
+		\bibitem{js}https://en.wikipedia.org/wiki/JavaScript
+	\end{thebibliography}
 
 \end{document}
