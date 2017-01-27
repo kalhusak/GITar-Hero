@@ -46,7 +46,9 @@ function onNewValidCommand (state) {
 
 function onActivateStep (state) {
   const task = TaskUtils.getCurrentTask(state);
-  task.pending = false;
+  if (task) {
+    task.pending = false;
+  }
   return state;
 }
 
