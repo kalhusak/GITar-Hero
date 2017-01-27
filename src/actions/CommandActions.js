@@ -27,7 +27,7 @@ export const newValidCommand = (command, step) => (dispatch, getState) => {
 
   const nextStep = TaskUtils.getCurrentStep(getState().tasks);
   let modifyTree = false;
-  if (nextStep.data && nextStep.data.before) {
+  if (nextStep && nextStep.data && nextStep.data.before) {
     if (nextStep.type === 'ADD' && nextStep.data.before.removeFiles) {
       nextStep.data.before.unstagedRemoveFiles = nextStep.data.before.removeFiles;
       nextStep.data.before.removeFiles = [];
