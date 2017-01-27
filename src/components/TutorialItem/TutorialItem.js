@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-export default class TutorialItem extends Component {
-  static propTypes = {
-    enabled: PropTypes.bool.isRequired
-  };
-
-  render () {
-    return <div className={this.props.enabled ? 'tutorial__active-item' : ''}>
-      {this.props.children}
-    </div>;
-  }
+export default function TutorialItem (props) {
+  return <div className={props.enabled ? 'tutorial__active-item' : ''} style={props.style}>
+    {props.children}
+  </div>;
 }
+
+TutorialItem.propTypes = {
+  enabled: PropTypes.bool.isRequired,
+  style: PropTypes.object
+};
