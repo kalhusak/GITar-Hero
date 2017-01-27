@@ -54,7 +54,7 @@ class Tree extends Component {
   }
 
   renderEmptyState () {
-    return <div className='tree__empty-state'>directory is empty :-(</div>;
+    return <div className='tree__empty-state'>directory is empty</div>;
   }
 
   renderTree () {

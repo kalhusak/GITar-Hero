@@ -34,9 +34,20 @@ class CurrentTask extends Component {
   }
 
   renderTask () {
-    return <div className='task__steps'>
-      {this.renderSteps()}
-    </div>;
+    return <ReactCCSSTransitionGroup
+      transitionName='task__animate'
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={500}>
+      <div key={this.props.task.id} className='task__animate'>
+        <Panel className='task__description' title={this.props.task.title}>
+          {this.props.task.description}
+        </Panel>
+        {this.renderLoader()}
+        <div className='task__steps'>
+          {this.renderSteps()}
+        </div>
+      </div>
+    </ReactCCSSTransitionGroup>;
   }
 
   renderLoader () {
@@ -45,6 +56,10 @@ class CurrentTask extends Component {
         <Loader />
       </div>;
     }
+  }
+
+  renderEmptyState () {
+    return <div className='task__empty-state'>you have no tasks yet</div>;
   }
 
   onWheel (event) {
@@ -60,23 +75,10 @@ class CurrentTask extends Component {
   }
 
   render () {
-    return (
-      <div ref='task' className='task'>
-        <h2 className='task__heading'>Current task</h2>
-        <ReactCCSSTransitionGroup
-          transitionName='task__animate'
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}>
-          <div key={this.props.task.id} className='task__animate'>
-            <Panel className='task__description' title={this.props.task.title}>
-              {this.props.task.description}
-            </Panel>
-            {this.renderLoader()}
-            {this.renderTask()}
-          </div>
-        </ReactCCSSTransitionGroup>
-      </div>
-    );
+    return <div ref='task' className='task'>
+      <h2 className='task__heading'>Current task</h2>
+      {this.props.task ? this.renderTask() : this.renderEmptyState()}
+    </div>;
   }
 };
 

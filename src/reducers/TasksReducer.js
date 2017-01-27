@@ -5,7 +5,14 @@ import * as tutorialActions from '../actions/TutorialActions';
 import TagUtils from '../utils/TagUtils';
 import { cloneDeep } from 'lodash';
 
-export default function tasksReducers (state = {}, action) {
+const initialState = {
+  current: 0,
+  byId: {},
+  tags: {},
+  startTime: Date.now()
+};
+
+export default function tasksReducers (state = initialState, action) {
   switch (action.type) {
     case tutorialActions.CLOSE_TUTORIAL:
       return onTutorialFinished(cloneDeep(state));
