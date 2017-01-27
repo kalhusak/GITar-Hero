@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash';
 const penalty = 50;
 
 const initialState = {
-  points: 0
+  value: 0
 };
 
 export default function pointsReducer (state = initialState, action) {
