@@ -5,12 +5,12 @@ import BottomDrawer from './BottomDrawer';
 import CurrentTask from './CurrentTask';
 import Top from './Top';
 import Tree from './Tree';
-import TutorialItem from '../components/TutorialItem';
-import Tutorial from '../components/Tutorial';
+import BlurItem from '../components/BlurItem';
+import Blur from '../components/Blur';
 import { closeTutorial } from '../actions/TutorialActions';
 import './App.scss';
 
-class AppContainer extends Component {
+class App extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired
   }
@@ -28,16 +28,16 @@ class AppContainer extends Component {
     return (
       <Provider store={this.props.store}>
         <div className='app'>
-          <Tutorial blur={this.props.helpDrawer.isOpen}
+          <Blur blur={this.props.helpDrawer.isOpen}
             message={null} onClose={this.onTutorialClose}>
             <Canvas store={this.props.store} />
             <Top />
             <Tree />
-            <TutorialItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen} style={{ height: '100%' }}>
+            <BlurItem enabled={this.props.tutorial === 'console' || this.props.helpDrawer.isOpen} style={{ height: '100%' }}>
               <BottomDrawer />
-            </TutorialItem>
+            </BlurItem>
             <CurrentTask />
-          </Tutorial>
+          </Blur>
         </div>
       </Provider>
     );
@@ -65,4 +65,4 @@ export default connect(({ tutorial, helpDrawer }) => {
     tutorial: tutorial.current,
     helpDrawer
   };
-})(AppContainer);
+})(App);

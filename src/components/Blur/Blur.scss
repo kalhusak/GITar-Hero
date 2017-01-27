@@ -1,8 +1,8 @@
 @import '../variables';
 
-.tutorial {
+.blur {
   height: 100%;
-  
+
   &>* {
     filter: blur(0px);
     transition: filter 0.3s $ease-out-timing-fn 0.5s;
@@ -11,26 +11,26 @@
   }
 }
 
-.tutorial.tutorial--blur {
-  &>*:not(.tutorial__active-item) {
+.blur.blur--blur {
+  &>*:not(.blur__active-item) {
     filter: blur(10px);
     transition-delay: 0s;
   }
 
-  .tutorial__active-item {
+  .blur__active-item {
     z-index: 3;
   }
 }
 
-.tutorial.tutorial--active>*.tutorial__active-item:not(.tutorial__box) {
+.blur.blur--active>*.blur__active-item:not(.blur__box) {
   pointer-events: none;
 }
 
-.tutorial__active-item {
+.blur__active-item {
   position: relative;
 }
 
-.tutorial__box {
+.blur__box {
   position: fixed;
   width: 300px;
   background: black;
@@ -43,16 +43,16 @@
   overflow: hidden;
 }
 
-.tutorial__box-inner {
+.blur__box-inner {
   padding: 10px;
 }
 
-.tutorial__box-inner .file {
+.blur__box-inner .file {
   display: inline-block;
   font-size: 12px;
 }
 
-.tutorial__box-button {
+.blur__box-button {
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -66,6 +66,6 @@
   outline: none;
 }
 
-.tutorial__box-button:hover {
+.blur__box-button:hover {
   background: rgba(white, 0.9);
 }
