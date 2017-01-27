@@ -14,7 +14,7 @@ export const outline = {
 };
 
 export const branch = {
-  colors:  palettes.candy,
+  colors:  palettes.cold05,
   specularColor: new BABYLON.Color3(0.2, 0.2, 0.2),
   specularPower: 8,
   textStyle: {
@@ -41,7 +41,7 @@ export const ground = {
   speed: 0.0006,
   fogDensity: 0.7, // from 0.0 to 1.0
   heightMap: 'heightMap.png',
-  texture: 'codeTexture3.png'
+  texture: 'codeTexture4.png'
 };
 
 export default {
