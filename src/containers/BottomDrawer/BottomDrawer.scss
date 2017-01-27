@@ -1,5 +1,9 @@
 @import '../variables';
 
+.bottom-drawer {
+  display: inline;
+}
+
 .bottom-drawer__container {
   position: fixed;
   bottom: 0px;

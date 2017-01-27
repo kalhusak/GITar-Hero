@@ -1,5 +1,5 @@
 import React from 'react';
-import File from '../File';
+import File from '../../components/File';
 
 export const taskList = {
   template: <div>
