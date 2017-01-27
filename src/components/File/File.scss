@@ -1,3 +1,6 @@
+$color-file-modified: rgba(#ba4a4a, 0.6);
+$color-file-staged: rgba(#4eac56, 0.6);
+
 .file {
   display: inline-block;
   border-radius: 5px;
@@ -10,7 +13,7 @@
   animation: file-enter 0.3s cubic-bezier(.2,1.27,.47,1.44);
   display: flex;
   align-items: center;
-  background: rgba(white, 0.7);
+  background: rgba(white, 0.6);
   color: rgba(black, 0.9);
   font-size: 11px;
 
@@ -28,12 +31,12 @@
 }
 
 .file--green {
-  background: hsla(120, 50%, 50%, 0.6);
+  background: $color-file-staged;
   animation: file-stage 0.3s cubic-bezier(.2,1.27,.47,1.44);
 }
 
 .file--red {
-  background: hsla(0, 50%, 50%, 0.6);
+  background: $color-file-modified;
   animation: file-modify 0.3s cubic-bezier(.2,1.27,.47,1.44);
 }
 
