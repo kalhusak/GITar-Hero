@@ -1,0 +1,25 @@
+@import '../variables';
+
+.blur-item {
+  display: inline;
+}
+
+.blur-item>* {
+  filter: blur(0px);
+  transition: filter 0.3s $ease-out-timing-fn;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.blur-item--blur>* {
+  filter: blur(10px);
+  transition-delay: 0s;
+}
+
+.blur-item--inactive {
+  pointer-events: none;
+}
+
+.blur-item--inactive:not(.blur-item--blur) {
+  opacity: 0.3;
+}
