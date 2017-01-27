@@ -646,7 +646,7 @@
 	\subsection{Repozytorium 3D}
 	W~celu kontrolowania właściwego odwzorowywania stanu repozytorium za pomocą grafiki 3D stworzono obiekt \textit{Repo3D}. Służy on jako kontroler, reagujący na~wprowadzane przez użytkownika komendy i~zarządzający elementami grafiki 3D. Nasłuchuje na wykonywane akcje i~w~zależności od ich typu dodaje, usuwa bądź modyfikuje elementy na scenie. Kontroler \textit{Repo3D} zawiera wszystkie potrzebne informacje dotyczące aktualnego stanu repozytorium, czyli między innymi listę utworzonych gałęzi, zawierane przez nie rewizje oraz wskaźnik HEAD, o którym więcej w podrozdziale~\ref{camera}.
 
-	\subsection{Branch}
+	\subsection{Gałąź}
 	Każda gałąź w repozytorium reprezentowana jest przez odpowiedni obiekt 3D nazwany \textit{Branch}. Tworzenie tego obiektu realizowane jest przy pomocy funkcji \textit{CreateTube} z~biblioteki \textit{Babylon.js}. Na~podstawie podanej listy punktów składających się na~ścieżkę funkcja ta generuje siatkę wierzchołków w~kształcie tuby. Pozwala również na podanie średnicy oraz szczegółowości siatki. Parametry te dobrano w taki sposób, aby wygenerować tubę, której przekrój przypomina koło, przy jednoczesnym zachowaniu jak najmniejszej liczby użytych wierzchołków. 
 	
 	Jedna gałąź może składać się z dwóch rodzajów siatki. 
@@ -666,7 +666,7 @@
 	Na końcu każdej gałęzi wyświetlany jest tekst, z nazwą gałęzi o~kolorze białym. Jego pozycję ustawiono na~referencję do~ostatniego punktu gałęzi, dzięki czemu tekst zawsze podąża za wydłużającą lub skracającą się gałęzią.
 
 
-	\subsection{Commit}
+	\subsection{Rewizja}
 	Rewizja, powstająca w~wyniku operacji zatwierdzania zmian, w~grafice~3D przedstawiana jest jako obiekt \textit{Commit} o~kształcie kuli. Umieszczona jest na gałęzi, która zawiera daną rewizję.
 
 	Funkcja \textit{CreateSphere} pochodząca z biblioteki \textit{Babylon.js} buduje siatkę wierzchołków w kształcie sfery o~określonej średnicy oraz teselacji. Przy wartości teselacji równej szesnaście powierzchnia obiektu wygląda na wygładzoną.
@@ -735,7 +735,7 @@
 	
 	Zadaniem programu cieniującego przetwarzającego fragmenty (ang. \textit{fragment shader}) jest przede wszystkim naniesienie tekstury na płaszczyznę. Do programu cieniującego przekazana jest tekstura przedstawiająca biały kod na czarnym tle. Przekazane są również współrzędne tekstury, do których w każdej kolejnej klatce dodawane jest przesunięcie (w ten sposób osiągnięty został efekt przewijania tekstu). Przy użyciu tych współrzędnych, próbkowany jest kolor tekstury w odpowiednim miejscu. Jeżeli jest to kolor czarny, przetwarzany piksel pozostaje przezroczysty, w przeciwnym wypadku kopiowany jest kolor z tekstury. W~celu podkreślenia efektu głębi obrazu zaimplementowano efekt mgły. Oznacza to, że kod znajdujący się daleko od kamery zaczyna zlewać się z tłem. Na podstawie współrzędnych fragmentu, wyliczana jest jego odległość od kamery. Ustalone zostały wartości odległości minimalnej, od której efekt mgły zaczyna być widoczny i maksymalnej, dla której fragmenty przybierają kolor tła. Dla odległości pomiędzy tymi wartościami kolor jest interpolowany liniowo między kolorem tła, a kolorem fragmentu tekstury.
 
-	\subsection{Drobny pył w tle}
+	\subsection{Drobny pył}
 
 	Poza przewijającym się kodem w~tle poruszają się także drobne cząsteczki imitujące kurz. Wypełniają one przestrzeń, niwelując wrażenie pustki.
 
