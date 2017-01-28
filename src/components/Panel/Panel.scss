@@ -1,0 +1,28 @@
+@import '../variables';
+
+.panel {
+  color: $color-active;
+  font-size: 12px;
+}
+
+.panel__inner, .panel__title {
+  border-radius: 5px;
+  padding: 10px;
+  background: $color-inactive;
+}
+
+.panel__inner {
+  font-weight: 300;
+}
+
+.panel__inner--with-title {
+  border-radius: 0px 0px 5px 5px;
+}
+
+.panel__title {
+  border-radius: 5px 5px 0px 0px;
+  margin-bottom: 2px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}

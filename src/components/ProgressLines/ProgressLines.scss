@@ -1,0 +1,14 @@
+@import '../variables';
+
+.progress-lines__line-bg, .progress-lines__line-fg {
+  stroke-width: 1px;
+  fill: none;
+}
+
+.progress-lines__line-bg {
+  stroke: $color-inactive;
+}
+
+.progress-lines__line-fg {
+  stroke: $color-active;
+}

@@ -1,0 +1,157 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+}
+
+p{
+     text-align: center;
+     overflow: overlay;
+     position: relative;
+}
+
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: rgb(248, 248, 248)
+}
+
+#toolbox{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    padding: 1em;
+    z-index: 5;
+}
+
+#toolbox input{
+    width: 30px;
+    opacity: 0.4;
+}
+#toolbox input:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#hidden-file-upload{
+    display: none;
+}
+
+#download-input{
+    margin: 0 0.5em;
+}
+
+.conceptG text{
+    pointer-events: none;
+}
+
+marker{
+    fill: #333;
+}
+
+g.conceptG circle{
+    fill: #F6FBFF;
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+g.conceptG:hover circle{
+    fill: rgb(200, 238, 241);
+}
+
+g.selected circle{
+    fill: rgb(250, 232, 255);
+}
+g.selected:hover circle{
+    fill: rgb(250, 232, 255);
+}
+
+path.link {
+    fill: none;
+    stroke: #333;
+    stroke-width: 6px;
+    cursor: default;
+}
+
+path.link:hover{
+    stroke: rgb(94, 196, 204);
+}
+
+g.connect-node circle{
+    fill: #BEFFFF;
+}
+
+path.link.hidden{
+    stroke-width: 0;
+}
+
+path.link.selected {
+    stroke: rgb(229, 172, 247);
+}
+
+#editor {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 40%;
+    height: 100%;
+    border-left-style: solid;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+    background-color: rgb(55, 71, 79);
+    color: white;
+    overflow: scroll;
+}
+
+.property {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 2px;
+}
+
+.property input{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.property textarea{
+    width: 100%;
+    margin-left: 10px;
+}
+
+label {
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+input.add {
+    background-image: url("http://downloadicons.net/sites/default/files/plus-icon-27951.png"); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+.step-header {
+    padding: 20px 0 15px 0;
+}
+.step-header .label {
+    color: rgb(243, 79, 41);
+    width: 80%;
+    display: inline-block;
+    font-size: 20px;
+}

@@ -1,0 +1,115 @@
+@import '../variables';
+
+.tree {
+  width: 18.75%;
+  position: fixed;
+  top: 170px;
+  left: 6.25%;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: calc(100% - 270px);
+  display: flex;
+  flex-direction: column;
+}
+
+.tree__inner {
+  padding-bottom: 4px;
+  padding-top: 30px;
+  padding-right: 30px;
+}
+
+.tree__items {
+  margin-top: 12px;
+  margin-left: -15px;
+}
+
+.tree__heading {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  margin: 0px;
+}
+
+.tree__scroller {
+  position: relative;
+  overflow: auto;
+  height: 100%;
+  width: calc(100% + 30px);
+}
+
+.tree__empty-state {
+  font-size: 12px;
+  color: rgba(white, 0.2);
+  letter-spacing: 0.1em;
+  margin-top: 30px;
+}
+
+.tree__item-name {
+  position: relative;
+  top: -7px;
+  padding-left: 10px;
+  height: 100%;
+  max-width: calc(100% - 25px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(white, 0.5);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.tree__file-branch, .tree__directory-branch {
+  width: 15px;
+  border-top: 1px solid $color-inactive;
+  height: 100%;
+}
+
+.tree__directory-branch:not(:last-child) {
+  border-right: 1px solid $color-inactive;
+}
+
+.tree__directory-branch--hidden {
+  transition: border-right-color 0s linear 1.5s;
+  border-right-color: transparent !important;
+}
+
+.tree__directory-content-wrapper {
+  padding-top: 10px;
+  margin-top: -10px;
+  overflow: hidden;
+  transition: all 0.3s $ease-out-timing-fn;
+}
+
+.tree__directory-content-wrapper--wrapped {
+  max-height: 0px !important;
+  transition-delay: 1.5s;
+  opacity: 0;
+}
+
+.tree__item {
+  margin-left: 15px;
+}
+
+.tree__item:not(:last-child) {
+  border-left: 1px solid $color-inactive;
+}
+
+.tree__item-inner {
+  height: 23px;
+  display: flex;
+}
+
+.tree__dropdown-icon {
+  opacity: 0.5;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  transition: transform 0.3s $ease-out-timing-fn;
+}
+
+.tree__dropdown-icon--closed {
+  transform: rotate(180deg);
+  transition-delay: 1.5s;
+}

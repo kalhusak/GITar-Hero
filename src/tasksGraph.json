@@ -1,0 +1,2347 @@
+{
+  "root": 17,
+  "byId": {
+    "9": {
+      "children": [],
+      "task": {
+        "title": "Merge release into develop",
+        "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are changes on the remote that you don't have.",
+        "steps": [
+          {
+            "description": "Return to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "version.txt"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge release/0.2.0 to develop without fastforward",
+            "commands": [
+              "git merge --no-ff release/0.2.0",
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/release"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "release/0.2.0",
+              "after": {
+                "newFiles": [
+                  "version.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Try to push commits to upstream",
+            "commands": [
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          },
+          {
+            "description": "Looks like you cannot push cleanly. Remove last merge commit",
+            "commands": [
+              "git reset --hard HEAD^",
+              "git reset --hard HEAD^1",
+              "git reset --hard HEAD~",
+              "git reset --hard HEAD~1",
+              "git reset HEAD^ --hard",
+              "git reset HEAD^1 --hard",
+              "git reset HEAD~ --hard",
+              "git reset HEAD~1 --hard"
+            ],
+            "tags": [
+              "reset"
+            ],
+            "type": "RESET",
+            "data": {
+              "type": "commit",
+              "name": "mergeCommit_release/0.2.0_develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "version.txt"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Download changes from origin",
+            "commands": [
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "pull"
+            ],
+            "type": "PULL",
+            "data": {
+              "newCommits": [
+                {
+                  "name": 7,
+                  "message": "Merge feature/easier-navigation to develop",
+                  "after": {
+                    "newFiles": [],
+                    "removeFiles": []
+                  }
+                },
+                {
+                  "name": 8,
+                  "message": "Merge feature/tooltips to develop",
+                  "after": {
+                    "newFiles": [],
+                    "removeFiles": []
+                  }
+                }
+              ],
+              "commonParentName": ""
+            }
+          },
+          {
+            "description": "Try again to merge release/0.2.0 to develop without fastforward",
+            "commands": [
+              "git merge --no-ff release/0.2.0",
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/release"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "release/0.2.0",
+              "after": {
+                "newFiles": [
+                  "version.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Push commits to upstream",
+            "commands": [
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 100,
+        "x": 794.1616,
+        "y": -1349.845
+      }
+    },
+    "12": {
+      "children": [
+        13
+      ],
+      "task": {
+        "title": "Make first release",
+        "description": "Your project is starting to look good. It is time to make first release. But first you have to fix some typos.",
+        "steps": [
+          {
+            "description": "Create branch release/0.1.0 and checkout in one step",
+            "commands": [
+              "git checkout -b release/0.1.0",
+              "git checkout -b 'release/0.1.0'",
+              "git checkout -b \"release/0.1.0\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/release"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "release/0.1.0",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Stage your modifications",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.js",
+                  "src/components/menu.js"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Fix typo\"",
+            "commands": [
+              "git commit -m \"Fix typo\"",
+              "git commit -m 'Fix typo'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "15",
+              "message": "Fix typo"
+            }
+          }
+        ],
+        "time": 60,
+        "x": 573.47,
+        "y": -538.2563
+      }
+    },
+    "13": {
+      "children": [
+        14
+      ],
+      "task": {
+        "title": "Merge release",
+        "description": "Let's merge our release into master, tag it, and push to remote to share it with the world. You should also merge your release branch into develop.",
+        "steps": [
+          {
+            "description": "Return to master",
+            "commands": [
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "master",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/components/menu.js",
+                  "src/components/menuItemList.json",
+                  "src/components/menu.css",
+                  "src/config.js",
+                  "src/components/menuAnimation.js",
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "src/components/login-form.js",
+                  "src/components/login-form.css",
+                  "src/components/logout-form.js",
+                  "src/components/logout-form.css",
+                  "src/application-config.js",
+                  "src/containers/content.js",
+                  "src/containers/content.css"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge release/0.1.0 to master without fastforward",
+            "commands": [
+              "git merge --no-ff release/0.1.0",
+              "git merge --no-ff 'release/0.1.0'",
+              "git merge --no-ff \"release/0.1.0\"",
+              "git merge release/0.1.0 --no-ff",
+              "git merge 'release/0.1.0' --no-ff",
+              "git merge \"release/0.1.0\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/release"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "master",
+              "targetBranch": "release/0.1.0",
+              "after": {
+                "newFiles": [
+                  "src/components/menu.js",
+                  "src/components/menuItemList.json",
+                  "src/components/menu.css",
+                  "src/config.js",
+                  "src/components/menuAnimation.js",
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "src/components/login-form.js",
+                  "src/components/login-form.css",
+                  "src/components/logout-form.js",
+                  "src/components/logout-form.css",
+                  "src/application-config.js",
+                  "src/containers/content.js",
+                  "src/containers/content.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Mark this commit with an annotated tag 0.1.0 and message \"First release\"",
+            "commands": [
+              "git tag -m \"First release\" 0.1.0",
+              "git tag -m \"First release\" 0.1.0 -a",
+              "git tag -m \"First release\" -a 0.1.0",
+              "git tag 0.1.0 -m \"First release\"",
+              "git tag 0.1.0 -m \"First release\" -a",
+              "git tag 0.1.0 -a -m \"First release\"",
+              "git tag -a 0.1.0 -m \"First release\"",
+              "git tag -a -m \"First release\" 0.1.0",
+              "git tag -m 'First release' 0.1.0",
+              "git tag -m 'First release' 0.1.0 -a",
+              "git tag -m 'First release' -a 0.1.0",
+              "git tag 0.1.0 -m 'First release'",
+              "git tag 0.1.0 -m 'First release' -a",
+              "git tag 0.1.0 -a -m 'First release'",
+              "git tag -a 0.1.0 -m 'First release'",
+              "git tag -a -m 'First release' 0.1.0"
+            ],
+            "tags": [
+              "tag"
+            ],
+            "type": "TAG",
+            "data": {
+              "name": "0.1.0",
+              "message": "First release"
+            }
+          },
+          {
+            "description": "Push commits to branch master of origin and tell git that your local branch master should track it",
+            "commands": [
+              "git push -u origin master"
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          },
+          {
+            "description": "Return to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Merge release/0.1.0 to develop without fastforward",
+            "commands": [
+              "git merge --no-ff release/0.1.0",
+              "git merge --no-ff 'release/0.1.0'",
+              "git merge --no-ff \"release/0.1.0\"",
+              "git merge release/0.1.0 --no-ff",
+              "git merge 'release/0.1.0' --no-ff",
+              "git merge \"release/0.1.0\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/release"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "release/0.1.0",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Push commits to upstream",
+            "commands": [
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 160,
+        "x": 574.7583,
+        "y": -679.9274
+      }
+    },
+    "14": {
+      "children": [
+        15
+      ],
+      "task": {
+        "title": "Add dialogs to your page",
+        "description": "You just did your first release but it doesn't mean the work is over. Add dialogs to your page. Start working on a new feature and share your work, so others can collaborate.",
+        "steps": [
+          {
+            "description": "Create branch feature/dialog and checkout in one step",
+            "commands": [
+              "git checkout -b feature/dialog",
+              "git checkout -b 'feature/dialog'",
+              "git checkout -b \"feature/dialog\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/feature"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/dialog",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Add new files to index",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css",
+                  "index.html",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Add dialog template\"",
+            "commands": [
+              "git commit -m \"Add dialog template\"",
+              "git commit -m 'Add dialog template'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "16",
+              "message": "Add dialog template"
+            }
+          },
+          {
+            "description": "Now push your branch to origin with setting the newly created remote branch as an upsteram branch",
+            "commands": [
+              "git push -u origin feature/dialog"
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 60,
+        "x": 997.19495,
+        "y": -761.67096
+      }
+    },
+    "15": {
+      "children": [
+        16
+      ],
+      "task": {
+        "title": "Oh no! Title margin needs fixing",
+        "description": "Looks like you have to stop working on your dialogs, there is something to fix on a master branch. Switch back to it, create a hotfix branch and fix what needs fixing.",
+        "steps": [
+          {
+            "description": "Return to master",
+            "commands": [
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "master",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Create branch hotfix/title-margin and checkout in one step",
+            "commands": [
+              "git checkout -b hotfix/title-margin",
+              "git checkout -b 'hotfix/title-margin'",
+              "git checkout -b \"hotfix/title-margin\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/hotfix"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "hotfix/title-margin",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "After modifying the title margin you need to add changed files to staging area.",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/containers/header.css",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit changes with message \"Change title margin\"",
+            "commands": [
+              "git commit -m \"Change title margin\"",
+              "git commit -m 'Change title margin'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "17",
+              "message": "Change title margin"
+            }
+          }
+        ],
+        "time": 70,
+        "x": 569.334,
+        "y": -840.03375
+      }
+    },
+    "16": {
+      "children": [
+        29
+      ],
+      "task": {
+        "title": "Merge hotfix to master",
+        "description": "Phew, looks like you saved the day and successfully fixed margin. Merge it into master and tag as 0.1.1. And in the end, push it to origin.",
+        "steps": [
+          {
+            "description": "Switch back to master",
+            "commands": [
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "master",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Merge hotfix/title-margin to master without fastforward",
+            "commands": [
+              "git merge --no-ff hotfix/title-margin",
+              "git merge --no-ff 'hotfix/title-margin'",
+              "git merge --no-ff \"hotfix/title-margin\"",
+              "git merge hotfix/title-margin --no-ff",
+              "git merge 'hotfix/title-margin' --no-ff",
+              "git merge \"hotfix/title-margin\" --no-ff"
+            ],
+            "tags": [
+              "gitflow/hotfix",
+              "merge"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "master",
+              "targetBranch": "hotfix/title-margin",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Mark this commit with a lightweight tag 0.1.1",
+            "commands": [
+              "git tag 0.1.1"
+            ],
+            "tags": [
+              "tag"
+            ],
+            "type": "TAG",
+            "data": {
+              "name": "0.1.1",
+              "message": "0.1.1"
+            }
+          },
+          {
+            "description": "Push it to origin",
+            "commands": [
+              "git push"
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 55,
+        "x": 569.83167,
+        "y": -1003.8531
+      }
+    },
+    "17": {
+      "children": [
+        18
+      ],
+      "task": {
+        "title": "Start project",
+        "description": "At first you have to create a new Git repository and tell Git, which project files you want to track.",
+        "steps": [
+          {
+            "description": "Initialize repo in your current directory",
+            "commands": [
+              "git init"
+            ],
+            "tags": [
+              "repo"
+            ],
+            "type": "INIT"
+          },
+          {
+            "description": "Add all files from your working directory to index (staging area)",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "index.html",
+                  "package.json",
+                  "src/app.js",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You added a new file notes.txt. Stage it.",
+            "commands": [
+              "git add notes.txt"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "notes.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "It is time to make a first commit! Create one with message \"Init project\".",
+            "commands": [
+              "git commit -m \"Init project\"",
+              "git commit -m 'Init project'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "25",
+              "message": "Init project"
+            }
+          }
+        ],
+        "time": 120,
+        "x": 640.6958651757813,
+        "y": 951.9416116210938
+      }
+    },
+    "18": {
+      "children": [
+        19
+      ],
+      "task": {
+        "title": "Describe your project",
+        "description": "This is a good habit to create a file describing your project called README.",
+        "steps": [
+          {
+            "description": "Start tracking your new file README.txt",
+            "commands": [
+              "git add README.txt"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "README.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit adding the file with message \"Add readme\"",
+            "commands": [
+              "git commit -m \"Add readme\"",
+              "git commit -m 'Add readme'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "19",
+              "message": "Add readme"
+            }
+          }
+        ],
+        "time": 35,
+        "x": 640.3467787109375,
+        "y": 809.25326640625
+      }
+    },
+    "19": {
+      "children": [
+        20,
+        38
+      ],
+      "task": {
+        "title": "Do some work",
+        "description": "You were working for some time, and decided to take a snapshot of your project to record it's current state.",
+        "steps": [
+          {
+            "description": "Add only files from your src folder. (Tip: you can use \"*\" in your command)",
+            "commands": [
+              "git add src/*",
+              "git add src/app.js src/app.css",
+              "git add src/app.css src/app.js"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.js",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You just remembered to fix something and modified src/app.css, stage it again to have the most recent version in your index",
+            "commands": [
+              "git add src/app.css"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Now commit your work with message \"Make improvements\"",
+            "commands": [
+              "git commit -m \"Make improvements\"",
+              "git commit -m 'Make improvements'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "22",
+              "message": "Make improvements"
+            }
+          }
+        ],
+        "time": 55,
+        "x": 642.3994790625,
+        "y": 655.523833515625
+      }
+    },
+    "20": {
+      "children": [
+        21
+      ],
+      "task": {
+        "title": "Development branch",
+        "description": "It's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
+        "steps": [
+          {
+            "description": "Create a new branch called \"develop\"",
+            "commands": [
+              "git branch develop",
+              "git branch 'develop'",
+              "git branch \"develop\""
+            ],
+            "tags": [
+              "branch"
+            ],
+            "type": "BRANCH",
+            "data": {
+              "name": "develop"
+            }
+          },
+          {
+            "description": "Switch to created branch",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          }
+        ],
+        "time": 100,
+        "x": 789.129,
+        "y": 376.77652
+      }
+    },
+    "21": {
+      "children": [
+        22
+      ],
+      "task": {
+        "title": "Add menu bar",
+        "description": "When you start working on a new functionality, you should create brand new branch for it. Do some work on a dedicated branch to implement menu bar for your project.",
+        "steps": [
+          {
+            "description": "Create and checkout to branch feature/menu in one step",
+            "commands": [
+              "git checkout -b feature/menu",
+              "git checkout -b 'feature/menu'",
+              "git checkout -b \"feature/menu\""
+            ],
+            "tags": [
+              "checkout",
+              "branch",
+              "gitflow/feature"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/menu",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "After implementing a menu component add new files to index",
+            "commands": [
+              "git add .",
+              "git add -A",
+              "git add src/components/*",
+              "git add src/*"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/components/menu.js",
+                  "src/components/menuItemList.json",
+                  "src/components/menu.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Add menu list\"",
+            "commands": [
+              "git commit -m \"Add menu list\"",
+              "git commit -m 'Add menu list'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "23",
+              "message": "Add menu list"
+            }
+          },
+          {
+            "description": "Now, when the menu animation is ready, stage all files",
+            "commands": [
+              "git add .",
+              "git add -A",
+              "git add src/components/*",
+              "git add src/*"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/components/menuAnimation.js",
+                  "src/components/menu.js",
+                  "src/components/menu.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit with message \"Add menu item animation\"",
+            "commands": [
+              "git commit -m \"Add menu item animation\"",
+              "git commit -m 'Add menu item animation'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "24",
+              "message": "Add menu item animation"
+            }
+          }
+        ],
+        "time": 75,
+        "x": 934.3175,
+        "y": 262.13147
+      }
+    },
+    "22": {
+      "children": [
+        23
+      ],
+      "task": {
+        "title": "Merge menu to branch develop",
+        "description": "You finished working on a menu. As it is ready, you can now include it in your development branch.",
+        "steps": [
+          {
+            "description": "Return to branch develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/components/menu.js",
+                  "src/components/menuItemList.json",
+                  "src/components/menu.css",
+                  "src/config.js",
+                  "src/components/menuAnimation.js"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge branch feature/menu to develop without fastforward",
+            "commands": [
+              "git merge --no-ff feature/menu",
+              "git merge --no-ff 'feature/menu'",
+              "git merge --no-ff \"feature/menu\"",
+              "git merge feature/menu --no-ff",
+              "git merge 'feature/menu' --no-ff",
+              "git merge \"feature/menu\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/feature"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "feature/menu",
+              "after": {
+                "newFiles": [
+                  "src/components/menu.js",
+                  "src/components/menuItemList.json",
+                  "src/components/menu.css",
+                  "src/config.js",
+                  "src/components/menuAnimation.js"
+                ],
+                "removeFiles": []
+              }
+            }
+          }
+        ],
+        "time": 90,
+        "x": 788.2963,
+        "y": 163.77069
+      }
+    },
+    "23": {
+      "children": [
+        24
+      ],
+      "task": {
+        "title": "Create header of your page",
+        "description": "You finished menu and included it to your main development branch. But your page is still rather empty.\nLet's create a header. It's best to do it on another topic branch dedicated especially for this feature.",
+        "steps": [
+          {
+            "description": "Checkout to a new branch feature/header",
+            "commands": [
+              "git checkout -b feature/header",
+              "git checkout -b 'feature/header'",
+              "git checkout -b \"feature/header\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/feature"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/header",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You did some work and created a header container. Stage all files.",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "index.html",
+                  "src/app.js"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Add header container\"",
+            "commands": [
+              "git commit -m \"Add header container\"",
+              "git commit -m 'Add header container'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "26",
+              "message": "Add header container"
+            }
+          },
+          {
+            "description": "Stage new files and changes",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "static/images/header.jpg",
+                  "static/images/headerTemp.jpg",
+                  "src/app.css",
+                  "src/containers/header.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files and changes with message \"Add logo image\"",
+            "commands": [
+              "git commit -m \"Add logo image\"",
+              "git commit -m 'Add logo image'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "27",
+              "message": "Add logo image"
+            }
+          }
+        ],
+        "time": 70,
+        "x": 930.5279,
+        "y": 57.77622
+      }
+    },
+    "24": {
+      "children": [
+        25
+      ],
+      "task": {
+        "title": "Merge header to develop branch",
+        "description": "Let's say you think you finished working on a header. You merge it into develop, and then realize, there is one more thing to do to complete header. Revert that merge, do some changes and then merge again.",
+        "steps": [
+          {
+            "description": "Switch to branch develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "static/images/headerTemp.jpg"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge feature/header to develop without fastforward",
+            "commands": [
+              "git merge --no-ff feature/header",
+              "git merge --no-ff 'feature/header'",
+              "git merge --no-ff \"feature/header\"",
+              "git merge feature/header --no-ff",
+              "git merge 'feature/header' --no-ff",
+              "git merge \"feature/header\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/feature"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "feature/header",
+              "after": {
+                "newFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "static/images/headerTemp.jpg"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You realized header is not ready yet. Remove last merge commit",
+            "commands": [
+              "git reset --hard HEAD^",
+              "git reset --hard HEAD^1",
+              "git reset --hard HEAD~",
+              "git reset --hard HEAD~1",
+              "git reset HEAD^ --hard",
+              "git reset HEAD^1 --hard",
+              "git reset HEAD~ --hard",
+              "git reset HEAD~1 --hard"
+            ],
+            "tags": [
+              "reset"
+            ],
+            "type": "RESET",
+            "data": {
+              "type": "commit",
+              "name": "mergeCommit_feature/header_develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "static/images/headerTemp.jpg"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Return to branch feature/header",
+            "commands": [
+              "git checkout feature/header",
+              "git checkout 'feature/header'",
+              "git checkout \"feature/header\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/header",
+              "after": {
+                "newFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg",
+                  "static/images/headerTemp.jpg"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You added a page title and removed headerTemp.js, so now stage all changes",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg"
+                ],
+                "removeFiles": [
+                  "static/images/headerTemp.jpg"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Add page title\"",
+            "commands": [
+              "git commit -m \"Add page title\"",
+              "git commit -m 'Add page title'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "28",
+              "message": "Add page title"
+            }
+          },
+          {
+            "description": "Switch back to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge header branch again (without fastforward)",
+            "commands": [
+              "git merge --no-ff feature/header",
+              "git merge --no-ff 'feature/header'",
+              "git merge --no-ff \"feature/header\"",
+              "git merge feature/header --no-ff",
+              "git merge 'feature/header' --no-ff",
+              "git merge \"feature/header\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/feature"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "feature/header",
+              "after": {
+                "newFiles": [
+                  "src/containers/header.js",
+                  "src/containers/header.css",
+                  "static/images/header.jpg"
+                ],
+                "removeFiles": []
+              }
+            }
+          }
+        ],
+        "time": 240,
+        "x": 778.9805,
+        "y": -52.130383
+      }
+    },
+    "25": {
+      "children": [
+        26
+      ],
+      "task": {
+        "title": "Add remote repository",
+        "description": "So far all your git operations where local. You can add a remote repo to synchronize with. This way you can share your work and collaborate on a project with everyone who has access to that remote repository.",
+        "steps": [
+          {
+            "description": "Add a remote repository from https://github.com/johny/project.git and name it origin",
+            "commands": [
+              "git remote add origin https://github.com/johny/project.git"
+            ],
+            "tags": [
+              "remote repos"
+            ],
+            "type": "REMOTE"
+          },
+          {
+            "description": "Pull data from remote branch develop ",
+            "commands": [
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
+            ],
+            "tags": [
+              "pull",
+              "remote repos"
+            ],
+            "type": "PULL",
+            "data": {
+              "newCommits": [],
+              "commonParentName": ""
+            }
+          },
+          {
+            "description": "There weren't any commits in the remote that you wouldn't already have. Push your changes to remote.",
+            "commands": [
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 200,
+        "x": 780.66486,
+        "y": -200.75575
+      }
+    },
+    "26": {
+      "children": [
+        27
+      ],
+      "task": {
+        "title": "Add content to your page",
+        "description": "Okay, you have to eventually deal with content of your page. You know what to do - switch to a dedicated branch, do some work and commit it.",
+        "steps": [
+          {
+            "description": "Create branch feature/content and checkout in one step",
+            "commands": [
+              "git checkout -b feature/content",
+              "git checkout -b 'feature/content'",
+              "git checkout -b \"feature/content\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/feature"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/content",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "You just finished implementing content container. Stage all your files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/containers/content.js",
+                  "src/containers/content.css",
+                  "index.html",
+                  "src/app.js"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit new files with message \"Add content container\"",
+            "commands": [
+              "git commit -m \"Add content container\"",
+              "git commit -m 'Add content container'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "39",
+              "message": "Add content container"
+            }
+          },
+          {
+            "description": "After adjusting scrollbar you have to add your changes to index",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "index.html",
+                  "src/app.js",
+                  "src/containers/content.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Create a commit with message \"Adjust scrollbar\"",
+            "commands": [
+              "git commit -m \"Adjust scrollbar\"",
+              "git commit -m 'Adjust scrollbar'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "40",
+              "message": "Adjust scrollbar"
+            }
+          }
+        ],
+        "time": 65,
+        "x": 951.56085,
+        "y": -279.21033
+      }
+    },
+    "27": {
+      "children": [
+        12
+      ],
+      "task": {
+        "title": "Merge content to develop branch",
+        "description": "You have to merge content into develop. But you're no longer working alone. There is a shared version of your project on a remote and you want to synchronize with it. You need to check, if anyone hasn't pushed something to develop before you. ",
+        "steps": [
+          {
+            "description": "Return to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/containers/content.js",
+                  "src/containers/content.css"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Download changes from remote branch develop from origin",
+            "commands": [
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "pull"
+            ],
+            "type": "PULL",
+            "data": {
+              "newCommits": [
+                {
+                  "name": 41,
+                  "message": "feature/configuration-module",
+                  "after": {
+                    "newFiles": [
+                      "src/application-config.js"
+                    ],
+                    "removeFiles": []
+                  }
+                }
+              ],
+              "commonParentName": ""
+            }
+          },
+          {
+            "description": "Merge feature/content to develop without fastforward",
+            "commands": [
+              "git merge --no-ff feature/content",
+              "git merge --no-ff 'feature/content'",
+              "git merge --no-ff \"feature/content\"",
+              "git merge feature/content --no-ff",
+              "git merge 'feature/content' --no-ff",
+              "git merge \"feature/content\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/feature"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "feature/content",
+              "after": {
+                "newFiles": [
+                  "src/containers/content.js",
+                  "src/containers/content.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Push your changes and set remote branch develop from origin as an upstream branch for your local develop branch",
+            "commands": [
+              "git push -u origin develop",
+              "git push -u 'origin' 'develop'",
+              "git push -u \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 80,
+        "x": 778.2937,
+        "y": -393.80496
+      }
+    },
+    "29": {
+      "children": [
+        37
+      ],
+      "task": {
+        "title": "Merge hotfix to develop",
+        "description": "Okay, so you just merged your hotfix branch to master and pushed it to remote. Let's do the same with branch develop - merge hotfix into it and push it.",
+        "steps": [
+          {
+            "description": "Switch to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Merge hotfix/title-margin to develop without fastforward",
+            "commands": [
+              "git merge --no-ff hotfix/title-margin",
+              "git merge --no-ff 'hotfix/title-margin'",
+              "git merge --no-ff \"hotfix/title-margin\"",
+              "git merge hotfix/title-margin --no-ff",
+              "git merge 'hotfix/title-margin' --no-ff",
+              "git merge \"hotfix/title-margin\" --no-ff"
+            ],
+            "tags": [
+              "gitflow/hotfix",
+              "merge"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "hotfix/title-margin",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Pull from remote branch develop",
+            "commands": [
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "pull"
+            ],
+            "type": "PULL",
+            "data": {
+              "newCommits": [
+                {
+                  "name": 42,
+                  "message": "feature/adjust-configuration",
+                  "after": {
+                    "newFiles": [],
+                    "removeFiles": []
+                  }
+                }
+              ],
+              "commonParentName": ""
+            }
+          },
+          {
+            "description": "Now you can push it upstream",
+            "commands": [
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 60,
+        "x": 772.4425,
+        "y": -1071.1346
+      }
+    },
+    "36": {
+      "children": [
+        9
+      ],
+      "task": {
+        "title": "Another release",
+        "description": "You should make another release. Switch to a new dedicated branch, add a version.txt file, then merge into master and push to origin.",
+        "steps": [
+          {
+            "description": "Create branch release/0.2.0 and checkout in one step",
+            "commands": [
+              "git checkout -b release/0.2.0",
+              "git checkout -b 'release/0.2.0'",
+              "git checkout -b \"release/0.2.0\""
+            ],
+            "tags": [
+              "branch",
+              "checkout",
+              "gitflow/release"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "release/0.2.0",
+              "after": {
+                "newFiles": [],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Stage newly added file version.txt",
+            "commands": [
+              "git add version.txt"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "version.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit adding a new file with message \"Add version file\"",
+            "commands": [
+              "git commit -m \"Add version file\"",
+              "git commit -m 'Add version file'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "54",
+              "message": " Add version file"
+            }
+          },
+          {
+            "description": "Switch to master",
+            "commands": [
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "master",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "version.txt"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge release/0.2.0 to master without fastforward",
+            "commands": [
+              "git merge --no-ff release/0.2.0",
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/release"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "master",
+              "targetBranch": "release/0.2.0",
+              "after": {
+                "newFiles": [
+                  "version.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Create an annotated tag 0.2.0 -m \"Second release\"",
+            "commands": [
+              "git tag -m \"Second release\" 0.2.0",
+              "git tag -m \"Second release\" 0.2.0 -a",
+              "git tag -m \"Second release\" -a 0.2.0",
+              "git tag 0.2.0 -m \"Second release\"",
+              "git tag 0.2.0 -m \"Second release\" -a",
+              "git tag 0.2.0 -a -m \"Second release\"",
+              "git tag -a 0.2.0 -m \"Second release\"",
+              "git tag -a -m \"Second release\" 0.2.0",
+              "git tag -m 'Second release' 0.2.0",
+              "git tag -m 'Second release' 0.2.0 -a",
+              "git tag -m 'Second release' -a 0.2.0",
+              "git tag 0.2.0 -m 'Second release'",
+              "git tag 0.2.0 -m 'Second release' -a",
+              "git tag 0.2.0 -a -m 'Second release'",
+              "git tag -a 0.2.0 -m 'Second release'",
+              "git tag -a -m 'Second release' 0.2.0"
+            ],
+            "tags": [
+              "tag"
+            ],
+            "type": "TAG",
+            "data": {
+              "name": "0.2.0",
+              "message": "Second release"
+            }
+          },
+          {
+            "description": "Push to origin",
+            "commands": [
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin master",
+              "git push 'origin' 'master'",
+              "git push \"origin\" \"master\""
+            ],
+            "tags": [
+              "remote repos",
+              "push"
+            ],
+            "type": "PUSH"
+          }
+        ],
+        "time": 100,
+        "x": 563.4909,
+        "y": -1250.0688
+      }
+    },
+    "37": {
+      "children": [
+        36
+      ],
+      "task": {
+        "title": "Finish dialogs",
+        "description": "Now, when the situation is under control, you can finish working on dialogs. Switch to feature branch, make last changes and commit them. Lastly, merge it into develop and push to an upstream branch.",
+        "steps": [
+          {
+            "description": "Switch back to branch feature/dialog",
+            "commands": [
+              "git checkout feature/dialog",
+              "git checkout 'feature/dialog'",
+              "git checkout \"feature/dialog\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "feature/dialog",
+              "after": {
+                "newFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css",
+                  "index.html",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Fetch commits from an upstream branch and merge them in (if there are any)",
+            "commands": [
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin feature/dialog",
+              "git pull 'origin' 'feature/dialog'",
+              "git pull \"origin\" \"feature/dialog\""
+            ],
+            "tags": [
+              "remote repos",
+              "pull"
+            ],
+            "type": "PULL",
+            "data": {
+              "newCommits": [],
+              "commonParentName": ""
+            }
+          },
+          {
+            "description": "After making final improvements, stage modified files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css",
+                  "index.html",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit with \"Improve dialog template\"",
+            "commands": [
+              "git commit -m \"Improve dialog template\"",
+              "git commit -m 'Improve dialog template'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "60",
+              "message": "Improve dialog template"
+            }
+          },
+          {
+            "description": "Return to develop",
+            "commands": [
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
+            ],
+            "tags": [
+              "checkout"
+            ],
+            "type": "CHECKOUT",
+            "data": {
+              "type": "branch",
+              "name": "develop",
+              "after": {
+                "newFiles": [],
+                "removeFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Merge feature/dialog to develop without fastforward",
+            "commands": [
+              "git merge --no-ff feature/dialog",
+              "git merge --no-ff 'feature/dialog'",
+              "git merge --no-ff \"feature/dialog\"",
+              "git merge feature/dialog --no-ff",
+              "git merge 'feature/dialog' --no-ff",
+              "git merge \"feature/dialog\" --no-ff"
+            ],
+            "tags": [
+              "merge",
+              "gitflow/feature"
+            ],
+            "type": "MERGE",
+            "data": {
+              "sourceBranch": "develop",
+              "targetBranch": "feature/dialog",
+              "after": {
+                "newFiles": [
+                  "src/components/dialog.js",
+                  "src/components/dialog.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          }
+        ],
+        "time": 90,
+        "x": 974.8319,
+        "y": -1155.7566
+      }
+    },
+    "38": {
+      "children": [
+        39,
+        20
+      ],
+      "task": {
+        "title": "Change style of your app",
+        "description": "Have a second look at your project. Something just doesn't seem right. Change some styles to improve the overall impression.",
+        "steps": [
+          {
+            "description": "Stage changes made in src/app.css",
+            "commands": [
+              "git add src/app.css"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit your improvements with message \"Change style\"",
+            "commands": [
+              "git commit -m \"Change style\"",
+              "git commit -m 'Change style'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "61",
+              "message": "Change style"
+            }
+          },
+          {
+            "description": "That still wasn`t enough, so you just made more improvements. Stage all files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "index.html",
+                  "src/app.css"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Your app looks much better now - commit with message \"Improved design\"",
+            "commands": [
+              "git commit -m \"Improved design\"",
+              "git commit -m 'Improved design'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "62",
+              "message": "Improved design"
+            }
+          }
+        ],
+        "time": 70,
+        "x": 496.91302490234375,
+        "y": 581.264892578125
+      }
+    },
+    "39": {
+      "children": [
+        40,
+        20
+      ],
+      "task": {
+        "title": "Update project description",
+        "description": "You realized that you should update some files with more suitable project description and version number. Modify it and than make a commit.",
+        "steps": [
+          {
+            "description": "You have made necessary updates, it is time to stage all files",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "package.json",
+                  "README.txt"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "After changing project version, add file package.json to index again",
+            "commands": [
+              "git add package.json"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "package.json"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "All what is left to do is to commit with message \"Update project info\"",
+            "commands": [
+              "git commit -m \"Update project info\"",
+              "git commit -m 'Update project info'"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "63",
+              "message": "Update project info"
+            }
+          }
+        ],
+        "time": 50,
+        "x": 458.74359130859375,
+        "y": 428.3623352050781
+      }
+    },
+    "40": {
+      "children": [
+        20
+      ],
+      "task": {
+        "title": "Refactor your code",
+        "description": "You are a perfectionist and want to make code look better. Refactor it and commit those pretty lines of code.",
+        "steps": [
+          {
+            "description": "After refactoring most of files, stage everything",
+            "commands": [
+              "git add .",
+              "git add -A"
+            ],
+            "tags": [
+              "stage"
+            ],
+            "type": "ADD",
+            "data": {
+              "before": {
+                "modifyFiles": [
+                  "src/app.js",
+                  "src/app.css",
+                  "index.html"
+                ],
+                "removeFiles": []
+              }
+            }
+          },
+          {
+            "description": "Commit changes with message \"Refactor\"",
+            "commands": [
+              "git commit -m \"Refactor\"",
+              "git commit -m 'Refactor'",
+              "git commit -m Refactor"
+            ],
+            "tags": [
+              "commit"
+            ],
+            "type": "COMMIT",
+            "data": {
+              "name": "64",
+              "message": "Refactor"
+            }
+          }
+        ],
+        "time": 35,
+        "x": 540.6464538574219,
+        "y": 295.59825134277344
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+$time-bar-height: 40px;
+
+.time {
+  height: $time-bar-height;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.time__bar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.time__label {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: $time-bar-height;
+  padding-left: 10px;
+}
+
+.time__label--white {
+  color: white;
+}

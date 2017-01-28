@@ -27,6 +27,13 @@ const config = {
   server_port : process.env.PORT || 3000,
 
   // ----------------------------------
+  // Tasks Configuration
+  // ----------------------------------
+  tasks_folder   : path.resolve(__dirname, '..', 'tasks'),
+  tasks_names_graph : path.resolve(__dirname, '..', 'tasks', 'tasksNamesGraph.json'),
+  tasks_graph : path.resolve(__dirname, '..', 'src', 'tasksGraph.json'),
+
+  // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
   compiler_babel : {

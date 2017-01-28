@@ -1,0 +1,23 @@
+@import '../variables';
+
+.loader__circle {
+  fill: $color-inactive;
+  animation: loading 1.2s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateY(0%);
+    fill: $color-inactive;
+  }
+
+  20% {
+    transform: translateY(-100%);
+    fill: $color-active;
+  }
+
+  40% {
+    transform: translateY(0%);
+    fill: $color-inactive;
+  }
+}
