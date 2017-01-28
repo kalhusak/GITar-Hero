@@ -473,7 +473,7 @@
 
 	\subsection{Zadania}
 
-	Część stanu dotycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z~jego właściwościami. Dodatkowo zapamiętuje czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu go. Dostępna jest również informacja o powodzeniach i~niepowodzeniach w rozwiązywaniu zadań dotyczących określonych poleceń systemu Git.
+	Część stanu dotycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z~jego właściwościami. Dodatkowo zapamiętuje czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu go. Dostępna jest również informacja o powodzeniach i~niepowodzeniach w rozwiązywaniu zadań dotyczących określonych poleceń systemu Git. Na jej podstawie wybierane jest później kolejne zadanie, które będzie musiał rozwiązać użytkownik. Informacja o postępach gracza jest także wykorzystywana na końcu gry, do stworzenia statystyk.
 
 	Poniżej opisane zostały akcje, które powodują wygenerowanie nowego stanu.
 
@@ -555,7 +555,7 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 
 	\subsection{Wstęp}
 
-	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o \textit{React} i \textit{Redux}. Komponenty takie będą dalej nazywane kontenerami.
+	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W~celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o \textit{React} i~\textit{Redux}. Komponenty takie będą dalej nazywane kontenerami.
 
 	\subsection{Komponenty pomocnicze} \label{KomponentyPomocnicze}
 
@@ -569,9 +569,9 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 	Pole symbolizujące wykonanie lub niewykonanie danego kroku jest potrzebne do wyświetlenia listy kroków aktualnego zadania. Komponent przyjmuje trzy parametry wejściowe:
 
 	\begin{itemize}
-		\item textit{value} - zmienna boolowska określająca, czy pole jest zaznaczone,
-		\item textit{active} - zmienna boolowska określająca, czy pole jest aktywne (w prakytce oznacza to użycie jaśniejszego koloru),
-		\item textit{size} - parametr opcjonalny, określający wysokość i szerokość pola.
+		\item \textit{value} - zmienna boolowska określająca, czy pole jest zaznaczone,
+		\item \textit{active} - zmienna boolowska określająca, czy pole jest aktywne (w~praktyce oznacza to użycie jaśniejszego koloru),
+		\item \textit{size} - parametr opcjonalny, określający wysokość i szerokość pola.
 	\end{itemize}
 
 	W przyszłości element ten może być wykorzystany również jako pole formularza typu \textit{checkbox}.
@@ -591,7 +591,7 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 	\end{description}
 
 	\subsection{Tutorial}
-	W celu wyświetlenia wprowadzenia, pojawiającego się po uruchomieniu aplikacji, zaimplementowany został kontener \textit{Tutorial}. Korzysta on z właściwości \textit{tutorial.current} stanu aplikacji, określającej aktualnie wyświetlaną wiadomość wprowadzającą. W wydzielonym pliku zostały zdefiniowane cztery wiadomości, każda z nich ma określoną treść i pozycję na ekranie. Jeżeli istnieje wśród nich wiadomość odpowiadająca aktualnej wartości stanu, to zostanie ona wyświetlona przez kontener \textit{Tutorial}.
+	W celu wyświetlenia wprowadzenia, pojawiającego się po uruchomieniu aplikacji, zaimplementowany został kontener \textit{Tutorial}. Korzysta on z właściwości \textit{tutorial.current} stanu aplikacji, określającej aktualnie wyświetlaną wiadomość wprowadzającą. W~wydzielonym pliku zostały zdefiniowane cztery wiadomości, każda z nich ma określoną treść i pozycję na ekranie. Jeżeli istnieje wśród nich wiadomość odpowiadająca aktualnej wartości stanu, to zostanie ona wyświetlona przez kontener \textit{Tutorial}.
 
 	\begin{figure}[h]
 		\centering
@@ -609,15 +609,15 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\subsection{Aktualne zadanie}
 
-	Aktualne zadanie (\textit{CurrentTask}) jest kontenerem korzystającym z części stanu aplikacji dotyczącej zadań. Jego rolą jest wyświetlanie aktualnego zadania, wraz ze~wszystkimi jego krokami. W pierwszej kolejności komponent pobiera z listy zadań aktualne zadanie. Przy pomocy komponentu pomocniczego \textit{Panel}, wyświetlany jest tytuł i opis zadania. Lista kroków korzysta natomiast z komponentu pomocniczego \textit{Checkbox}. Dodatkowo wykorzystany został tutaj komponent pomocniczy, napisany przez twórców biblioteki \textit{React}, a~mianowicie \textit{ReactCSSTransitionGroup}. Dzięki umieszczeniu elementu HTML zawierającego zadanie w~komponencie \textit{ReactCSSTransitionGroup} możliwe jest zdefiniowanie jego animacji wejścia i~wyjścia przy pomocy arkuszy stylów \textit{CSS}.
+	Aktualne zadanie (\textit{CurrentTask}) jest kontenerem korzystającym z części stanu aplikacji dotyczącej zadań. Jego rolą jest wyświetlanie aktualnego zadania, wraz ze~wszystkimi jego krokami. W~pierwszej kolejności komponent pobiera z listy zadań aktualne zadanie. Przy pomocy komponentu pomocniczego \textit{Panel}, wyświetlany jest tytuł i~opis zadania. Lista kroków korzysta natomiast z komponentu pomocniczego \textit{Checkbox}. Dodatkowo wykorzystany został tutaj komponent pomocniczy, napisany przez twórców biblioteki \textit{React}, a~mianowicie \textit{ReactCSSTransitionGroup}. Dzięki umieszczeniu elementu HTML zawierającego zadanie w~komponencie \textit{ReactCSSTransitionGroup} możliwe jest zdefiniowanie jego animacji wejścia i~wyjścia przy pomocy arkuszy stylów \textit{CSS}.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[height=8cm]{component-task-list}
-		\caption{Komponent listy zadań}
+		\includegraphics[height=6.1cm]{component-task}
+		\caption{Komponent zawierający aktualne zadanie}
 		\label{fig:task-list}
 	\end{figure}
-
+	\FloatBarrier
 	\subsection{Konsola} \label{KonsolaKomponent}
 
 	Konsola jest komponentem przyjmującym na wejściu cztery parametry. Pierwszy z~nich (\textit{enabled}) daje możliwość zablokowania konsoli, np.~w~przypadku, gdy tutorial nie został jeszcze ukończony. Kolejne dwa parametry (\textit{files}, \textit{branches}) to tablice wartości tekstowych, z~nazwami istniejących w~repozytorium plików oraz gałęzi. Nazwy te są potrzebne do działania funkcji autouzupełniania, znanej z~konsolowej wersji programu Git. Ostatni argument (\textit{onCommandEnter}) jest funkcją, która będzie wywołana, kiedy w~konsoli zostanie zatwierdzona komenda.
@@ -648,16 +648,17 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 		\item stanu zakładki pomocy - służącej do odpowiedniego wystylizowania zakładki w zależności od tego, czy jest otwarta, czy zamknięta,
 		\item stanu konsoli - w celu przekazania do komponentu konsoli listy gałęzi repozytorium.
 	\end{itemize}
-	  Gdy zakładka jest otwarta, wysuwa się z dolnej części ekranu. Efekt ten został osiągnięty przez animowanie właściwości \textit{translateY} elementu, które jest wysoce wydajne, ponieważ jest wykonywane na~karcie graficznej (w~odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt).
 
-	  \begin{figure}[h]
-	  	\centering
-	  	\includegraphics[width=15cm]{component-help-drawer}
-	  	\caption{Zakładka pomocy z otwartą sekcją ,,\textit{commit}''}
-	  	\label{fig:help-drawer}
-	  \end{figure}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{component-help}
+		\caption{Zakładka pomocy z otwartą sekcją ,,\textit{reset}''}
+		\label{fig:help-drawer}
+	\end{figure}
 
-	  Kontener pomocy emituje akcje związane ze zmianami stanu zakładki pomocy (patrz:~\ref{PomocStan}) oraz akcję zatwierdzenia nowej komendy (poprzez przekazanie komponentowi konsoli funkcji emitującej tę akcję).
+	Gdy zakładka jest otwarta, wysuwa się z dolnej części ekranu spod konsoli. Efekt ten został osiągnięty przez animowanie właściwości \textit{translateY} elementu, które jest wysoce wydajne, ponieważ jest wykonywane na~karcie graficznej (w~odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt). Z zakładką pomocy związane są także animacje wywoływane podczas zmiany aktualnie wyświetlanej sekcji.
+
+	Kontener pomocy emituje akcje związane ze zmianami stanu zakładki pomocy (patrz:~\ref{PomocStan}) oraz akcję zatwierdzenia nowej komendy (poprzez przekazanie komponentowi konsoli funkcji emitującej tę akcję).
 
 	\subsection{Drzewo plików}
 
@@ -667,12 +668,10 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[height=6.2cm]{component-tree}
+		\includegraphics[height=4.4cm]{component-tree}
 		\caption{Drzewo plików, wyświetlające aktualny stan obszaru roboczego}
 		\label{fig:tree}
 	\end{figure}
-
-	Poziom zagnieżdżenia plików został przedstawiony za pomocą łączących je linii oraz odpowiednich wcięć z~lewej strony.
 	\FloatBarrier
 
 	\subsection{Czas, punkty, postęp}
@@ -680,10 +679,24 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 	Zaimplementowano zbiorczy kontener wyświetlający komponenty w~górnej części widoku. Do wyświetlenia aktualnej liczby punktów posłużono się komponentem pomocniczym \textit{Licznik} (patrz: \ref{KomponentyPomocnicze}). Przy pomocy dynamicznie generowanego elementu \textit{SVG}, udało się stworzyć linie postępu, symbolizujące wykonaną część aktualnego zadania. Podobnie jak w przypadku komponentu licznika, aktualnie wyświetlana wartość postępu jest przechowywana w wewnętrznym stanie komponentu~i~animowana przy pomocy funkcji \textit{requestAnimationFrame} udostępnianej przez przeglądarkę.
 
 	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wygaszają się z upływem czasu (prędkość wygaszania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
-	
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{component-top}
+		\caption{Punkty, pozostały czas oraz linie postępu}
+		\label{fig:top}
+	\end{figure}
+
 	\subsection{Podsumowanie}
-	
+
 	Podsumowanie jest kontenerem mającym za zadanie wyświetlić wiadomość końcową po wykonaniu przez gracza ostatniego zadania. Pobiera on ze stanu aplikacji informacje o aktualnej liczbie punktów oraz statystyki dotyczące poprawności wpisywanych komend. Wiadomość wyświetlana jest przy pomocy komponentu \textit{Panel}. Statystyki są pokazywane w formie tabeli, dzięki czemu gracz może zobaczyć jak radził sobie z konkretnymi zagadnieniami.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{component-summary}
+		\caption{Podsumowanie zawierające statystyki dotyczące przebiegu gry}
+		\label{fig:summary}
+	\end{figure}
 
 	\subsection{Canvas}
 
@@ -700,23 +713,28 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\subsection{Gałąź}
 	Każda gałąź w repozytorium reprezentowana jest przez odpowiedni obiekt 3D nazwany \textit{Branch}. Tworzenie tego obiektu realizowane jest przy pomocy funkcji \textit{CreateTube} z~biblioteki \textit{Babylon.js}. Na~podstawie podanej listy punktów składających się na~ścieżkę funkcja ta generuje siatkę wierzchołków w~kształcie tuby. Pozwala również na podanie średnicy oraz szczegółowości siatki. Parametry te dobrano w taki sposób, aby wygenerować tubę, której przekrój przypomina koło, przy jednoczesnym zachowaniu jak najmniejszej liczby użytych wierzchołków. 
-	
+
 	Jedna gałąź może składać się z dwóch rodzajów siatki. 
 	\begin{itemize}
 		\item \textbf{Główny człon}~---~reprezentuje podstawową część gałęzi, będącą prostą tubą. Ścieżka użyta do jej wygenerowania zawiera tylko dwa punkty, wyznaczające jej krańce. Dzięki temu można osiągnąć dowolnie długi odcinek, nie zwiększając przy tym liczby wierzchołków.
-		
+
 		\item \textbf{Łącznik gałęzi}~---~wykorzystywany do łączenia dwóch gałęzi. Zostaje utworzony w~momencie dodania do repozytorium nowej gałęzi lub w wyniku wykonania operacji scalania. Do wyznaczenia ścieżki łącznika skorzystano z funkcji pomocniczej, generującej krzywą Beziera. Na podstawie podanych czterech punktów\footnote{Pierwszy z czterech punktów ustala początek krzywej, dwa kolejne służą do określenia kształtu linii, a ostatni definiuje punkt końcowy, czyli punkt początkowy członu innej gałęzi. Dodatkowym parametrem jest liczba wygenerowanych punktów krzywej, wpływającym na szczegółowość linii.} generuje ona tablicę punktów, które tworzą krzywą, określającą kształt łącznika. Następnie sprawdzane jest, czy wygenerowana ścieżka nie przecina istniejącej gałęzi. Jeżeli tak, to podczas tworzenia łącznika odpowiednio zwiększana a~następnie zmniejszana jest wysokość punktów, tak aby łącznik przechodził nad gałęzią.
-		
 	\end{itemize}
 
 	Dla gałęzi zaimplementowano animacje wydłużania oraz skracania. Dla głównego członu polega ona na przesunięciu ostatniego punktu ścieżki, a~następnie zaktualizowaniu bufora wierzchołków. Służy do tego ta sama funkcja, co~do~tworzenia początkowej siatki wierzchołków. Jedyna różnica polega na podaniu dodatkowego parametru, którym jest instancja obiektu, którego bufor należy zmienić. 
-	
+
 	W~przypadku łącznika gałęzi animacja jest bardziej skomplikowana, ponieważ rozmiar bufora wierzchołków musi być stały. Oznacza to, że nie można dodawać do niego nowych wierzchołków. W~związku z~tym, aby osiągnąć efekt rozwijania się łącznika, należy wszystkie punkty ścieżki przesunąć na jej początek, a~następnie rozwijać w kierunku końca ścieżki. Analogicznie jak przy animacji głównego członu, po każdej zmianie ścieżki konieczne jest zaktualizowanie bufora wierzchołków.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{branches}
+		\caption{Repozytorium zawierające kilka gałęzi, z bieżącą gałęzią \textit{master}}
+		\label{fig:branches}
+	\end{figure}
 
 	Na gałąź nałożono standardowy materiał. Jest to klasa z biblioteki \textit{Babylon.js} reprezentująca uniwersalny \textit{shader}.  Umożliwia on określenie takich właściwości jak kolor, przezroczystość oraz tekstury.
 
 	Na końcu każdej gałęzi wyświetlany jest tekst, z nazwą gałęzi o~kolorze białym. Jego pozycję ustawiono na~referencję do~ostatniego punktu gałęzi, dzięki czemu tekst zawsze podąża za wydłużającą lub skracającą się gałęzią.
-
 
 	\subsection{Rewizja}
 	Rewizja, powstająca w~wyniku operacji zatwierdzania zmian, w~grafice~3D przedstawiana jest jako obiekt \textit{Commit} o~kształcie kuli. Umieszczona jest na gałęzi, która zawiera daną rewizję.
@@ -725,8 +743,6 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	Z obiektem \textit{Commit} związany jest napis, zawierający wiadomość podaną przy zatwierdzaniu zmian, który widnieje nad kulą.
 	Jego kolor jest nieznacznie jaśniejszy od koloru samego obiektu. \textit{Commit} może poza wiadomością posiadać również etykietę, nadaną poleceniem \textit{git tag}. Etykiety znajdują się nieco powyżej tekstu z~wiadomością. Aby nie wprowadzać zbyt wielu elementów, tekst jest wyświetlany tylko dla tych obiektów \textit{Commit}, które znajdują się na aktywnej aktualnie gałęzi. Podczas przełączania się między gałęziami występuje animacja ukrywająca tekst wszystkich rewizji bieżącej gałęzi oraz ukazująca tekst dotyczący nowej gałęzi.
-
-	 W~kwestii wyglądu kuli zastosowane te same zabiegi co w przypadku gałęzi, na której jest umieszczona~---~posiada ten sam kolor, materiał oraz obramowanie.
 
 	Z obiektem ukazującym zatwierdzenie zmian związane są dwie animacje, opisane poniżej.
 	\begin{description}
@@ -737,8 +753,16 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 		Efektowna animacja z~wybuchem cząsteczek stałych. Do ich utworzenia skorzystano z~wbudowanych mechanizmów biblioteki \textit{Babylon.js}. Na początku tworzona jest figura z kilkuset cząsteczek, będących sferami o tym samym kolorze co obiekt \textit{Commit}. Następnie definiowana jest funkcja wykonywana dla każdej cząsteczki, określająca prędkość oraz kierunek rozchodzenia. W~rezultacie cząsteczki rozchodzą się dynamicznie w~kształcie kuli, a~w~każdej klatce zmniejszana jest ich skala, dzięki czemu maleją i~zanikają. Całość daje efekt eksplozji ciała, co urozmaica doznania wizualne.
 
 		Animacja jest wykonywana kiedy ma zostać usunięta rewizja, czyli gdy użytkownik wykona polecenie resetujące wskaźnik HEAD do wcześniejszej rewizji w repozytorium.
+	\end{description}	
 
-	\end{description}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{commit-reset}
+		\caption{Animacja eksplozji rewizji}
+		\label{fig:commit}
+	\end{figure}
+
+	W~kwestii wyglądu kuli zastosowane te same zabiegi co w przypadku gałęzi, na której jest umieszczona~---~posiada ten sam kolor, materiał oraz obramowanie.
 
 	\subsection{Tekst}
 	W grafice 3D niektóre obiekty, takie jak \textit{Commit} i \textit{Branch}, wymagają wyświetlania tekstu. W~przypadku obiektu rewizji jest to wiadomość i~opcjonalnie etykieta, a~dla~gałęzi nazwa.
@@ -782,10 +806,17 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 	\subsection{Kod w tle}
 
 	Fabułę gry stanowi praca gracza nad repozytorium projektu informatycznego. W~celu jej uwidocznienia zdecydowano się utworzyć obiekt tła przedstawiający przewijający się kod. W pierwszej kolejności stworzono płaszczyznę przy pomocy statycznej metody \textit{CreateGround} klasy \textit{Mesh}. Aby kod nie znikał z pola widzenia, gdy kamera porusza się do przodu, w każdej klatce wartość \textit{z} wektora pozycji płaszczyzny ustawiana jest na tę samą, co wartość \textit{z}wektora pozycji kamery.
-	
+
 	Jako materiał wykorzystano obiekt \textit{ShaderMaterial}, który umożliwia definiowanie własnych programów cieniujących (ang. \textit{shaders}). W pierwszej kolejności dla każdego wierzchołka obiektu wykonywany jest program cieniujący przetwarzający wierzchołki (ang. \textit{vertex shader}). Jego głównym zadaniem jest odpowiednie ustawienie danego wierzchołka we współrzędnych projekcji. Dodatkowo do programu cieniującego została przekazana monochromatyczna tekstura zwaną mapą wysokości. Pozwala ona nadać płaszczyźnie wypukłości. Program cieniujący pobiera wartość kanału czerwonego z~mapy wysokości, z~miejsca określonego koordynatami tekstury (pozyskanymi w procesie \textit{mapowania UV}). Wartość ta, będąca z w przedziale od 0 do 1, jest następnie przemnażana przez stałą \textit{maxHeight} i dodawana do współrzędnej \textit{y} aktualnie przetwarzanego wierzchołka.
-	
-	Zadaniem programu cieniującego przetwarzającego fragmenty (ang. \textit{fragment shader}) jest przede wszystkim naniesienie tekstury na płaszczyznę. Do programu cieniującego przekazana jest tekstura przedstawiająca biały kod na czarnym tle. Przekazane są również współrzędne tekstury, do których w każdej kolejnej klatce dodawane jest przesunięcie (w ten sposób osiągnięty został efekt przewijania tekstu). Przy użyciu tych współrzędnych, próbkowany jest kolor tekstury w odpowiednim miejscu. Jeżeli jest to kolor czarny, przetwarzany piksel pozostaje przezroczysty, w przeciwnym wypadku kopiowany jest kolor z tekstury. W~celu podkreślenia efektu głębi obrazu zaimplementowano efekt mgły. Oznacza to, że kod znajdujący się daleko od kamery zaczyna zlewać się z tłem. Na podstawie współrzędnych fragmentu, wyliczana jest jego odległość od kamery. Ustalone zostały wartości odległości minimalnej, od której efekt mgły zaczyna być widoczny i maksymalnej, dla której fragmenty przybierają kolor tła. Dla odległości pomiędzy tymi wartościami kolor jest interpolowany liniowo między kolorem tła, a kolorem fragmentu tekstury.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=15cm]{ground}
+		\caption{Lecący w tle kod}
+		\label{fig:ground}
+	\end{figure}
+
+	Zadaniem programu cieniującego przetwarzającego fragmenty (ang. \textit{fragment shader}) jest przede wszystkim naniesienie tekstury na płaszczyznę. Do programu cieniującego przekazana jest tekstura przedstawiająca biały kod na czarnym tle. Przekazane są również współrzędne tekstury, do których w każdej kolejnej klatce dodawane jest przesunięcie (w ten sposób osiągnięty został efekt przewijania tekstu). Przy użyciu tych współrzędnych, próbkowany jest kolor tekstury w odpowiednim miejscu. Jeżeli jest to kolor czarny, przetwarzany piksel pozostaje przezroczysty, w~przeciwnym wypadku kopiowany jest kolor z tekstury. W~celu podkreślenia efektu głębi obrazu zaimplementowano efekt mgły. Oznacza to, że kod znajdujący się daleko od kamery zaczyna zlewać się z tłem. Na podstawie współrzędnych fragmentu, wyliczana jest jego odległość od kamery. Ustalone zostały wartości odległości minimalnej, od której efekt mgły zaczyna być widoczny i maksymalnej, dla której fragmenty przybierają kolor tła. Dla odległości pomiędzy tymi wartościami kolor jest interpolowany liniowo między kolorem tła, a kolorem fragmentu tekstury.
 
 	\subsection{Drobny pył}
 
