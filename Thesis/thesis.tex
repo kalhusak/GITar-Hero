@@ -559,7 +559,7 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 
 	\subsection{Komponenty pomocnicze} \label{KomponentyPomocnicze}
 
-	W celu zwiększenia modułowości projektu oraz jednokrotnej implementacji powtarzających się funkcjonalności zaimplementowano pięć komponentów pomocniczych, które zostały opisane poniżej.
+	W celu zwiększenia modułowości projektu oraz jednokrotnej implementacji powtarzających się funkcjonalności zaimplementowano sześć komponentów pomocniczych, które zostały opisane poniżej.
 
 	\begin{description}
 	\item[Komponent rozmywający] \hfill \\
@@ -584,7 +584,10 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 
 	\item[Plik] \hfill \\
 	W kilku miejscach aplikacji wymagane jest wyświetlenie obiektu symbolizującego plik repozytorium. Zaimplementowany został komponent, przyjmujący jako parametry nazwę pliku oraz jego status. Dzięki użyciu komponentu, wszystkie obiekty graficzne reprezentujące pliki w aplikacji wyglądają tak samo.
-
+	
+	\item[Panel] \hfill \\
+	Do wyświetlania wiadomości wprowadzających, opisów zadań oraz podsumowania zdefiniowany został komponent \textit{Panel}. Przyjmuje on jeden opcjonalny argument \textit{title} określający tytuł wiadomości. Treść wiadomości
+przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowolnych elementów \textit{HTML} lub innych komponentów we wnętrzu wiadomości.
 	\end{description}
 
 	\subsection{Tutorial}
@@ -677,6 +680,8 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 	Zaimplementowano zbiorczy kontener wyświetlający komponenty w~górnej części widoku. Do wyświetlenia aktualnej liczby punktów posłużono się komponentem pomocniczym \textit{Licznik} (patrz: \ref{KomponentyPomocnicze}). Przy pomocy dynamicznie generowanego elementu \textit{SVG}, udało się stworzyć linie postępu, symbolizujące wykonaną część aktualnego zadania. Podobnie jak w przypadku komponentu licznika, aktualnie wyświetlana wartość postępu jest przechowywana w wewnętrznym stanie komponentu~i~animowana przy pomocy funkcji \textit{requestAnimationFrame} udostępnianej przez przeglądarkę.
 
 	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wygaszają się z upływem czasu (prędkość wygaszania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
+	
+	\subsection{•}
 
 	\subsection{Canvas}
 
