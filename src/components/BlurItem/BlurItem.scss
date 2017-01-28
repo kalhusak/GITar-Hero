@@ -5,7 +5,7 @@
 }
 
 .blur-item>* {
-  filter: blur(0px);
+  filter: none;
   transition: filter 0.3s $ease-out-timing-fn;
   transform: translateZ(0);
   will-change: transform;
