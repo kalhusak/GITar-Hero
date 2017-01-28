@@ -5,12 +5,14 @@
       "children": [],
       "task": {
         "title": "Merge release into develop",
-        "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are some changes on the remote that you don't have.",
+        "description": "After merging release branch to master, you should merge it into develop too. And then, push to an upstream branch. But sometimes push fails. It happens if there are changes on the remote that you don't have.",
         "steps": [
           {
             "description": "Return to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -31,10 +33,15 @@
             "description": "Merge release/0.2.0 to develop without fastforward",
             "commands": [
               "git merge --no-ff release/0.2.0",
-              "git merge --no-ff release/0.2.0 develop"
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -51,9 +58,16 @@
           {
             "description": "Try to push commits to upstream",
             "commands": [
-              "git push"
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -62,7 +76,13 @@
             "description": "Looks like you cannot push cleanly. Remove last merge commit",
             "commands": [
               "git reset --hard HEAD^",
-              "git reset --hard HEAD~"
+              "git reset --hard HEAD^1",
+              "git reset --hard HEAD~",
+              "git reset --hard HEAD~1",
+              "git reset HEAD^ --hard",
+              "git reset HEAD^1 --hard",
+              "git reset HEAD~ --hard",
+              "git reset HEAD~1 --hard"
             ],
             "tags": [
               "reset"
@@ -82,9 +102,16 @@
           {
             "description": "Download changes from origin",
             "commands": [
-              "git pull"
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -114,10 +141,15 @@
             "description": "Try again to merge release/0.2.0 to develop without fastforward",
             "commands": [
               "git merge --no-ff release/0.2.0",
-              "git merge --no-ff release/0.2.0 develop"
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -134,9 +166,16 @@
           {
             "description": "Push commits to upstream",
             "commands": [
-              "git push"
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -158,9 +197,12 @@
           {
             "description": "Create branch release/0.1.0 and checkout in one step",
             "commands": [
-              "git checkout -b release/0.1.0"
+              "git checkout -b release/0.1.0",
+              "git checkout -b 'release/0.1.0'",
+              "git checkout -b \"release/0.1.0\""
             ],
             "tags": [
+              "branch",
               "checkout",
               "gitflow/release"
             ],
@@ -197,7 +239,8 @@
           {
             "description": "Commit new files with message \"Fix typo\"",
             "commands": [
-              "git commit -m \"Fix typo\""
+              "git commit -m \"Fix typo\"",
+              "git commit -m 'Fix typo'"
             ],
             "tags": [
               "commit"
@@ -225,7 +268,9 @@
           {
             "description": "Return to master",
             "commands": [
-              "git checkout master"
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
             ],
             "tags": [
               "checkout"
@@ -260,10 +305,15 @@
             "description": "Merge release/0.1.0 to master without fastforward",
             "commands": [
               "git merge --no-ff release/0.1.0",
-              "git merge --no-ff release/0.1.0 master"
+              "git merge --no-ff 'release/0.1.0'",
+              "git merge --no-ff \"release/0.1.0\"",
+              "git merge release/0.1.0 --no-ff",
+              "git merge 'release/0.1.0' --no-ff",
+              "git merge \"release/0.1.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -292,9 +342,24 @@
             }
           },
           {
-            "description": "Mark this commit with an annotated tag 0.10",
+            "description": "Mark this commit with an annotated tag 0.1.0 and message \"First release\"",
             "commands": [
-              "git tag -a 0.1.0"
+              "git tag -m \"First release\" 0.1.0",
+              "git tag -m \"First release\" 0.1.0 -a",
+              "git tag -m \"First release\" -a 0.1.0",
+              "git tag 0.1.0 -m \"First release\"",
+              "git tag 0.1.0 -m \"First release\" -a",
+              "git tag 0.1.0 -a -m \"First release\"",
+              "git tag -a 0.1.0 -m \"First release\"",
+              "git tag -a -m \"First release\" 0.1.0",
+              "git tag -m 'First release' 0.1.0",
+              "git tag -m 'First release' 0.1.0 -a",
+              "git tag -m 'First release' -a 0.1.0",
+              "git tag 0.1.0 -m 'First release'",
+              "git tag 0.1.0 -m 'First release' -a",
+              "git tag 0.1.0 -a -m 'First release'",
+              "git tag -a 0.1.0 -m 'First release'",
+              "git tag -a -m 'First release' 0.1.0"
             ],
             "tags": [
               "tag"
@@ -302,7 +367,7 @@
             "type": "TAG",
             "data": {
               "name": "0.1.0",
-              "message": "0.1.0"
+              "message": "First release"
             }
           },
           {
@@ -311,6 +376,7 @@
               "git push -u origin master"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -318,7 +384,9 @@
           {
             "description": "Return to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -337,10 +405,15 @@
             "description": "Merge release/0.1.0 to develop without fastforward",
             "commands": [
               "git merge --no-ff release/0.1.0",
-              "git merge --no-ff release/0.1.0 develop"
+              "git merge --no-ff 'release/0.1.0'",
+              "git merge --no-ff \"release/0.1.0\"",
+              "git merge release/0.1.0 --no-ff",
+              "git merge 'release/0.1.0' --no-ff",
+              "git merge \"release/0.1.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -355,9 +428,16 @@
           {
             "description": "Push commits to upstream",
             "commands": [
-              "git push"
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -379,10 +459,14 @@
           {
             "description": "Create branch feature/dialog and checkout in one step",
             "commands": [
-              "git checkout -b feature/dialog"
+              "git checkout -b feature/dialog",
+              "git checkout -b 'feature/dialog'",
+              "git checkout -b \"feature/dialog\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -419,7 +503,8 @@
           {
             "description": "Commit new files with message \"Add dialog template\"",
             "commands": [
-              "git commit -m \"Add dialog template\""
+              "git commit -m \"Add dialog template\"",
+              "git commit -m 'Add dialog template'"
             ],
             "tags": [
               "commit"
@@ -436,6 +521,7 @@
               "git push -u origin feature/dialog"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -457,11 +543,12 @@
           {
             "description": "Return to master",
             "commands": [
-              "git checkout master"
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
             ],
             "tags": [
-              "checkout",
-              "gitflow/hotfix"
+              "checkout"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -479,10 +566,14 @@
           {
             "description": "Create branch hotfix/title-margin and checkout in one step",
             "commands": [
-              "git checkout -b hotfix/title-margin"
+              "git checkout -b hotfix/title-margin",
+              "git checkout -b 'hotfix/title-margin'",
+              "git checkout -b \"hotfix/title-margin\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/hotfix"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -517,7 +608,8 @@
           {
             "description": "Commit changes with message \"Change title margin\"",
             "commands": [
-              "git commit -m \"Change title margin\""
+              "git commit -m \"Change title margin\"",
+              "git commit -m 'Change title margin'"
             ],
             "tags": [
               "commit"
@@ -545,7 +637,9 @@
           {
             "description": "Switch back to master",
             "commands": [
-              "git checkout master"
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
             ],
             "tags": [
               "checkout"
@@ -564,9 +658,14 @@
             "description": "Merge hotfix/title-margin to master without fastforward",
             "commands": [
               "git merge --no-ff hotfix/title-margin",
-              "git merge --no-ff hotfix/title-margin master"
+              "git merge --no-ff 'hotfix/title-margin'",
+              "git merge --no-ff \"hotfix/title-margin\"",
+              "git merge hotfix/title-margin --no-ff",
+              "git merge 'hotfix/title-margin' --no-ff",
+              "git merge \"hotfix/title-margin\" --no-ff"
             ],
             "tags": [
+              "gitflow/hotfix",
               "merge"
             ],
             "type": "MERGE",
@@ -580,9 +679,9 @@
             }
           },
           {
-            "description": "Mark this commit with a tag 0.1.1",
+            "description": "Mark this commit with a lightweight tag 0.1.1",
             "commands": [
-              "git tag -a 0.1.1"
+              "git tag 0.1.1"
             ],
             "tags": [
               "tag"
@@ -599,6 +698,7 @@
               "git push"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -670,7 +770,8 @@
           {
             "description": "It is time to make a first commit! Create one with message \"Init project\".",
             "commands": [
-              "git commit -m \"Init project\""
+              "git commit -m \"Init project\"",
+              "git commit -m 'Init project'"
             ],
             "tags": [
               "commit"
@@ -716,7 +817,8 @@
           {
             "description": "Commit adding the file with message \"Add readme\"",
             "commands": [
-              "git commit -m \"Add readme\""
+              "git commit -m \"Add readme\"",
+              "git commit -m 'Add readme'"
             ],
             "tags": [
               "commit"
@@ -746,7 +848,8 @@
             "description": "Add only files from your src folder. (Tip: you can use \"*\" in your command)",
             "commands": [
               "git add src/*",
-              "git add src/app.js src/app.css"
+              "git add src/app.js src/app.css",
+              "git add src/app.css src/app.js"
             ],
             "tags": [
               "stage"
@@ -781,9 +884,10 @@
             }
           },
           {
-            "description": "Now commit your work with message \"Do some improvements\"",
+            "description": "Now commit your work with message \"Make improvements\"",
             "commands": [
-              "git commit -m \"Do some improvements\""
+              "git commit -m \"Make improvements\"",
+              "git commit -m 'Make improvements'"
             ],
             "tags": [
               "commit"
@@ -791,7 +895,7 @@
             "type": "COMMIT",
             "data": {
               "name": "22",
-              "message": "Do some improvements"
+              "message": "Make improvements"
             }
           }
         ],
@@ -806,12 +910,14 @@
       ],
       "task": {
         "title": "Development branch",
-        "description": "I's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
+        "description": "It's a good idea to do your work on a dedicated branches. It helps to keep the history of a project well-formed, and therefore easier to browse and analyze.\nLet's create a branch for development.",
         "steps": [
           {
             "description": "Create a new branch called \"develop\"",
             "commands": [
-              "git branch develop"
+              "git branch develop",
+              "git branch 'develop'",
+              "git branch \"develop\""
             ],
             "tags": [
               "branch"
@@ -824,7 +930,9 @@
           {
             "description": "Switch to created branch",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -856,7 +964,9 @@
           {
             "description": "Create and checkout to branch feature/menu in one step",
             "commands": [
-              "git checkout -b feature/menu"
+              "git checkout -b feature/menu",
+              "git checkout -b 'feature/menu'",
+              "git checkout -b \"feature/menu\""
             ],
             "tags": [
               "checkout",
@@ -899,7 +1009,8 @@
           {
             "description": "Commit new files with message \"Add menu list\"",
             "commands": [
-              "git commit -m \"Add menu list\""
+              "git commit -m \"Add menu list\"",
+              "git commit -m 'Add menu list'"
             ],
             "tags": [
               "commit"
@@ -936,7 +1047,8 @@
           {
             "description": "Commit with message \"Add menu item animation\"",
             "commands": [
-              "git commit -m \"Add menu item animation\""
+              "git commit -m \"Add menu item animation\"",
+              "git commit -m 'Add menu item animation'"
             ],
             "tags": [
               "commit"
@@ -964,7 +1076,9 @@
           {
             "description": "Return to branch develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -989,10 +1103,15 @@
             "description": "Merge branch feature/menu to develop without fastforward",
             "commands": [
               "git merge --no-ff feature/menu",
-              "git merge --no-ff feature/menu develop"
+              "git merge --no-ff 'feature/menu'",
+              "git merge --no-ff \"feature/menu\"",
+              "git merge feature/menu --no-ff",
+              "git merge 'feature/menu' --no-ff",
+              "git merge \"feature/menu\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1027,10 +1146,14 @@
           {
             "description": "Checkout to a new branch feature/header",
             "commands": [
-              "git checkout -b feature/header"
+              "git checkout -b feature/header",
+              "git checkout -b 'feature/header'",
+              "git checkout -b \"feature/header\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -1067,7 +1190,8 @@
           {
             "description": "Commit new files with message \"Add header container\"",
             "commands": [
-              "git commit -m \"Add header container\""
+              "git commit -m \"Add header container\"",
+              "git commit -m 'Add header container'"
             ],
             "tags": [
               "commit"
@@ -1103,7 +1227,8 @@
           {
             "description": "Commit new files and changes with message \"Add logo image\"",
             "commands": [
-              "git commit -m \"Add logo image\""
+              "git commit -m \"Add logo image\"",
+              "git commit -m 'Add logo image'"
             ],
             "tags": [
               "commit"
@@ -1126,12 +1251,14 @@
       ],
       "task": {
         "title": "Merge header to develop branch",
-        "description": "Let's say you think you finished working on a header. You merge it into develop, and realize, there is one more thing to do to complete header. Revert that merge, do some changes and then merge again.",
+        "description": "Let's say you think you finished working on a header. You merge it into develop, and then realize, there is one more thing to do to complete header. Revert that merge, do some changes and then merge again.",
         "steps": [
           {
             "description": "Switch to branch develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -1155,10 +1282,15 @@
             "description": "Merge feature/header to develop without fastforward",
             "commands": [
               "git merge --no-ff feature/header",
-              "git merge --no-ff feature/header develop"
+              "git merge --no-ff 'feature/header'",
+              "git merge --no-ff \"feature/header\"",
+              "git merge feature/header --no-ff",
+              "git merge 'feature/header' --no-ff",
+              "git merge \"feature/header\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1179,7 +1311,13 @@
             "description": "You realized header is not ready yet. Remove last merge commit",
             "commands": [
               "git reset --hard HEAD^",
-              "git reset --hard HEAD~"
+              "git reset --hard HEAD^1",
+              "git reset --hard HEAD~",
+              "git reset --hard HEAD~1",
+              "git reset HEAD^ --hard",
+              "git reset HEAD^1 --hard",
+              "git reset HEAD~ --hard",
+              "git reset HEAD~1 --hard"
             ],
             "tags": [
               "reset"
@@ -1202,7 +1340,9 @@
           {
             "description": "Return to branch feature/header",
             "commands": [
-              "git checkout feature/header"
+              "git checkout feature/header",
+              "git checkout 'feature/header'",
+              "git checkout \"feature/header\""
             ],
             "tags": [
               "checkout"
@@ -1248,7 +1388,8 @@
           {
             "description": "Commit new files with message \"Add page title\"",
             "commands": [
-              "git commit -m \"Add page title\""
+              "git commit -m \"Add page title\"",
+              "git commit -m 'Add page title'"
             ],
             "tags": [
               "commit"
@@ -1262,7 +1403,9 @@
           {
             "description": "Switch back to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -1285,10 +1428,15 @@
             "description": "Merge header branch again (without fastforward)",
             "commands": [
               "git merge --no-ff feature/header",
-              "git merge --no-ff feature/header develop"
+              "git merge --no-ff 'feature/header'",
+              "git merge --no-ff \"feature/header\"",
+              "git merge feature/header --no-ff",
+              "git merge 'feature/header' --no-ff",
+              "git merge \"feature/header\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1331,10 +1479,13 @@
           {
             "description": "Pull data from remote branch develop ",
             "commands": [
-              "git pull origin develop"
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
             ],
             "tags": [
-              "pull"
+              "pull",
+              "remote repos"
             ],
             "type": "PULL",
             "data": {
@@ -1343,11 +1494,14 @@
             }
           },
           {
-            "description": "Remote repository doesn't have any commits you don't have. Push your changes to it.",
+            "description": "There weren't any commits in the remote that you wouldn't already have. Push your changes to remote.",
             "commands": [
-              "git push origin develop"
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1369,10 +1523,14 @@
           {
             "description": "Create branch feature/content and checkout in one step",
             "commands": [
-              "git checkout -b feature/content"
+              "git checkout -b feature/content",
+              "git checkout -b 'feature/content'",
+              "git checkout -b \"feature/content\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -1409,7 +1567,8 @@
           {
             "description": "Commit new files with message \"Add content container\"",
             "commands": [
-              "git commit -m \"Add content container\""
+              "git commit -m \"Add content container\"",
+              "git commit -m 'Add content container'"
             ],
             "tags": [
               "commit"
@@ -1444,7 +1603,8 @@
           {
             "description": "Create a commit with message \"Adjust scrollbar\"",
             "commands": [
-              "git commit -m \"Adjust scrollbar\""
+              "git commit -m \"Adjust scrollbar\"",
+              "git commit -m 'Adjust scrollbar'"
             ],
             "tags": [
               "commit"
@@ -1472,7 +1632,9 @@
           {
             "description": "Return to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -1493,9 +1655,12 @@
           {
             "description": "Download changes from remote branch develop from origin",
             "commands": [
-              "git pull origin develop"
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -1519,10 +1684,15 @@
             "description": "Merge feature/content to develop without fastforward",
             "commands": [
               "git merge --no-ff feature/content",
-              "git merge --no-ff feature/content develop"
+              "git merge --no-ff 'feature/content'",
+              "git merge --no-ff \"feature/content\"",
+              "git merge feature/content --no-ff",
+              "git merge 'feature/content' --no-ff",
+              "git merge \"feature/content\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1540,9 +1710,12 @@
           {
             "description": "Push your changes and set remote branch develop from origin as an upstream branch for your local develop branch",
             "commands": [
-              "git push -u origin develop"
+              "git push -u origin develop",
+              "git push -u 'origin' 'develop'",
+              "git push -u \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1564,7 +1737,9 @@
           {
             "description": "Switch to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -1583,9 +1758,14 @@
             "description": "Merge hotfix/title-margin to develop without fastforward",
             "commands": [
               "git merge --no-ff hotfix/title-margin",
-              "git merge --no-ff hotfix/title-margin develop"
+              "git merge --no-ff 'hotfix/title-margin'",
+              "git merge --no-ff \"hotfix/title-margin\"",
+              "git merge hotfix/title-margin --no-ff",
+              "git merge 'hotfix/title-margin' --no-ff",
+              "git merge \"hotfix/title-margin\" --no-ff"
             ],
             "tags": [
+              "gitflow/hotfix",
               "merge"
             ],
             "type": "MERGE",
@@ -1601,9 +1781,16 @@
           {
             "description": "Pull from remote branch develop",
             "commands": [
-              "git pull"
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin develop",
+              "git pull 'origin' 'develop'",
+              "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -1624,9 +1811,16 @@
           {
             "description": "Now you can push it upstream",
             "commands": [
-              "git push"
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin develop",
+              "git push 'origin' 'develop'",
+              "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1648,9 +1842,12 @@
           {
             "description": "Create branch release/0.2.0 and checkout in one step",
             "commands": [
-              "git checkout -b release/0.2.0"
+              "git checkout -b release/0.2.0",
+              "git checkout -b 'release/0.2.0'",
+              "git checkout -b \"release/0.2.0\""
             ],
             "tags": [
+              "branch",
               "checkout",
               "gitflow/release"
             ],
@@ -1685,7 +1882,8 @@
           {
             "description": "Commit adding a new file with message \"Add version file\"",
             "commands": [
-              "git commit -m \"Add version file\""
+              "git commit -m \"Add version file\"",
+              "git commit -m 'Add version file'"
             ],
             "tags": [
               "commit"
@@ -1699,7 +1897,9 @@
           {
             "description": "Switch to master",
             "commands": [
-              "git checkout master"
+              "git checkout master",
+              "git checkout 'master'",
+              "git checkout \"master\""
             ],
             "tags": [
               "checkout"
@@ -1720,10 +1920,15 @@
             "description": "Merge release/0.2.0 to master without fastforward",
             "commands": [
               "git merge --no-ff release/0.2.0",
-              "git merge --no-ff release/0.2.0 master"
+              "git merge --no-ff 'release/0.2.0'",
+              "git merge --no-ff \"release/0.2.0\"",
+              "git merge release/0.2.0 --no-ff",
+              "git merge 'release/0.2.0' --no-ff",
+              "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -1740,7 +1945,22 @@
           {
             "description": "Create an annotated tag 0.2.0 -m \"Second release\"",
             "commands": [
-              "git tag -a 0.2.0 -m \"Second release\""
+              "git tag -m \"Second release\" 0.2.0",
+              "git tag -m \"Second release\" 0.2.0 -a",
+              "git tag -m \"Second release\" -a 0.2.0",
+              "git tag 0.2.0 -m \"Second release\"",
+              "git tag 0.2.0 -m \"Second release\" -a",
+              "git tag 0.2.0 -a -m \"Second release\"",
+              "git tag -a 0.2.0 -m \"Second release\"",
+              "git tag -a -m \"Second release\" 0.2.0",
+              "git tag -m 'Second release' 0.2.0",
+              "git tag -m 'Second release' 0.2.0 -a",
+              "git tag -m 'Second release' -a 0.2.0",
+              "git tag 0.2.0 -m 'Second release'",
+              "git tag 0.2.0 -m 'Second release' -a",
+              "git tag 0.2.0 -a -m 'Second release'",
+              "git tag -a 0.2.0 -m 'Second release'",
+              "git tag -a -m 'Second release' 0.2.0"
             ],
             "tags": [
               "tag"
@@ -1754,9 +1974,16 @@
           {
             "description": "Push to origin",
             "commands": [
-              "git push"
+              "git push",
+              "git push origin",
+              "git push 'origin'",
+              "git push \"origin\"",
+              "git push origin master",
+              "git push 'origin' 'master'",
+              "git push \"origin\" \"master\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1778,7 +2005,9 @@
           {
             "description": "Switch back to branch feature/dialog",
             "commands": [
-              "git checkout feature/dialog"
+              "git checkout feature/dialog",
+              "git checkout 'feature/dialog'",
+              "git checkout \"feature/dialog\""
             ],
             "tags": [
               "checkout"
@@ -1799,11 +2028,18 @@
             }
           },
           {
-            "description": "Chcek if there are any commits on an upstream branch that you dont have and merge them in",
+            "description": "Fetch commits from an upstream branch and merge them in (if there are any)",
             "commands": [
-              "git pull"
+              "git pull",
+              "git pull origin",
+              "git pull 'origin'",
+              "git pull \"origin\"",
+              "git pull origin feature/dialog",
+              "git pull 'origin' 'feature/dialog'",
+              "git pull \"origin\" \"feature/dialog\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -1837,7 +2073,8 @@
           {
             "description": "Commit with \"Improve dialog template\"",
             "commands": [
-              "git commit -m \"Improve dialog template\""
+              "git commit -m \"Improve dialog template\"",
+              "git commit -m 'Improve dialog template'"
             ],
             "tags": [
               "commit"
@@ -1851,7 +2088,9 @@
           {
             "description": "Return to develop",
             "commands": [
-              "git checkout develop"
+              "git checkout develop",
+              "git checkout 'develop'",
+              "git checkout \"develop\""
             ],
             "tags": [
               "checkout"
@@ -1873,10 +2112,15 @@
             "description": "Merge feature/dialog to develop without fastforward",
             "commands": [
               "git merge --no-ff feature/dialog",
-              "git merge --no-ff feature/dialog develop"
+              "git merge --no-ff 'feature/dialog'",
+              "git merge --no-ff \"feature/dialog\"",
+              "git merge feature/dialog --no-ff",
+              "git merge 'feature/dialog' --no-ff",
+              "git merge \"feature/dialog\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1927,7 +2171,8 @@
           {
             "description": "Commit your improvements with message \"Change style\"",
             "commands": [
-              "git commit -m \"Change style\""
+              "git commit -m \"Change style\"",
+              "git commit -m 'Change style'"
             ],
             "tags": [
               "commit"
@@ -1961,7 +2206,8 @@
           {
             "description": "Your app looks much better now - commit with message \"Improved design\"",
             "commands": [
-              "git commit -m \"Improved design\""
+              "git commit -m \"Improved design\"",
+              "git commit -m 'Improved design'"
             ],
             "tags": [
               "commit"
@@ -1985,7 +2231,7 @@
       ],
       "task": {
         "title": "Update project description",
-        "description": "You realized that you should be update some files with more suitable project description and version number. Modify it and than make a commit.",
+        "description": "You realized that you should update some files with more suitable project description and version number. Modify it and than make a commit.",
         "steps": [
           {
             "description": "You have made necessary updates, it is time to stage all files",
@@ -2028,7 +2274,8 @@
           {
             "description": "All what is left to do is to commit with message \"Update project info\"",
             "commands": [
-              "git commit -m \"Update project info\""
+              "git commit -m \"Update project info\"",
+              "git commit -m 'Update project info'"
             ],
             "tags": [
               "commit"
@@ -2077,7 +2324,9 @@
           {
             "description": "Commit changes with message \"Refactor\"",
             "commands": [
-              "git commit -m \"Refactor\""
+              "git commit -m \"Refactor\"",
+              "git commit -m 'Refactor'",
+              "git commit -m Refactor"
             ],
             "tags": [
               "commit"
