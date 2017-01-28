@@ -460,23 +460,23 @@
 	Aby dodać nowy węzeł grafu należy przytrzymać klawisz Shift i kliknąć myszką w~wybrane miejsce. Żeby edytować wierzchołek należy go~wybrać poprzez kliknięcie. Z~kolei przytrzymanie klawisza Shift oraz wciśniętego lewego przycisku myszki, a~następnie przeciągniecie kursora znad jednego węzła na drugi, utworzy skierowaną krawędź między nimi. Aby usunąć wybrany wierzchołek grafu bądź jego krawędź, należy go zaznaczyć kliknięciem oraz nacisnąć klawisz Delete.
 
 	Stworzony w ten sposób graf zadań można zapisać do formatu JSON. W~tym~celu wystarczy kliknąć drugi przycisk w~lewym dolnym rogu ekranu. Narzędzie wygeneruje strukturę grafu zrozumiałą dla aplikacji GITar Hero, określi zadanie inicjujące rozgrywkę i~zapisze dane do pliku \textit{taskGraph.json}. Zapisane w ten sposób grafy można wczytać ponownie do aplikacji TaskCreator naciskając pierwszy przycisk w~lewym dolnym rogu ekranu i~wybierając plik do wczytania.
-	
+
 	\section{Stan i jego tranzycje}
-	
+
 	\subsection{Wstęp}
-	
-	Stan naszej aplikacji został podzielony na pięć głównych części. Do każdej z~nich zdefiniowany został tzw. \textit{reducer} (więcej w sekcji \ref{Redux}) odpowiedzialny za tranzycje stanu w~zależności od typu akcji. Stan jest zatem obiektem posiadającym pięć kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
-	
+
+	Stan naszej aplikacji został podzielony na siedem głównych części. Dla każdej z~nich zdefiniowany został tzw. \textit{reducer} (więcej w sekcji \ref{Redux}) odpowiedzialny za tranzycje stanu w~zależności od typu akcji. Stan jest zatem obiektem posiadającym siedem kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
+
 	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w~których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
-	
-	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużono się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
-	
+
+	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużyliśmy się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
+
 	\subsection{Zadania}
-	
+
 	Część stanu dotycząca zadań informuje przede wszystkim o aktualnym zadaniu wraz z~jego właściwościami. Dodatkowo zapamiętuje czas rozpoczęcia aktualnego zadania, co pozwala na obliczenie nagrody punktowej po wykonaniu go. Dostępna jest również informacja o powodzeniach i~niepowodzeniach w rozwiązywaniu zadań dotyczących określonych poleceń systemu Git.
-	
+
 	Poniżej opisane zostały akcje, które powodują wygenerowanie nowego stanu.
-		
+
 	\begin{description}
 	\item[Nowa poprawna komenda z konsoli] \hfill \\
 	Wyemitowanie akcji tego typu następuje na skutek poprawnego wykonania kroku zadania. W~rezultacie kolejny krok ustawiany jest w stanie jako aktywny oraz dodawana jest do statystyk informacja o poprawnie wykonanej komendzie danego rodzaju.
@@ -485,70 +485,110 @@
 	\item[Ostatni podpunkt zadania został wykonany] \hfill \\
 	Wywoływana gdy dane zadanie zostało ukończone, czyli gdy ostatni krok został prawidłowo rozwiązany. \textit{Reducer} zareaguje wtedy wygenerowaniem nowego aktywnego zadania na podstawie przechowywanych statystyk dotyczących znajomości poleceń.
 	\end{description}
-		
+
 	\subsection{Pomoc} \label{PomocStan}
-	
-	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w~dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otwarta, czy zamknięta (\textit{isOpen}). Druga właściwość to również zmienna boolowska, stanowiąca o~tym, czy pomoc ma otwierać się automatycznie, po pojawieniu się zadania zawierającego nowe polecenie (\textit{autoShowHelp}). Ostatnia wartość informuje o~aktywnej sekcji pomocy, widocznej o~ile zakładka jest otwarta (\textit{selectedTab}).
-	
+
+	Osobną część stanu stanowią informacje dotyczące zakładki pomocy, dostępnej w~dolnej części strony. Pierwszą właściwość stanowi zmienna boolowska określająca, czy zakładka jest aktualnie otwarta, czy zamknięta (\textit{isOpen}). Druga właściwość informuje o~aktywnej sekcji pomocy, widocznej o~ile zakładka jest otwarta (\textit{selectedTab}). Pod ostatnim kluczem (\textit{info}) znajduje się zmienna boolowska stanowiąca o~wyświetleniu dodatkowej informacji dla gracza.
+
 	Akcje, które powodują tranzycję stanu zakładki pomocy to:
-	
+
 	\begin{description}
-	\item[Akcja nowej komendy z konsoli] \hfill \\
-	Akcja tego typu wywołuje zmianę stanu, jeżeli treścią komendy jest słowo kluczowe "\textit{help}". \textit{Reducer} zmienia w efekcie wartość pola \textit{isOpen} na przeciwną w stosunku do aktualnej.
-	
-	\item[Akcja wyboru sekcji pomocy] \hfill \\
-	Akcja tego typu informuje o wyborze aktywnej sekcji, a~w~niektórych przypadkach otwiera zakładkę pomocy. Jest ona emitowana podczas klikania w~tytuły sekcji w nawigacji zakładki pomocy, ale również gdy pojawi się krok dotyczący nowej komendy (aby wprowadzić gracza w~nowe zagadnienie). W~tym drugim przypadku w parametrach akcji przekazywana jest flaga \textit{auto}, ustawiona na~\textit{true}. Niezależnie od przyczyny wyemitowania akcji przekazywany jest identyfikator wybranej sekcji pomocy. \textit{Reducer} reaguje na akcję ustawiając wskazaną sekcję jako aktywną oraz otwierając zakładkę pomocy, o ile jest zamknięta i~spełniony jest następujący warunek~---~jeżeli automatyczne otwieranie pomocy jest wyłączone (flaga \textit{auto} jest ustawiona na \textit{false}), to źródłem akcji nie może być pojawienie się nowego polecenia.
-	
+	\item[Akcja otwarcia zakładki pomocy] \hfill \\
+	Emitowana po wpisaniu słowa kluczowego "\textit{help}" w konsoli i zatwierdzeniu klawiszem \textit{Enter} lub kliknięcie informacji wyświetlanej nad konsolą. W wyniku jej wykonania \textit{reducer} ustawia flagę \textit{isOpen} na wartość \textit{true}, natomiast flagę \textit{info} na~wartość \textit{false}. W efekcie zakładka pomocy otwiera się, a~informacja dodatkowa znika.
+
 	\item[Akcja zamknięcia zakładki pomocy] \hfill \\
-	Wywoływana przez kliknięcie poza zakładką pomocy, wpisanie słowa kluczowego "\textit{help}" lub wciśnięcie przycisku \textit{ESC}, gdy zakładka jest otwarta. \textit{Reducer} otrzymując akcję tego typu ustawia pole \textit{isOpen} na wartość \textit{false}, co skutkuje zamknięciem pomocy.
-	
+	Wywoływana przez kliknięcie poza zakładką pomocy, kliknięcie w konsolę, wciśnięcie klawisza \textit{ESC} lub wciśnięcie klawisza \textit{Enter}. \textit{Reducer} otrzymując akcję tego typu ustawia pole~\textit{isOpen} na wartość~\textit{false}, co~skutkuje zamknięciem pomocy.
+
+	\item[Akcja wyboru sekcji pomocy] \hfill \\
+	Akcja tego typu informuje o wyborze aktywnej sekcji pomocy. Jest ona emitowana po kliknięcu w~jeden z tytułów sekcji w~nawigacji zakładki. Skutkuje ustawieniem właściwości \textit{selectedTab} na konkretną wartość, przekazaną w danych akcji.
+
 	\item[Akcje nawigacji po sekcjach pomocy] \hfill \\
 	Są to akcje przełączenia sekcji pomocy na poprzednią bądź następną. Naturalnie \textit{reducer} reaguje zmianem stanu pola dotyczącego aktywnej sekcji, ustawiając je na wartość poprzednią lub następną względem aktywnej.
-	
-	\item[Akcja zmiany opcji automatycznego włączania pomocy] \hfill \\
-	Akcja ta emitowana jest kiedy gracz włącza lub wyłącza opcję automatycznego otwierania pomocy. \textit{Reducer} zmienia w efekcie wartość pola \textit{autoShowHelp} na~przeciwną w~stosunku do~aktualnej.
+
+	\item[Akcja wyświetlenia dodatkowej informacji] \hfill \\
+	Akcja ta emitowana jest, kiedy pojawia się zadanie nowego typu (dotyczące nowego zagadnienia). Efektem jej wywołania jest ustawienie wartości \textit{true} w~polu~\textit{info} oraz ustawienie odpowiedniej sekcji pomocy.
 	\end{description}
-	
+
 	\subsection{Drzewo plików} \label{DrzewoStan}
-	
+
 	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako części stanu aplikacji. Struktura ta jest rekursywna i~umożliwia dowolne zagnieżdżanie plików w~katalogach. Każdy katalog jest reprezentowany przez obiekt, posiadający nazwę oraz zawartość w~formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, zawierają obowiązkowo nazwę, ale także pola statusu oraz typu zmiany (nie posiadają pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
-	
+
 	Akcje, powodujące tranzycję stanu drzewa plików zostały opisane poniżej.
-	
+
 	\begin{description}
 	\item[Akcja modyfikacji drzewa plików] \hfill \\
 	Akcja ta została przygotowana, aby móc swobodnie operować na drzewie plików. We właściwościach akcji określane są pliki, które zostaną usunięte, zmodyfikowane lub dodane. \textit{Reducer} reaguje operacjami na strukturze reprezentującej drzewo plików dodając, usuwając i~modyfikując odpowiednie węzły.
-	
+
 	\item[Akcja zatwierdzenia poprawnej komendy w konsoli] \hfill \\
 	Pliki w repozytorium zmieniają swoje statusy w~wyniku utworzenia nowej rewizji lub dodania plików do indeksu. W~związku z~faktem, że każdy \textit{reducer} informowany jest o~każdej wyemitowanej akcji, można w łatwy sposób stwierdzić żądanie utworzenia rewizji lub zaindeksowania plików z~poziomu \textit{reducera}. Wystarczy, że~po~otrzymaniu akcji zatwierdzenia w~konsoli poprawnej komendy sprawdzona zostanie składnia tego polecenia. Jeżeli odpowiada ona składni dodawania rewizji lub indeksowania zmian, \textit{reducer} wygeneruje nowy stan, odpowiadający drzewu plików z nowymi statusami. W przeciwnym wypadku zwrócony zostanie niezmieniony stan.
 	\end{description}
-	
+
 	\subsection{Punkty}
-	
+
 	Część stanu dotycząca punktów zawiera informację o aktualnej liczbie punktów zdobytych przez gracza.
-	
-	\textit{Reducer} odpowiedzialny za stan punktów reaguje wygenerowaniem nowego stanu tylko w przypadku jednego typu akcji - akcji emitowanej, gdy ostatni krok zadania został poprawnie wykonany. W~takim przypadku liczony jest najpierw ułamek informujący o~tym, jaka część czasu przeznaczonego na zadanie została wykorzystana. Czas przydzielony do zadania jest liniowo zależny od liczby jego kroków. Następnie na podstawie tego stosunku i~maksymalnej liczby punktów, możliwych do uzyskania za to zadanie, wyliczana jest nagroda punktowa. Ostatnim krokiem jest dodanie otrzymanej nagrody do aktualnego wyniku i~zwrócenie nowego stanu.
-	
+
+	\textit{Reducer} odpowiedzialny za stan punktów reaguje wygenerowaniem nowego stanu tylko w przypadku dwóch typów akcji:
+
+	\begin{description}
+	\item[Akcja wykonania ostatniego kroku zadania] \hfill \\
+	W~takim przypadku liczony jest najpierw ułamek informujący o~tym, jaka część czasu przeznaczonego na zadanie została wykorzystana (czas przydzielony do zadania jest liniowo zależny od liczby jego kroków). Następnie na podstawie tego stosunku i~maksymalnej liczby punktów, możliwych do uzyskania za to zadanie, wyliczana jest nagroda punktowa. Ostatnim krokiem jest dodanie otrzymanej nagrody do aktualnego wyniku i~zwrócenie nowego stanu.
+
+	\item[Akcja zatwierdzenia niepoprawnej komendy] \hfill \\
+	Zgodnie z założeniami, wpisanie niepoprawnej komendy skutkuje przyznaniem punktów ujemnych. Po wywołaniu tej akcji, \textit{reducer} odejmuje określoną liczbę punktów od aktualnej wartości i zwraca nowy stan.
+	\end{description}
+
 	\subsection{Tutorial} \label{TutorialStan}
-	
+
 	Podczas pierwszego uruchomienia aplikacji gracz zostanie zapoznany z~zasadami gry przez wiadomości pojawiające się w~odpowiednich miejscach ekranu. Wyjaśniają one do czego służą poszczególne elementy interfejsu i~tłumaczą jak prawidłowo z~nich korzystać. Każda z takich wiadomości ma swój identyfikator. Stan przechowuje identyfikator aktualnie wyświetlanej wiadomości (lub wartość \textit{undefined}, gdy nie jest wyświetlana żadna wiadomość).
-	
+
 	Zostały przygotowane cztery wiadomości wprowadzające. \textit{Reducer} ma dostęp do tablicy \textit{tutorialsQueue}, w której zapisane są identyfikatory wiadomości zgodnie z~kolejnością ich wyświetlania. \textit{Reducer} generuje nowy stan w przypadku wyemitowania akcji informującej o~zamknięciu wiadomości. Zmienna \textit{current}, określająca aktualnie wyświetlaną wiadomość, zmienia się wtedy na wartość następną w~stosunku do~aktualnej w~tablicy \textit{tutorialsQueue}. W~efekcie akcja zamknięcia wiadomości w~przypadku pierwszych trzech powoduje przełączenie aktualnej wiadomości na~kolejną. Zamknięcie ostatniej wiadomości ustawia wartość zmiennej \textit{current} na~\textit{undefined}, co~oznacza, że~\textit{tutorial} został ukończony.
+
+	\subsection{Konsola}
+
+	Konsola posiada wbudowany mechanizm autouzupełniania, imitujący zachowanie znane z konsoli systemowej. Kluczowa dla działania mechanizmu jest znajomość nazw gałęzi utworzonych w repozytorium. W tym celu utworzono \textit{reducer}, który reaguje na akcję zatwierdzenia poprawnej komendy. Jeżeli komenda ta powoduje utworzenie nowej gałęzi repozytorium, jej nazwa jest zapisywana w tablicy \textit{branches}, w części stanu aplikacji dostępnej pod kluczem \textit{console}. Tablica ta jest później wykorzystywana do stworzenia drzewa autouzupełniania (patrz \ref{KonsolaKomponent}).
+
+	\subsection{Podsumowanie}
+
+Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie punktacji oraz statystyk. Obie wartości są przechowywane w stanie. Aby wyświetlić podsumowanie, potrzebna jest jednak informacja o~zakończeniu rogrywki. W~tym celu wydzielono część stanu dostępną pod kluczem \textit{summary}. Zawiera ona jedną zmienną boolowską \textit{show} informującą o wyświetlaniu lub ukryciu podsumowania. Zaimplementowano również \textit{reducer}, reagujący na wywołanie akcji wykonania ostatniego zadania. Ustawia on wtedy flagę \textit{show} na wartość \textit{true}, co skutkuje wyświetleniem podsumowania.
 
 	\section{Komponenty graficzne}
 
 	\subsection{Wstęp}
 
-	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o \textit{React} i \textit{Redux}. Komponenty takie będą dalej nazywane kontenerami.
+	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o React i Redux. Komponenty takie będziemy nazywać kontenerami.
+
+	\subsection{Komponenty pomocnicze} \label{KomponentyPomocnicze}
+
+	W celu zwiększenia modułowości projektu oraz jednokrotnej implementacji powtarzających się funkcjonalności zaimplementowano trzy komponenty pomocnicze:
+
+	\begin{description}
+	\item[Komponent rozmywający] \hfill \\
+	Niektóre stany aplikacji, jak na przykład wprowadzenie do gry czy korzystanie z zakładki pomocy, wymagają od gracza chwilowego skupienia uwagi na wyszczególnionym elemencie ekranu. W tym celu zaimplementowano pomocniczy komponent \textit{Blur}, służący nałożeniu na wybrany element graficzny filtra rozmywającego. Element docelowy przekazywany jest jako zawartość komponentu \textit{Blur}. Za pomocą właściwości \textit{blur} można określić, czy ma zostać użyty filtr rozmywający, natomiast właściwość \textit{active} określa, czy element ma reagować na zdarzenia myszy.
+
+	\item[Checkbox] \hfill \\
+	Pole symbolizujące wykonanie lub niewykonanie danego kroku jest potrzebne do wyświetlenia listy kroków aktualnego zadania. Komponent przyjmuje trzy parametry wejściowe:
+
+	\begin{itemize}
+		\item textit{value} - zmienna boolowska określająca, czy pole jest zaznaczone,
+		\item textit{active} - zmienna boolowska określająca, czy pole jest aktywne (w prakytce oznacza to użycie jaśniejszego koloru),
+		\item textit{size} - parametr opcjonalny, określający wysokość i szerokość pola.
+	\end{itemize}
+
+	W przyszłości element ten może być wykorzystany również jako pole formularza typu \textit{checkbox}.
+
+	\item[Ładowanie] \hfill \\
+	Podczas rozgrywki istnieją sytuacje, w~których należy zasygnalizować graczowi oczekiwanie na~pewien typ zdarzenia. Przykładem jest stan, w~którym wykonywane są zmiany w~plikach repozytorium, a gracz oczekuje na krok dotyczący dodania zmian do indeksu. W tym celu zaimplementowano komponent \textit{Loader} przedstawiający trzy kropki animowane za pomocą arkuszy \textit{CSS}.
+
+	\item[Licznik] \hfill \\
+	Zmiana aktualnej liczby punktów po wykonaniu ostatniego kroku zadania jest natychmiastowa. Aby zwiększyć atrakcyjność graficzną aplikacji, zdecydowano się na zaimplementowanie animacji płynnej zmiany liczby punktów w~komponencie. W~tym celu zaimplementowano pomocniczy komponent licznika, który w~swoim wewnętrznym stanie przechowuje aktualnie wyświetlaną liczbę. Za~pomocą metody \textit{componentWillReceiveProps} otrzymuje on informację o~zmianie liczby punktów w~stanie aplikacji. Zmiana faktycznie wyświetlanej liczby jest wykonywana co klatkę, interpolując czas, który upłynął od początku animacji na~liczbę punktów. Ostatecznie, po czasie określonym jako czas animacji, wartość jest ustawiana na~docelową.
+
+	\item[Plik] \hfill \\
+	W kilku miejscach aplikacji wymagane jest wyświetlenie obiektu symbolizującego plik repozytorium. Zaimplementowany został komponent, przyjmujący jako parametry nazwę pliku oraz jego status. Dzięki użyciu komponentu, wszystkie obiekty graficzne reprezentujące pliki w aplikacji wyglądają tak samo.
+
+	\end{description}
 
 	\subsection{Tutorial}
-
-	W celu wyświetlenia tutoriala pojawiąjącego się po uruchomieniu aplikacji zaimplementowane zostały dwa komponenty~---~\textit{Tutorial} oraz \textit{TutorialItem}. Pierwszy z~nich z~założenia obejmuje całą treść strony, a~jako parametry wejściowe otrzymuje identyfikator aktualnie wyświetlanej wiadomości tutoriala oraz funkcję, która ma się wykonać po zamknięciu każdej wiadomości. Metoda renderująca tego komponentu obsługuje dwa stany, w zależności od wartości aktywnej wiadomości. 
-	\begin{itemize}
-		\item \textbf{Aktywna wiadomość jest ustawiona}~---~część zawartości komponentu zostanie przepuszczona przez filtr rozmywający (ang. \textit{blur}). Efekt ten osiągnięto przez przypisanie klasy \textit{CSS} modyfikującej właściwość  \textit{filter} wszystkim elementom \textit{DOM} poza tymi, które należy wyróżnić (czyli elementem wiadomości oraz elementem, którego ta wiadomość dotyczy).
-		\item \textbf{Aktywna wiadomość ma wartość \textit{undefined}}~---~żadna wiadomość nie jest wyświetlana, a~komponent renderuje swoją zawartość, nie wpływając w~żaden sposób na jej wygląd (elementy nie są rozmywane).
-	\end{itemize}
-	Komponent \textit{TutorialItem} służy temu, by nie dodawać klasy \textit{CSS} powodującej rozmycie na element którego dotyczy wiadomość. Przyjmuje on jeden parametr wejściowy, określający, czy jego zawartość powinna zostać wyłączona z procesu rozmywania.
+	W celu wyświetlenia wprowadzenia, pojawiąjącego się po uruchomieniu aplikacji, zaimplementowany został kontener \textit{Tutorial}. Korzysta on z właściwości \textit{tutorial.current} stanu aplikacji, określającej aktualnie wyświetlanej wiadomości wprowadzającej. W wydzielonym pliku zostały zdefiniowane cztery wiadomości, każda z nich ma określoną treść i pozycję na ekranie. Jeżeli istnieje wśród nich wiadomość odpowiadająca aktualnej wartości stanu, to zostanie ona wyświetlona przez kontener \textit{Tutorial}.
 
 	\begin{figure}[h]
 		\centering
@@ -558,15 +598,16 @@
 	\end{figure}
 	\FloatBarrier
 
-	\subsection{Kontener aplikacji (App)}
+	\subsection{Kontener aplikacji}
 
 	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za~wyrenderowanie całego widoku aplikacji, wywołuje zatem wszystkie pozostałe komponenty. Cała zawartość kontenera zamknięta jest w~komponencie \textit{Provider}. Jest on dostarczony wraz z biblioteką \textit{Redux}, a~jego użycie jest wymagane dla poprawnego jej działania.
 
-	Kontener ten korzysta z jednej właściwości stanu, mianowicie aktywnej wiadomości tutoriala. Właściwość ta jest przekazywana do komponentu \textit{Tutorial}, aby ten mógł wyświetlić odpowiednią wiadomość pomocniczą. Dodatkowo kontener aplikacji może emitować akcję wyłączenia wiadomości tutoriala (patrz: \ref{TutorialStan}). Metoda emitująca tę akcję jest przekazana do komponentu \textit{Tutorial}, aby umożliwić wyświetlanie kolejnych wiadomości. Jako zawartość komponentu \textit{Tutorial} przekazane są instancje wszystkich głównych komponentów gry, które zostały opisane w kolejnych podrodziałach.
+	Kontener \textit{App} nie tylko wywołuje pozostałe komponenty, ale również zarządza nakładaniem na nie filtra rozmywającego (korzystając z komponentu pomocniczego \textit{Blur}). Jest to możliwe dzięki połączeniu kontenera z właściwościami stanu dotyczącymi wprowadzenia, zakładki pomocy oraz podsumowania i przekazania odpowiednich parametrów wejściowych do instancji komponentu \textit{Blur}.
 
-	\subsection{Lista zadań}
+	\subsection{Aktualne zadanie}
 
-	Lista zadań jest kontenerem korzystającym z dwóch właściwości stanu~---~zadań oraz tutoriala. Rolą tego kontenera jest wyświetlanie aktualnego zadania, wraz ze~wszystkimi jego krokami. W~tym celu zdefiniowano komponent pomocniczy \textit{Task}, umożliwiający wyświetlenie konkretnego zadania. Kontener listy zadań wyświetla zatem kolekcję zadań dostępną w~stanie, mapując każde z~nich na~wywołanie komponentu \textit{Task}. Dodatkowo wykorzystany został tutaj komponent pomocniczy, napisany przez twórców biblioteki \textit{React}, a~mianowicie \textit{ReactCSSTransitionGroup}. Dzięki umieszczeniu kolekcji elementów (w~tym przypadku komponentów \textit{Task}) w~komponencie \textit{ReactCSSTransitionGroup} możliwe jest zdefiniowanie animacji wejścia i~wyjścia elementu z~kolekcji przy pomocy arkuszy stylów \textit{CSS}.
+	Aktualne zadanie (\textit{CurrentTask}) jest kontenerem korzystającym z części stanu aplikacji dotyczącej zadań. Jego rolą jest wyświetlanie aktualnego zadania, wraz ze~wszystkimi jego krokami. W pierwszej kolejności komponent pobiera z listy zadań aktualne zadanie. Przy pomocy komponentu pomocniczego \textit{Panel}, wyświetlany jest tytuł i opis zadania. Lista kroków korzysta natomiast z komponentu pomocniczego \textit{Checkbox}.
+W~tym celu zdefiniowano komponent pomocniczy \textit{Task}, umożliwiający wyświetlenie konkretnego zadania. Kontener listy zadań wyświetla zatem kolekcję zadań dostępną w~stanie, mapując każde z~nich na~wywołanie komponentu \textit{Task}. Dodatkowo wykorzystany został tutaj komponent pomocniczy, napisany przez twórców biblioteki \textit{React}, a~mianowicie \textit{ReactCSSTransitionGroup}. Dzięki umieszczeniu kolekcji elementów (w~tym przypadku komponentów \textit{Task}) w~komponencie \textit{ReactCSSTransitionGroup} możliwe jest zdefiniowanie animacji wejścia i~wyjścia elementu z~kolekcji przy pomocy arkuszy stylów \textit{CSS}.
 
 	\begin{figure}[h]
 		\centering
@@ -575,7 +616,7 @@
 		\label{fig:task-list}
 	\end{figure}
 
-	\subsection{Konsola}
+	\subsection{Konsola} \label{KonsolaKomponent}
 
 	Konsola jest komponentem przyjmującym na wejściu cztery parametry. Pierwszy z~nich (\textit{enabled}) daje możliwość zablokowania konsoli, np.~w~przypadku, gdy tutorial nie został jeszcze ukończony. Kolejne dwa parametry (\textit{files}, \textit{branches}) to tablice wartości tekstowych, z~nazwami istniejących w~repozytorium plików oraz gałęzi. Nazwy te są potrzebne do działania funkcji autouzupełniania, znanej z~konsolowej wersji programu Git. Ostatni argument (\textit{onCommandEnter}) jest funkcją, która będzie wywołana, kiedy w~konsoli zostanie zatwierdzona komenda.
 
@@ -596,15 +637,16 @@
 
 	Generowanie drzewa podpowiedzi jest stosunkowo kosztowną operacją, dlatego wykonywana jest ona tylko jeżeli zmieniła się lista plików lub gałęzi. Przeszukiwanie odbywa się za~każdym razem, gdy~podczas używania konsoli wciśnięty zostanie klawisz tabulacji.
 
-	\subsection{Pomoc (HelpDrawer)}
+	\subsection{Pomoc}
 
-	Zakładka pomocy jest kontenerem zawierającym komponent konsoli oraz treść materiałów dydaktycznych i~wskazówek przydatnych podczas rozwiązywania zadań. Kontener korzysta z~trzech właściwości stanu aplikacji:
+	Zakładka pomocy jest kontenerem zawierającym komponent konsoli oraz treść materiałów dydaktycznych i~wskazówek przydatnych podczas rozwiązywania zadań. Kontener korzysta z~czterech właściwości stanu aplikacji:
 	\begin{itemize}
 		\item drzewa plików - potrzebnego do przekazania listy istniejących w~repozytorium plików do komponentu konsoli,
 		\item aktywnej wiadomości tutoriala - wymaganej do uniemożliwienia interakcji z~konsolą do czasu zakończenia tutoriala,
-		\item stanu zakładki pomocy - służącej do odpowiedniego wystylizowania zakładki w zależności od tego, czy jest otwarta, czy zamknięta.
+		\item stanu zakładki pomocy - służącej do odpowiedniego wystylizowania zakładki w zależności od tego, czy jest otwarta, czy zamknięta,
+		\item stanu konsoli - w celu przekazania do komponentu konsoli listy gałęzi repozytorium.
 	\end{itemize}
-	  Gdy zakładka jest otwarta, wysuwa się z dolnej części ekranu. Efekt ten został osiągnięty przez animowanie właściwości \textit{translateY} elementu, które jest wysoce wydajne, ponieważ jest wykonywane na~karcie graficznej (w~odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt). 
+	  Gdy zakładka jest otwarta, wysuwa się z dolnej części ekranu. Efekt ten został osiągnięty przez animowanie właściwości \textit{translateY} elementu, które jest wysoce wydajne, ponieważ jest wykonywane na~karcie graficznej (w~odróżnieniu od właściwości takich jak \textit{top}, czy \textit{margin-top}, które pozwalałyby osiągnąć podobny efekt).
 
 	  \begin{figure}[h]
 	  	\centering
@@ -619,7 +661,7 @@
 
 	Kontener drzewa plików jest odpowiedzialny za wyświetlenie informacji o~strukturze katalogu roboczego, w~którym znajduje się repozytorium. Korzysta on z~części stanu dotyczącej drzewa plików.
 
-	Zaimplementowana została pomocnicza funkcja renderująca \textit{renderRecursively}, umożliwiająca wyświetlenie plików na~dowolnym poziomie zagnieżdżenia. W~jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze~stanu. Ma~ono strukturę tablicy (patrz:~\ref{DrzewoStan}). Dla każdego z~elementów funkcja sprawdza czy jest on plikiem, czy katalogiem. Jeżeli jest to~plik, to~zwrócony zostaje pomocniczy komponent pliku (odpowiedzialny za dodanie odpowiedniej ikony oraz koloru, w~zależności od~statusu pliku). W~przypadku katalogu zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, a~zawartość folderu wyświetlana jest poprzez rekursywne wywołanie funkcji \textit{renderRecursively}.
+	Zaimplementowana została pomocnicza funkcja renderująca \textit{renderRecursively}, umożliwiająca wyświetlenie plików na~dowolnym poziomie zagnieżdżenia. W~jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze~stanu. Ma~ono strukturę tablicy (patrz:~\ref{DrzewoStan}). Dla każdego z~elementów funkcja sprawdza czy jest on plikiem, czy katalogiem. Jeżeli jest to~plik, to~zwrócony zostaje pomocniczy komponent pliku (patrz \ref{KomponentyPomocnicze}). W~przypadku katalogu zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, a~zawartość folderu wyświetlana jest poprzez rekursywne wywołanie funkcji \textit{renderRecursively}. Dodatkowo, katalogi w których nie ma plików o statusie innym niż "\textit{niezmodyfikowany}" są zwijane, aby ograniczyć wysokość komponentu.
 
 	\begin{figure}[h]
 		\centering
@@ -630,6 +672,12 @@
 
 	Poziom zagnieżdżenia plików został przedstawiony za pomocą łączących je linii oraz odpowiednich wcięć z~lewej strony.
 	\FloatBarrier
+
+	\subsection{Czas, punkty, postęp}
+
+	Zaimplementowano zbiorczy kontener wyświetlający komponenty w~górnej części widoku. Do wyświetlenia aktualnej liczby punktów posłużono się komponentem pomocniczym \textit{Counter} (patrz: \ref{KomponentyPomocnicze}). Przy pomocy dynamicznie generowanego elementu \textit{SVG}, udało się stworzyć linie postępu, symbolizujące wykonaną część aktualnego zadania. Podobnie jak w przypadku komponentu licznika, aktualnie wyświetlana wartość postępu jest przechowywana w wewnętrznym stanie komponentu~i~animowana przy pomocy funkcji \textit{requestAnimationFrame} udostępnianej przez przeglądarkę.
+
+	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wyszarzają się z upływem czasu (prędkość wyszarzania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
 
 	\subsection{Canvas}
 
