@@ -19,11 +19,7 @@ export const tree = {
   title: 'And finally - directory tree on the right',
   template: <div><p>You can see the state of your project's files here.
     Take a look at the explaination for colors and icons below:</p>
-    <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0 20px' }}>
-      <b style={{ marginRight: '7px' }}>unmodified file</b>
-      <File name='file.txt' status='unmodified' />
-    </div>
-    <table>
+    <table style={{ margin: '0 auto' }}>
       <tr>
         <th />
         <th>added</th>
@@ -41,6 +37,10 @@ export const tree = {
         <td><File name='file.txt' status='staged' changeType='added' /></td>
         <td><File name='file.txt' status='staged' changeType='modified' /></td>
         <td><File name='file.txt' status='staged' changeType='removed' /></td>
+      </tr>
+      <tr>
+        <th style={{ paddingTop: '20px' }}>unmodified file</th>
+        <td colSpan='3' style={{ paddingTop: '20px' }}><File name='file.txt' status='unmodified' /></td>
       </tr>
     </table>
   </div>,
