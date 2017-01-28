@@ -4,6 +4,7 @@ import Repo3D from './Repo3D';
 import Camera from './Camera';
 import Ground from './objects/Ground';
 import VignettePostProcess from './postProcesses/VignettePostProcess';
+import LensPostProcess from './postProcesses/LensPostProcess';
 
 const config = {
   antialiasing: true
@@ -19,6 +20,7 @@ class Engine3D extends BABYLON.Engine {
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
     this.ground = new Ground(this.camera, this.scene);
+    this.flares = new LensPostProcess(this);
     this.vignette = new VignettePostProcess(this);
     if (config.antialiasing) {
       this.fxaaAntialiasing = new BABYLON.FxaaPostProcess('fxaa', 1.0, this.camera, null, this, true);
