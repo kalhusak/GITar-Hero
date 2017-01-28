@@ -681,7 +681,9 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wygaszają się z upływem czasu (prędkość wygaszania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
 	
-	\subsection{•}
+	\subsection{Podsumowanie}
+	
+	Podsumowanie jest kontenerem mającym za zadanie wyświetlić wiadomość końcową po wykonaniu przez gracza ostatniego zadania. Pobiera on ze stanu aplikacji informacje o aktualnej liczbie punktów oraz statystyki dotyczące poprawności wpisywanych komend. Wiadomość wyświetlana jest przy pomocy komponentu \textit{Panel}. Statystyki są pokazywane w formie tabeli, dzięki czemu gracz może zobaczyć jak radził sobie z konkretnymi zagadnieniami.
 
 	\subsection{Canvas}
 
