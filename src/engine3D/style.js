@@ -44,11 +44,20 @@ export const ground = {
   texture: 'codeTexture.png'
 };
 
+// all from 0.0 to 1.0
+export const vignette = {
+  innerRing: 0.6,
+  outerRing: 1.0,
+  power: 1.0,
+  showConfiguration: false
+};
+
 export default {
   scene,
   outline,
   branch,
   ground,
   commit,
-  tag
+  tag,
+  vignette
 };
