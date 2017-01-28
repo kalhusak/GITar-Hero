@@ -40,7 +40,8 @@
               "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -66,6 +67,7 @@
               "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -109,6 +111,7 @@
               "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -145,7 +148,8 @@
               "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -171,6 +175,7 @@
               "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -197,6 +202,7 @@
               "git checkout -b \"release/0.1.0\""
             ],
             "tags": [
+              "branch",
               "checkout",
               "gitflow/release"
             ],
@@ -306,7 +312,8 @@
               "git merge \"release/0.1.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -369,6 +376,7 @@
               "git push -u origin master"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -404,7 +412,8 @@
               "git merge \"release/0.1.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -428,6 +437,7 @@
               "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -454,7 +464,9 @@
               "git checkout -b \"feature/dialog\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -509,6 +521,7 @@
               "git push -u origin feature/dialog"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -535,8 +548,7 @@
               "git checkout \"master\""
             ],
             "tags": [
-              "checkout",
-              "gitflow/hotfix"
+              "checkout"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -559,7 +571,9 @@
               "git checkout -b \"hotfix/title-margin\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/hotfix"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -651,6 +665,7 @@
               "git merge \"hotfix/title-margin\" --no-ff"
             ],
             "tags": [
+              "gitflow/hotfix",
               "merge"
             ],
             "type": "MERGE",
@@ -683,6 +698,7 @@
               "git push"
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1094,7 +1110,8 @@
               "git merge \"feature/menu\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1134,7 +1151,9 @@
               "git checkout -b \"feature/header\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -1270,7 +1289,8 @@
               "git merge \"feature/header\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1415,7 +1435,8 @@
               "git merge \"feature/header\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1463,7 +1484,8 @@
               "git pull \"origin\" \"develop\""
             ],
             "tags": [
-              "pull"
+              "pull",
+              "remote repos"
             ],
             "type": "PULL",
             "data": {
@@ -1479,6 +1501,7 @@
               "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1505,7 +1528,9 @@
               "git checkout -b \"feature/content\""
             ],
             "tags": [
-              "checkout"
+              "branch",
+              "checkout",
+              "gitflow/feature"
             ],
             "type": "CHECKOUT",
             "data": {
@@ -1635,6 +1660,7 @@
               "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -1665,7 +1691,8 @@
               "git merge \"feature/content\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -1688,6 +1715,7 @@
               "git push -u \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1737,6 +1765,7 @@
               "git merge \"hotfix/title-margin\" --no-ff"
             ],
             "tags": [
+              "gitflow/hotfix",
               "merge"
             ],
             "type": "MERGE",
@@ -1761,6 +1790,7 @@
               "git pull \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -1790,6 +1820,7 @@
               "git push \"origin\" \"develop\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -1816,6 +1847,7 @@
               "git checkout -b \"release/0.2.0\""
             ],
             "tags": [
+              "branch",
               "checkout",
               "gitflow/release"
             ],
@@ -1895,7 +1927,8 @@
               "git merge \"release/0.2.0\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/release"
             ],
             "type": "MERGE",
             "data": {
@@ -1950,6 +1983,7 @@
               "git push \"origin\" \"master\""
             ],
             "tags": [
+              "remote repos",
               "push"
             ],
             "type": "PUSH"
@@ -2005,6 +2039,7 @@
               "git pull \"origin\" \"feature/dialog\""
             ],
             "tags": [
+              "remote repos",
               "pull"
             ],
             "type": "PULL",
@@ -2084,7 +2119,8 @@
               "git merge \"feature/dialog\" --no-ff"
             ],
             "tags": [
-              "merge"
+              "merge",
+              "gitflow/feature"
             ],
             "type": "MERGE",
             "data": {
@@ -2195,7 +2231,7 @@
       ],
       "task": {
         "title": "Update project description",
-        "description": "You realized that you should be update some files with more suitable project description and version number. Modify it and than make a commit.",
+        "description": "You realized that you should update some files with more suitable project description and version number. Modify it and than make a commit.",
         "steps": [
           {
             "description": "You have made necessary updates, it is time to stage all files",
