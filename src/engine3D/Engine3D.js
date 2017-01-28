@@ -3,6 +3,7 @@ import Scene from './Scene';
 import Repo3D from './Repo3D';
 import Camera from './Camera';
 import Ground from './objects/Ground';
+import VignettePostProcess from './postProcesses/VignettePostProcess';
 
 const config = {
   antialiasing: true
@@ -10,7 +11,7 @@ const config = {
 
 class Engine3D extends BABYLON.Engine {
   constructor (canvas) {
-    super(canvas, config.antialiasing);
+    super(canvas, false);
     this.onNewValidCommand = ::this.onNewValidCommand;
     this.onNewInvalidCommand = ::this.onNewInvalidCommand;
     this.renderLoop = ::this.renderLoop;
@@ -18,6 +19,10 @@ class Engine3D extends BABYLON.Engine {
     this.repo3D = new Repo3D(this.scene);
     this.camera = new Camera(this.repo3D.HEAD, canvas, this.scene);
     this.ground = new Ground(this.camera, this.scene);
+    this.vignette = new VignettePostProcess(this);
+    if (config.antialiasing) {
+      this.fxaaAntialiasing = new BABYLON.FxaaPostProcess('fxaa', 1.0, this.camera, null, this, true);
+    }
     this.renderLoop();
   }
 
