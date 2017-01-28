@@ -469,7 +469,7 @@
 
 	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w~których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
 
-	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużyliśmy się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
+	Zgodnie z wytycznymi twórców biblioteki \textit{Redux}, obiekt nowego stanu nie może być zmodyfikowanym obiektem poprzedniego stanu (stan powinien być stały i~nie podlegać mutacjom). Aby uzyskać taki efekt, posłużono się funkcją \textit{cloneDeep} z~pakietu \textit{lodash}, będącego zestawem pomocniczych funkcji służących do operacji na strukturach danych w JavaScript. Funkcja ta przyjmuje na wejściu obiekt, a~zwraca jego głęboką kopię. Jeżeli zatem stan wymaga tranzycji, to najpierw generowana jest jego głęboka kopia, a następnie jest modyfikowana i~zwracana jako nowy stan.
 
 	\subsection{Zadania}
 
@@ -500,13 +500,13 @@
 	Wywoływana przez kliknięcie poza zakładką pomocy, kliknięcie w konsolę, wciśnięcie klawisza \textit{ESC} lub wciśnięcie klawisza \textit{Enter}. \textit{Reducer} otrzymując akcję tego typu ustawia pole~\textit{isOpen} na wartość~\textit{false}, co~skutkuje zamknięciem pomocy.
 
 	\item[Akcja wyboru sekcji pomocy] \hfill \\
-	Akcja tego typu informuje o wyborze aktywnej sekcji pomocy. Jest ona emitowana po kliknięcu w~jeden z tytułów sekcji w~nawigacji zakładki. Skutkuje ustawieniem właściwości \textit{selectedTab} na konkretną wartość, przekazaną w danych akcji.
+	Akcja tego typu informuje o wyborze aktywnej sekcji pomocy. Jest ona emitowana po kliknięciu w~jeden z tytułów sekcji w~nawigacji zakładki. Skutkuje ustawieniem właściwości \textit{selectedTab} na konkretną wartość, przekazaną w danych akcji.
 
 	\item[Akcje nawigacji po sekcjach pomocy] \hfill \\
-	Są to akcje przełączenia sekcji pomocy na poprzednią bądź następną. Naturalnie \textit{reducer} reaguje zmianem stanu pola dotyczącego aktywnej sekcji, ustawiając je na wartość poprzednią lub następną względem aktywnej.
+	Są to akcje przełączenia sekcji pomocy na poprzednią bądź następną. Naturalnie \textit{reducer} reaguje zmianą stanu pola dotyczącego aktywnej sekcji, ustawiając je na wartość poprzednią lub następną względem bieżącej.
 
 	\item[Akcja wyświetlenia dodatkowej informacji] \hfill \\
-	Akcja ta emitowana jest, kiedy pojawia się zadanie nowego typu (dotyczące nowego zagadnienia). Efektem jej wywołania jest ustawienie wartości \textit{true} w~polu~\textit{info} oraz ustawienie odpowiedniej sekcji pomocy.
+	Akcja ta emitowana jest kiedy pojawia się zadanie nowego typu (dotyczące nowego zagadnienia). Efektem jej wywołania jest ustawienie wartości \textit{true} w~polu~\textit{info} oraz ustawienie odpowiedniej sekcji pomocy.
 	\end{description}
 
 	\subsection{Drzewo plików} \label{DrzewoStan}
@@ -549,17 +549,17 @@
 
 	\subsection{Podsumowanie}
 
-Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie punktacji oraz statystyk. Obie wartości są przechowywane w stanie. Aby wyświetlić podsumowanie, potrzebna jest jednak informacja o~zakończeniu rogrywki. W~tym celu wydzielono część stanu dostępną pod kluczem \textit{summary}. Zawiera ona jedną zmienną boolowską \textit{show} informującą o wyświetlaniu lub ukryciu podsumowania. Zaimplementowano również \textit{reducer}, reagujący na wywołanie akcji wykonania ostatniego zadania. Ustawia on wtedy flagę \textit{show} na wartość \textit{true}, co skutkuje wyświetleniem podsumowania.
+Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie punktacji oraz statystyk. Obie wartości są przechowywane w stanie. Aby wyświetlić podsumowanie, potrzebna jest jednak informacja o~zakończeniu rozgrywki. W~tym celu wydzielono część stanu dostępną pod kluczem \textit{summary}. Zawiera ona jedną zmienną boolowską \textit{show} informującą o wyświetlaniu lub ukryciu podsumowania. Zaimplementowano również \textit{reducer}, reagujący na wywołanie akcji wykonania ostatniego zadania. Ustawia on wtedy flagę \textit{show} na wartość \textit{true}, co skutkuje wyświetleniem podsumowania.
 
 	\section{Komponenty graficzne}
 
 	\subsection{Wstęp}
 
-	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o React i Redux. Komponenty takie będziemy nazywać kontenerami.
+	Do połączenia komponentów interfejsu ze stanem aplikacji wykorzystano specjalny komponent \textit{Connect}, przygotowany przez twórców biblioteki \textit{Redux}. Pozwala on na~przekazanie konkretnych właściwości stanu do komponentu użytkownika. W celu strukturyzacji projektu zdecydowano się wydzielić komponenty połączone ze stanem do osobnego katalogu. Jest to praktyka popularna wśród twórców aplikacji opartych o \textit{React} i \textit{Redux}. Komponenty takie będą dalej nazywane kontenerami.
 
 	\subsection{Komponenty pomocnicze} \label{KomponentyPomocnicze}
 
-	W celu zwiększenia modułowości projektu oraz jednokrotnej implementacji powtarzających się funkcjonalności zaimplementowano trzy komponenty pomocnicze:
+	W celu zwiększenia modułowości projektu oraz jednokrotnej implementacji powtarzających się funkcjonalności zaimplementowano pięć komponentów pomocniczych, które zostały opisane poniżej.
 
 	\begin{description}
 	\item[Komponent rozmywający] \hfill \\
@@ -580,7 +580,7 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 	Podczas rozgrywki istnieją sytuacje, w~których należy zasygnalizować graczowi oczekiwanie na~pewien typ zdarzenia. Przykładem jest stan, w~którym wykonywane są zmiany w~plikach repozytorium, a gracz oczekuje na krok dotyczący dodania zmian do indeksu. W tym celu zaimplementowano komponent \textit{Loader} przedstawiający trzy kropki animowane za pomocą arkuszy \textit{CSS}.
 
 	\item[Licznik] \hfill \\
-	Zmiana aktualnej liczby punktów po wykonaniu ostatniego kroku zadania jest natychmiastowa. Aby zwiększyć atrakcyjność graficzną aplikacji, zdecydowano się na zaimplementowanie animacji płynnej zmiany liczby punktów w~komponencie. W~tym celu zaimplementowano pomocniczy komponent licznika, który w~swoim wewnętrznym stanie przechowuje aktualnie wyświetlaną liczbę. Za~pomocą metody \textit{componentWillReceiveProps} otrzymuje on informację o~zmianie liczby punktów w~stanie aplikacji. Zmiana faktycznie wyświetlanej liczby jest wykonywana co klatkę, interpolując czas, który upłynął od początku animacji na~liczbę punktów. Ostatecznie, po czasie określonym jako czas animacji, wartość jest ustawiana na~docelową.
+	Zmiana aktualnej liczby punktów po wykonaniu ostatniego kroku zadania jest natychmiastowa. Aby zwiększyć atrakcyjność graficzną aplikacji, zdecydowano się na dodanie animacji płynnej zmiany liczby punktów w~komponencie. W~tym celu zaimplementowano pomocniczy komponent licznika, który w~swoim wewnętrznym stanie przechowuje aktualnie wyświetlaną liczbę. Za~pomocą metody \textit{componentWillReceiveProps} otrzymuje on informację o~zmianie liczby punktów w~stanie aplikacji. Zmiana faktycznie wyświetlanej liczby jest wykonywana co klatkę, interpolując czas, który upłynął od początku animacji na~liczbę punktów. Ostatecznie, po czasie określonym jako czas animacji, wartość jest ustawiana na~docelową.
 
 	\item[Plik] \hfill \\
 	W kilku miejscach aplikacji wymagane jest wyświetlenie obiektu symbolizującego plik repozytorium. Zaimplementowany został komponent, przyjmujący jako parametry nazwę pliku oraz jego status. Dzięki użyciu komponentu, wszystkie obiekty graficzne reprezentujące pliki w aplikacji wyglądają tak samo.
@@ -588,7 +588,7 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 	\end{description}
 
 	\subsection{Tutorial}
-	W celu wyświetlenia wprowadzenia, pojawiąjącego się po uruchomieniu aplikacji, zaimplementowany został kontener \textit{Tutorial}. Korzysta on z właściwości \textit{tutorial.current} stanu aplikacji, określającej aktualnie wyświetlanej wiadomości wprowadzającej. W wydzielonym pliku zostały zdefiniowane cztery wiadomości, każda z nich ma określoną treść i pozycję na ekranie. Jeżeli istnieje wśród nich wiadomość odpowiadająca aktualnej wartości stanu, to zostanie ona wyświetlona przez kontener \textit{Tutorial}.
+	W celu wyświetlenia wprowadzenia, pojawiającego się po uruchomieniu aplikacji, zaimplementowany został kontener \textit{Tutorial}. Korzysta on z właściwości \textit{tutorial.current} stanu aplikacji, określającej aktualnie wyświetlaną wiadomość wprowadzającą. W wydzielonym pliku zostały zdefiniowane cztery wiadomości, każda z nich ma określoną treść i pozycję na ekranie. Jeżeli istnieje wśród nich wiadomość odpowiadająca aktualnej wartości stanu, to zostanie ona wyświetlona przez kontener \textit{Tutorial}.
 
 	\begin{figure}[h]
 		\centering
@@ -602,7 +602,7 @@ Zgodnie z~założeniami projektu, gracz może ocenić swój postęp na~podstawie
 
 	Kontener aplikacji (\textit{App}) stanowi korzeń drzewa komponentów interfejsu graficznego. Oznacza to, że jest on odpowiedzialny za~wyrenderowanie całego widoku aplikacji, wywołuje zatem wszystkie pozostałe komponenty. Cała zawartość kontenera zamknięta jest w~komponencie \textit{Provider}. Jest on dostarczony wraz z biblioteką \textit{Redux}, a~jego użycie jest wymagane dla poprawnego jej działania.
 
-	Kontener \textit{App} nie tylko wywołuje pozostałe komponenty, ale również zarządza nakładaniem na nie filtra rozmywającego (korzystając z komponentu pomocniczego \textit{Blur}). Jest to możliwe dzięki połączeniu kontenera z właściwościami stanu dotyczącymi wprowadzenia, zakładki pomocy oraz podsumowania i przekazania odpowiednich parametrów wejściowych do instancji komponentu \textit{Blur}.
+	Kontener \textit{App} nie tylko wywołuje pozostałe komponenty, ale również zarządza nakładaniem na nie filtra rozmywającego (korzystając z komponentu pomocniczego \textit{Blur}). Jest to możliwe dzięki połączeniu kontenera z właściwościami stanu dotyczącymi wprowadzenia, zakładki pomocy oraz podsumowania i przekazaniu odpowiednich parametrów wejściowych do instancji komponentu \textit{Blur}.
 
 	\subsection{Aktualne zadanie}
 
@@ -675,9 +675,9 @@ W~tym celu zdefiniowano komponent pomocniczy \textit{Task}, umożliwiający wyś
 
 	\subsection{Czas, punkty, postęp}
 
-	Zaimplementowano zbiorczy kontener wyświetlający komponenty w~górnej części widoku. Do wyświetlenia aktualnej liczby punktów posłużono się komponentem pomocniczym \textit{Counter} (patrz: \ref{KomponentyPomocnicze}). Przy pomocy dynamicznie generowanego elementu \textit{SVG}, udało się stworzyć linie postępu, symbolizujące wykonaną część aktualnego zadania. Podobnie jak w przypadku komponentu licznika, aktualnie wyświetlana wartość postępu jest przechowywana w wewnętrznym stanie komponentu~i~animowana przy pomocy funkcji \textit{requestAnimationFrame} udostępnianej przez przeglądarkę.
+	Zaimplementowano zbiorczy kontener wyświetlający komponenty w~górnej części widoku. Do wyświetlenia aktualnej liczby punktów posłużono się komponentem pomocniczym \textit{Licznik} (patrz: \ref{KomponentyPomocnicze}). Przy pomocy dynamicznie generowanego elementu \textit{SVG}, udało się stworzyć linie postępu, symbolizujące wykonaną część aktualnego zadania. Podobnie jak w przypadku komponentu licznika, aktualnie wyświetlana wartość postępu jest przechowywana w wewnętrznym stanie komponentu~i~animowana przy pomocy funkcji \textit{requestAnimationFrame} udostępnianej przez przeglądarkę.
 
-	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wyszarzają się z upływem czasu (prędkość wyszarzania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
+	Podobnie, wykorzystując element \textit{SVG}, renderowany jest element przypominający prędkościomierz. Reprezentuje on czas przeznaczony na wykonanie zadania. Dynamiczne generowanie elementu pozwala na ustawienie konkretnego koloru dla wybranych linii wartości. Wszystkie linie podświetlają się, gdy pojawia się nowe zadanie i wygaszają się z upływem czasu (prędkość wygaszania zależy od czasu przeznaczonego na zadanie). Ponieważ stan linii wartości zmienia się maksymalnie kilka razy w~ciągu sekundy, nie ma potrzeby użycia funkcji \textit{requestAnimationFrame} i aktualizowania komponentu w każdej klatce. Zamiast tego została użyta funkcja \textit{setInterval}, aktualizująca element w~drzewie \textit{DOM} dziesięć razy na~sekundę.
 
 	\subsection{Canvas}
 
