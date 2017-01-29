@@ -27,14 +27,12 @@ class Engine3D extends BABYLON.Engine {
   }
 
   renderLoop () {
-    let scene = this.scene;
-    let engine = this;
-    this.runRenderLoop(function () {
-      var currentTime = new Date().getTime();
-      scene.elapsedTime = currentTime - scene.lastTime;
-      document.getElementById('fps').innerHTML = engine.getFps().toFixed();
-      scene.render();
-      scene.lastTime = currentTime;
+    this.runRenderLoop(() => {
+      let currentTime = new Date().getTime();
+      this.scene.elapsedTime = currentTime - this.scene.lastTime;
+      // document.getElementById('fps').innerHTML = engine.getFps().toFixed();
+      this.scene.render();
+      this.scene.lastTime = currentTime;
     });
   }
 
