@@ -10,7 +10,8 @@ class CommandResolver {
     return [
       /^git commit -m ".*"\s*$/,
       /^git branch \S*\s*/,
-      /^git checkout (-b)? \S*\s*/
+      /^git checkout (-b)? \S*\s*/,
+      /^git remote add origin/
     ].some(exp => exp.test(str1) && exp.test(str2));
   };
 
