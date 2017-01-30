@@ -22,10 +22,10 @@
 
 \begin{document}
 
-	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magalena Łątkowska}
-	\title{Internetowa gra edukacyjna ucząca podstaw pracy~z~programem~git}
+	\author{Tymoteusz Bleja \and Paweł Husak \and Patryk Imosa \and Magdalena Łątkowska \and }
+	\title{Internetowa gra edukacyjna ucząca podstaw pracy~z~programem~Git}
 	\subtitle{Praca inżynierska}
-	\supervisor{dr~hab.~inż.~Marek Andrzej Wojciechowski}
+	\supervisor{dr~hab.~inż.~Marek Wojciechowski}
 	\date{Poznań, 2017}
 	\maketitle
 	\frontmatter
@@ -44,9 +44,9 @@
 	
 	Istotnym aspektem było połączenie nauki z zabawą, aby możliwie jak najbardziej zachęcić i~zaciekawić użytkownika. Zdecydowano się zastosować elementy gamifikacji, takie jak punkty za~realizowane zadania, zwiększające zaangażowanie gracza. Dodatkowo, aby~uatrakcyjnić grę, postanowiono wykorzystać grafikę 3D. Celem było stworzenie samouczka działającego w~przeglądarce, niewymagającego podczas rozgrywki komunikacji z~serwerem.
 
-	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśnione zostały podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
+	Praca podzielona została na kilka rozdziałów. W rozdziale \ref{Teoria} przedstawiono zagadnienia dotyczące systemów kontroli wersji, a~w~szczególności opisany został system Git. Wyjaśniono podstawowe pojęcia związane z~jego działaniem. Zaprezentowano także popularną metodykę pracy z~wykorzystaniem tego systemu, nazywaną Gitflow. Rozdział~\ref{Projekt} zawiera krótki opis projektu samouczka GITar-Hero oraz przykładowy przebieg rozgrywki. Określone są~pojęcia i~terminy z~zakresu korzystania z~programu Git, których będzie uczyła gra. Rozdział~\ref{Implementacja} poświęcony został implementacji samouczka. Na~samym początku zaprezentowano wykorzystane technologie. W~kolejnym podrozdziale przedstawiono strukturę scenariusza zadań i~narzędzie służące do~definiowania go. Następna część dotyczy konstrukcji aplikacji. Opisane zostały poszczególne komponenty. W ostatnim podrozdziale wyjaśniono zasady działania elementów grafiki~3D. W rozdziale \ref{Podsumowanie} podsumowano efekty pracy i przedstawiono dalsze plany dotyczące rozwoju aplikacji.
 
-	Za przygotowanie merytoryczne, dotyczące systemu Git, odpowiedzialna była Magdalena Łątkowska. Przygotowała treść dydaktyczną dostępną w pomocy oraz zadania pojawiające się w trakcie rozgrywki. Stworzyła także mechanizm wybierania kolejnego zadania na podstawie umiejętności użytkownika i wpisywanych przez niego poleceń. Narzędzie TaskCreator służące do generowania grafu zadań przygotował Paweł Husak. Razem z Patrykiem Imosą opracował system zadań, rozumiany jako pobieranie ich z grafu i właściwe przetwarzanie przez aplikację. Zaimplementowali także kompletny kontroler do grafiki 3D reagujący na wprowadzone komendy poprzez tworzenie, rozmieszczanie i animowanie obiektów reprezentujących repozytorium. Wspólnie dostosowali działanie kamery śledzącej. Możliwość oddalania kamery oraz lecący w tle kod przygotował Paweł Husak. Zaimplementował także przetwarzanie końcowe (ang. \textit{post-processing}), zapewniające efekt winietowania. Patryk Imosa dodał napisy widniejące nad niektórymi elementami 3D oraz animację eksplozji rewizji. Poruszający się w tle drobny pył zaimplementowała Magdalena Łątkowska. Tymoteusz Bleja był odpowiedzialny głównie za komponenty graficzne oraz dotyczące ich części stanu aplikacji, akcje oraz funkcje tranzycji stanu. Zaimplementował komponent konsoli, licznika czasu, linii postępu, zakładki pomocy, licznika punktów, drzewa plików oraz aktualnego zadania. Utworzył również niezbędne struktury danych i funkcje pomocnicze, służące poprawnemu działaniu powyższych komponentów. Magdalena Łątkowska zaimplementowała podsumowanie zawierające statystyki, pojawiające się na koniec gry, wraz z potrzebną funkcją tranzycji stanu.
+	Za przygotowanie merytoryczne, dotyczące systemu Git, odpowiedzialna była Magdalena Łątkowska. Przygotowała treść dydaktyczną dostępną w pomocy oraz zadania pojawiające się w trakcie rozgrywki. Stworzyła także mechanizm wybierania kolejnego zadania na podstawie umiejętności użytkownika i wpisywanych przez niego poleceń. Narzędzie TaskCreator służące do generowania grafu zadań przygotował Paweł Husak. Razem z Patrykiem Imosa opracował system zadań, rozumiany jako pobieranie ich z grafu i właściwe przetwarzanie przez aplikację. Zaimplementowali także kompletny kontroler do grafiki 3D reagujący na wprowadzone komendy poprzez tworzenie, rozmieszczanie i animowanie obiektów reprezentujących repozytorium. Wspólnie dostosowali działanie kamery śledzącej. Możliwość oddalania kamery oraz lecący w tle kod przygotował Paweł Husak. Zaimplementował także przetwarzanie końcowe (ang. \textit{post-processing}), zapewniające efekt winietowania. Patryk Imosa dodał napisy widniejące nad niektórymi elementami 3D oraz animację eksplozji rewizji. Poruszający się w tle drobny pył zaimplementowała Magdalena Łątkowska. Tymoteusz Bleja był odpowiedzialny głównie za komponenty graficzne oraz dotyczące ich części stanu aplikacji, akcje oraz funkcje tranzycji stanu. Zaimplementował komponent konsoli, licznika czasu, linii postępu, zakładki pomocy, licznika punktów, drzewa plików oraz aktualnego zadania. Utworzył również niezbędne struktury danych i funkcje pomocnicze, służące poprawnemu działaniu powyższych komponentów. Magdalena Łątkowska zaimplementowała podsumowanie zawierające statystyki, pojawiające się na koniec gry, wraz z potrzebną funkcją tranzycji stanu.
 
 	\chapter{Podstawy teoretyczne} \label{Teoria}
 
@@ -89,7 +89,7 @@
 
 	\subsection{Repozytorium}
 
-	Aby w pełni zrozumieć, czym jest Git, należy zacząć od wytłumaczenia kilku pojęć. Przez zwykłe repozytorium systemu Git określa się folder, przechowujący całą dotychczasową historię projektu i wszystkie zapisane wersje śledzonych plików, oraz przestrzeń roboczą (ang. \textit{working directory}), w której znajdują się bieżące pliki. Git wyróżnia także repozytoria surowe (ang. \textit{bare}), służące przede wszystkim do~synchronizacji i~wymiany zmian. Nie posiadają one obszaru roboczego, ponieważ nie są przeznaczone do tego, aby w~nich pracować.
+	Aby w pełni zrozumieć czym jest Git, należy zacząć od wytłumaczenia kilku pojęć. Przez zwykłe repozytorium systemu Git określa się folder, przechowujący całą dotychczasową historię projektu i wszystkie zapisane wersje śledzonych plików, oraz przestrzeń roboczą (ang. \textit{working directory}), w której znajdują się bieżące pliki. Git wyróżnia także repozytoria surowe (ang. \textit{bare}), służące przede wszystkim do~synchronizacji i~wymiany zmian. Nie posiadają one obszaru roboczego, ponieważ nie są przeznaczone do tego, aby w~nich pracować.
 
 	Repozytorium systemu Git można samodzielnie utworzyć w dowolnym folderze na dysku, lub pobrać poprzez sklonowanie istniejącego. Pierwsza metoda może dotyczyć zarówno pustego katalogu jak i~takiego, który już zawiera projekt. Podczas inicjalizacji repozytorium zostanie utworzony osobny podkatalog .git, obejmujący wszystkie pliki potrzebne systemowi Git do działania. Pozostała zawartość folderu, w którym utworzono repozytorium, pozostanie niezmieniona. Drugi sposób polega na sklonowaniu istniejącego repozytorium do wybranego katalogu na dysku. Pobrany zostanie folder .git, wraz z całą zawartością, oraz obszar roboczy ze wszystkimi plikami projektu.
 
@@ -171,7 +171,7 @@
 		\label{fig:git-merge_no_ff}
 	\end{figure}
 
-	Przykład przeprowadzenia operacji scalania rozłącznych gałęzi jest przedstawiony na rysunku~\ref{fig:git-merge_no_ff}. Do gałęzi \textit{master}, która wcześniej wskazywała na rewizję C4, dołączone zostały zmiany z gałęzi \textit{iss53}. W wyniku tego powstała nowa rewizja C5.
+	Przykład przeprowadzenia operacji scalania rozłącznych gałęzi jest przedstawiony na rysunku~\ref{fig:git-merge_no_ff}. Do gałęzi \textit{master}, która wcześniej wskazywała na rewizję C3, dołączone zostały zmiany z gałęzi \textit{iss53}. W wyniku tego powstała nowa rewizja C6.
 
 	\FloatBarrier
 
@@ -318,13 +318,13 @@
 	
 	Wszystkie materiały dydaktyczne znajdują się w~pomocy, podzielonej na zakładki, z~których każda dotyczy jednej komendy lub terminu. Jej treść wystarcza, aby osoba nieznająca poleceń systemu Git była w~stanie poprawnie wykonać zadania ze scenariusza rozgrywki. W~przypadku niektórych pojęć jest jednak bardziej obszerna i~wykracza poza wymaganą do przejścia gry wiedzę. Zawiera informacje, które uznano za szczególnie istotne i~przydatne do właściwego zrozumienia systemu Git.
 	
-	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, pomoc otwiera się automatycznie na odpowiedniej zakładce. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~jej treścią, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
+	Za każdym razem, gdy podczas rozgrywki w jednym z kroków zadania pojawia się nowe polecenie, nad konsolą pojawia się podpowiedź sugerująca otwarcie zakładki pomocy i~zapoznanie się z~nowym zagadnieniem. Użytkownik może poświęcić dowolnie dużo czasu na zaznajomienie się z~treścią pomocy, a~ponadto w każdej chwili ma możliwość ponownego przeczytania informacji dotyczących wcześniejszych poleceń.  
 	
 	\subsection{Punkty za rozwiązanie}
 
-	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z~każdym rozegraniem, gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i~pewniej będzie korzystał z~poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do osiągnięcia jak najlepszego wyniku.
+	W projekcie wprowadzono elementy gamifikacji, takie jak punkty za rozwiązanie zadań. Mają one za zadanie zwiększyć zaangażowanie użytkownika. Z~każdym rozegraniem gracz będzie starać się poprawić swój dotychczasowy wynik. W ten sposób co raz szybciej i~pewniej będzie korzystał z~poleceń systemu Git. Ponadto punkty wprowadzają element rywalizacji pomiędzy użytkownikami, którzy będą dążyć do osiągnięcia jak najlepszego wyniku.
 
-	Punkty możliwe do otrzymania za zadanie obliczane są na podstawie liczby kroków~---~im bardziej złożone zadanie, tym wyżej punktowane. Ostateczna nagroda, jaka przyznawana jest graczowi za~wykonanie zadania, wyliczana jest jako procent maksymalnej liczby punktów, zależny od~czasu rozwiązywania. Dzięki temu użytkownik, który potrafi szybko wykonywać kolejne kroki, osiągnie lepszy wynik. Żeby zapobiec sytuacji, w~której prędkość stałaby się bardziej istotna niż dokładność, za~błędnie wprowadzone komendy gracz karany jest odjęciem określonej liczby punktów.
+	Punkty możliwe do otrzymania za zadanie obliczane są na podstawie liczby kroków~---~im bardziej złożone zadanie, tym wyżej punktowane. Ostateczna nagroda, jaka przyznawana jest za~wykonanie zadania, wyliczana jest jako procent maksymalnej liczby punktów, zależny od~czasu rozwiązywania. Dzięki temu użytkownik, który potrafi szybko wykonywać kolejne kroki, osiągnie lepszy wynik. Żeby zapobiec sytuacji, w~której prędkość stałaby się bardziej istotna niż dokładność, za~błędnie wprowadzone komendy gracz karany jest odjęciem określonej liczby punktów.
 	
 	\chapter{Implementacja} \label{Implementacja}
 
@@ -364,7 +364,7 @@
 
    \textit{React} opiera się na koncepcji niezależnych komponentów, nadających się do~wielokrotnego wykorzystania, z~których można komponować skomplikowane widoki. Są to obiekty JavaScript, reprezentujące fragmenty interfejsu użytkownika, mające określoną strukturę i~funkcjonalność. Każdy komponent musi implementować metodę \textit{render()}, odpowiedzialną za wyświetlenie komponentu w przeglądarce. W wartości zwracanej przez tę metodę mogą pojawić się zarówno znaczniki HTML jak i instancje zdefiniowanych wcześniej komponentów. Aplikacje internetowe korzystające z biblioteki \textit{React} budowane są zwykle na zasadzie drzewa komponentów. Tworzony jest jeden komponent nadrzędny, w którym zagnieżdżone są kolejne. Wzorzec ten pozwala zachować modułowość aplikacji.
 
-   Komponenty czerpią wiedzę na temat wyświetlanych informacji z dwóch źródeł - właściwości (\textit{props}) oraz stanu (\textit{state}). Właściwości są obiektem reprezentującym parametry wejściowe podane podczas wywołania komponentu w komponencie nadrzędnym, natomiast stan jest obiektem widocznym i modyfikowalnym tylko wewnątrz danego komponentu. Zmiana stanu komponentu powoduje wywołanie jego metody \textit{render()} i, co za tym idzie, rekursywnego wywoływania metod \textit{render()} komponentów zagnieżdżonych. Efektem tej operacji jest modyfikacja odpowiednich węzłów obiektowego modelu dokumentu (ang. \textit{DOM}) przeglądarki i ostatecznie przerysowanie strony przez przeglądarkę. Należy zaznaczyć, że \textit{React} jest dobrze zoptymalizowany pod kątem renderowania strony. Na szczególną uwagę zasługuje mechanizm wirtualnego obiektowego modelu dokumentu (ang. \textit{virtual DOM}). Polega on na utrzymywaniu kopii DOM reprezentowanej przez zwykłe obiekty JavaScript. Operacje na tych obiektach są znacznie mniej kosztowne, ponieważ nie zmuszają przeglądarki do ponownego renderowania strony. Właściwy DOM jest modyfikowany jedynie w przypadku stwierdzenia różnic między nim a wirtualnym DOM.
+   Komponenty czerpią wiedzę na temat wyświetlanych informacji z~dwóch źródeł~---~właściwości (\textit{props}) oraz stanu (\textit{state}). Właściwości są obiektem reprezentującym parametry wejściowe podane podczas wywołania komponentu w komponencie nadrzędnym, natomiast stan jest obiektem widocznym i modyfikowalnym tylko wewnątrz danego komponentu. Zmiana stanu komponentu powoduje wywołanie jego metody \textit{render()} i, co za tym idzie, rekursywnego wywoływania metod \textit{render()} komponentów zagnieżdżonych. Efektem tej operacji jest modyfikacja odpowiednich węzłów obiektowego modelu dokumentu (ang. \textit{DOM}) przeglądarki i ostatecznie przerysowanie strony przez przeglądarkę. Należy zaznaczyć, że \textit{React} jest dobrze zoptymalizowany pod kątem renderowania strony. Na szczególną uwagę zasługuje mechanizm wirtualnego obiektowego modelu dokumentu (ang. \textit{virtual DOM}). Polega on na utrzymywaniu kopii DOM reprezentowanej przez zwykłe obiekty JavaScript. Operacje na tych obiektach są znacznie mniej kosztowne, ponieważ nie zmuszają przeglądarki do ponownego renderowania strony. Właściwy DOM jest modyfikowany jedynie w przypadku stwierdzenia różnic między nim a wirtualnym DOM.
 
    Istotne ułatwienie dla procesu implementacji komponentów stanowi nakładka JSX. Jest to rozszerzenie składni języka JavaScript pozwalające w wygodny sposób używać tagów HTML oraz wywoływać wcześniej zdefiniowane komponenty w kodzie aplikacji. Używanie JSX jest zalecane przy tworzeniu aplikacji opartych o bibliotekę \textit{React} przez samych jej twórców, ponieważ nie tylko ułatwia proces implementacji, ale również zwiększa czytelność kodu.
 
@@ -448,7 +448,7 @@
 
 	Postanowiono przerobić wspomnianą w podrozdziale~\ref{solution} aplikację. Została ona napisana tylko i~wyłącznie w~języku JavaScript, bez wykorzystania jakichkolwiek platform programistycznych (ang. \textit{frameworks}). Modyfikację utrudniał także fakt, że cały kod zawarty był w~jednym pliku. Postanowiono nie zmieniać struktury aplikacji i~dalszą część napisać również w~czystym języku JavaScript. Dodano jedynie bibliotekę jQuery, która umożliwia łatwiejsze zarządzanie elementami drzewa DOM, czyli obiektowego modelu dokumentu. W~związku z~tym, że jest to aplikacja internetowa, potrzebny był serwer HTTP. W~tym celu użyto środowiska Node.js, wykorzystywanego do tworzenia wysoce skalowalnych aplikacji sieciowych.
 
-	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny, służący do wypełniania pól zadania i~definiowania listy kroków. Jest on widoczny na~rysunku~\ref{fig:taskCreator} po~prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz~czas wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk "Dodaj", a~następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności oraz dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków.
+	Największą modyfikacją było rozszerzenie interfejsu o dodatkowy panel boczny, służący do wypełniania pól zadania i~definiowania listy kroków. Jest on widoczny na~rysunku~\ref{fig:taskCreator} po~prawej stronie. Po~kliknięciu na węzeł grafu, reprezentujący pojedyncze zadanie, na bocznym panelu zostają wyświetlone wszystkie informacje dotyczącego wybranego elementu. Należą do nich między innymi tytuł, opis oraz~czas wykonania. Oczywiście wszystkie pola są edytowalne. W panelu istnieje również możliwość definiowania listy kroków, które trzeba zrealizować żeby wykonać zadanie. Aby dodać jeden z nich należy wybrać jego typ i kliknąć przycisk ,,Dodaj'', a~następnie wypełnić pola opisujące dany krok. Znajdują się tam atrybuty takie jak opis, lista komend spełniająca dany krok, etykiety opisujące wykonane czynności oraz dodatkowe parametry, charakterystyczne dla poszczególnych typów kroków.
 	
 	\begin{figure}[h]
 		\centering
@@ -465,7 +465,7 @@
 
 	\subsection{Wstęp}
 
-	Stan naszej aplikacji został podzielony na siedem głównych części. Dla każdej z~nich zdefiniowany został tzw. \textit{reducer} (więcej w sekcji \ref{Redux}) odpowiedzialny za tranzycje stanu w~zależności od typu akcji. Stan jest zatem obiektem posiadającym siedem kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
+	Stan aplikacji GITar-Hero został podzielony na siedem głównych części. Dla każdej z~nich zdefiniowany został tzw. \textit{reducer} (więcej w sekcji \ref{Redux}) odpowiedzialny za~tranzycje stanu w~zależności od typu akcji. Stan jest zatem obiektem posiadającym siedem kluczy, pod którymi zdefiniowane są obiekty definiujące stany określonych części aplikacji.
 
 	Przy implementacji \textit{reducerów} zdecydowano się na popularny wzorzec wykorzystujący instrukcję \textit{switch}, sprawdzającą typ wyemitowanej akcji. Domyślnie zwracany jest niezmieniony fragment stanu, przekazany w pierwszym argumencie funkcji. Za pomocą słowa kluczowego \textit{case} zdefiniowane są natomiast wszystkie przypadki, w~których \textit{reducer} powinien zareagować wygenerowaniem nowego stanu.
 
@@ -494,7 +494,7 @@
 
 	\begin{description}
 	\item[Akcja otwarcia zakładki pomocy] \hfill \\
-	Emitowana po wpisaniu słowa kluczowego "\textit{help}" w konsoli i zatwierdzeniu klawiszem \textit{Enter} lub kliknięcie informacji wyświetlanej nad konsolą. W wyniku jej wykonania \textit{reducer} ustawia flagę \textit{isOpen} na wartość \textit{true}, natomiast flagę \textit{info} na~wartość \textit{false}. W efekcie zakładka pomocy otwiera się, a~informacja dodatkowa znika.
+	Emitowana po wpisaniu słowa kluczowego ,,\textit{help}'' w~konsoli i~zatwierdzeniu klawiszem \textit{Enter} lub kliknięcie informacji wyświetlanej nad konsolą. W wyniku jej wykonania \textit{reducer} ustawia flagę \textit{isOpen} na wartość \textit{true}, natomiast flagę \textit{info} na~wartość \textit{false}. W~efekcie zakładka pomocy otwiera się, a~informacja dodatkowa znika.
 
 	\item[Akcja zamknięcia zakładki pomocy] \hfill \\
 	Wywoływana przez kliknięcie poza zakładką pomocy, kliknięcie w konsolę, wciśnięcie klawisza \textit{ESC} lub wciśnięcie klawisza \textit{Enter}. \textit{Reducer} otrzymując akcję tego typu ustawia pole~\textit{isOpen} na wartość~\textit{false}, co~skutkuje zamknięciem pomocy.
@@ -513,7 +513,7 @@
 
 	Aby symulować modyfikacje na plikach w repozytorium kontrolowanym przez gracza, potrzebna była reprezentacja tychże plików jako części stanu aplikacji. Struktura ta jest rekursywna i~umożliwia dowolne zagnieżdżanie plików w~katalogach. Każdy katalog jest reprezentowany przez obiekt, posiadający nazwę oraz zawartość w~formie tablicy obiektów. Pliki, również reprezentowane przez obiekty, zawierają obowiązkowo nazwę, ale także pola statusu oraz typu zmiany (nie posiadają pola zawartości). Część stanu reprezentująca katalog główny jest zatem tablicą obiektów o strukturze opisanej powyżej.
 
-	Akcje, powodujące tranzycję stanu drzewa plików zostały opisane poniżej.
+	Akcje, powodujące tranzycję stanu drzewa plików zostały wymienione poniżej.
 
 	\begin{description}
 	\item[Akcja modyfikacji drzewa plików] \hfill \\
@@ -664,7 +664,7 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	Kontener drzewa plików jest odpowiedzialny za wyświetlenie informacji o~strukturze katalogu roboczego, w~którym znajduje się repozytorium. Korzysta on z~części stanu dotyczącej drzewa plików.
 
-	Zaimplementowana została pomocnicza funkcja renderująca \textit{renderRecursively}, umożliwiająca wyświetlenie plików na~dowolnym poziomie zagnieżdżenia. W~jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze~stanu. Ma~ono strukturę tablicy (patrz:~\ref{DrzewoStan}). Dla każdego z~elementów funkcja sprawdza czy jest on plikiem, czy katalogiem. Jeżeli jest to~plik, to~zwrócony zostaje pomocniczy komponent pliku (patrz \ref{KomponentyPomocnicze}). W~przypadku katalogu zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, a~zawartość folderu wyświetlana jest poprzez rekursywne wywołanie funkcji \textit{renderRecursively}. Dodatkowo, katalogi w których nie ma plików o statusie innym niż "\textit{niezmodyfikowany}" są zwijane, aby ograniczyć wysokość komponentu.
+	Zaimplementowana została pomocnicza funkcja renderująca \textit{renderRecursively}, umożliwiająca wyświetlenie plików na~dowolnym poziomie zagnieżdżenia. W~jej pierwszym wywołaniu jako argument podawane jest drzewo plików ze~stanu. Ma~ono strukturę tablicy (patrz:~\ref{DrzewoStan}). Dla każdego z~elementów funkcja sprawdza czy jest on plikiem, czy katalogiem. Jeżeli jest to~plik, to~zwrócony zostaje pomocniczy komponent pliku (patrz \ref{KomponentyPomocnicze}). W~przypadku katalogu zwracany jest nowy element \textit{HTML} wyświetlający jego nazwę, a~zawartość folderu wyświetlana jest poprzez rekursywne wywołanie funkcji \textit{renderRecursively}. Dodatkowo, katalogi w których nie ma plików o statusie innym niż ,,\textit{niezmodyfikowany}'' są zwijane, aby ograniczyć wysokość komponentu.
 
 	\begin{figure}[h]
 		\centering
@@ -700,9 +700,9 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\subsection{Canvas}
 
-	Komponent \textit{Canvas} stanowi połączenie między architekturą opartą o~komponenty \textit{React} i~stan aplikacji, a~moduł 3D, zaimplementowany z~wykorzystaniem biblioteki \textit{Babylon.js}.
+	Komponent \textit{Canvas} stanowi połączenie między architekturą opartą o~komponenty \textit{React} i~stan aplikacji, a~modułem 3D, zaimplementowanym z~wykorzystaniem biblioteki \textit{Babylon.js}.
 
-	Pierwszym zadaniem komponentu jest wstawienie do obiektowego modelu dokumentu elementu \textit{canvas}, który umożliwia rysowanie przy pomocy technologii \textit{WebGL}. Założono dodatkowo, że~po~utworzeniu tego elementu, powinien on~być modyfikowalny tylko z~poziomu modułu 3D (metoda \textit{render} komponentu powinna wykonać się tylko raz). Efekt ten osiągnięto implementując metodę \textit{shouldComponentUpdate} i zwracając w niej zawsze wartość \textit{false}. \textit{React} pozwala na zaimplementowanie tej metody w przypadku, w~którym użytkownik chce zablokować przerysowanie komponentu po zmianie jego stanu lub parametrów wejściowych. Po utworzeniu elementu \textit{canvas}, inicjowany jest moduł 3D, do którego element ten przekazywany jest jako argument.
+	Pierwszym zadaniem komponentu jest wstawienie do obiektowego modelu dokumentu elementu \textit{canvas}, który umożliwia rysowanie przy pomocy technologii \mbox{\textit{WebGL}}. Założono dodatkowo, że~po~utworzeniu tego elementu, powinien on~być modyfikowalny tylko z~poziomu modułu 3D (metoda \textit{render} komponentu powinna wykonać się tylko raz). Efekt ten osiągnięto implementując metodę \textit{shouldComponentUpdate} i zwracając w niej zawsze wartość \textit{false}. \textit{React} pozwala na zaimplementowanie tej metody w przypadku, w~którym użytkownik chce zablokować przerysowanie komponentu po zmianie jego stanu lub parametrów wejściowych. Po utworzeniu elementu \textit{canvas}, inicjowany jest moduł 3D, do którego element ten przekazywany jest jako argument.
 
 	Parametrem wejściowym komponentu \textit{Canvas} jest obiekt \textit{store}, zawierający stan aplikacji i~umożliwiający reagowanie na~emitowane akcje. Jest on~wykorzystywany do~przekazywania modułowi~3D informacji o~zmianach, które pojawiły się w~repozytorium.
 
@@ -762,12 +762,12 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 		\label{fig:commit}
 	\end{figure}
 
-	W~kwestii wyglądu kuli zastosowane te same zabiegi co w przypadku gałęzi, na której jest umieszczona~---~posiada ten sam kolor, materiał oraz obramowanie.
+	W~kwestii wyglądu kuli zastosowano te same zabiegi co w przypadku gałęzi, na~której jest umieszczona~---~posiada ten sam kolor, materiał oraz obramowanie.
 
 	\subsection{Tekst}
 	W grafice 3D niektóre obiekty, takie jak \textit{Commit} i \textit{Branch}, wymagają wyświetlania tekstu. W~przypadku obiektu rewizji jest to wiadomość i~opcjonalnie etykieta, a~dla~gałęzi nazwa.
 
-	Tekst ukazano na płaszczyźnie dwuwymiarowej, obracającej się odpowiednio w~kierunku kamery, tak, aby niezależnie od jej położenia zawsze być do niej przodem. Ten efekt uzyskano korzystając z właściwości \textit{billboardMode} obiektu płaszczyzny dostarczanego przez bibliotekę \textit{Babylon.js}, którą ustawiono na~tryb wszystkich trzech osi układu współrzędnych.
+	Tekst ukazano na płaszczyźnie dwuwymiarowej, obracającej się odpowiednio w~kierunku kamery, tak aby niezależnie od jej położenia zawsze być do niej przodem. Ten efekt uzyskano korzystając z właściwości \textit{billboardMode} obiektu płaszczyzny dostarczanego przez bibliotekę \textit{Babylon.js}, którą ustawiono na~tryb wszystkich trzech osi układu współrzędnych.
 
 	Dodanie tekstu do sceny wymaga wykonania kilku operacji, które zebrano w~dedykowanej do~tego celu klasie \textit{Text}. Poniżej opisano je w~odpowiedniej kolejności.
 
@@ -805,7 +805,7 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\subsection{Kod w tle}
 
-	Fabułę gry stanowi praca gracza nad repozytorium projektu informatycznego. W~celu jej uwidocznienia zdecydowano się utworzyć obiekt tła przedstawiający przewijający się kod. W pierwszej kolejności stworzono płaszczyznę przy pomocy statycznej metody \textit{CreateGround} klasy \textit{Mesh}. Aby kod nie znikał z pola widzenia, gdy kamera porusza się do przodu, w każdej klatce wartość \textit{z} wektora pozycji płaszczyzny ustawiana jest na tę samą, co wartość \textit{z}wektora pozycji kamery.
+	Fabułę gry stanowi praca gracza nad repozytorium projektu informatycznego. W~celu jej uwidocznienia zdecydowano się utworzyć obiekt tła przedstawiający przewijający się kod. W pierwszej kolejności stworzono płaszczyznę przy pomocy statycznej metody \textit{CreateGround} klasy \textit{Mesh}. Aby kod nie znikał z pola widzenia, gdy kamera porusza się do przodu, w każdej klatce wartość \textit{z} wektora pozycji płaszczyzny ustawiana jest na tę samą, co wartość \textit{z} wektora pozycji kamery.
 
 	Jako materiał wykorzystano obiekt \textit{ShaderMaterial}, który umożliwia definiowanie własnych programów cieniujących (ang. \textit{shaders}). W pierwszej kolejności dla każdego wierzchołka obiektu wykonywany jest program cieniujący przetwarzający wierzchołki (ang. \textit{vertex shader}). Jego głównym zadaniem jest odpowiednie ustawienie danego wierzchołka we współrzędnych projekcji. Dodatkowo do programu cieniującego została przekazana monochromatyczna tekstura zwaną mapą wysokości. Pozwala ona nadać płaszczyźnie wypukłości. Program cieniujący pobiera wartość kanału czerwonego z~mapy wysokości, z~miejsca określonego koordynatami tekstury (pozyskanymi w procesie \textit{mapowania UV}). Wartość ta, będąca z w przedziale od 0 do 1, jest następnie przemnażana przez stałą \textit{maxHeight} i dodawana do współrzędnej \textit{y} aktualnie przetwarzanego wierzchołka.
 
@@ -830,17 +830,17 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 
 	\chapter{Podsumowanie} \label{Podsumowanie}
 	
-	Udało się zaimplementować grę przeglądarkową zapoznającą użytkownika z najważniejszymi poleceniami systemu Git. Opanowanie zawartych w niej materiałów powinno właściwie przygotować gracza do korzystania z programu Git, zarówno w pracy indywidualnej jak i~zespołowej. Gra GITar-Hero posiada atrakcyjny wizualnie interfejs i~dynamiczną grafikę 3D, co zapewnia bardziej zachęcającą rozgrywkę. Generowane na bieżąco kolejne zadania, jakie musi rozwiązywać użytkownik,  są dostosowane do jego umiejętności. Dzięki dostosowaniu poziomu trudności i stopniowym wprowadzaniu nowych zagadnień gracz nie zniechęca się, a nagradzanie punktami za rozwiązane polecenia dodatkowo go motywuje.
+	Udało się zaimplementować grę przeglądarkową zapoznającą użytkownika z najważniejszymi poleceniami systemu Git. Opanowanie zawartych w niej materiałów powinno właściwie przygotować gracza do korzystania z programu Git, zarówno w~pracy indywidualnej jak i~zespołowej. Gra GITar-Hero posiada atrakcyjny wizualnie interfejs i~dynamiczną grafikę 3D, co zapewnia bardziej zachęcającą rozgrywkę. Generowane na bieżąco kolejne zadania, jakie musi rozwiązywać użytkownik,  są dostosowane do jego umiejętności. Dzięki dostosowaniu poziomu trudności i stopniowym wprowadzaniu nowych zagadnień gracz nie zniechęca się, a nagradzanie punktami za rozwiązane polecenia dodatkowo go motywuje.
 	
-	Zdecydowaną zaletą stworzenia aplikacji przeglądarkowej jest jej kompatybilność oraz łatwość uruchomienia. Implementacja programu z wykorzystaniem wybranych bibliotek stworzyła wygodną warstwę abstrakcji na metody służące do interakcji z grafiką w przeglądarce internetowej. Podniosło to niezawodność aplikacji i przyspieszyło czas pracy nad oprogramowaniem.
+	Zdecydowaną zaletą stworzenia aplikacji przeglądarkowej jest jej kompatybilność oraz łatwość uruchomienia. Implementacja programu z wykorzystaniem wybranych bibliotek stworzyła wygodną warstwę abstrakcji na metody służące do interakcji z~grafiką w przeglądarce internetowej. Podniosło to niezawodność aplikacji i przyspieszyło czas pracy nad oprogramowaniem.
 	
-	Niewątpliwą wadą przyjętego rozwiazania jest mniejsza~---~w porównaniu z aplikacjami natywnymi, opartymi na przykład o OpenGL~---~wydajność renderowania grafiki 3D przy pomocy WebGL. Spowodowało to konieczność rezygnacji z niektórych efektów graficznych, na rzecz zwiększenia płynności działania aplikacji.
+	Niewątpliwą wadą przyjętego rozwiązania jest mniejsza~---~w porównaniu z aplikacjami natywnymi, opartymi na przykład o OpenGL~---~wydajność renderowania grafiki 3D przy pomocy WebGL. Spowodowało to konieczność rezygnacji z niektórych efektów graficznych, na rzecz zwiększenia płynności działania aplikacji.
 
-	Aplikacja jest przygotowana na dalszy rozwój w wielu aspektach. Git jest rozbudowanym narzędziem; posiada wiele funkcji, które mogłyby zostać wprowadzone do scenariusza rozgrywki. Jedną z nich jest operacja zmiany bazy, której opis znalazł się w zkładce pomocy, jednak nie została ona jeszcze dodana do listy zadań. Dodatkowo, przedstawienie tej operacji za pomocą grafiki 3D stanowiłoby istotne ułatwienie w jej zrozumieniu.
+	Aplikacja jest przygotowana na dalszy rozwój w wielu aspektach. Git jest rozbudowanym narzędziem; posiada wiele funkcji, które mogłyby zostać wprowadzone do scenariusza rozgrywki. Jedną z nich jest operacja zmiany bazy, której opis znalazł się w zakładce pomocy, jednak nie została ona jeszcze dodana do listy zadań. Dodatkowo, przedstawienie tej operacji za pomocą grafiki 3D stanowiłoby istotne ułatwienie w jej zrozumieniu.
 	
-	Systemy kontorli wersji powstały, by ułatwić współtworzenie oprogramowania przez wielu programistów w różnym czasie. Naturalnym rozwinięciem gry jest zatem wprowadzenie rozgrywki wieloosobowej. Dzięki takiemu trybowi gry, scenariusz byłby jeszcze bardziej zbliżony do realnej pracy z programem Git. Z pewnością zwiększyłoby to również zaangażowanie graczy w rozgrywkę.
+	Systemy kontroli wersji powstały, by ułatwić współtworzenie oprogramowania przez wielu programistów w różnym czasie. Naturalnym rozwinięciem gry jest zatem wprowadzenie rozgrywki wieloosobowej. Dzięki takiemu trybowi gry, scenariusz byłby jeszcze bardziej zbliżony do realnej pracy z programem Git. Z pewnością zwiększyłoby to również zaangażowanie graczy w rozgrywkę.
 	
-	Istotnym aspektem gry jest konkurencja graczy. Zaimplementowany został system punktacji, jednak nie ma jeszcze centralnego rankingu graczy. Takie rozszerzenie niewątpliwie zachęciłoby większą liczbę użytkowników do rozgrywki. Stworzenie rankingu jest, z~oczywistych względów, ściśle powiązane z inną funkcją aplikacji - uwierzytelnianiem graczy. Tworzenie kont mogłoby wykorzystywać API udostępniane przez duże serwisy społecznościowe, takie jak Facebook. Kolejnym krokiem byłaby możliwość udostępniania wyniku we wspomnianych serwisach.
+	Istotnym aspektem gry jest rywalizacja. Zaimplementowany został system punktacji, jednak nie ma jeszcze centralnego rankingu graczy. Takie rozszerzenie niewątpliwie zachęciłoby większą liczbę użytkowników do rozgrywki. Stworzenie rankingu jest, z~oczywistych względów, ściśle powiązane z inną funkcją aplikacji - uwierzytelnianiem graczy. Tworzenie kont mogłoby wykorzystywać API udostępniane przez duże serwisy społecznościowe, takie jak Facebook. Kolejnym krokiem byłaby możliwość udostępniania wyniku we wspomnianych serwisach.
 	
 	Grywalność zależy w dużej mierze od przewidywalności zachowań aplikacji. Duże wyzwanie stanowi stworzenie rozbudowanego grafu zadań, który zapewniałby jak największą losowość w przydzielaniu zadań. Ta część aplikacji może być rozwijana w zasadzie nieustannie.
 
@@ -849,15 +849,15 @@ przekazywana jest jako zawartość komponentu. Pozwala to na wyświetlanie dowol
 	\backmatter
 	
 	\begin{thebibliography}{1}
-		\bibitem{progit}S. Chacon, B. Straub \emph{Pro Git} 2014, \\ https://progit2.s3.amazonaws.com/en/2016-03-22-f3531/progit-en.1084.pdf
+		\bibitem{progit}S. Chacon, B. Straub \emph{Pro Git} 2014, \\ https://progit2.s3.amazonaws.com/en/2016-03-22-f3531/progit-en.1084.pdf \mbox{(pobrano 2016-10-12)}
 		\bibitem{gitflow}V. Driessen \emph{A successful Git branching model} \\
-		http://nvie.com/posts/a-successful-git-branching-model/
+		http://nvie.com/posts/a-successful-git-branching-model/ (pobrano 2016-10-27)
 		\bibitem{gajda}W. Gajda \emph{Git. Rozproszony system kontroli wersji} Helion, 2013
-		\bibitem{graphCreator} https://github.com/cjrd/directed-graph-creator
-		\bibitem{babylon}http://doc.babylonjs.com/
-		\bibitem{react}https://facebook.github.io/react/
-		\bibitem{redux}http://redux.js.org/
-		\bibitem{js}https://en.wikipedia.org/wiki/JavaScript
+		\bibitem{graphCreator} https://github.com/cjrd/directed-graph-creator (pobrano 2016-11-04)
+		\bibitem{babylon}http://doc.babylonjs.com/ (pobrano 2017-01-19)
+		\bibitem{react}https://facebook.github.io/react/ (pobrano 2017-01-21)
+		\bibitem{redux}http://redux.js.org/ (pobrano 2017-01-21)
+		\bibitem{js}https://en.wikipedia.org/wiki/JavaScript (pobrano 2017-01-23)
 	\end{thebibliography}
 
 \end{document}
